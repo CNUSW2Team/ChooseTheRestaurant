@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.188.191.205:3306/worldcup_mgmt
+    username: root
+    password: sw1234!
