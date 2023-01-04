@@ -1,22 +1,10 @@
 let testData = JSON.parse(JSON.stringify(TestFile));
-console.log(testData);
 
 var header = document.querySelector('header');
 var section = document.querySelector('section'); 
 
-var request = new XMLHttpRequest();
-
-request.open('GET', testData);
-request.responseType = 'text';
-request.send();
-
-
-request.onload = function() {
-    var superHeroesText = request.response;
-    var superHeroes = JSON.parse(superHeroesText);
-    populateHeader(superHeroes);
-    showHeroes(superHeroes);
-  }
+populateHeader(testData);
+showHeroes(testData);
 
 
 function populateHeader(jsonObj) {
@@ -61,4 +49,3 @@ function showHeroes(jsonObj) {
       section.appendChild(myArticle);
     }
   }
-  
