@@ -14,23 +14,23 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-public class Store {
+public class Review {
     @Id
+    private UUID review_id;
+
+    @Column(length = 20, nullable = false, unique = false)
     private UUID store_id;
 
     @Column(length = 20, nullable = false, unique = false)
-    private String store_name;
+    private String writer;
 
     @Column(length = 20, nullable = false, unique = false)
-    private String address;
+    private String contents;
 
     @Column(length = 20, nullable = false, unique = false)
-    private String phone_number;
+    private int rating;
 
     @Column(length = 20, nullable = false, unique = false)
-    private String opening_hours;
-
-    @Column(length = 20, nullable = false, unique = false)
-    private String image;
+    private String date;
 
 }

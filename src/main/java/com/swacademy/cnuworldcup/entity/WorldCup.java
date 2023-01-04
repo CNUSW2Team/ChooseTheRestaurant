@@ -14,21 +14,15 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-public class Store {
+public class WorldCup {
     @Id
-    private UUID store_id;
+    private UUID worldcup_id;
 
     @Column(length = 20, nullable = false, unique = false)
     private String store_name;
 
     @Column(length = 20, nullable = false, unique = false)
-    private String address;
-
-    @Column(length = 20, nullable = false, unique = false)
-    private String phone_number;
-
-    @Column(length = 20, nullable = false, unique = false)
-    private String opening_hours;
+    private int like_num;
 
     @Column(length = 20, nullable = false, unique = false)
     private String image;
