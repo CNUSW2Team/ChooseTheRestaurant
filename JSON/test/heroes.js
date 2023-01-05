@@ -1,5 +1,5 @@
 let testData = JSON.parse(JSON.stringify(TestFile));
-
+let greeting = JSON.parse(JSON.stringify(Hi));
 var header = document.querySelector('header');
 var section = document.querySelector('section'); 
 

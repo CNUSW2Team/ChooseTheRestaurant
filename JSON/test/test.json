@@ -39,3 +39,21 @@ TestFile = {
       }
     ]
   }
+
+Hi = {
+  "name" : "SW2팀",
+  "members" : [
+    {
+    "memberName" : "soyee",
+    "age" : 23
+    },
+    {
+    "memberName" : "aaa",
+    "age" : 47
+    },
+    {
+    "memberName" : "bbb",
+    "age" : 11
+    }
+  ]
+}
