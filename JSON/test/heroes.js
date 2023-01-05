@@ -49,3 +49,5 @@ function showHeroes(jsonObj) {
       section.appendChild(myArticle);
     }
   }
+
+  // xptmxmdljd
