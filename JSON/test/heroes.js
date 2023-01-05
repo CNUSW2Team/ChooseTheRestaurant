@@ -50,5 +50,4 @@ function showHeroes(jsonObj) {
     }
   }
 
-  // gestset
-  // getststes22
+  // rrtestsaete
