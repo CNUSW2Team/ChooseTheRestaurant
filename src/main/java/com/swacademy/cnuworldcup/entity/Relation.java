@@ -18,12 +18,9 @@ public class Relation {
     @Id
     private UUID relation_id;
 
-    @Column(length = 20, nullable = false, unique = false)
     private UUID worldcup_id;
 
-    @Column(length = 20, nullable = false, unique = false)
     private UUID store_id;
 
-    @Column(length = 20, nullable = false, unique = false)
     private int win_count;
 }
