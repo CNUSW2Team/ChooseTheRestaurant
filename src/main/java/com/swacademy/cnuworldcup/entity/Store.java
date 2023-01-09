@@ -18,19 +18,14 @@ public class Store {
     @Id
     private UUID store_id;
 
-    @Column(length = 20, nullable = true, unique = false)
     private String store_name;
 
-    @Column(length = 20, nullable = true, unique = false)
     private String address;
 
-    @Column(length = 20, nullable = true, unique = false)
     private String phone_number;
 
-    @Column(length = 20, nullable = true, unique = false)
     private String opening_hours;
-
-    @Column(length = 20, nullable = true, unique = false)
+    
     private String image;
 
 }

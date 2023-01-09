@@ -18,10 +18,8 @@ public class Comment {
     @Id
     private UUID comment_id;
 
-    @Column(length = 20, nullable = false, unique = false)
     private UUID store_id;
 
-    @Column(length = 20, nullable = false, unique = false)
     private String contents;
 
 }
