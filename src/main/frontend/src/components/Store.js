@@ -19,7 +19,9 @@ function Store() {
         []);
     return (
         <div>
-            StoreID: {JSON.stringify(store) && JSON.stringify(store['store_id'])}<p></p>
+            {/* <p>StoreID: {JSON.stringify(store) && JSON.stringify(store['store_id'])}</p> */}
+            {/* <p>StoreID: {JSON.stringify(store['store_id'])}</p> */}
+            StoreID: {JSON.stringify(store['store_id'])}
             StoreName: {JSON.stringify(store) && JSON.stringify(store['store_name'])}<p></p>
             <img src={`/img/${storeId}.jpg`} />
         </div>
