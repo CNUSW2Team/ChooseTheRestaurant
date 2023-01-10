@@ -17,32 +17,10 @@ function AllCategory() {
         },
         []);
     return (
-        <Form>
-            <h1>Store Table</h1>
-            <Table striped bordered hover>
-                <thead>
-                <tr>
-                    <th>id</th>
-                    <th>name</th>
-                    <th>address</th>
-                    <th>phone_number</th>
-                    <th>opening_hours</th>
-                </tr>
-                </thead>
-                <tbody>
-                {store.map(v =>
-                    <tr>
-                        <td>{v.store_id}</td>
-                        <td>{v.store_name}</td>
-                        <td>{v.address}</td>
-                        <td>{v.phone_number}</td>
-                        <td>{v.opening_hours}</td>
-                        <td><Link to={`/Store/${v.store_id}`}> 이동하기 </Link></td>
-                    </tr>,
-                )}
-                </tbody>
-            </Table>
-        </Form>
+        <div>
+            <p>{category[0] && category[0]["worldcup_name"]}</p>
+            <img width={500} src={`/img/${category[0] && category[0]["worldcup_id"]}.jpg`} />
+        </div>
     );
 }
 
