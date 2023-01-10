@@ -1,7 +1,11 @@
 package com.swacademy.cnuworldcup;
 
+import com.swacademy.cnuworldcup.Repository.RelationRepository;
 import com.swacademy.cnuworldcup.Repository.StoreRepository;
+import com.swacademy.cnuworldcup.Repository.WorldCupRepository;
+import com.swacademy.cnuworldcup.entity.Relation;
 import com.swacademy.cnuworldcup.entity.Store;
+import com.swacademy.cnuworldcup.entity.WorldCup;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -13,23 +17,15 @@ public class tester {
 
     public static void main(String[] args) {
         var applicationContext = new AnnotationConfigApplicationContext(AppConfiguration.class);
-        var storeRepository = applicationContext.getBean(StoreRepository.class);
+        var storeRepository = applicationContext.getBean(RelationRepository.class);
         UUID rand = UUID.randomUUID();
-        Store store = Store.builder()
-                .store_id(UUID.randomUUID())
-                .store_name("청춘우동")
-                .address("대전광역시 유성구 궁동 410")
-                .phone_number("042-823-7234")
-                .opening_hours("금요일\t오전 11:00~오후 8:30\n" +
-                        "토요일\t오전 11:00~오후 8:30\n" +
-                        "일요일\t오전 11:00~오후 8:30\n" +
-                        "월요일\t오전 11:00~오후 8:30\n" +
-                        "화요일\t오전 11:00~오후 8:30\n" +
-                        "수요일\t오전 11:00~오후 8:30\n" +
-                        "목요일\t오전 11:00~오후 8:30")
-                .image("/resources/static/images/store_" + rand.toString() + ".jpg")
+        Relation relation = Relation.builder()
+                .relation_id(rand)
+                .worldcup_id(UUID.fromString("0b44cd73-6ab8-4500-9d07-fbc9cdfa03bd"))
+                .store_id(UUID.fromString("3ee3785d-afe3-46f5-999e-ae77a0dc8d06"))
+                .win_count(1)
                 .build();
         //storeRepository.deleteAll();
-        storeRepository.save(store);
+        storeRepository.save(relation);
     }
 }

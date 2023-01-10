@@ -22,7 +22,5 @@ public class Menu {
 
     private String store_name;
 
-    private String image;
-
     private int price;
 }

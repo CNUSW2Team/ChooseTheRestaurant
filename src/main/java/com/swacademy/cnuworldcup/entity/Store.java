@@ -25,7 +25,5 @@ public class Store {
     private String phone_number;
 
     private String opening_hours;
-    
-    private String image;
 
 }
