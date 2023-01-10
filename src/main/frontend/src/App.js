@@ -20,8 +20,8 @@ function App() {
   return (
       <Form>
           <h1>Store Details</h1>
-          StoreID: {JSON.stringify(store[0]) && JSON.stringify(store[0]["store_id"])}<p></p>
-          StoreName: {JSON.stringify(store[0]) && JSON.stringify(store[0]["store_name"])}<p></p>
+          <p>StoreID: {JSON.stringify(store[0]) && JSON.stringify(store[0]["store_id"])}</p>
+          <p>StoreName: {JSON.stringify(store[0]) && JSON.stringify(store[0]["store_name"])}</p>
       </Form>
   );
 }
