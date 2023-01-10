@@ -1,8 +1,8 @@
 // src/main/frontend/src/setProxy.js
 
-const { createProxyMiddleware } = require('http-proxy-middleware');
+import { createProxyMiddleware } from 'http-proxy-middleware';
 
-module.exports = function(app) {
+export default function(app) {
     app.use(
         '/api',
         createProxyMiddleware({

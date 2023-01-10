@@ -6,6 +6,7 @@ import NotFound from "./components/NotFound";
 import Store from "./components/Store";
 
 function App() {
+
     return (
         <div className='App'>
             <BrowserRouter>
@@ -20,6 +21,7 @@ function App() {
             </BrowserRouter>
         </div>
     );
+
 }
 
 export default App;
