@@ -1,32 +1,27 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
-import axios from 'axios';
-import {Link, useParams} from 'react-router-dom';
-import { Button, Form } from 'react-bootstrap';
-import StorePage from "./components/StorePage";
+import HomePage from "./components/HomePage";
+import AllStore from "./components/AllStore";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Header from "./components/Header";
+import NotFound from "./components/NotFound";
+import Store from "./components/Store";
 
 function App() {
-  const [store, setData] = useState([]);
-    useEffect(() => {
-          axios.get('/store/all')
-              .then(response => {
-                  setData(response.data);
-                  console.log(response.data);
-              })
-              .catch(error => {
-                  console.log(error);
-              })
-      },
-      []);
-  return (
-      <Form>
-          <h1>Store Details</h1>
-          <p>StoreID: {JSON.stringify(store[0]) && JSON.stringify(store[0]["store_id"])}</p>
-          <p>StoreName: {JSON.stringify(store[0]) && JSON.stringify(store[0]["store_name"])}</p>
-      </Form>
-  );
-}
 
-// let test = document.querySelector({test})
-// test.create
+    return (
+        <div className='App'>
+            <BrowserRouter>
+                <Header />
+                <Routes>
+                    <Route path="/" element={<HomePage />}></Route>
+                    <Route path="/Store/:storeId" element={<Store />}></Route>
+                    <Route path="/AllStore/*" element={<AllStore />}></Route>
+                    {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
+                    <Route path="*" element={<NotFound />}></Route>
+                </Routes>
+            </BrowserRouter>
+        </div>
+    );
+
+}
 
 export default App;

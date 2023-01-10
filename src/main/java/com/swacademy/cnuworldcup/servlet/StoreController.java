@@ -31,16 +31,16 @@ public class StoreController {
         return storeRepository.findAll();
     }
 
-    @GetMapping(value = "image/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
-    public ResponseEntity<Resource> getImage(@PathVariable("id") String id) throws IOException {
-        String path = "src/main/resources/static/images/";
-        FileSystemResource resource = new FileSystemResource(path + id + ".jpg");
-        HttpHeaders header = new HttpHeaders();
-        Path filePath = null;
-        filePath = Paths.get(path+id);
-        header.add("Content-Type", Files.probeContentType(filePath));
-        return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
-    }
+//    @GetMapping(value = "image/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
+//    public ResponseEntity<Resource> getImage(@PathVariable("id") String id) throws IOException {
+//        String path = "src/main/frontend/public/img/";
+//        FileSystemResource resource = new FileSystemResource(path + id + ".jpg");
+//        HttpHeaders header = new HttpHeaders();
+//        Path filePath = null;
+//        filePath = Paths.get(path+id);
+//        header.add("Content-Type", Files.probeContentType(filePath));
+//        return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
+//    }
 
     @GetMapping(value = "store/{storeId}")
     public Optional<Store> storeInfo(@PathVariable("storeId") String storeId) {
