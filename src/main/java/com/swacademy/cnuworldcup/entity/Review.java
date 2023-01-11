@@ -4,7 +4,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @Entity
@@ -26,6 +28,7 @@ public class Review {
 
     private int rating;
 
-    private String date;
+    @CreationTimestamp
+    private Timestamp date;
 
 }

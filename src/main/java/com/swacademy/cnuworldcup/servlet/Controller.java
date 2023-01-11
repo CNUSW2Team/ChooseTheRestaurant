@@ -1,6 +1,8 @@
 package com.swacademy.cnuworldcup.servlet;
 
 import com.swacademy.cnuworldcup.Repository.*;
+import com.swacademy.cnuworldcup.entity.Relation;
+import com.swacademy.cnuworldcup.entity.Review;
 import com.swacademy.cnuworldcup.entity.Store;
 import com.swacademy.cnuworldcup.entity.WorldCup;
 import lombok.AllArgsConstructor;
@@ -46,5 +48,20 @@ public class Controller {
     @GetMapping(value = "/category/{categoryId}")
     public Optional<WorldCup> categoryInfo(@PathVariable("categoryId") String categoryId) {
         return worldCupRepository.findById(UUID.fromString(categoryId));
+    }
+
+    @GetMapping(value = "/review/all")
+    public List<Review> allReviews(){
+        return reviewRepository.findAll();
+    }
+
+    @GetMapping(value = "/review/{reviewId}")
+    public Optional<Review> reviewInfo(@PathVariable("reviewId") String reviewId) {
+        return reviewRepository.findById(UUID.fromString(reviewId));
+    }
+
+    @GetMapping(value = "/relation")
+    public List<Relation> allRelations(){
+        return relationRepository.findAll();
     }
 }
