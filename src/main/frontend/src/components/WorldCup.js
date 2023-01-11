@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Button, Form, Table} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
-function WorldCup() {
-    // 라운드 선택 >> 사진, 가게이름
-    // let { storeId } = useParams();
-
-    const [category, setData] = useState([]); //나중에 카테고리 name, 사진,  DB받기
+function WorldCup(props) {
+    const [category, setData] = useState([]);
     useEffect(() => {
             axios.get('/category/all')
                 .then(response => {
@@ -19,23 +16,14 @@ function WorldCup() {
                 })
         },
         []);
-    
-
-        
-    let dataShowUp = () => {
-
-    }
 
     return (
-        // 팝업 & 월드컵 데이터 같이 받기
         <div>
-            <button onClick={console.log(2)}>Round : 2강</button>
-            <button onClick={dataShowUp}>Round : 4강</button>
+            <h2>월드컵 N강</h2>
             {/* 라운드 선택 >> 시작하기 클릭 시 random 개수 만큼 뜨게하기 */}
             {/* <img width={500} src={`/img/${category[0] && category[0]["worldcup_id"]}.jpg`} />
             <p>{category[0] && category[0]["worldcup_name"]}</p> */}
         </div>
-        
     );
 }
 
