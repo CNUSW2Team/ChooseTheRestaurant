@@ -21,7 +21,7 @@ function AllCategory() {
         <div>
             <img width={500} src={`/img/${category[0] && category[0]["worldcup_id"]}.jpg`} />
             <p>{category[0] && category[0]["worldcup_name"]}</p>
-            <Link to={`/WorldCup/${category[0] && category[0]["worldcup_name"]}`} ><button>시작하기</button></Link> 
+            <Link to={`/RoundChoice/${category[0] && category[0]["worldcup_id"]}`} ><button>시작하기</button></Link> 
         </div>
     );
 }
