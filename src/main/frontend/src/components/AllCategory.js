@@ -20,6 +20,7 @@ function AllCategory() {
         <div>
             <p>{category[0] && category[0]["worldcup_name"]}</p>
             <img width={500} src={`/img/${category[0] && category[0]["worldcup_id"]}.jpg`} />
+            <div>test</div>
         </div>
     );
 }
