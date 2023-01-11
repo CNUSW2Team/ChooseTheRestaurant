@@ -16,11 +16,12 @@ function AllCategory() {
                 })
         },
         []);
+
     return (
         <div>
-            <p>{category[0] && category[0]["worldcup_name"]}</p>
             <img width={500} src={`/img/${category[0] && category[0]["worldcup_id"]}.jpg`} />
-            <div>test</div>
+            <p>{category[0] && category[0]["worldcup_name"]}</p>
+            <Link to={`/WorldCup/${category[0] && category[0]["worldcup_name"]}`} ><button>시작하기</button></Link> 
         </div>
     );
 }

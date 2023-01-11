@@ -6,6 +6,7 @@ import NotFound from "./components/NotFound";
 import Store from "./components/Store";
 import RankingPage from "./components/RankingPage";
 import AllCategory from "./components/AllCategory";
+import WorldCup from "./components/WorldCup";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
                     <Route path="/Store/:storeId" element={<Store />}></Route>
                     <Route path="/AllStore/*" element={<AllStore />}></Route>
                     <Route path="/AllCategory/*" element={<AllCategory />}></Route>
+                    <Route path="/WorldCup/*" element={<WorldCup />}></Route>
                     <Route path="/Ranking/:worldcupId" element={<RankingPage />}></Route>
                     {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
                     <Route path="*" element={<NotFound />}></Route>
