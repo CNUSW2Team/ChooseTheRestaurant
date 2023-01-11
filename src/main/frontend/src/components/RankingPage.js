@@ -69,10 +69,10 @@ function RankingPage() {
                 </tr>
                 </thead>
                 <tbody>
-                {store.map(v =>
+                {relations.filter(v => v.worldcup_id === worldcupId).map(v =>
                     <tr>
                         <td><img width={100} src={`/img/${v.store_id}.jpg`} /></td>
-                        <td>{v.store_name}</td>
+                        <td>{store.filter(w => w.store_id === v.store_id).store_name}</td>
                         <td>{reviews.filter(review => review.store_id === v.store_id).length === 0 ? 0 : reviews.filter(review => review.store_id === v.store_id)
                             .map(w => w.rating)
                             .reduce((sum, cur) => sum += cur, 0) / reviews.filter(review => review.store_id === v.store_id).length}</td>

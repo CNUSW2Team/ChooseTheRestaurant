@@ -64,4 +64,14 @@ public class Controller {
     public List<Relation> allRelations(){
         return relationRepository.findAll();
     }
+
+//    @GetMapping(value = "/ranking/{categoryId}")
+//    public Optional<Review> rankingResult(@PathVariable("categoryId") String categoryId) {
+//
+//
+//
+//
+//
+//        return reviewRepository.findById(UUID.fromString(reviewId));
+//    }
 }

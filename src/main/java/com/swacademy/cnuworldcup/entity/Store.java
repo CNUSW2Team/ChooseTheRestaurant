@@ -1,10 +1,10 @@
 package com.swacademy.cnuworldcup.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -25,5 +25,9 @@ public class Store {
     private String phone_number;
 
     private String opening_hours;
+
+    @ManyToOne
+    @JoinColumn(name = "relation_id")
+    private Relation relation;
 
 }
