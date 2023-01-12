@@ -23,8 +23,4 @@ public class Relation {
     private UUID store_id;
 
     private int win_count;
-
-    @OneToMany(mappedBy = "relation")
-    private List<Store> relations = new ArrayList<>();
-
 }

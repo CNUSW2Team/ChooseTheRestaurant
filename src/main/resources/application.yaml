@@ -1,9 +1,23 @@
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://10.188.191.205:3306/worldcup_mgmt
+#    username: root
+#    password: sw1234!
+#  thymeleaf:
+#    view-names: "views/*"
+#    prefix: "/WEB-INF/"
+
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://10.188.191.205:3306/worldcup_mgmt
-    username: root
-    password: sw1234!
-  thymeleaf:
-    view-names: "views/*"
-    prefix: "/WEB-INF/"
+    url:  jdbc:h2:~/test
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+    initialization-mode: always
+    schema: classpath:h2/schema.sql
+    data: classpath:h2/data.sql
+  h2:
+    console:
+      enabled: true
+      path: /h2-console

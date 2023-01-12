@@ -26,8 +26,4 @@ public class Store {
 
     private String opening_hours;
 
-    @ManyToOne
-    @JoinColumn(name = "relation_id")
-    private Relation relation;
-
 }
