@@ -14,7 +14,7 @@ import java.util.UUID;
 public class CommentDto {
     private UUID comment_id;
 
-    private UUID store_id;
+    private StoreDto storeDto;
 
     private String contents;
 }

@@ -18,7 +18,7 @@ import java.util.UUID;
 public class MenuDto {
     private UUID menu_id;
 
-    private UUID store_id;
+    private StoreDto storeDto;
 
     private String menu_name;
 

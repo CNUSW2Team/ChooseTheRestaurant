@@ -18,9 +18,9 @@ import java.util.UUID;
 public class RelationDto {
     private UUID relation_id;
 
-    private UUID store_id;
+    private StoreDto storeDto;
 
-    private UUID category_id;
+    private CategoryDto categoryDto;
 
     private int win_count;
 }
