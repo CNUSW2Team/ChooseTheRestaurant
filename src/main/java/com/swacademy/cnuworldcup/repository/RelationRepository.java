@@ -1,6 +1,5 @@
-package com.swacademy.cnuworldcup.Repository;
+package com.swacademy.cnuworldcup.repository;
 
-import com.swacademy.cnuworldcup.entity.Comment;
 import com.swacademy.cnuworldcup.entity.Relation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

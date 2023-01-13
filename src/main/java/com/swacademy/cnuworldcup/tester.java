@@ -1,18 +1,10 @@
 package com.swacademy.cnuworldcup;
 
-import com.swacademy.cnuworldcup.Repository.RelationRepository;
-import com.swacademy.cnuworldcup.Repository.ReviewRepository;
-import com.swacademy.cnuworldcup.Repository.StoreRepository;
-import com.swacademy.cnuworldcup.Repository.WorldCupRepository;
+import com.swacademy.cnuworldcup.repository.RelationRepository;
 import com.swacademy.cnuworldcup.entity.Relation;
-import com.swacademy.cnuworldcup.entity.Review;
-import com.swacademy.cnuworldcup.entity.Store;
-import com.swacademy.cnuworldcup.entity.WorldCup;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.sql.Timestamp;
-import java.util.List;
 import java.util.UUID;
 
 @Slf4j

@@ -1,6 +1,6 @@
 package com.swacademy.cnuworldcup.servlet;
 
-import com.swacademy.cnuworldcup.Repository.*;
+import com.swacademy.cnuworldcup.repository.*;
 import com.swacademy.cnuworldcup.entity.Relation;
 import com.swacademy.cnuworldcup.entity.Review;
 import com.swacademy.cnuworldcup.entity.Store;

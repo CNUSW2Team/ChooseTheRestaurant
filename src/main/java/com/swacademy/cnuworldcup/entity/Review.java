@@ -1,8 +1,6 @@
 package com.swacademy.cnuworldcup.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -15,12 +13,12 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "store")
 public class Review {
     @Id
     private UUID review_id;
 
-    private UUID store_id;
+    //private UUID store_id;
 
     private String writer;
 
@@ -31,4 +29,7 @@ public class Review {
     @CreationTimestamp
     private Timestamp date;
 
+    @ManyToOne
+    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
+    private Store store;
 }

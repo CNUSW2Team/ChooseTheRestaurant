@@ -1,8 +1,6 @@
 package com.swacademy.cnuworldcup.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.UUID;
@@ -13,14 +11,18 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "store")
 public class Menu {
     @Id
     private UUID menu_id;
 
-    private UUID store_id;
+    //private UUID store_id;
 
-    private String store_name;
+    private String menu_name;
 
     private int price;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
+    private Store store;
 }

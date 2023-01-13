@@ -1,10 +1,10 @@
 package com.swacademy.cnuworldcup.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "stores")
 @Table(name = "worldcup")
 public class WorldCup {
     @Id
@@ -23,4 +23,8 @@ public class WorldCup {
 
     private int like_num;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "relation", joinColumns = @JoinColumn(name = "worldcup_id"),
+            inverseJoinColumns = @JoinColumn(name = "store_id"))
+    private List<Store> stores = new ArrayList<>();
 }
