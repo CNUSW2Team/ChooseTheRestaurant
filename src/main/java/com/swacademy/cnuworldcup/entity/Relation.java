@@ -3,11 +3,7 @@ package com.swacademy.cnuworldcup.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
-
-import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Builder
@@ -25,8 +21,8 @@ public class Relation {
     private Store store;
 
     @ManyToOne
-    @JoinColumn(name = "worldcup_id", referencedColumnName = "worldcup_id")
-    private WorldCup worldCup;
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    private Category category;
 
     private int win_count;
 }

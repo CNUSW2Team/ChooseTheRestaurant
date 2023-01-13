@@ -4,20 +4,16 @@ package com.swacademy.cnuworldcup.test;
 import com.swacademy.cnuworldcup.entity.Menu;
 import com.swacademy.cnuworldcup.entity.Relation;
 import com.swacademy.cnuworldcup.entity.Store;
-import com.swacademy.cnuworldcup.entity.WorldCup;
+import com.swacademy.cnuworldcup.entity.Category;
 import com.swacademy.cnuworldcup.repository.MenuRepository;
 import com.swacademy.cnuworldcup.repository.RelationRepository;
 import com.swacademy.cnuworldcup.repository.StoreRepository;
-import com.swacademy.cnuworldcup.repository.WorldCupRepository;
+import com.swacademy.cnuworldcup.repository.CategoryRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.PropertySource;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -31,7 +27,7 @@ public class test {
     MenuRepository menuRepository;
 
     @Autowired
-    WorldCupRepository worldCupRepository;
+    CategoryRepository worldCupRepository;
 
     @Autowired
     RelationRepository relationRepository;
@@ -59,22 +55,22 @@ public class test {
     }
 
     @Test
-    void worldcup_store_insert_test() {
-        WorldCup worldCup = worldCupRepository.findAll().get(0);
+    void category_store_insert_test() {
+        Category worldCup = worldCupRepository.findAll().get(0);
         worldCup.getRelations().forEach(v -> System.out.println(v.getStore().getStore_id()));
 
     }
 
     @Test
-    void worldcup_wincount_test() {
-        WorldCup worldCup = worldCupRepository.findAll().get(2);
+    void category_wincount_test() {
+        Category worldCup = worldCupRepository.findAll().get(2);
         relationRepository.findByWorldCup(worldCup).forEach(v -> System.out.println(v.getWin_count()));
     }
 
     @Test
-    void worldcup_save_test() {
-        WorldCup worldCup1 = WorldCup.builder().worldcup_id(UUID.randomUUID())
-                .worldcup_name("테스트 월드컵")
+    void category_save_test() {
+        Category worldCup1 = Category.builder().category_id(UUID.randomUUID())
+                .category_name("테스트 월드컵")
                 .like_num(0)
                 .build();
         worldCupRepository.save(worldCup1);
@@ -85,11 +81,11 @@ public class test {
     @Test
     void relation_save_test() {
 
-        WorldCup worldCup = worldCupRepository.findAll().get(0);
+        Category worldCup = worldCupRepository.findAll().get(0);
         Store store = storeRepository.findAll().get(0);
         Relation relation = Relation.builder()
                 .relation_id(UUID.randomUUID())
-                .worldCup(worldCup)
+                .category(worldCup)
                 .win_count(0)
                 .store(store)
                 .build();

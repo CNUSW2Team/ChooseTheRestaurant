@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = {"worldCups", "menus", "reviews", "relations"})
+@ToString(exclude = {"comments", "menus", "reviews", "relations"})
 public class Store {
     @Id
     private UUID store_id;

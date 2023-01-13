@@ -4,7 +4,7 @@ import com.swacademy.cnuworldcup.repository.*;
 import com.swacademy.cnuworldcup.entity.Relation;
 import com.swacademy.cnuworldcup.entity.Review;
 import com.swacademy.cnuworldcup.entity.Store;
-import com.swacademy.cnuworldcup.entity.WorldCup;
+import com.swacademy.cnuworldcup.entity.Category;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class Controller {
     @Autowired
     private final StoreRepository storeRepository;
     @Autowired
-    private final WorldCupRepository worldCupRepository;
+    private final CategoryRepository worldCupRepository;
     @Autowired
     private final ReviewRepository reviewRepository;
     @Autowired
@@ -41,12 +41,12 @@ public class Controller {
     }
 
     @GetMapping(value = "/category/all")
-    public List<WorldCup> allCategories(){
+    public List<Category> allCategories(){
         return worldCupRepository.findAll();
     }
 
     @GetMapping(value = "/category/{categoryId}")
-    public Optional<WorldCup> categoryInfo(@PathVariable("categoryId") String categoryId) {
+    public Optional<Category> categoryInfo(@PathVariable("categoryId") String categoryId) {
         return worldCupRepository.findById(UUID.fromString(categoryId));
     }
 

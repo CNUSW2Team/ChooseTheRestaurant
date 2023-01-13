@@ -14,15 +14,14 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString(exclude = "relations")
-@Table(name = "worldcup")
-public class WorldCup {
+public class Category {
     @Id
-    private UUID worldcup_id;
+    private UUID category_id;
 
-    private String worldcup_name;
+    private String category_name;
 
     private int like_num;
 
-    @OneToMany(mappedBy = "worldCup", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     private List<Relation> relations = new ArrayList<>();
 }
