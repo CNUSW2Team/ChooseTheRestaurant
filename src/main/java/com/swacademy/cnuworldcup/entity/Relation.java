@@ -20,12 +20,6 @@ public class Relation {
     @Id
     private UUID relation_id;
 
-//    private UUID worldcup_id;
-//
-//    private UUID store_id;
-
-    private int win_count;
-
     @ManyToOne
     @JoinColumn(name = "store_id", referencedColumnName = "store_id")
     private Store store;
@@ -34,8 +28,5 @@ public class Relation {
     @JoinColumn(name = "worldcup_id", referencedColumnName = "worldcup_id")
     private WorldCup worldCup;
 
-//    @OneToMany(mappedBy = "relation", fetch = FetchType.EAGER)
-//    private List<WorldCup> worldCups = new ArrayList<>();
-//    @OneToMany(mappedBy = "relation", fetch = FetchType.EAGER)
-//    private List<Store> stores = new ArrayList<>();
+    private int win_count;
 }

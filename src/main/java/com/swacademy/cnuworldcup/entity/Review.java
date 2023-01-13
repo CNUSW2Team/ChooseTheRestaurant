@@ -18,7 +18,9 @@ public class Review {
     @Id
     private UUID review_id;
 
-    //private UUID store_id;
+    @ManyToOne
+    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
+    private Store store;
 
     private String writer;
 
@@ -28,8 +30,4 @@ public class Review {
 
     @CreationTimestamp
     private Timestamp date;
-
-    @ManyToOne
-    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
-    private Store store;
 }

@@ -23,11 +23,6 @@ public class WorldCup {
 
     private int like_num;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "relation", joinColumns = @JoinColumn(name = "worldcup_id"),
-//            inverseJoinColumns = @JoinColumn(name = "store_id"))
-//    private List<Store> stores = new ArrayList<>();
-
     @OneToMany(mappedBy = "worldCup", fetch = FetchType.EAGER)
     private List<Relation> relations = new ArrayList<>();
 }

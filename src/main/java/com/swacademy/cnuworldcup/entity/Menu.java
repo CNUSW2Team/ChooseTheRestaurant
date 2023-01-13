@@ -16,13 +16,12 @@ public class Menu {
     @Id
     private UUID menu_id;
 
-    //private UUID store_id;
+    @ManyToOne
+    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
+    private Store store;
 
     private String menu_name;
 
     private int price;
 
-    @ManyToOne
-    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
-    private Store store;
 }

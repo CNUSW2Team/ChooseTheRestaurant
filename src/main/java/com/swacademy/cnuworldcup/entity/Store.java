@@ -26,11 +26,6 @@ public class Store {
 
     private String opening_hours;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "relation", joinColumns = @JoinColumn(name = "store_id"),
-//            inverseJoinColumns = @JoinColumn(name = "worldcup_id"))
-//    private List<WorldCup> worldCups = new ArrayList<>();
-
     @OneToMany(mappedBy = "store", fetch = FetchType.EAGER)
     private List<Relation> relations = new ArrayList<>();
 

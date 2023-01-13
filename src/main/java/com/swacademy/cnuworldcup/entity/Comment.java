@@ -16,12 +16,9 @@ public class Comment {
     @Id
     private UUID comment_id;
 
-    //private UUID store_id;
-
-    private String contents;
-
     @ManyToOne
     @JoinColumn(name = "store_id", referencedColumnName = "store_id")
     private Store store;
 
+    private String contents;
 }
