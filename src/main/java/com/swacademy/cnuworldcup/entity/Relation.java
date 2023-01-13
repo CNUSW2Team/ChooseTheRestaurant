@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static jakarta.persistence.GenerationType.IDENTITY;
+
 @Entity
 @Builder
 @AllArgsConstructor
@@ -18,9 +20,22 @@ public class Relation {
     @Id
     private UUID relation_id;
 
-    private UUID worldcup_id;
-
-    private UUID store_id;
+//    private UUID worldcup_id;
+//
+//    private UUID store_id;
 
     private int win_count;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id", referencedColumnName = "store_id")
+    private Store store;
+
+    @ManyToOne
+    @JoinColumn(name = "worldcup_id", referencedColumnName = "worldcup_id")
+    private WorldCup worldCup;
+
+//    @OneToMany(mappedBy = "relation", fetch = FetchType.EAGER)
+//    private List<WorldCup> worldCups = new ArrayList<>();
+//    @OneToMany(mappedBy = "relation", fetch = FetchType.EAGER)
+//    private List<Store> stores = new ArrayList<>();
 }
