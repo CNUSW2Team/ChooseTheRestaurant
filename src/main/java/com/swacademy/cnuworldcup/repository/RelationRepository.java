@@ -10,5 +10,5 @@ import java.util.UUID;
 
 @Repository
 public interface RelationRepository extends JpaRepository<Relation, UUID> {
-    List<Relation> findByWorldCup(Category worldCup);
+    List<Relation> findByCategory(Category category);
 }

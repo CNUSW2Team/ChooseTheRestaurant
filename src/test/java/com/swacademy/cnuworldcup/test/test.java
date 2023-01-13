@@ -64,7 +64,7 @@ public class test {
     @Test
     void category_wincount_test() {
         Category worldCup = worldCupRepository.findAll().get(2);
-        relationRepository.findByWorldCup(worldCup).forEach(v -> System.out.println(v.getWin_count()));
+        relationRepository.findByCategory(worldCup).forEach(v -> System.out.println(v.getWin_count()));
     }
 
     @Test
