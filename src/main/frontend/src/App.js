@@ -23,7 +23,7 @@ function App() {
                     <Route path="/AllCategory/*" element={<AllCategory />}></Route>
                     <Route path="/GetReady/:categoryId" element={<GetReady />}></Route>
                     <Route path="/Round/:categoryId/:numOfRound" element={<WorldCup />}></Route>
-                    <Route path="/Result/:storeId" element={<WinnerResult />}></Route>
+                    <Route path="/Result/:categoryId/:storeId" element={<WinnerResult />}></Route>
                     <Route path="/Ranking/:categoryId" element={<RankingPage />}></Route>
                     {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
                     <Route path="*" element={<NotFound />}></Route>
