@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Button, Form, Table} from "react-bootstrap";
 import {Link, useParams} from "react-router-dom";
-import WorldCup from './WorldCup';
 
 function GetReady() {
     let { categoryId } = useParams();
