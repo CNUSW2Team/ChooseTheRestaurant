@@ -6,9 +6,12 @@ import {Link, useParams, useLocation} from "react-router-dom";
 
 
 function WorldCup(props) {
-    const [category, setData] = useState([]);
+    let { categoryId } = useParams();
+    let { numOfRound } = useParams();
+
+    const [StoreInfo, setData] = useState([]);
     useEffect(() => {
-            axios.get('/category/all')
+            axios.get(`/F/Round/${categoryId}/${numOfRound}`)
                 .then(response => {
                     setData(response.data);
                     console.log(response.data);
@@ -19,15 +22,19 @@ function WorldCup(props) {
         },
         []);
     
-    const rounds = useLocation();
-    const selectedRounds = rounds
 
     return (
         <div>
-            <h2>{`월드컵 ${props.rounds}강`}</h2>
-            {/* 라운드 선택 >> 시작하기 클릭 시 random 개수 만큼 뜨게하기 */}
-            {/* <img width={500} src={`/img/${category[0] && category[0]["worldcup_id"]}.jpg`} />
-            <p>{category[0] && category[0]["worldcup_name"]}</p> */}
+            <h2>{numOfRound}강</h2>
+            {/* 랜덤월드컵 구현 */}
+            <Link to={`/Result/${StoreInfo[0] && StoreInfo[0]["name"]}`}>
+                <div>
+                    <p>{StoreInfo[0] && StoreInfo[0]["name"]}</p>
+                    <img width={500} src={`/img/${StoreInfo[0] && StoreInfo[0]["store_id"]}.jpg`} />
+                </div>
+            </Link>
+            
+        
         </div>
     );
 }
