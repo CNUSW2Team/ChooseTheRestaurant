@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 function AllStore() {
     const [store, setData] = useState([]);
     useEffect(() => {
-            axios.get('/store/all')
+            axios.get('/F/AllStore')
                 .then(response => {
                     setData(response.data);
                     console.log(response.data);

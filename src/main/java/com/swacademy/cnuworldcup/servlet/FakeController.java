@@ -54,6 +54,8 @@ public class FakeController {
         return results.toString();
     }
 
+    // !! 카테고리/선택카테고리 
+
     @GetMapping("/F/AllStore") // DB에 존재하는 모든 가게들을 반환(월드컵 제작용)
     public @ResponseBody String getAllStore() {
         List<JSONObject> results = new ArrayList<>();
@@ -90,7 +92,7 @@ public class FakeController {
         return results.toString();
     }
 
-    @GetMapping("/F/WinnerResult/{categoryId}/{storeId}") // categoryId에 해당하는 storeId의 코멘트와 랭킹정보 반환(내가 선택한 1위 가게의 정보 출력시)
+    @GetMapping("/F/Result/{categoryId}/{storeId}") // categoryId에 해당하는 storeId의 코멘트와 랭킹정보 반환(내가 선택한 1위 가게의 정보 출력시)
     public @ResponseBody String getWinnerResult() {
         List<JSONObject> results = new ArrayList<>();
 

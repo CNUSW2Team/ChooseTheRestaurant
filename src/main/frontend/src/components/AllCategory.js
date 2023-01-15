@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 function AllCategory() {
     const [category, setData] = useState([]);
     useEffect(() => {
-            axios.get('/category/all')
+            axios.get('/F/AllCategory')
                 .then(response => {
                     setData(response.data);
                     console.log(response.data);
@@ -19,11 +19,14 @@ function AllCategory() {
 
     return (
         <div>
-            <img width={500} src={`/img/${category[0] && category[0]["worldcup_id"]}.jpg`} />
-            <p>{category[0] && category[0]["worldcup_name"]}</p>
-            <Link to={`/RoundChoice/${category[0] && category[0]["worldcup_id"]}`} ><button>시작하기</button></Link> 
+            <img width={500} src={`/img/${category[0] && category[0]["category_id"]}.jpg`} />
+            <p>{category[0] && category[0]["name"]}</p>
+            <Link to={`/GetReady/${category[0] && category[0]["category_id"]}`} ><button>시작하기</button></Link> 
         </div>
     );
 }
+
+
+
 
 export default AllCategory;
