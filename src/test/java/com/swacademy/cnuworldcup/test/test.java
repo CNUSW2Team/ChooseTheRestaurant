@@ -9,6 +9,7 @@ import com.swacademy.cnuworldcup.repository.MenuRepository;
 import com.swacademy.cnuworldcup.repository.RelationRepository;
 import com.swacademy.cnuworldcup.repository.StoreRepository;
 import com.swacademy.cnuworldcup.repository.CategoryRepository;
+import com.swacademy.cnuworldcup.service.CRUDService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class test {
 
     @Autowired
     RelationRepository relationRepository;
+
+    @Autowired
+    CRUDService crudService;
 
 
     @Test
@@ -94,4 +98,27 @@ public class test {
 
         relationRepository.save(relation);
     }
+
+    @Test
+    void asdf(){
+        crudService.saveComment(UUID.fromString("0c8eeaaa-eee8-4318-989b-c765aa691a9a"), "꿀맛이에요");
+
+    }
+
+    @Test
+    void sdfdsf(){
+        String s = "안녕하세요";
+        log.info("charAt(0): {}", s.charAt(1));
+
+    }
+
+//    @Test
+//    void find_store_dto_test() throws NotFoundException {
+//
+//        StoreDto storeById = crudService.findStoreById(UUID.fromString("0c8eeaaa-eee8-4318-989b-c765aa691a9a"));
+////        Store byId = storeRepository.findById(UUID.fromString("0c8eeaaa-eee8-4318-989b-c765aa691a9a")).get();
+////        System.out.println(byId);
+//
+//
+//    }
 }
