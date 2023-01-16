@@ -91,9 +91,8 @@ public class FakeController {
 
         return results.toString();
     }
-
-    @GetMapping("/F/Result/{categoryId}/{storeId}") // categoryId에 해당하는 storeId의 코멘트와 랭킹정보 반환(내가 선택한 1위 가게의 정보 출력시)
     // 프론트상에선 categoryId 필요x, 백에 데이터 보내야하니까 놔둘까?
+    @GetMapping("/F/Result/{categoryId}/{storeId}") // categoryId에 해당하는 storeId의 코멘트와 랭킹정보 반환(내가 선택한 1위 가게의 정보 출력시)
     public @ResponseBody String getWinnerResult() {
         List<JSONObject> results = new ArrayList<>();
 
