@@ -8,7 +8,7 @@ function RankingPage() {
     const [worldcup, setWorldcup] = useState([]);
     const [reviews, setReview] = useState([]);
     const [relations, setRelation] = useState([]);
-    let { worldcupId } = useParams();
+    let { categoryId } = useParams();
 
     useEffect(() => {
             axios.get('/store/all')
@@ -22,7 +22,7 @@ function RankingPage() {
         },
         []);
     useEffect(() => {
-            axios.get(`/category/${worldcupId}`)
+            axios.get(`/category/${categoryId}`)
                 .then(response => {
                     setWorldcup(response.data);
                     console.log(response.data);
@@ -69,7 +69,7 @@ function RankingPage() {
                 </tr>
                 </thead>
                 <tbody>
-                {relations.filter(v => v.worldcup_id === worldcupId).map(v =>
+                {relations.filter(v => v.worldcup_id === categoryId).map(v =>
                     <tr>
                         <td><img width={100} src={`/img/${v.store_id}.jpg`} /></td>
                         <td>{store.filter(w => w.store_id === v.store_id).store_name}</td>
@@ -77,7 +77,7 @@ function RankingPage() {
                             .map(w => w.rating)
                             .reduce((sum, cur) => sum += cur, 0) / reviews.filter(review => review.store_id === v.store_id).length}</td>
                         <td>{reviews.filter(review => review.store_id === v.store_id).length}</td>
-                        <td>{relations.filter(relation => relation.worldcup_id === worldcupId).filter(relation => relation.store_id === v.store_id).map(w => w.win_count)}</td>
+                        <td>{relations.filter(relation => relation.worldcup_id === categoryId).filter(relation => relation.store_id === v.store_id).map(w => w.win_count)}</td>
                         <td><Link to={`/Store/${v.store_id}`}> 상세정보 </Link></td>
                     </tr>,
                 )}

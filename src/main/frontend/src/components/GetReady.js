@@ -24,8 +24,7 @@ function GetReady() {
         <div>
             <h1>{category[0] && category[0]["name"]}</h1>
             <Link to={`/Round/${categoryId}/2`}><button>Round : 2강</button></Link>
-            <Link to={`/Round/${categoryId}/4`}><button>Round : 4강</button></Link>
-            <Link to={`/Ranking/${categoryId}`}><button>랭킹페이지로 가기</button></Link> 
+            <Link to={`/Round/${categoryId}/4`}><button>Round : 4강</button></Link> 
         </div>
         
     );
