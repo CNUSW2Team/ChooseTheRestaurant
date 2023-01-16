@@ -9,7 +9,7 @@ function WinnerResult(){
 
     const [storeInfo, setData] = useState([]);
     useEffect(() => {
-            axios.get(`/F/Result/${categoryId}/${storeId}`)
+            axios.get(`/Result/${categoryId}/${storeId}`)
                 .then(response => {
                     setData(response.data);
                     console.log(response.data);

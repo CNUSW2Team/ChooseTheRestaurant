@@ -8,7 +8,7 @@ function GetReady() {
 
     const [category, setData] = useState([]); 
     useEffect(() => {
-            axios.get(`/F/AllCategory`)
+            axios.get(`/AllCategory`)
                 .then(response => {
                     setData(response.data);
                     console.log(response.data);

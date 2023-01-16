@@ -24,11 +24,21 @@ public class Controller {
         for (Category category : categories) {
             JSONObject json = new JSONObject();
             json.put("category_id", category.getCategory_id());
-            json.put("name", category.getCategory_name());
+            json.put("category_name", category.getCategory_name());
             json.put("favorite", category.getLike_num());
 
             results.add(json);
         }
+        return results.toString();
+    }
+
+    @GetMapping("/AllCategory/{categoryId}")
+    public @ResponseBody String getOneCategory(@PathVariable("categoryId") String categoryId) {
+        JSONObject results = new JSONObject();
+        Category category = crudService.findCategoryById(UUID.fromString(categoryId));
+        results.put("category_id", category.getCategory_id());
+        results.put("category_name", category.getCategory_name());
+        results.put("favorite", category.getLike_num());
         return results.toString();
     }
 
@@ -83,7 +93,7 @@ public class Controller {
         return results.toString();
     }
 
-    @GetMapping("/WinnerResult/{categoryId}/{storeId}") // categoryId에 해당하는 storeId의 코멘트와 랭킹정보 반환(내가 선택한 1위 가게의 정보 출력시)
+    @GetMapping("/Result/{categoryId}/{storeId}") // categoryId에 해당하는 storeId의 코멘트와 랭킹정보 반환(내가 선택한 1위 가게의 정보 출력시)
     public @ResponseBody String getWinnerResult(@PathVariable("categoryId") String categoryId, @PathVariable("storeId") String storeId) {
         JSONObject results = new JSONObject();
         List<Relation> relations = crudService.findCategoryById(UUID.fromString(categoryId))
@@ -100,8 +110,8 @@ public class Controller {
 
             list.add(v.getContents().toString());
         });
-
-        results.put("rank", relations.indexOf(rank)+1);
+        results.put("store_name", store.getStore_name());
+        results.put("rank", relations.indexOf(rank) + 1);
         results.put("stars", averageStars);
         results.put("comments", list);
 
@@ -112,7 +122,7 @@ public class Controller {
     public @ResponseBody String getStoreInfo(@PathVariable("storeId") String storeId) {
         Store store = crudService.findStoreById(UUID.fromString(storeId));
         JSONObject results = new JSONObject();
-
+        results.put("store_name", store.getStore_name());
         results.put("address", store.getAddress());
         results.put("contact", store.getPhone_number());
         List<JSONObject> menus = new ArrayList<>();
@@ -138,36 +148,43 @@ public class Controller {
         List<JSONObject> times = new ArrayList<>();
         String openingHours = store.getOpening_hours();
         String[] split = openingHours.split("\n");
+        Arrays.stream(split)
+                .forEach(v -> {
+                    JSONObject time = new JSONObject();
+                    String hours = v.substring(4);
+                    switch (v.charAt(0)) {
+                        case '월':
+                            time.put("day", "월요일");
+                            time.put("hours", hours);
+                            break;
+                        case '화':
+                            time.put("day", "화요일");
+                            time.put("hours", hours);
+                            break;
+                        case '수':
+                            time.put("day", "수요일");
+                            time.put("hours", hours);
+                            break;
+                        case '목':
+                            time.put("day", "목요일");
+                            time.put("hours", hours);
+                            break;
+                        case '금':
+                            time.put("day", "금요일");
+                            time.put("hours", hours);
+                            break;
+                        case '토':
+                            time.put("day", "토요일");
+                            time.put("hours", hours);
+                            break;
+                        case '일':
+                            time.put("day", "일요일");
+                            time.put("hours", hours);
+                            break;
+                    }
 
-        Arrays.stream(split).forEach(v -> {
-            JSONObject time = new JSONObject();
-            String hours = v.substring(4);
-            switch (v.charAt(0)){
-                case '월':
-                    time.put("mon", hours);
-                    break;
-                case '화':
-                    time.put("tue", hours);
-                    break;
-                case '수':
-                    time.put("wed", hours);
-                    break;
-                case '목':
-                    time.put("thu", hours);
-                    break;
-                case '금':
-                    time.put("fri", hours);
-                    break;
-                case '토':
-                    time.put("sat", hours);
-                    break;
-                case '일':
-                    time.put("sun", hours);
-                    break;
-            }
-
-            times.add(time);
-        });
+                    times.add(time);
+                });
 
         results.put("times", times);
 
