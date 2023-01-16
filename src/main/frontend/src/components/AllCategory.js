@@ -19,14 +19,29 @@ function AllCategory() {
 
     return (
         <div>
-            <img width={500} src={`/img/${category[0] && category[0]["category_id"]}.jpg`} />
-            <p>{category[0] && category[0]["name"]}</p>
-            <Link to={`/GetReady/${category[0] && category[0]["category_id"]}`} ><button>시작하기</button></Link> 
+            <Table striped bordered hover>
+                <thead>
+                <tr>
+                    <th>월드컵이름</th>
+                    <th>사진</th>
+                    <th>좋아요</th>
+                    <th>시작하기</th>
+                </tr>
+                </thead>
+                <tbody>
+                {category.map(v =>
+                    <tr>
+                        <td>{v.category_name}</td>
+                        <td><img width={400} src={`/img/${v.category_id}.jpg`}/></td>
+                        <td>{v.favorite}</td>
+                        <td><Link to={`/GetReady/${v.category_id}`}> 시작하기 </Link></td>
+                    </tr>,
+                )}
+                </tbody>
+            </Table>
         </div>
     );
 }
-
-
 
 
 export default AllCategory;
