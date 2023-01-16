@@ -113,7 +113,7 @@ public class FakeController {
         return results.toString();
     }
 
-    @GetMapping("/F/StoreInfo/{storeId}") // categoryId에 해당하는 storeId의 코멘트와 랭킹정보 반환(내가 선택한 1위 가게의 정보 출력시)
+    @GetMapping("/F/StoreInfo/{storeId}") // storeId에 해당하는 store의 상세정보
     public @ResponseBody String getStoreInfo() {
         //메뉴
         JSONObject menu1 = new JSONObject();

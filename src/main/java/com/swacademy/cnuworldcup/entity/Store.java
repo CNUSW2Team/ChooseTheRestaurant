@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"comments", "menus", "reviews", "relations"})
 public class Store {
     @Id
     private UUID store_id;
@@ -26,4 +26,15 @@ public class Store {
 
     private String opening_hours;
 
+    @OneToMany(mappedBy = "store", fetch = FetchType.EAGER)
+    private List<Relation> relations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "store", fetch = FetchType.EAGER)
+    private List<Menu> menus = new ArrayList<>();
+
+    @OneToMany(mappedBy = "store", fetch = FetchType.EAGER)
+    private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "store", fetch = FetchType.EAGER)
+    private List<Comment> comments = new ArrayList<>();
 }
