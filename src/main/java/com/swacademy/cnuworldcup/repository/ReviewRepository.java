@@ -1,4 +1,4 @@
-package com.swacademy.cnuworldcup.Repository;
+package com.swacademy.cnuworldcup.repository;
 
 import com.swacademy.cnuworldcup.entity.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
