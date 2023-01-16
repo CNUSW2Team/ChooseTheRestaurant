@@ -11,7 +11,7 @@ function WorldCup(props) {
 
     const [StoreInfo, setData] = useState([]);
     useEffect(() => {
-            axios.get(`/F/Round/${categoryId}/${numOfRound}`)
+            axios.get(`/Round/${categoryId}/${numOfRound}`)
                 .then(response => {
                     setData(response.data);
                     console.log(response.data);
