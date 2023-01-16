@@ -5,6 +5,7 @@ import {Link, useParams} from "react-router-dom";
 
 function RankingPage() {
     const [store, setStore] = useState([]);
+
     const [category, setCategory] = useState([]);
     let { categoryId } = useParams();
 
@@ -20,6 +21,7 @@ function RankingPage() {
         },
         []);
     useEffect(() => {
+
             axios.get(`/AllCategory/${categoryId}`)
                 .then(response => {
                     setCategory(response.data);
@@ -47,10 +49,12 @@ function RankingPage() {
                 </tr>
                 </thead>
                 <tbody>
+
                 {store.map(v =>
                     <tr>
                         <td>{count++}</td>
                         <td><img width={100} src={`/img/${v.store_id}.jpg`} /></td>
+
                         <td>{v.store_name}</td>
                         <td>{v.stars}</td>
                         <td>{v.winningCount}</td>
