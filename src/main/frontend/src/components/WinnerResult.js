@@ -2,13 +2,12 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Button, Form, Table} from "react-bootstrap";
 import {Link, useParams} from "react-router-dom";
-import styles from "./WinnerResult.module.css"
 
 function WinnerResult(){
     let { categoryId } = useParams();
     let { storeId } = useParams();
 
-    const [storeInfo, setData] = useState([]);
+    const [StoreInfo, setData] = useState([]);
     useEffect(() => {
             axios.get(`/Result/${categoryId}/${storeId}`)
                 .then(response => {
@@ -20,22 +19,18 @@ function WinnerResult(){
                 })
         },
         []);
-
+    
     return (
-        // 랜덤 컬러, 크기 / 위치는 테두리로 고정
         <>
-            <div className={styles.secLeft}>
-                <p>{storeInfo[0] && storeInfo[0]["comments"][0]}</p>
-                <p>{storeInfo[0] && storeInfo[0]["comments"][1]}</p>
-                <p>{storeInfo[0] && storeInfo[0]["comments"][2]}</p>
+            <div className="inlineBlock">
+                <p>{StoreInfo["comments"]}</p>
                 <img width={500} src={`/img/${storeId}.jpg`} />
             </div>
-            <div className={styles.secLeft}>
-                {/* storename도 파라미터로 가져와야하나? */}
-                <p>{`리코타코는 전체 랭킹에서 ${storeInfo[0] && storeInfo[0]["rank"]}등을 차지했어요!`}</p>
-                <p>{`별점 ${storeInfo[0] && storeInfo[0]["stars"]}`}</p>
+            <div className="inlineBlock">
+                <p>{`${StoreInfo["store_name"]}는 전체 랭킹에서 ${StoreInfo["rank"]}등을 차지했어요!`}</p>
+                <p>{`별점 ${StoreInfo["stars"]}`}</p>
                 <form>
-                    <h4>내가 남기는 리코타코 간단 코멘트</h4>
+                    <h4>{`내가 남기는 ${StoreInfo["store_name"]} 간단 코멘트`}</h4>
                     <input type="text" placeholder="write your comment"/>
                 </form>
             </div>
@@ -48,7 +43,8 @@ function WinnerResult(){
             
         </>
         
-    );        
+    )     
 }
 
 export default WinnerResult;
+

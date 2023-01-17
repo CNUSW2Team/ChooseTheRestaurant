@@ -41,7 +41,7 @@ public class Controller {
         results.put("favorite", category.getLike_num());
         return results.toString();
     }
-
+    
     @GetMapping("/Ranking/{categoryId}") //categoryId에 해당하는 가게들의 리스트 반환(랭킹결과 가게순위 확인시)
     public @ResponseBody String getStoreOfCategory(@PathVariable("categoryId") String categoryId) {
         List<JSONObject> results = new ArrayList<>();
