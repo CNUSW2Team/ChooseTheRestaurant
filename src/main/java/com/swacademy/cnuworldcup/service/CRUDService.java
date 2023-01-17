@@ -55,4 +55,10 @@ public class CRUDService {
         comment.setContents(s);
         return commentRepository.save(comment);
     }
+
+    @Transactional
+    public Store saveStore(Store store) {
+        return storeRepository.save(store);
+    }
+
 }

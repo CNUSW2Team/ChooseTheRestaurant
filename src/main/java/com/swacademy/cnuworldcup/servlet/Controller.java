@@ -2,12 +2,15 @@ package com.swacademy.cnuworldcup.servlet;
 
 import com.swacademy.cnuworldcup.entity.*;
 import com.swacademy.cnuworldcup.service.CRUDService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.util.*;
 
 @Slf4j
@@ -189,5 +192,25 @@ public class Controller {
         results.put("times", times);
 
         return results.toString();
+    }
+
+    // ==================================== Post =========================================== //
+    @RequestMapping(value = "/admin/requestStoreAdd")
+    @ResponseBody
+    public String AddNewStore(@RequestBody Map<String, String> paramMap) {
+        // System.out.println(paramMap);
+
+        Store store = Store.builder()
+                .store_id(UUID.randomUUID())
+                .address(paramMap.get("address"))
+                .opening_hours(paramMap.get("opening_hours"))
+                .store_name(paramMap.get("store_name"))
+                .phone_number(paramMap.get("phone_number"))
+                .build();
+
+        crudService.saveStore(store);
+
+        String result = "새로운 가게 등록 완료";
+        return result;
     }
 }
