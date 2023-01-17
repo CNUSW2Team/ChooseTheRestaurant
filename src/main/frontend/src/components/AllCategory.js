@@ -39,6 +39,7 @@ function AllCategory() {
                 )}
                 </tbody>
             </Table>
+            <button><Link to={`/admin/AdminAddShop`}> 가게 추가하기 </Link></button>
         </div>
     );
 }
