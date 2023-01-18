@@ -1,5 +1,7 @@
 package com.swacademy.cnuworldcup.servlet;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.swacademy.cnuworldcup.entity.*;
 import com.swacademy.cnuworldcup.service.CRUDService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,7 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.util.*;
@@ -197,18 +202,28 @@ public class Controller {
     // ==================================== Post =========================================== //
     @RequestMapping(value = "/admin/requestStoreAdd")
     @ResponseBody
-    public String AddNewStore(@RequestBody Map<String, String> paramMap) {
-        // System.out.println(paramMap);
+    public String AddNewStore(String storeDto,
+                              MultipartFile[] files) throws IOException {
 
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, String> storeMap = mapper.readValue(storeDto, Map.class);
+
+        UUID storeID = UUID.randomUUID();
         Store store = Store.builder()
-                .store_id(UUID.randomUUID())
-                .address(paramMap.get("address"))
-                .opening_hours(paramMap.get("opening_hours"))
-                .store_name(paramMap.get("store_name"))
-                .phone_number(paramMap.get("phone_number"))
+                .store_id(storeID)
+                .address(storeMap.get("address"))
+                .opening_hours(storeMap.get("opening_hours"))
+                .store_name(storeMap.get("store_name"))
+                .phone_number(storeMap.get("phone_number"))
                 .build();
-
         crudService.saveStore(store);
+
+        String IMAGE_FILE_UPLOAD_PATH = "D:\\demo (1)\\CNUWorldCup\\src\\main\\frontend\\public\\img";
+        for(MultipartFile mf : files) {
+//            System.out.println("파일 이름 : " + mf.getOriginalFilename());
+            File fileSave = new File(IMAGE_FILE_UPLOAD_PATH, storeID.toString()+".jpg");
+            mf.transferTo(fileSave);
+        }
 
         String result = "새로운 가게 등록 완료";
         return result;
