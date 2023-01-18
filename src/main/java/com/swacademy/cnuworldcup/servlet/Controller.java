@@ -77,6 +77,7 @@ public class Controller {
             JSONObject json = new JSONObject();
             json.put("store_id", store.getStore_id());
             json.put("store_name", store.getStore_name());
+            json.put("address", store.getAddress());
 
             results.add(json);
         }
@@ -218,13 +219,47 @@ public class Controller {
                 .build();
         crudService.saveStore(store);
 
-        String IMAGE_FILE_UPLOAD_PATH = new File("src\\main\\frontend\\public\\img").getAbsolutePath();;
-        for(MultipartFile mf : files) {
-            File fileSave = new File(IMAGE_FILE_UPLOAD_PATH, storeID.toString()+".jpg");
+        String IMAGE_FILE_UPLOAD_PATH = new File("src\\main\\frontend\\public\\img").getAbsolutePath();
+
+        for (MultipartFile mf : files) {
+            File fileSave = new File(IMAGE_FILE_UPLOAD_PATH, storeID.toString() + ".jpg");
             mf.transferTo(fileSave);
         }
 
         String result = "새로운 가게 등록 완료";
         return result;
+    }
+
+    @PostMapping(value = "/requestCategoryAdd")
+    public String AddNewCategory(String categoryDto) throws IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> categoryMap = mapper.readValue(categoryDto, Map.class);
+
+        ArrayList<String> storeList = (ArrayList<String>) categoryMap.get("stores");
+
+        UUID categoryId = UUID.randomUUID();
+        Category category = Category.builder()
+                .category_id(categoryId)
+                .category_name((String) categoryMap.get("category_name"))
+                .like_num(0)
+                //.relations()
+                .build();
+        crudService.saveCategory(category);
+
+        for(String storeid : storeList){
+            Store store = crudService.findStoreById(UUID.fromString(storeid));
+            Relation relation = Relation.builder()
+                    .relation_id(UUID.randomUUID())
+                    .win_count(0)
+                    .store(store)
+                    .category(category)
+                    .build();
+            crudService.saveRelation(relation);
+
+        }
+
+
+        return "새로운 카테고리 등록 완료";
     }
 }
