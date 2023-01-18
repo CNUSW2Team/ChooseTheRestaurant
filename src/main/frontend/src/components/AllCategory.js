@@ -39,7 +39,7 @@ function AllCategory() {
                 )}
                 </tbody>
             </Table>
-            <button><Link to={`/admin/AdminAddShop`}> 가게 추가하기 </Link></button>
+            <button><Link to={`/admin/AdminAddStore`}> 가게 추가하기 </Link></button>
             <button><Link to={`/AddCategory`}> 월드컵 만들기 </Link></button>
         </div>
     );
