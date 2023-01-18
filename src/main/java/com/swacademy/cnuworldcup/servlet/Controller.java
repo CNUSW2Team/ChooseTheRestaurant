@@ -218,9 +218,8 @@ public class Controller {
                 .build();
         crudService.saveStore(store);
 
-        String IMAGE_FILE_UPLOAD_PATH = "D:\\demo (1)\\CNUWorldCup\\src\\main\\frontend\\public\\img";
+        String IMAGE_FILE_UPLOAD_PATH = new File("src\\main\\frontend\\public\\img").getAbsolutePath();;
         for(MultipartFile mf : files) {
-//            System.out.println("파일 이름 : " + mf.getOriginalFilename());
             File fileSave = new File(IMAGE_FILE_UPLOAD_PATH, storeID.toString()+".jpg");
             mf.transferTo(fileSave);
         }
