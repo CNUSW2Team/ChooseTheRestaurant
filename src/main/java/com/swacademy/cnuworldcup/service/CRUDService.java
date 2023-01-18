@@ -1,6 +1,7 @@
 package com.swacademy.cnuworldcup.service;
 import com.swacademy.cnuworldcup.entity.Category;
 import com.swacademy.cnuworldcup.entity.Comment;
+import com.swacademy.cnuworldcup.entity.Relation;
 import com.swacademy.cnuworldcup.entity.Store;
 import com.swacademy.cnuworldcup.repository.*;
 import jakarta.transaction.Transactional;
@@ -59,6 +60,16 @@ public class CRUDService {
     @Transactional
     public Store saveStore(Store store) {
         return storeRepository.save(store);
+    }
+
+    @Transactional
+    public Category saveCategory(Category category) {
+        return categoryRepository.save(category);
+    }
+
+    @Transactional
+    public Relation saveRelation(Relation relation) {
+        return relationRepository.save(relation);
     }
 
 }
