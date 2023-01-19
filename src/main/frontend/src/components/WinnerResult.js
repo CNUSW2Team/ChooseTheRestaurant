@@ -20,6 +20,15 @@ function WinnerResult(){
         },
         []);
     
+    const [NewComment, setComment] = useState('');
+    const updateNewComment = e => setComment(e.target.value) 
+
+    function Send(){
+        console.log(NewComment);
+        axios.post('http://localhost:8080/admin/requestStoreAdd',
+            {NewComment:NewComment})
+    }
+
     return (
         <>
             <div className="inlineBlock">
@@ -31,7 +40,8 @@ function WinnerResult(){
                 <p>{`별점 ${StoreInfo["stars"]}`}</p>
                 <form>
                     <h4>{`내가 남기는 ${StoreInfo["store_name"]} 간단 코멘트`}</h4>
-                    <input type="text" placeholder="write your comment"/>
+                    <input onChange={updateNewComment} type="text" placeholder="write your comment"/>
+                    <Button onClick={Send}>sfsfds</Button>
                 </form>
             </div>
             <div className='button-wrap'>
