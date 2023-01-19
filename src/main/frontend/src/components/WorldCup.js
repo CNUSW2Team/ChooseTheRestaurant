@@ -28,9 +28,15 @@ function WorldCup(props) {
             <h2>{numOfRound}강</h2>
             {/* 랜덤월드컵 구현 */}
             <Link to={`/Result/${categoryId}/${StoreInfo[0] && StoreInfo[0]["store_id"]}`}>
-                <div>
-                    <p>{StoreInfo[0] && StoreInfo[0]["name"]}</p>
+                <div className='inlineBlock'>
+                    <p>{StoreInfo[0] && StoreInfo[0]["store_name"]}</p>
                     <img width={500} src={`/img/${StoreInfo[0] && StoreInfo[0]["store_id"]}.jpg`} />
+                </div>
+            </Link>
+            <Link to={`/Result/${categoryId}/${StoreInfo[1] && StoreInfo[1]["store_id"]}`}>
+                <div className='inlineBlock'>
+                    <p>{StoreInfo[1] && StoreInfo[1]["store_name"]}</p>
+                    <img width={500} src={`/img/${StoreInfo[1] && StoreInfo[1]["store_id"]}.jpg`} />
                 </div>
             </Link>
             

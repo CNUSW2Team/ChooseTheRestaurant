@@ -54,7 +54,6 @@ public class FakeController {
         return results.toString();
     }
 
-    // !! 카테고리/선택카테고리 
 
     @GetMapping("/F/AllStore") // DB에 존재하는 모든 가게들을 반환(월드컵 제작용)
     public @ResponseBody String getAllStore() {
