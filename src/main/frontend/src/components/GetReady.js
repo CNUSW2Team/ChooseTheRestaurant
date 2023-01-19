@@ -8,7 +8,7 @@ function GetReady() {
 
     const [category, setData] = useState([]); 
     useEffect(() => {
-            axios.get(`/AllCategory`)
+            axios.get(`/AllCategory/${categoryId}`)
                 .then(response => {
                     setData(response.data);
                     console.log(response.data);
@@ -22,7 +22,7 @@ function GetReady() {
         
     return (
         <div>
-            <h1>{category[0] && category[0]["name"]}</h1>
+            <h1>{category && category["category_name"]}</h1>
             <Link to={`/Round/${categoryId}/2`}><button>Round : 2강</button></Link>
             <Link to={`/Round/${categoryId}/4`}><button>Round : 4강</button></Link> 
         </div>
