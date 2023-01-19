@@ -200,6 +200,21 @@ public class Controller {
         return results.toString();
     }
 
+    @GetMapping("/StoreMenusInfo/{storeId}") // storeId에 해당하는 store의 메뉴 정보
+    public @ResponseBody String getStoreMenusInfo(@PathVariable("storeId") String storeId) {
+        Store store = crudService.findStoreById(UUID.fromString(storeId));
+        List<JSONObject> results = new ArrayList<>();
+        store.getMenus().forEach(v -> {
+            JSONObject menu = new JSONObject();
+            menu.put("menu_name", v.getMenu_name());
+            menu.put("menu_id", v.getMenu_id());
+            menu.put("price", v.getPrice());
+            results.add(menu);
+        });
+
+        return results.toString();
+    }
+
     // ==================================== Post =========================================== //
     @RequestMapping(value = "/admin/requestStoreAdd")
     @ResponseBody

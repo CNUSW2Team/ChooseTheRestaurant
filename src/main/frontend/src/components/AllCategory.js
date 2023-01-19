@@ -40,6 +40,7 @@ function AllCategory() {
                 </tbody>
             </Table>
             <button><Link to={`/admin/AdminAddStore`}> 가게 추가하기 </Link></button>
+            <button><Link to={`/admin/AdminAddMenuToStore`}> 가게에 메뉴 추가하기 </Link></button>
             <button><Link to={`/AddCategory`}> 월드컵 만들기 </Link></button>
         </div>
     );

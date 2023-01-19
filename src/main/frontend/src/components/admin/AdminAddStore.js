@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {Link} from "react-router-dom";
 
 import {useEffect, useState} from 'react';
@@ -15,7 +15,21 @@ function AdminAddStore() {
     const updateAddress = e => setAddress(e.target.value);
     const updatePhoneNumber = e => setPhoneNumber(e.target.value);
     const updateOpeningHours = e => setOpeningHours(e.target.value);
-    const handleChangeFile = e => setFile(e.target.files);
+    const handleChangeFile = e => {
+        setFile(e.target.files);
+        previewImg(e.target.files);
+    }
+    function previewImg(files) {
+        const imgBox = document.getElementById("imgBox");
+        if(files.length == 0) {
+            imgBox.src = `/img/icon/istockphoto-1206577970-170667a.jpg`;
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = () =>
+            ( imgBox.src = reader.result);
+        reader.readAsDataURL(files[0]);
+    }
 
     function Send(){
 
@@ -69,7 +83,8 @@ function AdminAddStore() {
             <div style={{
                 border: "1px solid black",
                 backgroundColor: "white",
-                padding: "20px 20px 20px 20px"
+                padding: "20px 20px 20px 20px",
+                overflow: "hidden"
             }}>
                 <table>
                     <tbody >
@@ -91,8 +106,10 @@ function AdminAddStore() {
                     <tbody>
                     <tr><td style={{padding: "10px 0px 10px 20px"}}><b>영업시간 </b>: </td></tr>
                     <tr><td style={{padding: "10px 0px 10px 20px"}}><textarea id={"openingHours"} cols={30} rows={8} onChange={updateOpeningHours}/></td></tr>
-                    <tr><td style={{padding: "10px 0px 10px 20px"}}><b>이미지 </b>: </td></tr>
-                    <tr><td style={{padding: "10px 0px 10px 20px"}}><input type={"file"} id={"imageFile"} onChange={handleChangeFile}/></td></tr>
+                    <tr>
+                        <td style={{padding: "10px 0px 10px 20px"}}><input type={"file"} onChange={handleChangeFile}/><br/><br/>
+                        <img id={"imgBox"}  width={300} height={240} src={`/img/icon/istockphoto-1206577970-170667a.jpg`}/></td>
+                    </tr>
                     <tr><td style={{padding: "10px 0px 10px 20px"}}><button onClick={() => Send()}>등록하기</button></td></tr>
                     </tbody>
                 </table>
