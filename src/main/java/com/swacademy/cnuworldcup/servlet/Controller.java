@@ -34,6 +34,7 @@ public class Controller {
             json.put("category_id", category.getCategory_id());
             json.put("category_name", category.getCategory_name());
             json.put("favorite", category.getLike_num());
+            json.put("num_of_stores", (long) category.getRelations().size());
 
             results.add(json);
         }
@@ -261,5 +262,23 @@ public class Controller {
 
 
         return "새로운 카테고리 등록 완료";
+    }
+
+    @PostMapping(value = "/requestCategoryRemove")
+    public String removeCategory(String categoryDto) throws IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, String> categoryMap = mapper.readValue(categoryDto, Map.class);
+
+        String categoryId = categoryMap.get("category_id");
+        Category removeCategory = crudService.findCategoryById(UUID.fromString(categoryId));
+
+        List<Relation> relations = crudService.findRelationsByCategoryId(UUID.fromString(categoryId));
+        for(Relation r : relations){
+            crudService.removeRelation(r);
+        }
+        crudService.removeCategory(removeCategory);
+
+        return "카테고리 삭제 완료";
     }
 }

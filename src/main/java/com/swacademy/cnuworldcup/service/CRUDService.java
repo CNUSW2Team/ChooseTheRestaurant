@@ -48,6 +48,12 @@ public class CRUDService {
     }
 
     @Transactional
+    public List<Relation> findRelationsByCategoryId(UUID uuid) {
+        Category category = categoryRepository.findById(uuid).get();
+        return relationRepository.findByCategory(category);
+    }
+
+    @Transactional
     public Comment saveComment(UUID storeUUID, String s) {
         Store store = storeRepository.findById(storeUUID).get();
         Comment comment = new Comment();
@@ -72,4 +78,13 @@ public class CRUDService {
         return relationRepository.save(relation);
     }
 
+    @Transactional
+    public void removeCategory(Category category) {
+        categoryRepository.delete(category);
+    }
+
+    @Transactional
+    public void removeRelation(Relation relation) {
+        relationRepository.delete(relation);
+    }
 }

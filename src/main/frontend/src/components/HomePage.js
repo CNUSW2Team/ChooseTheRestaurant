@@ -6,8 +6,10 @@ function HomePage(props) {
             <Link to="/AllCategory">
                 <div>
                     <p>충대맛집월드컵 시작하기</p>
+
                 </div>
-            </Link> 
+            </Link>
+            <Link to={`/admin`}><button>관리자 페이지</button></Link>
         </>
     );
 }

@@ -6,13 +6,20 @@ import {useEffect, useState} from 'react';
 import axios from "axios";
 import {Form, Table} from "react-bootstrap";
 import styles from "./AddCategory.module.css"
+import {escapeRegExp} from "lodash/string";
 
 
 function AddCategory() {
     const [store, setStore] = useState([]);
     const [select, setSelect] = useState([]);
-    const updateCategoryName = e => setCategoryName(e.target.value);
+
     const [categoryName, setCategoryName] = useState('');
+    const updateCategoryName = e => setCategoryName(e.target.value);
+
+    const [searchBox, setSearchBox] = useState('');
+    const updateSearchBox = e => setSearchBox(e.target.value);
+    const resetSearchBox = () => setSearchBox('');
+
 
     function CreateCategory() {
         const fd = new FormData();
@@ -29,10 +36,49 @@ function AddCategory() {
                 .then((response) => {
                     console.log(response.data)
                 })
-                .then(() =>{
+                .then(() => {
                     window.location.href = "/AllCategory";
                 })
         }
+    }
+
+    function ch2pattern(ch) {
+        const offset = 44032; /* '가'의 코드 */
+        // 한국어 음절
+        if (/[가-힣]/.test(ch)) {
+            const chCode = ch.charCodeAt(0) - offset;
+            // 종성이 있으면 문자 그대로를 찾는다.
+            if (chCode % 28 > 0) {
+                return ch;
+            }
+            const begin = Math.floor(chCode / 28) * 28 + offset;
+            const end = begin + 27;
+            return `[\\u${begin.toString(16)}-\\u${end.toString(16)}]`;
+        }
+        // 한글 자음
+        if (/[ㄱ-ㅎ]/.test(ch)) {
+            const con2syl = {
+                'ㄱ': '가'.charCodeAt(0),
+                'ㄲ': '까'.charCodeAt(0),
+                'ㄴ': '나'.charCodeAt(0),
+                'ㄷ': '다'.charCodeAt(0),
+                'ㄸ': '따'.charCodeAt(0),
+                'ㄹ': '라'.charCodeAt(0),
+                'ㅁ': '마'.charCodeAt(0),
+                'ㅂ': '바'.charCodeAt(0),
+                'ㅃ': '빠'.charCodeAt(0),
+                'ㅅ': '사'.charCodeAt(0),
+            };
+            const begin = con2syl[ch] || ((ch.charCodeAt(0) - 12613 /* 'ㅅ'의 코드 */) * 588 + con2syl['ㅅ']);
+            const end = begin + 587;
+            return `[${ch}\\u${begin.toString(16)}-\\u${end.toString(16)}]`;
+        }
+        return escapeRegExp(ch);
+    }
+
+    function createFuzzyMatcher(input) {
+        const pattern = input.split('').map(ch2pattern).join('.*?');
+        return new RegExp(pattern);
     }
 
     const onChangeAll = (e) => {
@@ -64,20 +110,20 @@ function AddCategory() {
         },
         []);
 
-
     return (
-        <Form>
-            <h1>월드컵 이름: <input onChange={updateCategoryName}/></h1>
-            <button type={"button"} onClick={() => CreateCategory()}>등록하기</button>
+        <div>
+            <h1>월드컵 이름: <input onChange={updateCategoryName}/>
+                <button type={"button"} onClick={() => CreateCategory()}>등록하기</button>
+            </h1>
             <Form className={styles.left}>
                 <h1>Selected Store Table</h1>
-                <Table className={styles.table}>
+                <Table>
                     <thead>
                     <tr>
                         <th>선택 해제</th>
-                        <th>name</th>
-                        <th>address</th>
-                        <th>id</th>
+                        <th>이름</th>
+                        <th>주소</th>
+                        <th>상세정보</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -85,9 +131,9 @@ function AddCategory() {
                         <tr>
                             <td><Checkbox onChange={(e) => onChangeEach(e, v.store_id)}
                                           checked={select.includes(v.store_id)}/></td>
-                            <td>{v.store_name}</td>
+                            <td><img width={100} src={`/img/${v.store_id}.jpg`}/><br></br>{v.store_name}</td>
                             <td>{v.address}</td>
-                            <td>{v.store_id}</td>
+                            <td><Link to={`/Store/${v.store_id}`}> 상세정보 </Link></td>
                         </tr>,
                     )}
                     </tbody>
@@ -95,6 +141,10 @@ function AddCategory() {
             </Form>
             <Form className={styles.right}>
                 <h1>All Store Table</h1>
+                <div><input id={"searchArea"} value={searchBox} onChange={updateSearchBox}
+                            placeholder={"Type 'Name' to Search"}/>
+                    <button type={"button"} onClick={resetSearchBox}>clear</button>
+                </div>
                 <Table striped bordered hover>
                     <thead>
                     <tr>
@@ -104,17 +154,17 @@ function AddCategory() {
                     </tr>
                     <tr>
                         <th>선택</th>
-                        <th>name</th>
-                        <th>address</th>
+                        <th>이름</th>
+                        <th>주소</th>
                         <th>상세정보</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {store.filter(v => !select.includes(v.store_id)).map(v =>
+                    {store.filter(v => createFuzzyMatcher(searchBox).test(v.store_name)).filter(v => !select.includes(v.store_id)).map(v =>
                         <tr key={v.store_id}>
                             <td><Checkbox onChange={(e) => onChangeEach(e, v.store_id)}
                                           checked={select.includes(v.store_id)}/></td>
-                            <td>{v.store_name}</td>
+                            <td><img width={100} src={`/img/${v.store_id}.jpg`}/><br></br>{v.store_name}</td>
                             <td>{v.address}</td>
                             {/*<td>{v.store_id}</td>*/}
                             <td><Link to={`/Store/${v.store_id}`}> 상세정보 </Link></td>
@@ -123,7 +173,8 @@ function AddCategory() {
                     </tbody>
                 </Table>
             </Form>
-        </Form>
+        </div>
+
     );
 }
 
