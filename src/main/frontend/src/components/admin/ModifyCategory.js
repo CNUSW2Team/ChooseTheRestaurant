@@ -3,7 +3,7 @@ import axios from "axios";
 import {Button, Form, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
-function AllCategory() {
+function ModifyCategory() {
     const [category, setData] = useState([]);
     useEffect(() => {
             axios.get('/AllCategory')
@@ -17,36 +17,52 @@ function AllCategory() {
         },
         []);
 
+    function RemoveCategory(category_id) {
+        const fd = new FormData();
+        const categoryDto = {
+            category_id: category_id
+        }
+        if (window.confirm("정말로 삭제하시겠습니까?")) {
+
+            fd.append("categoryDto", JSON.stringify(categoryDto));
+
+            axios.post('http://localhost:8080/requestCategoryRemove', fd)
+                .then((response) => {
+                    console.log(response.data)
+                })
+                .then(() => {
+                    window.location.href = "/admin/ModifyCategory";
+                })
+        }
+    }
+
     return (
         <div>
-            <Table striped bordered hover>
+            <Table>
                 <thead>
                 <tr>
                     <th>월드컵이름</th>
-                    <th>사진</th>
                     <th>좋아요</th>
                     <th>가게 수</th>
-                    <th>시작하기</th>
+                    <th>삭제하기</th>
                 </tr>
                 </thead>
                 <tbody>
                 {category.map(v =>
-                    <tr>
+                    <tr key={v.category_id}>
                         <td>{v.category_name}</td>
-                        <td><img width={400} src={`/img/${v.category_id}.jpg`}/></td>
                         <td>{v.favorite}</td>
                         <td>{v.num_of_stores}개</td>
-                        <td><Link to={`/GetReady/${v.category_id}`}> 시작하기 </Link></td>
+                        <td>
+                            <button onClick={() => RemoveCategory(v.category_id)}>삭제하기</button>
+                        </td>
                     </tr>,
                 )}
                 </tbody>
             </Table>
-            <button><Link to={`/admin/AdminAddStore`}> 가게 추가하기 </Link></button>
-            <button><Link to={`/admin/AdminAddMenuToStore`}> 가게에 메뉴 추가하기 </Link></button>
-            <button><Link to={`/AddCategory`}> 월드컵 만들기 </Link></button>
         </div>
     );
 }
 
 
-export default AllCategory;
+export default ModifyCategory;
