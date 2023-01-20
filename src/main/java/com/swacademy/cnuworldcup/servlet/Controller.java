@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -289,8 +290,11 @@ public class Controller {
             Relation relation = Relation.builder().relation_id(UUID.randomUUID()).win_count(0).store(store).category(category).build();
             crudService.saveRelation(relation);
         }
-
-        combineAndSaveImage(storeList.get(0), storeList.get(1), categoryId.toString());
+        
+        // 랜덤하게 두개 이미지 선택
+        Collections.shuffle(storeList);
+        
+        combineAndSaveImage(storeList.get(1), storeList.get(2), categoryId.toString());
 
         return "새로운 카테고리 등록 완료";
     }
@@ -395,7 +399,7 @@ public class Controller {
         } catch (IOException e) {
             log.info("Cannot find Image: {}.jpg, {}.jpg", id1, id2);
             log.info("Combined Image is Set Default");
-            combine_img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+            combine_img = new BufferedImage(1000, 2000, BufferedImage.TYPE_INT_RGB);
         }
 
         // 카테고리 이미지 저장
