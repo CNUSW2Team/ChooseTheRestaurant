@@ -26,7 +26,11 @@ function AddCategory() {
 
         if (categoryName.length < 5) {
             alert('월드컵 이름은 5자 이상으로 해 주세요.');
-        } else {
+        }
+        else if(select.length < 2){
+            alert('가게를 2개 이상 선택해 주세요.');
+        }
+        else {
             const categoryDto = {
                 category_name: categoryName, stores: select
             }

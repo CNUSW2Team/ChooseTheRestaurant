@@ -12,11 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.util.*;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -24,6 +28,8 @@ import java.util.*;
 public class Controller {
     @Autowired
     CRUDService crudService;
+
+    final String IMAGE_FILE_UPLOAD_PATH = new File("src\\main\\frontend\\public\\img").getAbsolutePath();
 
     @GetMapping("/AllCategory")
     public @ResponseBody String getAllCategory() {
@@ -50,7 +56,7 @@ public class Controller {
         results.put("favorite", category.getLike_num());
         return results.toString();
     }
-    
+
     @GetMapping("/Ranking/{categoryId}") //categoryId에 해당하는 가게들의 리스트 반환(랭킹결과 가게순위 확인시)
     public @ResponseBody String getStoreOfCategory(@PathVariable("categoryId") String categoryId) {
         List<JSONObject> results = new ArrayList<>();
@@ -217,8 +223,7 @@ public class Controller {
     }
 
     // ==================================== Post =========================================== //
-    @RequestMapping(value = "/admin/requestStoreAdd")
-    @ResponseBody
+    @PostMapping(value = "/admin/requestStoreAdd")
     public String AddNewStore(String storeDto,
                               MultipartFile[] files) throws IOException {
 
@@ -235,15 +240,11 @@ public class Controller {
                 .build();
         crudService.saveStore(store);
 
-        String IMAGE_FILE_UPLOAD_PATH = new File("src\\main\\frontend\\public\\img").getAbsolutePath();
+        File fileSave = new File(IMAGE_FILE_UPLOAD_PATH, storeID.toString() + ".jpg");
+        files[0].transferTo(fileSave);
+        saveFormattedImage(storeID.toString(), 1000, 1000);
 
-        for (MultipartFile mf : files) {
-            File fileSave = new File(IMAGE_FILE_UPLOAD_PATH, storeID.toString() + ".jpg");
-            mf.transferTo(fileSave);
-        }
-
-        String result = "새로운 가게 등록 완료";
-        return result;
+        return "새로운 가게 등록 완료";
     }
 
     @PostMapping(value = "/requestCategoryAdd")
@@ -254,6 +255,10 @@ public class Controller {
 
         ArrayList<String> storeList = (ArrayList<String>) categoryMap.get("stores");
 
+        if (storeList.size() < 2) {
+            return "가게를 2개 이상 등록해야 합니다.";
+        }
+
         UUID categoryId = UUID.randomUUID();
         Category category = Category.builder()
                 .category_id(categoryId)
@@ -263,8 +268,8 @@ public class Controller {
                 .build();
         crudService.saveCategory(category);
 
-        for(String storeid : storeList){
-            Store store = crudService.findStoreById(UUID.fromString(storeid));
+        for (String storeId : storeList) {
+            Store store = crudService.findStoreById(UUID.fromString(storeId));
             Relation relation = Relation.builder()
                     .relation_id(UUID.randomUUID())
                     .win_count(0)
@@ -272,9 +277,9 @@ public class Controller {
                     .category(category)
                     .build();
             crudService.saveRelation(relation);
-
         }
 
+        combineAndSaveImage(storeList.get(0), storeList.get(1), categoryId.toString());
 
         return "새로운 카테고리 등록 완료";
     }
@@ -289,11 +294,78 @@ public class Controller {
         Category removeCategory = crudService.findCategoryById(UUID.fromString(categoryId));
 
         List<Relation> relations = crudService.findRelationsByCategoryId(UUID.fromString(categoryId));
-        for(Relation r : relations){
+        for (Relation r : relations) {
             crudService.removeRelation(r);
         }
         crudService.removeCategory(removeCategory);
 
+        // 사진 삭제
+        deleteImage(categoryId);
+
         return "카테고리 삭제 완료";
+    }
+
+    // 가게, 메뉴, 카테고리 등 이미지있는 엔티티 삭제시 호출할 것!
+    private void deleteImage(String id) {
+        // 사진 삭제
+        File toDelete = new File(IMAGE_FILE_UPLOAD_PATH, id + ".jpg");
+        if (toDelete.exists()) {
+            if (toDelete.delete()) {
+                log.info("Image {}.jpg has been deleted", id);
+            } else {
+                log.info("Image {}.jpg cannot be deleted because it is in use.", id);
+            }
+        } else {
+            log.info("Can not find Image {}.jpg", id);
+        }
+    }
+
+    private void combineAndSaveImage(String id1, String id2, String combineId) throws IOException {
+        // 카테고리 이미지 생성
+        BufferedImage img1 = null;
+        BufferedImage img2 = null;
+        BufferedImage combine_img = null;
+        try {
+            img1 = ImageIO.read(new File(IMAGE_FILE_UPLOAD_PATH, id1 + ".jpg"));
+            img2 = ImageIO.read(new File(IMAGE_FILE_UPLOAD_PATH, id2 + ".jpg"));
+
+            int width = img1.getWidth() + img2.getWidth();
+            int height = Math.max(img1.getHeight(), img2.getHeight());
+            combine_img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+            Graphics2D graphics = (Graphics2D) combine_img.getGraphics();
+
+            graphics.setBackground(Color.WHITE);
+            graphics.drawImage(img1, 0, 0, null);
+            graphics.drawImage(img2, img1.getWidth(), 0, null);
+            graphics.dispose();
+        } catch (IOException e) {
+            log.info("Cannot find Image: {}.jpg, {}.jpg", id1, id2);
+            log.info("Combined Image is Set Default");
+            combine_img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+        }
+
+        // 카테고리 이미지 저장
+        ImageIO.write(combine_img, "jpg", new File(IMAGE_FILE_UPLOAD_PATH, combineId + ".jpg"));
+    }
+
+    // 사진 저장후 호출할 것. default: 1000x1000
+    private void saveFormattedImage(String id, int resizeWidth, int resizeHeight) throws IOException {
+        // 사진 삭제
+        File toFormat = new File(IMAGE_FILE_UPLOAD_PATH, id + ".jpg");
+        if (toFormat.exists()) {
+            BufferedImage bufferedImageInput = ImageIO.read(toFormat);
+            BufferedImage bufferedImageOutput = new BufferedImage(resizeWidth,
+                    resizeHeight, bufferedImageInput.getType());
+
+            Graphics2D graphics = bufferedImageOutput.createGraphics();
+            graphics.drawImage(bufferedImageInput, 0, 0, resizeWidth, resizeHeight, null);
+            graphics.dispose();
+            ImageIO.write(bufferedImageOutput, "jpg", new File(IMAGE_FILE_UPLOAD_PATH, id + ".jpg"));
+
+            log.info("Image {}.jpg has been resized {} x {}", id, resizeWidth, resizeHeight);
+
+        } else {
+            log.info("Can not find Image {}.jpg", id);
+        }
     }
 }

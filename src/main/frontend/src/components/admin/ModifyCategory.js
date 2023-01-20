@@ -50,7 +50,8 @@ function ModifyCategory() {
                 <tbody>
                 {category.map(v =>
                     <tr key={v.category_id}>
-                        <td>{v.category_name}</td>
+                        <td><img width={100} src={`/img/${v.category_id}.jpg`}/><br></br>
+                            {v.category_name}</td>
                         <td>{v.favorite}</td>
                         <td>{v.num_of_stores}개</td>
                         <td>
