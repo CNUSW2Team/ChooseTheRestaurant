@@ -20,11 +20,20 @@ function GetReady() {
         []);
 
         
+    const [numOfRound, SetRound] = useState('')
+    const sendRound = (e) => {
+        SetRound(e.target.value)
+        console.log(numOfRound)
+    }
+    
     return (
         <div>
             <h1>{category && category["category_name"]}</h1>
-            <Link to={`/Round/${categoryId}/2`}><button>Round : 2강</button></Link>
-            <Link to={`/Round/${categoryId}/4`}><button>Round : 4강</button></Link> 
+            <div>
+                <button value={2} onClick={sendRound}>Round : 2강</button>
+                <button value={4} onClick={sendRound}>Round : 4강</button>
+            </div>
+            <Link to={`/Round/${categoryId}/${numOfRound}`}><button>시작하기</button></Link>
         </div>
         
     );
