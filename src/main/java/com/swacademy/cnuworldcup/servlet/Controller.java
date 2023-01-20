@@ -3,8 +3,8 @@ package com.swacademy.cnuworldcup.servlet;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.swacademy.cnuworldcup.entity.*;
+import com.swacademy.cnuworldcup.entity.Menu;
 import com.swacademy.cnuworldcup.service.CRUDService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
@@ -17,8 +17,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.text.MessageFormat;
 import java.util.*;
 import java.util.List;
 
@@ -112,11 +110,7 @@ public class Controller {
     @GetMapping("/Result/{categoryId}/{storeId}") // categoryId에 해당하는 storeId의 코멘트와 랭킹정보 반환(내가 선택한 1위 가게의 정보 출력시)
     public @ResponseBody String getWinnerResult(@PathVariable("categoryId") String categoryId, @PathVariable("storeId") String storeId) {
         JSONObject results = new JSONObject();
-        List<Relation> relations = crudService.findCategoryById(UUID.fromString(categoryId))
-                .getRelations()
-                .stream()
-                .sorted((a, b) -> b.getWin_count() - a.getWin_count())
-                .toList();
+        List<Relation> relations = crudService.findCategoryById(UUID.fromString(categoryId)).getRelations().stream().sorted((a, b) -> b.getWin_count() - a.getWin_count()).toList();
 
         Store store = crudService.findStoreById(UUID.fromString(storeId));
         double averageStars = store.getReviews().stream().mapToInt(Review::getRating).average().orElse(0);
@@ -164,43 +158,42 @@ public class Controller {
         List<JSONObject> times = new ArrayList<>();
         String openingHours = store.getOpening_hours();
         String[] split = openingHours.split("\n");
-        Arrays.stream(split)
-                .forEach(v -> {
-                    JSONObject time = new JSONObject();
-                    String hours = v.substring(4);
-                    switch (v.charAt(0)) {
-                        case '월':
-                            time.put("day", "월요일");
-                            time.put("hours", hours);
-                            break;
-                        case '화':
-                            time.put("day", "화요일");
-                            time.put("hours", hours);
-                            break;
-                        case '수':
-                            time.put("day", "수요일");
-                            time.put("hours", hours);
-                            break;
-                        case '목':
-                            time.put("day", "목요일");
-                            time.put("hours", hours);
-                            break;
-                        case '금':
-                            time.put("day", "금요일");
-                            time.put("hours", hours);
-                            break;
-                        case '토':
-                            time.put("day", "토요일");
-                            time.put("hours", hours);
-                            break;
-                        case '일':
-                            time.put("day", "일요일");
-                            time.put("hours", hours);
-                            break;
-                    }
+        Arrays.stream(split).forEach(v -> {
+            JSONObject time = new JSONObject();
+            String hours = v.substring(4);
+            switch (v.charAt(0)) {
+                case '월':
+                    time.put("day", "월요일");
+                    time.put("hours", hours);
+                    break;
+                case '화':
+                    time.put("day", "화요일");
+                    time.put("hours", hours);
+                    break;
+                case '수':
+                    time.put("day", "수요일");
+                    time.put("hours", hours);
+                    break;
+                case '목':
+                    time.put("day", "목요일");
+                    time.put("hours", hours);
+                    break;
+                case '금':
+                    time.put("day", "금요일");
+                    time.put("hours", hours);
+                    break;
+                case '토':
+                    time.put("day", "토요일");
+                    time.put("hours", hours);
+                    break;
+                case '일':
+                    time.put("day", "일요일");
+                    time.put("hours", hours);
+                    break;
+            }
 
-                    times.add(time);
-                });
+            times.add(time);
+        });
 
         results.put("times", times);
 
@@ -224,20 +217,13 @@ public class Controller {
 
     // ==================================== Post =========================================== //
     @PostMapping(value = "/admin/requestStoreAdd")
-    public String AddNewStore(String storeDto,
-                              MultipartFile[] files) throws IOException {
+    public String AddNewStore(String storeDto, MultipartFile[] files) throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
         Map<String, String> storeMap = mapper.readValue(storeDto, Map.class);
 
         UUID storeID = UUID.randomUUID();
-        Store store = Store.builder()
-                .store_id(storeID)
-                .address(storeMap.get("address"))
-                .opening_hours(storeMap.get("opening_hours"))
-                .store_name(storeMap.get("store_name"))
-                .phone_number(storeMap.get("phone_number"))
-                .build();
+        Store store = Store.builder().store_id(storeID).address(storeMap.get("address")).opening_hours(storeMap.get("opening_hours")).store_name(storeMap.get("store_name")).phone_number(storeMap.get("phone_number")).build();
         crudService.saveStore(store);
 
         File fileSave = new File(IMAGE_FILE_UPLOAD_PATH, storeID.toString() + ".jpg");
@@ -245,6 +231,39 @@ public class Controller {
         saveFormattedImage(storeID.toString(), 1000, 1000);
 
         return "새로운 가게 등록 완료";
+    }
+
+    @PostMapping(value = "/requestStoreRemove")
+    public String removeStore(String storeDto) throws IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, String> storeMap = mapper.readValue(storeDto, Map.class);
+
+        String storeId = storeMap.get("store_id");
+        Store removeStore = crudService.findStoreById(UUID.fromString(storeId));
+
+        // Store와 연관된 모든 Relation 삭제
+        for (Relation relation : crudService.findRelationsByStoreId(UUID.fromString(storeId))) {
+            crudService.removeRelation(relation);
+        }
+        // Store와 연관된 모든 Menu 삭제
+        for (Menu menu : crudService.findMenuByStoreId(UUID.fromString(storeId))) {
+            crudService.removeMenu(menu);
+        }
+        // Store와 연관된 모든 Comment 삭제
+        for (Comment comment : crudService.findCommentByStoreId(UUID.fromString(storeId))) {
+            crudService.removeComment(comment);
+        }
+        // Store와 연관된 모든 Review 삭제
+        for (Review review : crudService.findReviewByStoreId(UUID.fromString(storeId))) {
+            crudService.removeReview(review);
+        }
+
+        crudService.removeStore(removeStore);
+
+        // 사진 삭제
+        deleteImage(storeId);
+        return "가게 삭제 완료";
     }
 
     @PostMapping(value = "/requestCategoryAdd")
@@ -260,22 +279,14 @@ public class Controller {
         }
 
         UUID categoryId = UUID.randomUUID();
-        Category category = Category.builder()
-                .category_id(categoryId)
-                .category_name((String) categoryMap.get("category_name"))
-                .like_num(0)
+        Category category = Category.builder().category_id(categoryId).category_name((String) categoryMap.get("category_name")).like_num(0)
                 //.relations()
                 .build();
         crudService.saveCategory(category);
 
         for (String storeId : storeList) {
             Store store = crudService.findStoreById(UUID.fromString(storeId));
-            Relation relation = Relation.builder()
-                    .relation_id(UUID.randomUUID())
-                    .win_count(0)
-                    .store(store)
-                    .category(category)
-                    .build();
+            Relation relation = Relation.builder().relation_id(UUID.randomUUID()).win_count(0).store(store).category(category).build();
             crudService.saveRelation(relation);
         }
 
@@ -303,6 +314,49 @@ public class Controller {
         deleteImage(categoryId);
 
         return "카테고리 삭제 완료";
+    }
+
+    @PostMapping(value = "/requestMenuRemove")
+    public String removeMenu(String menuDto) throws IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, String> menuMap = mapper.readValue(menuDto, Map.class);
+
+        String menuId = menuMap.get("menu_id");
+        Menu removeMenu = crudService.findMenuById(UUID.fromString(menuId));
+
+        crudService.removeMenu(removeMenu);
+
+        // 사진 삭제
+        deleteImage(menuId);
+
+        return "메뉴 삭제 완료";
+    }
+
+    @PostMapping(value = "/requestCommentRemove")
+    public String removeComment(String commentDto) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, String> commentMap = mapper.readValue(commentDto, Map.class);
+
+        String commentId = commentMap.get("comment_id");
+        Comment removeComment = crudService.findCommentById(UUID.fromString(commentId));
+
+        crudService.removeComment(removeComment);
+
+        return "코멘트 삭제 완료";
+    }
+
+    @PostMapping(value = "/requestReviewRemove")
+    public String removeReview(String reviewDto) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, String> reviewMap = mapper.readValue(reviewDto, Map.class);
+
+        String reviewId = reviewMap.get("comment_id");
+        Review removeReview = crudService.findReviewById(UUID.fromString(reviewId));
+
+        crudService.removeReview(removeReview);
+
+        return "리뷰 삭제 완료";
     }
 
     // 가게, 메뉴, 카테고리 등 이미지있는 엔티티 삭제시 호출할 것!
@@ -354,8 +408,7 @@ public class Controller {
         File toFormat = new File(IMAGE_FILE_UPLOAD_PATH, id + ".jpg");
         if (toFormat.exists()) {
             BufferedImage bufferedImageInput = ImageIO.read(toFormat);
-            BufferedImage bufferedImageOutput = new BufferedImage(resizeWidth,
-                    resizeHeight, bufferedImageInput.getType());
+            BufferedImage bufferedImageOutput = new BufferedImage(resizeWidth, resizeHeight, bufferedImageInput.getType());
 
             Graphics2D graphics = bufferedImageOutput.createGraphics();
             graphics.drawImage(bufferedImageInput, 0, 0, resizeWidth, resizeHeight, null);

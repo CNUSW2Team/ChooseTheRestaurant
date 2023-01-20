@@ -1,0 +1,17 @@
+.row {
+  width: 100%;
+  display: flex;
+  border: 1px solid #003458;
+}
+.left {
+  width: 40%;
+  float: left;
+  box-sizing: border-box;
+  /*background: #8977ad;*/
+}
+.right {
+  width: 60%;
+  float: right;
+  box-sizing: border-box;
+  /*background: #ece6cc;*/
+}
