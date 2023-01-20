@@ -30,7 +30,7 @@ function AllCategory() {
                 </thead>
                 <tbody>
                 {category.map(v =>
-                    <tr>
+                    <tr key={v.category_id}>
                         <td>{v.category_name}</td>
                         <td><img width={400} src={`/img/${v.category_id}.jpg`}/></td>
                         <td>{v.favorite}</td>
