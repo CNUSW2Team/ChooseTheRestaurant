@@ -25,17 +25,18 @@ function AllStore() {
         <div><input id={"searchArea"} value={searchBox} onChange={updateSearchBox}
                     placeholder={"Type 'Name' to Search"}/>
             <button type={"button"} onClick={resetSearchBox}>clear</button>
+            {store.filter(v => createFuzzyMatcher(searchBox).test(v.store_name)).length}개 검색됨
         </div>
         <Table striped bordered hover>
             <thead>
             <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>address</th>
+                <th>사진</th>
+                <th>이름</th>
+                <th>주소</th>
             </tr>
             </thead>
             <tbody>
-            {store.filter(v => createFuzzyMatcher(searchBox).test(v.store_name)).map(v => <tr>
+            {store.filter(v => createFuzzyMatcher(searchBox).test(v.store_name)).map(v => <tr key={v.store_id}>
                 <td><img width={100} src={`/img/${v.store_id}.jpg`}/></td>
                 <td>{v.store_name}</td>
                 <td>{v.address}</td>

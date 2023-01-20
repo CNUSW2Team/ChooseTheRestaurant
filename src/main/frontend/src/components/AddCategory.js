@@ -1,7 +1,7 @@
 import React from 'react';
 import {Checkbox} from 'antd';
 import {Link, useHref} from "react-router-dom";
-
+import styled from "styled-components";
 import {useEffect, useState} from 'react';
 import axios from "axios";
 import {Form, Table} from "react-bootstrap";
@@ -19,7 +19,6 @@ function AddCategory() {
     const [searchBox, setSearchBox] = useState('');
     const updateSearchBox = e => setSearchBox(e.target.value);
     const resetSearchBox = () => setSearchBox('');
-
 
     function CreateCategory() {
         const fd = new FormData();
@@ -75,12 +74,14 @@ function AddCategory() {
         },
         []);
 
+
+
     return (
         <div>
             <h1>월드컵 이름: <input onChange={updateCategoryName}/>
                 <button type={"button"} onClick={() => CreateCategory()}>등록하기</button>
             </h1>
-            <Form className={styles.left}>
+            <div className={styles.left}>
                 <h1>Selected Store Table</h1>
                 <Table>
                     <thead>
@@ -93,7 +94,7 @@ function AddCategory() {
                     </thead>
                     <tbody>
                     {store.filter(v => select.includes(v.store_id)).map(v =>
-                        <tr>
+                        <tr key={v.store_id}>
                             <td><Checkbox onChange={(e) => onChangeEach(e, v.store_id)}
                                           checked={select.includes(v.store_id)}/></td>
                             <td><img width={100} src={`/img/${v.store_id}.jpg`}/><br></br>{v.store_name}</td>
@@ -103,14 +104,14 @@ function AddCategory() {
                     )}
                     </tbody>
                 </Table>
-            </Form>
-            <Form className={styles.right}>
+            </div>
+            <div className={styles.right}>
                 <h1>All Store Table</h1>
                 <div><input id={"searchArea"} value={searchBox} onChange={updateSearchBox}
                             placeholder={"Type 'Name' to Search"}/>
                     <button type={"button"} onClick={resetSearchBox}>clear</button>
                 </div>
-                <Table striped bordered hover>
+                <Table>
                     <thead>
                     <tr>
                         <th>
@@ -137,7 +138,7 @@ function AddCategory() {
                     )}
                     </tbody>
                 </Table>
-            </Form>
+            </div>
         </div>
 
     );

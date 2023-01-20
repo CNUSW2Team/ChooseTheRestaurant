@@ -25,6 +25,7 @@ function AllCategory() {
         <div><input id={"searchArea"} value={searchBox} onChange={updateSearchBox}
                     placeholder={"Type 'Name' to Search"}/>
             <button type={"button"} onClick={resetSearchBox}>clear</button>
+            {category.filter(v => createFuzzyMatcher(searchBox).test(v.category_name)).length}개 검색됨
         </div>
         <Table striped bordered hover>
             <thead>
@@ -37,7 +38,7 @@ function AllCategory() {
             </tr>
             </thead>
             <tbody>
-            {category.filter(v => createFuzzyMatcher(searchBox).test(v.category_name)).map(v => <tr>
+            {category.filter(v => createFuzzyMatcher(searchBox).test(v.category_name)).map(v => <tr key={v.category_id}>
                 <td>{v.category_name}</td>
                 <td><img width={400} src={`/img/${v.category_id}.jpg`}/></td>
                 <td>{v.favorite}</td>
