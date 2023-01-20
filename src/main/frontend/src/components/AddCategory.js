@@ -37,11 +37,11 @@ function AddCategory() {
             fd.append("categoryDto", JSON.stringify(categoryDto));
 
             axios.post('http://localhost:8080/requestCategoryAdd', fd)
-                .then((response) => {
-                    console.log(response.data)
-                })
                 .then(() => {
                     window.location.href = "/AllCategory";
+                })
+                .then((response) => {
+                    console.log(response.data)
                 })
         }
     }
