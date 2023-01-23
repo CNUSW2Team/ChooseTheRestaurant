@@ -5,15 +5,16 @@ import Header from "./components/Header";
 import NotFound from "./components/NotFound";
 import Store from "./components/Store";
 import RankingPage from "./components/RankingPage";
-import AllCategory from "./components/AllCategory";
-import GetReady from "./components/GetReady";
-import WorldCup from "./components/WorldCup";
-import WinnerResult from "./components/WinnerResult";
+import AllCategory from "./components/worldcup/AllCategory";
+import GetReady from "./components/worldcup/GetReady";
+import Game from "./components/worldcup/Game";
+import WinnerResult from "./components/worldcup/WinnerResult";
 import AdminAddStore from "./components/admin/AdminAddStore";
 import AddCategory from "./components/AddCategory";
 import AdminAddMenuToStore from "./components/admin/AdminAddMenuToStore";
 import ModifyEntities from "./components/admin/ModifyEntities";
 import AdminPage from "./components/admin/AdminPage";
+import GameTest from "./components/worldcup/GameTest"; //나중에 지우기
 
 function App() {
 
@@ -27,7 +28,9 @@ function App() {
                     <Route path="/AllStore/*" element={<AllStore />}></Route>
                     <Route path="/AllCategory/*" element={<AllCategory />}></Route>
                     <Route path="/GetReady/:categoryId" element={<GetReady />}></Route>
-                    <Route path="/Round/:categoryId/:numOfRound" element={<WorldCup />}></Route>
+                    <Route path="/Round/:categoryId/:numOfRound" element={<Game />}></Route>
+                    {/* test 나중에 지우기 */}
+                    <Route path="/Round/:categoryId/:numOfRound/test" element={<GameTest />}></Route> 
                     <Route path="/Result/:categoryId/:storeId" element={<WinnerResult />}></Route>
                     <Route path="/Ranking/:categoryId" element={<RankingPage />}></Route>
                     <Route path="/admin" element={<AdminPage />}></Route>

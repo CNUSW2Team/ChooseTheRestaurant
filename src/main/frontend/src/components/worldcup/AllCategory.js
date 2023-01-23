@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Button, Form, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {createFuzzyMatcher} from "../util/util";
+import {createFuzzyMatcher} from "../../util/util";
 
 function AllCategory() {
     const [category, setData] = useState([]);
