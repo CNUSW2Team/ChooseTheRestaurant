@@ -45,8 +45,8 @@ function GetReady() {
                 <button value={2} onClick={sendRound}>Round : 2강</button>
                 <button value={4} onClick={sendRound}>Round : 4강</button>
             </div>
-            {/* <Link to={`/Round/${categoryId}/${numOfRound}`}><button onClick={DneyUndefined}>시작하기</button></Link> */}
-            <Link to={`/Round/${categoryId}/${numOfRound}/test`}><button onClick={DneyUndefined}>시작하기</button></Link>
+            <Link to={`/Round/${categoryId}/${numOfRound}`}><button onClick={DneyUndefined}>시작하기</button></Link>
+            {/* <Link to={`/Round/${categoryId}/${numOfRound}/test`}><button onClick={DneyUndefined}>시작하기</button></Link> */}
         </div>
         
     );

@@ -27,11 +27,11 @@ function Game(props) {
         []);
 
     // winner(클릭 시)만 보내고 slice하기
-    const WinnerChoice = e => {
-        e.preventDefault();
-    }
+    // const WinnerChoice = e => {
+    //     e.preventDefault();
+    // }
 
-    useEffect(WinnerChoice, [items]);
+    // useEffect(WinnerChoice, [items]);
 
     // winner만 담고 스테이지(Round) 끝날때마다 setItems
     useEffect(() => {
@@ -48,11 +48,11 @@ function Game(props) {
     // `/Result/${categoryId}/${StoreInfo[0] && StoreInfo[0]["store_id"]}`
     return (
         <>
-            <div onClick={WinnerChoice} className='inlineBlock'>
+            <div className='inlineBlock'>
                 <p>{items[0] && items[0]["store_name"]}</p>
                 <img width={500} src={`/img/${items[0] && items[0]["store_id"]}.jpg`} />
             </div>
-            <div onClick={WinnerChoice} className='inlineBlock'>
+            <div className='inlineBlock'>
                 <p>{items[1] && items[1]["store_name"]}</p>
                 <img width={500} src={`/img/${items[1] && items[1]["store_id"]}.jpg`} />
             </div>
