@@ -3,6 +3,7 @@ import axios from "axios";
 import {Button, Form, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {createFuzzyMatcher} from "../util/util";
+import styles from "./table.module.css"
 
 function AllStore() {
     const [store, setData] = useState([]);
