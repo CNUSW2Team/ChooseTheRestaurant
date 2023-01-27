@@ -28,7 +28,7 @@ function AllStore() {
             <button type={"button"} onClick={resetSearchBox}>clear</button>
         </div>
         <Table striped bordered hover>
-            <thead>
+            <thead className={styles.thead}>
             <tr>
                 <th>id</th>
                 <th>name</th>
