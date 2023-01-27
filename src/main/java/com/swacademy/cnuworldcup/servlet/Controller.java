@@ -86,6 +86,7 @@ public class Controller {
             json.put("store_name", store.getStore_name());
             json.put("address", store.getAddress());
             json.put("numOfReviews", store.getReviews().size());
+            json.put("averageStars", Math.round(store.getReviews().stream().mapToDouble(Review::getRating).average().orElseGet(()-> 0)*100.0)/100.0);
 
             results.add(json);
         }
@@ -138,6 +139,7 @@ public class Controller {
         results.put("store_name", store.getStore_name());
         results.put("address", store.getAddress());
         results.put("contact", store.getPhone_number());
+        results.put("averageStars", Math.round(store.getReviews().stream().mapToDouble(Review::getRating).average().orElseGet(()-> 0)*100.0)/100.0);
         List<JSONObject> menus = new ArrayList<>();
         store.getMenus().forEach(v -> {
             JSONObject menu = new JSONObject();
@@ -249,7 +251,7 @@ public class Controller {
         Review review = Review.builder()
                 .review_id(reviewId)
                 .writer((String) reviewMap.get("writer"))
-                .rating((Integer) reviewMap.get("rating"))
+                .rating(Integer.parseInt((String) reviewMap.get("rating")))
                 .store(store)
                 .contents((String) reviewMap.get("contents"))
                 .password((String) reviewMap.get("password"))

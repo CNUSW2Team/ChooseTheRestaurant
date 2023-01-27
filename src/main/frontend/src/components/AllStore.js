@@ -4,6 +4,7 @@ import {Button, Form, Table} from "react-bootstrap";
 import {Link, useNavigate } from "react-router-dom";
 import {createFuzzyMatcher} from "../util/util";
 import styles from "./table.module.css"
+import {Rating} from "@mui/material";
 
 function AllStore() {
     const [store, setData] = useState([]);
@@ -40,6 +41,7 @@ function AllStore() {
                 <th className={styles.th}>이름</th>
                 <th className={styles.th}>주소</th>
                 <th className={styles.th}>리뷰 개수</th>
+                <th className={styles.th}>평균 별점</th>
             </tr>
             </thead>
             <tbody>
@@ -48,6 +50,7 @@ function AllStore() {
                 <td className={styles.td}>{v.store_name}</td>
                 <td className={styles.td}>{v.address}</td>
                 <td className={styles.td}>{v.numOfReviews}</td>
+                <td className={styles.td}><Rating name="half-rating-read" value={v.averageStars} precision={0.01} readOnly/> {v.averageStars}</td>
             </tr>,)}
             </tbody>
         </Table>

@@ -3,9 +3,7 @@ import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import {Table} from "react-bootstrap";
 import styles from "./table.module.css"
-import StarRating from "./StarRating";
-import "./StarRating.css";
-import StarRate from "./StarRate";
+import { Rating } from '@mui/material';
 
 function Store() {
     let {storeId} = useParams();
@@ -18,6 +16,7 @@ function Store() {
     const updateNickName = e => setNickName(e.target.value);
     const updatePasswords = e => setPassword(e.target.value);
     const updateComment = e => setComment(e.target.value);
+    const updateRating = e => {setRating(e.target.value); console.log(rating)}
 
     useEffect(() => {
         axios.get(`/StoreInfo/${storeId}`)
@@ -35,7 +34,12 @@ function Store() {
 
         if (password.length < 1) {
             alert('비밀번호를 입력해 주세요.');
-        } else {
+        } else if(rating === 0){
+            alert('별점을 메겨주세요.');
+        } else if(comment.length < 1){
+            alert('리뷰를 적어주세요.');
+        }
+        else {
             const reviewDto = {
                 store_id: storeId,
                 writer: nickName,
@@ -74,6 +78,9 @@ function Store() {
                         </tr>
                         <tr>
                             <td className={styles.td}> 연락처: {store.contact} </td>
+                        </tr>
+                        <tr>
+                            <td className={styles.td}> <Rating name="half-rating-read" value={store.averageStars} precision={0.01} readOnly/> {store.averageStars} </td>
                         </tr>
                         </tbody>
                     </Table>
@@ -123,7 +130,7 @@ function Store() {
                 {store.reviews && store.reviews.sort((a, b) => (new Date(b.date) - new Date(a.date))).map(v => <tr>
                     <td className={styles.td}>{v.nickname}</td>
                     <td className={styles.td}>{v.date}</td>
-                    <td className={styles.td}> {v.stars} <StarRate average={v.stars}/>  </td>
+                    <td className={styles.td}> <Rating name="size-medium" defaultValue={v.stars} readOnly/> {v.stars} </td>
                     <td className={styles.td}>{v.comment}</td>
                 </tr>,)}
                 </tbody>
@@ -142,7 +149,9 @@ function Store() {
                                 <label htmlFor="replyPassword"><i className="fa fa-unlock-alt fa-2x"></i></label>
                                 <input type="password" placeholder="패스워드" onChange={updatePasswords}/>
                             </div>
-                            <div><StarRating setRating={setRating} rating={rating} /></div>{}
+                            <div>
+                                <Rating name="size-medium" defaultValue={0} onChange={updateRating}/> {rating}점
+                            </div>
                             <textarea onChange={updateComment} style={{width: "50%", height: "6.25em", resize: "none", border: "none"}}
                                       placeholder="리뷰를 남겨주세요"></textarea>
                             <button type="button" onClick={addReview}>
