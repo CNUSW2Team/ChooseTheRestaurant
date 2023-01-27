@@ -39,6 +39,7 @@ function AllStore() {
                 <th className={styles.th}>사진</th>
                 <th className={styles.th}>이름</th>
                 <th className={styles.th}>주소</th>
+                <th className={styles.th}>리뷰 개수</th>
             </tr>
             </thead>
             <tbody>
@@ -46,7 +47,7 @@ function AllStore() {
                 <td className={styles.td}><img width={100} src={`/img/${v.store_id}.jpg`}/></td>
                 <td className={styles.td}>{v.store_name}</td>
                 <td className={styles.td}>{v.address}</td>
-                <Link to={`/Store/${v.store_id}`}></Link>
+                <td className={styles.td}>{v.numOfReviews}</td>
             </tr>,)}
             </tbody>
         </Table>

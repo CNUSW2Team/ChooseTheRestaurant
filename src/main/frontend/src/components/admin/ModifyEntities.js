@@ -75,7 +75,7 @@ function ModifyEntities() {
                 <Table className={styles.table}>
                     <thead className={styles.thead}>
                     <tr>
-                        <th className={styles.th}>월드컵이름</th>
+                        <th className={styles.th}>월드컵</th>
                         <th className={styles.th}>좋아요</th>
                         <th className={styles.th}>가게 수</th>
                         <th className={styles.th}>삭제하기</th>
@@ -101,7 +101,7 @@ function ModifyEntities() {
                 <Table className={styles.table}>
                     <thead className={styles.thead}>
                     <tr>
-                        <th className={styles.th}>가게이름</th>
+                        <th className={styles.th}>가게</th>
                         <th className={styles.th}>주소</th>
                         <th className={styles.th}>삭제하기</th>
                     </tr>
