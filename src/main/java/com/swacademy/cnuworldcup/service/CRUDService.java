@@ -105,6 +105,10 @@ public class CRUDService {
     }
 
     @Transactional
+    public Menu saveMenu(Menu menu) {
+        return menuRepository.save(menu);
+    }
+    @Transactional
     public Category saveCategory(Category category) {
         return categoryRepository.save(category);
     }

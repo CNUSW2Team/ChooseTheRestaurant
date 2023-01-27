@@ -316,21 +316,40 @@ public class Controller {
         return "카테고리 삭제 완료";
     }
 
-    @PostMapping(value = "/requestMenuRemove")
-    public String removeMenu(String menuDto) throws IOException {
+    @PostMapping(value = "/admin/requestMenuAdd")
+    public String AddNewMenu(String menuDto, MultipartFile[] file) throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
         Map<String, String> menuMap = mapper.readValue(menuDto, Map.class);
 
-        String menuId = menuMap.get("menu_id");
-        Menu removeMenu = crudService.findMenuById(UUID.fromString(menuId));
+        UUID menuID = UUID.randomUUID();
+        Menu menu = Menu.builder()
+                .menu_id((menuID))
+                .menu_name(menuMap.get("menu_name"))
+                .price(Integer.parseInt(menuMap.get("price")))
+                .store(crudService.findStoreById(UUID.fromString(menuMap.get("store_id"))))
+                .build();
+        crudService.saveMenu(menu);
 
-        crudService.removeMenu(removeMenu);
+        File fileSave = new File(IMAGE_FILE_UPLOAD_PATH, menuID.toString() + ".jpg");
+        file[0].transferTo(fileSave);
+        saveFormattedImage(menuID.toString(), 1000, 1000);
 
-        // 사진 삭제
-        deleteImage(menuId);
+        return "새로운 메뉴 등록 완료";
+    }
 
-        return "메뉴 삭제 완료";
+    @PostMapping(value = "/requestMenuRemove")
+    public String removeMenu(String selectedMenuId) throws IOException {
+
+        String[] menuId = selectedMenuId.split(",");
+
+        for(String id : menuId) {
+            Menu removeMenu = crudService.findMenuById(UUID.fromString(id));
+            crudService.removeMenu(removeMenu);
+            deleteImage(id);
+        }
+
+        return "선택한 메뉴 삭제 완료";
     }
 
     @PostMapping(value = "/requestCommentRemove")
