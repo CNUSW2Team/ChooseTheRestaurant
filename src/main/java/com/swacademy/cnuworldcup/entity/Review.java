@@ -28,6 +28,8 @@ public class Review {
 
     private int rating;
 
+    private String password;
+
     @CreationTimestamp
     private Timestamp date;
 }

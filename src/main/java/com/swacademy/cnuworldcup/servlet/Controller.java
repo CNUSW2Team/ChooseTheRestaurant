@@ -7,6 +7,7 @@ import com.swacademy.cnuworldcup.entity.Menu;
 import com.swacademy.cnuworldcup.service.CRUDService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.type.descriptor.java.ObjectJavaType;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.*;
 import java.util.List;
 
@@ -83,6 +85,8 @@ public class Controller {
             json.put("store_id", store.getStore_id());
             json.put("store_name", store.getStore_name());
             json.put("address", store.getAddress());
+            json.put("numOfReviews", store.getReviews().size());
+            json.put("averageStars", Math.round(store.getReviews().stream().mapToDouble(Review::getRating).average().orElseGet(()-> 0)*100.0)/100.0);
 
             results.add(json);
         }
@@ -135,6 +139,7 @@ public class Controller {
         results.put("store_name", store.getStore_name());
         results.put("address", store.getAddress());
         results.put("contact", store.getPhone_number());
+        results.put("averageStars", Math.round(store.getReviews().stream().mapToDouble(Review::getRating).average().orElseGet(()-> 0)*100.0)/100.0);
         List<JSONObject> menus = new ArrayList<>();
         store.getMenus().forEach(v -> {
             JSONObject menu = new JSONObject();
@@ -231,6 +236,30 @@ public class Controller {
         saveFormattedImage(storeID.toString(), 1000, 1000);
 
         return "새로운 가게 등록 완료";
+    }
+
+    @PostMapping(value = "/requestReviewAdd")
+    public String AddNewReview(String reviewDto) throws IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> reviewMap = mapper.readValue(reviewDto, Map.class);
+
+        UUID reviewId = UUID.randomUUID();
+
+        Store store = crudService.findStoreById(UUID.fromString((String) reviewMap.get("store_id")));
+
+        Review review = Review.builder()
+                .review_id(reviewId)
+                .writer((String) reviewMap.get("writer"))
+                .rating(Integer.parseInt((String) reviewMap.get("rating")))
+                .store(store)
+                .contents((String) reviewMap.get("contents"))
+                .password((String) reviewMap.get("password"))
+                .date(new Timestamp(System.currentTimeMillis()))
+                .build();
+        crudService.saveReview(review);
+        
+        return "리뷰 등록 완료";
     }
 
     @PostMapping(value = "/requestStoreRemove")

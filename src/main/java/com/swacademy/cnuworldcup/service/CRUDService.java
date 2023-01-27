@@ -119,6 +119,11 @@ public class CRUDService {
     }
 
     @Transactional
+    public Review saveReview(Review review) {
+        return reviewRepository.save(review);
+    }
+
+    @Transactional
     public void removeCategory(Category category) {
         categoryRepository.delete(category);
     }
