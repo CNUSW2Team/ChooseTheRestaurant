@@ -26,7 +26,7 @@ public class Review {
 
     private String contents;
 
-    private int rating;
+    private float rating;
 
     private String password;
 

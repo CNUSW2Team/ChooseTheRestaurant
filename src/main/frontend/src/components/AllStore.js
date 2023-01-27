@@ -50,7 +50,7 @@ function AllStore() {
                 <td className={styles.td}>{v.store_name}</td>
                 <td className={styles.td}>{v.address}</td>
                 <td className={styles.td}>{v.numOfReviews}</td>
-                <td className={styles.td}><Rating name="half-rating-read" value={v.averageStars} precision={0.01} readOnly/> {v.averageStars}</td>
+                <td className={styles.td}><Rating name="Average_Star" value={v.averageStars} precision={0.01} readOnly/> {v.averageStars}</td>
             </tr>,)}
             </tbody>
         </Table>

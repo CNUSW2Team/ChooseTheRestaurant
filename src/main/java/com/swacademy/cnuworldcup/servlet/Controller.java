@@ -65,7 +65,7 @@ public class Controller {
             JSONObject json = new JSONObject();
             json.put("store_id", v.getStore().getStore_id());
             json.put("store_name", v.getStore().getStore_name());
-            double averageStars = v.getStore().getReviews().stream().mapToInt(Review::getRating).average().orElse(0);
+            double averageStars = v.getStore().getReviews().stream().mapToDouble(Review::getRating).average().orElse(0);
             json.put("stars", averageStars);
             json.put("winningCount", v.getWin_count());
 
@@ -117,7 +117,7 @@ public class Controller {
         List<Relation> relations = crudService.findCategoryById(UUID.fromString(categoryId)).getRelations().stream().sorted((a, b) -> b.getWin_count() - a.getWin_count()).toList();
 
         Store store = crudService.findStoreById(UUID.fromString(storeId));
-        double averageStars = store.getReviews().stream().mapToInt(Review::getRating).average().orElse(0);
+        double averageStars = store.getReviews().stream().mapToDouble(Review::getRating).average().orElse(0);
         Relation rank = store.getRelations().stream().filter(v -> Objects.equals(v.getCategory().getCategory_id().toString(), categoryId)).findFirst().get();
         List<String> list = new ArrayList<>();
         store.getComments().forEach(v -> {
@@ -242,19 +242,19 @@ public class Controller {
     public String AddNewReview(String reviewDto) throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> reviewMap = mapper.readValue(reviewDto, Map.class);
+        Map<String, String> reviewMap = mapper.readValue(reviewDto, Map.class);
 
         UUID reviewId = UUID.randomUUID();
 
-        Store store = crudService.findStoreById(UUID.fromString((String) reviewMap.get("store_id")));
+        Store store = crudService.findStoreById(UUID.fromString(reviewMap.get("store_id")));
 
         Review review = Review.builder()
                 .review_id(reviewId)
-                .writer((String) reviewMap.get("writer"))
-                .rating(Integer.parseInt((String) reviewMap.get("rating")))
+                .writer(reviewMap.get("writer"))
+                .rating(Float.parseFloat(reviewMap.get("rating")))
                 .store(store)
-                .contents((String) reviewMap.get("contents"))
-                .password((String) reviewMap.get("password"))
+                .contents(reviewMap.get("contents"))
+                .password(reviewMap.get("password"))
                 .date(new Timestamp(System.currentTimeMillis()))
                 .build();
         crudService.saveReview(review);
