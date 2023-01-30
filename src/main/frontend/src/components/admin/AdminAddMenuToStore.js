@@ -250,7 +250,7 @@ function AdminAddMenuToStore(props) {
 
     return (
         <div>
-            <h1>Hello Menu</h1>
+            <h1>{storeName} 메뉴 관리</h1>
             {storeId ? <button onClick={showStoreListAgain}>가게 변경</button> : showStoreList()}
             {storeId ? formAddMenu() : ""}
             {!storeId ? "" : showStoreMenuList()}
