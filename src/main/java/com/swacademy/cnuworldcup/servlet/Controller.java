@@ -376,9 +376,11 @@ public class Controller {
                 .build();
         crudService.saveMenu(menu);
 
-        File fileSave = new File(IMAGE_FILE_UPLOAD_PATH, menuID.toString() + ".jpg");
-        file[0].transferTo(fileSave);
-        saveFormattedImage(menuID.toString(), 1000, 1000);
+        if(file != null) {
+            File fileSave = new File(IMAGE_FILE_UPLOAD_PATH, menuID.toString() + ".jpg");
+            file[0].transferTo(fileSave);
+            saveFormattedImage(menuID.toString(), 1000, 1000);
+        }
 
         return "새로운 메뉴 등록 완료";
     }
