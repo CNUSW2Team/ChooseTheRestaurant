@@ -72,7 +72,7 @@ function AdminAddMenuToStore(props) {
                         <tr key={s.store_id}>
                             <td className={styles.td}><input type={"radio"} name={"selectedStore"} value={s.store_id}
                                        onChange={e => updateStoreInfo(e, s.store_name)}/></td>
-                            <td className={styles.td}><img width={100} src={`/img/${s.store_id}.jpg`}/><br></br>{s.store_name}</td>
+                            <td className={styles.td}><img width={100} src={`/image/${s.store_id}`}/><br></br>{s.store_name}</td>
                             <td className={styles.td}>{s.address}</td>
                         </tr>
                     ))}
@@ -122,7 +122,7 @@ function AdminAddMenuToStore(props) {
                                               checked={selected.includes(m.menu_id)}/></td>
                                 <td className={styles.td}>{m.menu_name}</td>
                                 <td className={styles.td}>{m.price}</td>
-                                <td className={styles.td}><img width={200} height={100} src={`/img/${m.menu_id}.jpg`}/></td>
+                                <td className={styles.td}><img width={200} height={100} src={`/image/${m.menu_id}`}/></td>
                             </tr>
                         ))}
                         </tbody>
@@ -154,7 +154,7 @@ function AdminAddMenuToStore(props) {
                                                                     checked={selected.includes(m.menu_id)}/></td>
                                 <td className={styles.td}>{m.menu_name}</td>
                                 <td className={styles.td}>{m.price}</td>
-                                <td className={styles.td}><img width={200} height={100} src={`/img/${m.menu_id}.jpg`}/></td>
+                                <td className={styles.td}><img width={200} height={100} src={`/image/${m.menu_id}`}/></td>
                             </tr>
                         ))}
                         </tbody>

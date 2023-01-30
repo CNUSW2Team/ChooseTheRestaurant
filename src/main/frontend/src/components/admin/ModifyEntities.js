@@ -84,7 +84,7 @@ function ModifyEntities() {
                     <tbody className={styles.body}>
                     {category.map(v =>
                         <tr key={v.category_id}>
-                            <td className={styles.td}><img width={300} src={`/img/${v.category_id}.jpg`}/><br></br>
+                            <td className={styles.td}><img width={300} src={`/image/${v.category_id}`}/><br></br>
                                 {v.category_name}</td>
                             <td className={styles.td}>{v.favorite}</td>
                             <td className={styles.td}>{v.num_of_stores}개</td>
@@ -109,7 +109,7 @@ function ModifyEntities() {
                     <tbody>
                     {store.map(v =>
                         <tr key={v.store_id}>
-                            <td className={styles.td}><img width={100} src={`/img/${v.store_id}.jpg`}/><br></br>
+                            <td className={styles.td}><img width={100} src={`/image/${v.store_id}`}/><br></br>
                                 {v.store_name}</td>
                             <td className={styles.td}>{v.address}</td>
                             <td className={styles.td}>

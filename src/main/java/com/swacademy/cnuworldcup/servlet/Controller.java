@@ -1,15 +1,19 @@
 package com.swacademy.cnuworldcup.servlet;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.swacademy.cnuworldcup.entity.*;
 import com.swacademy.cnuworldcup.entity.Menu;
 import com.swacademy.cnuworldcup.service.CRUDService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.type.descriptor.java.ObjectJavaType;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,7 +33,19 @@ public class Controller {
     @Autowired
     CRUDService crudService;
 
-    final String IMAGE_FILE_UPLOAD_PATH = new File("src\\main\\frontend\\public\\img").getAbsolutePath();
+//    final String IMAGE_FILE_UPLOAD_PATH = new File("src\\main\\frontend\\public\\img").getAbsolutePath();
+    final String IMAGE_FILE_UPLOAD_PATH = new File("src\\main\\resources\\image\\").getAbsolutePath();
+
+    @GetMapping("/image/{image_id}")
+    public @ResponseBody ResponseEntity<Resource> getImageWithMediaType(@PathVariable("image_id") String image_id) throws IOException {
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+
+        File file = new File(IMAGE_FILE_UPLOAD_PATH, image_id + ".jpg");
+        Resource resource = new FileSystemResource(file);
+
+        return new ResponseEntity<Resource>(resource, headers, HttpStatus.CREATED);
+    }
 
     @GetMapping("/AllCategory")
     public @ResponseBody String getAllCategory() {

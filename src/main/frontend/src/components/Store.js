@@ -71,7 +71,7 @@ function Store() {
                         </thead>
                         <tbody>
                         <tr>
-                            <td className={styles.td}><img width={400} src={`/img/${storeId}.jpg`}/></td>
+                            <td className={styles.td}><img width={400} src={`/image/${storeId}`}/></td>
                         </tr>
                         <tr>
                             <td className={styles.td}> 주소: {store.address} </td>
@@ -130,7 +130,7 @@ function Store() {
                 {store.reviews && store.reviews.sort((a, b) => (new Date(b.date) - new Date(a.date))).map(v => <tr>
                     <td className={styles.td}>{v.nickname}</td>
                     <td className={styles.td}>{v.date}</td>
-                    <td className={styles.td}> <Rating name="Review_Stars" defaultValue={v.stars} readOnly/> {v.stars} </td>
+                    <td className={styles.td}> <Rating name="Review_Stars" precision={0.5} defaultValue={v.stars} readOnly/> {v.stars} </td>
                     <td className={styles.td}>{v.comment}</td>
                 </tr>,)}
                 </tbody>
