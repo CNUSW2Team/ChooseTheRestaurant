@@ -1,0 +1,77 @@
+.card {
+    color: black;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
+    border-collapse: collapse;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: auto;
+    width: 800px;
+}
+
+.cardBody {
+    flex: 1 1 auto;
+    padding: 5px 5px;
+    color: black;
+}
+
+.cardHeader {
+    width: 100%;
+    display: inline-flex;
+    padding: 15px;
+    color: black;
+    border-bottom: solid #9f9f9f;
+    font-size: 25px;
+    background: #eaeaea;
+}
+
+.textarea {
+    /*width: border-box;*/
+    width: 150%;
+    height: 6.25em;
+    resize: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.form1 {
+    justify-content: space-between;
+    display: inline-flex;
+    padding: 5px;
+    width: 650px;
+    /*background: #9f9f9f;*/
+}
+
+.form2 {
+    display: inline-block;
+    /*background: #9f9f9f;*/
+    text-align: left;
+    width: 180px;
+}
+
+.form3{
+    /*text-align: right;*/
+    width: 460px;
+    /*background: #9f9f9f;*/
+    justify-content: stretch;
+}
+
+.form4{
+    text-align: right;
+    width: 93%;
+    /*background: #9f9f9f;*/
+    justify-content: stretch;
+}
+
+.li {
+    margin: 1px;
+    display: flex;
+    flex-flow: column;
+    height: 180px;
+    columns: 2;
+    justify-content: space-between;
+}
+
+.ul {
+    columns: 2;
+}
