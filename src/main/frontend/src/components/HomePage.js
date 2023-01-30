@@ -2,17 +2,23 @@ import React from 'react';
 import {Link} from "react-router-dom";
 function HomePage() {
     return (
-        <div style={{textAlign: "center", position:"fixed", top:"50%", left:"45%"}}>
+        <div style={{textAlign: "center", paddingTop:"50px", display:"flex", flexFlow:"column", "justify-content":"space-between"}}>
+            <div style={{padding:"50px"}}><img src={"img/cnu-worldcup-logo.png"} width={350}/></div>
+            <div style={{margin:"10px"}}>
             <Link to="/AllCategory">
-                <div>
-                    <p>충대맛집월드컵 시작하기</p>
-                </div>
+                    충대맛집월드컵 시작하기
             </Link>
+            </div>
+            <div style={{margin:"10px"}}>
             <Link to="/AllStore">
-                <div>
-                    <p>전체 가게 확인하기</p>
-                </div>
+                    전체 가게 확인하기
             </Link>
+            </div>
+            <div style={{margin:"10px"}}>
+                    <Link to={`/admin`}>
+                        관리자 페이지
+                    </Link>
+            </div>
 
         </div>
     );
