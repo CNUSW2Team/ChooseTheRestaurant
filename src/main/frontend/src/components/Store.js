@@ -2,21 +2,31 @@ import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import {Table} from "react-bootstrap";
-import styles from "./table.module.css"
-import { Rating } from '@mui/material';
+import tableStyle from "./table.module.css"
+import tabStyle from "./storetab.module.css"
+import Reply from "./Reply";
+import Reviews from "./Reviews";
+import half from "./store.module.css"
+import Menus from "./Menus";
 
 function Store() {
     let {storeId} = useParams();
     const [store, setData] = useState([]);
-    const [nickName, setNickName] = useState('익명');
-    const [password, setPassword] = useState('');
-    const [comment, setComment] = useState('');
-    const [rating, setRating] = useState(0);
 
-    const updateNickName = e => setNickName(e.target.value);
-    const updatePasswords = e => setPassword(e.target.value);
-    const updateComment = e => setComment(e.target.value);
-    const updateRating = e => {setRating(e.target.value); console.log(rating)}
+    const content  = [
+        { name: '메뉴', content: <Menus menus={store.menu}/> },
+        { name: '리뷰', content: <div><Reviews reviews={store.reviews}/><div style={{position: "sticky", top:"100"}}><Reply store={storeId}/></div></div> },
+    ];
+
+    const useTabs = (initialTabs, allTabs) => {
+        const [contentIndex, setContentIndex] = useState(initialTabs);
+        return {
+            contentItem: allTabs[contentIndex],
+            contentChange: setContentIndex
+        };
+    };
+    const { contentItem, contentChange } = useTabs(0, content);
+
 
     useEffect(() => {
         axios.get(`/StoreInfo/${storeId}`)
@@ -29,140 +39,60 @@ function Store() {
             })
     }, []);
 
-    function addReview() {
-        const fd = new FormData();
-
-        if (password.length < 1) {
-            alert('비밀번호를 입력해 주세요.');
-        } else if(rating === 0){
-            alert('별점을 메겨주세요.');
-        } else if(comment.length < 1){
-            alert('리뷰를 적어주세요.');
-        }
-        else {
-            const reviewDto = {
-                store_id: storeId,
-                writer: nickName,
-                contents: comment,
-                rating: rating,
-                password: password
-            }
-
-            fd.append("reviewDto", JSON.stringify(reviewDto));
-
-            axios.post('http://localhost:8080/requestReviewAdd', fd)
-                .then((response) => {
-                    alert(response.data);
-                })
-                .then(() => {
-                    window.location.href = `/Store/${storeId}`;
-                })
-        }
-    }
 
     return (<div>
-            <div style={{display: "flex", justifyContent: "center", margin: "auto"}}>
-                <div>
-                    <Table className={styles.table}>
-                        <thead className={styles.thead}>
-                        <tr>
-                            <th className={styles.th}>가게이름: {store.store_name}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td className={styles.td}><img width={400} src={`/image/${storeId}`}/></td>
-                        </tr>
-                        <tr>
-                            <td className={styles.td}> 주소: {store.address} </td>
-                        </tr>
-                        <tr>
-                            <td className={styles.td}> 연락처: {store.contact} </td>
-                        </tr>
-                        <tr>
-                            <td className={styles.td}> 별점: {store.averageStars}점 </td>
-                        </tr>
-                        </tbody>
-                    </Table>
-                </div>
-                <div>
-                    <Table className={styles.table}>
-                        <thead className={styles.thead}>
-                        <tr>
-                            <th className={styles.th}>요일</th>
-                            <th className={styles.th}>시간</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {store.times && store.times.map(v => <tr>
-                            <td className={styles.td}>{v.day}</td>
-                            <td className={styles.td}>{v.hours}</td>
-                        </tr>,)}
-                        </tbody>
-                    </Table>
-                </div>
-            </div>
-            <Table className={styles.table}>
-                <thead className={styles.thead}>
-                <tr>
-                    <th className={styles.th}>메뉴명</th>
-                    <th className={styles.th}>가격</th>
-                </tr>
-                </thead>
-                <tbody>
-                {store.menu && store.menu.map(v => <tr>
-                    <td className={styles.td}>{v.menu_name}</td>
-                    <td className={styles.td}>{v.price}</td>
-                </tr>,)}
-                </tbody>
-            </Table>
 
-            <Table className={styles.table}>
-                <thead className={styles.thead}>
-                <tr>
-                    <th className={styles.th}>작성자</th>
-                    <th className={styles.th}>시간</th>
-                    <th className={styles.th}>별점</th>
-                    <th className={styles.th}>내용</th>
-                </tr>
-                </thead>
-                <tbody>
-                {store.reviews && store.reviews.sort((a, b) => (new Date(b.date) - new Date(a.date))).map(v => <tr>
-                    <td className={styles.td}>{v.nickname}</td>
-                    <td className={styles.td}>{v.date}</td>
-                    <td className={styles.td}> <Rating name="Review_Stars" precision={0.5} defaultValue={v.stars} readOnly/> {v.stars} </td>
-                    <td className={styles.td}>{v.comment}</td>
-                </tr>,)}
-                </tbody>
-            </Table>
+            <div className={half.left}>
+                <div style={{display: "flex", justifyContent: "center", margin: "auto"}}>
+                    <div>
+                        <Table className={tableStyle.table}>
+                            <thead className={tableStyle.thead}>
+                            <tr >
+                                <th colSpan={2} className={tableStyle.th}>{store.store_name}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td colSpan={2} className={tableStyle.td}><img width={400} height={300} src={`/image/${storeId}`}/></td>
+                            </tr>
+                            <tr>
+                                <td colSpan={2} className={tableStyle.td}> 주소: {store.address} </td>
+                            </tr>
+                            <tr>
+                                <td colSpan={2} className={tableStyle.td}> 연락처: {store.contact} </td>
+                            </tr>
+                            <tr>
+                                <td colSpan={2} className={tableStyle.td}> 별점: {store.averageStars}점</td>
+                            </tr>
+                            </tbody>
+                        </Table>
+                    </div>
+                    <div>
+                        <Table className={tableStyle.table}>
+                            <thead className={tableStyle.thead}>
+                            <tr>
+                                <th className={tableStyle.th}>요일</th>
+                                <th className={tableStyle.th}>시간</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {store.times && store.times.map(v => <tr>
+                                <td className={tableStyle.td}>{v.day}</td>
+                                <td className={tableStyle.td}>{v.hours}</td>
+                            </tr>,)}
+                            </tbody>
+                        </Table>
+                    </div>
+                </div>
 
-            <div>
-                <div>
-                    <i className="fa fa-comment fa"></i> REPLY
-                </div>
-                <div>
-                    <ul>
-                        <li>
-                            <div>
-                                <label htmlFor="replyId"><i className="fa fa-user-circle-o fa-2x"></i></label>
-                                <input type="text" placeholder="익명" onChange={updateNickName}/>
-                                <label htmlFor="replyPassword"><i className="fa fa-unlock-alt fa-2x"></i></label>
-                                <input type="password" placeholder="패스워드" onChange={updatePasswords}/>
-                            </div>
-                            <div>
-                                <Rating name="Create_Review" defaultValue={0} precision={0.5} onChange={updateRating}/> {rating}점
-                            </div>
-                            <textarea onChange={updateComment} style={{width: "50%", height: "6.25em", resize: "none", border: "none"}}
-                                      placeholder="리뷰를 남겨주세요"></textarea>
-                            <button type="button" onClick={addReview}>
-                                post reply
-                            </button>
-                        </li>
-                    </ul>
-                </div>
             </div>
 
-
+            <div className={half.right}>
+                <ul className={tabStyle.ul}>{content.map((section, index) => (
+                    <li className={tabStyle.li} onClick={() => contentChange(index)}> {section.name} </li>
+                ))}</ul>
+                {contentItem.content}
+            </div>
         </div>
 
     );
