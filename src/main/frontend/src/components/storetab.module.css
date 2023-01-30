@@ -1,0 +1,15 @@
+.li {
+    width: 30%;
+    list-style: none;
+    font-size: 25px;
+    margin: 10px;
+    text-align: center;
+    /*padding: 10px;*/
+    background: #9f9f9f;
+}
+
+.ul{
+    display: flex;
+    margin: auto;
+    justify-content: space-around;
+}

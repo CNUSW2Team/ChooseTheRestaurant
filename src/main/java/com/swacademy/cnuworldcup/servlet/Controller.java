@@ -23,6 +23,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 
@@ -167,8 +168,10 @@ public class Controller {
         results.put("menu", menus);
         List<JSONObject> reviews = new ArrayList<>();
         store.getReviews().forEach(v -> {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            String time = simpleDateFormat.format(v.getDate());
             JSONObject review = new JSONObject();
-            review.put("date", v.getDate());
+            review.put("date", time);
             review.put("nickname", v.getWriter());
             review.put("comment", v.getContents());
             review.put("stars", v.getRating());
@@ -299,7 +302,7 @@ public class Controller {
         for (Comment comment : crudService.findCommentByStoreId(UUID.fromString(storeId))) {
             crudService.removeComment(comment);
         }
-        // Store와 연관된 모든 Review 삭제
+        // Store와 연관된 모든 Reply 삭제
         for (Review review : crudService.findReviewByStoreId(UUID.fromString(storeId))) {
             crudService.removeReview(review);
         }
