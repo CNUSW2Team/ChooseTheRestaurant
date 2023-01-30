@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import {Button, Form, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {createFuzzyMatcher} from "../../util/util";
-import styles from "../table.module.css"
 import CardItem from "../Cards/Carditem";
 import '../Cards/Cards.css';
 
