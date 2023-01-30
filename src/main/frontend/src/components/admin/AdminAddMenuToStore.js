@@ -72,7 +72,7 @@ function AdminAddMenuToStore(props) {
                         <tr key={s.store_id}>
                             <td className={styles.td}><input type={"radio"} name={"selectedStore"} value={s.store_id}
                                        onChange={e => updateStoreInfo(e, s.store_name)}/></td>
-                            <td className={styles.td}><img width={100} src={`/image/${s.store_id}`}/><br></br>{s.store_name}</td>
+                            <td className={styles.td}><img width={100} src={`/image/${s.store_id}`} onError={handleNoImg}/><br></br>{s.store_name}</td>
                             <td className={styles.td}>{s.address}</td>
                         </tr>
                     ))}
@@ -80,6 +80,11 @@ function AdminAddMenuToStore(props) {
                 </Table>
             </div>
         );
+    }
+
+    const handleNoImg = (e) => {
+        const path = "no_image";
+        e.target.src = `/image/${path}`;
     }
 
     function showStoreListAgain() {
@@ -122,7 +127,7 @@ function AdminAddMenuToStore(props) {
                                               checked={selected.includes(m.menu_id)}/></td>
                                 <td className={styles.td}>{m.menu_name}</td>
                                 <td className={styles.td}>{m.price}</td>
-                                <td className={styles.td}><img width={200} height={100} src={`/image/${m.menu_id}`}/></td>
+                                <td className={styles.td}><img width={200} height={100} src={`/image/${m.menu_id}`} onError={handleNoImg}/></td>
                             </tr>
                         ))}
                         </tbody>
@@ -154,12 +159,12 @@ function AdminAddMenuToStore(props) {
                                                                     checked={selected.includes(m.menu_id)}/></td>
                                 <td className={styles.td}>{m.menu_name}</td>
                                 <td className={styles.td}>{m.price}</td>
-                                <td className={styles.td}><img width={200} height={100} src={`/image/${m.menu_id}`}/></td>
+                                <td className={styles.td}><img width={200} height={100} src={`/image/${m.menu_id}`} onError={handleNoImg}/></td>
                             </tr>
                         ))}
                         </tbody>
                     </Table>
-                    {selected.length ? <button onClick={() => removeMenu()}>메뉴 삭제하기</button> : ""}
+                    {selected.length ? <button onClick={(event) => removeMenu(event)}>메뉴 삭제하기</button> : ""}
                 </Form>
             </div>
         );
@@ -195,9 +200,10 @@ function AdminAddMenuToStore(props) {
         );
     }
 
-    function addMenu() {
+    function addMenu(e) {
 
         if(alertBlankInput() != 1) {
+            e.preventDefault();
             return;
         }
 
@@ -206,10 +212,10 @@ function AdminAddMenuToStore(props) {
             store_id: storeId
         }
         console.log(menuDto);
-        console.log(file[0]);
+        file ? console.log(file[0]) : console.log("No image");
 
         const fd = new FormData();
-        fd.append("file", file[0]);
+        file ? fd.append("file", file[0]) : fd.append("file", null);
         fd.append("menuDto", JSON.stringify(menuDto));
 
         axios.post('http://localhost:8080/admin/requestMenuAdd', fd)
@@ -218,7 +224,7 @@ function AdminAddMenuToStore(props) {
         resetInput();
     }
 
-    function removeMenu() {
+    function removeMenu(e) {
 
         const fd = new FormData();
         selected.forEach(s => fd.append("selectedMenuId", s));
@@ -226,11 +232,10 @@ function AdminAddMenuToStore(props) {
         axios.post('http://localhost:8080/requestMenuRemove', fd)
             .then((response) => {alert(response.data);})
 
-    }
+   }
     function alertBlankInput() {
         if(!menuName) {alert("메뉴 이름을 입력해주세요");return -1;}
         else if(!price) {alert("가격을 입력해주세요");return -1;}
-        else if(!file) { alert("가게의 이미지를 업로드해주세요"); return -1;}
         return 1;
     }
 
