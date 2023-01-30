@@ -46,11 +46,11 @@ function AllStore() {
             </thead>
             <tbody>
             {store.filter(v => createFuzzyMatcher(searchBox).test(v.store_name)).map(v => <tr onClick={()=>linkToStore(v.store_id)} style={{cursor:"pointer"}} key={v.store_id}>
-                <td className={styles.td}><img width={100} src={`/img/${v.store_id}.jpg`}/></td>
+                <td className={styles.td}><img width={100} src={`/image/${v.store_id}`}/></td>
                 <td className={styles.td}>{v.store_name}</td>
                 <td className={styles.td}>{v.address}</td>
                 <td className={styles.td}>{v.numOfReviews}</td>
-                <td className={styles.td}><Rating name="half-rating-read" value={v.averageStars} precision={0.01} readOnly/> {v.averageStars}</td>
+                <td className={styles.td}><Rating name="Average_Star" value={v.averageStars} precision={0.01} readOnly/> {v.averageStars}</td>
             </tr>,)}
             </tbody>
         </Table>

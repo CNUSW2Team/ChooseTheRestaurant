@@ -71,7 +71,7 @@ function Store() {
                         </thead>
                         <tbody>
                         <tr>
-                            <td className={styles.td}><img width={400} src={`/img/${storeId}.jpg`}/></td>
+                            <td className={styles.td}><img width={400} src={`/image/${storeId}`}/></td>
                         </tr>
                         <tr>
                             <td className={styles.td}> 주소: {store.address} </td>
@@ -80,7 +80,7 @@ function Store() {
                             <td className={styles.td}> 연락처: {store.contact} </td>
                         </tr>
                         <tr>
-                            <td className={styles.td}> <Rating name="half-rating-read" value={store.averageStars} precision={0.01} readOnly/> {store.averageStars} </td>
+                            <td className={styles.td}> 별점: {store.averageStars}점 </td>
                         </tr>
                         </tbody>
                     </Table>
@@ -130,7 +130,7 @@ function Store() {
                 {store.reviews && store.reviews.sort((a, b) => (new Date(b.date) - new Date(a.date))).map(v => <tr>
                     <td className={styles.td}>{v.nickname}</td>
                     <td className={styles.td}>{v.date}</td>
-                    <td className={styles.td}> <Rating name="size-medium" defaultValue={v.stars} readOnly/> {v.stars} </td>
+                    <td className={styles.td}> <Rating name="Review_Stars" precision={0.5} defaultValue={v.stars} readOnly/> {v.stars} </td>
                     <td className={styles.td}>{v.comment}</td>
                 </tr>,)}
                 </tbody>
@@ -150,7 +150,7 @@ function Store() {
                                 <input type="password" placeholder="패스워드" onChange={updatePasswords}/>
                             </div>
                             <div>
-                                <Rating name="size-medium" defaultValue={0} onChange={updateRating}/> {rating}점
+                                <Rating name="Create_Review" defaultValue={0} precision={0.5} onChange={updateRating}/> {rating}점
                             </div>
                             <textarea onChange={updateComment} style={{width: "50%", height: "6.25em", resize: "none", border: "none"}}
                                       placeholder="리뷰를 남겨주세요"></textarea>

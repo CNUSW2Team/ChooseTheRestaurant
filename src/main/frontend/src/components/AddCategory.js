@@ -96,7 +96,7 @@ function AddCategory() {
                         <tr>
                             <td className={styles.td}><Checkbox onChange={(e) => onChangeEach(e, v.store_id)}
                                           checked={select.includes(v.store_id)}/></td>
-                            <td className={styles.td}><img width={100} src={`/img/${v.store_id}.jpg`}/><br></br>{v.store_name}</td>
+                            <td className={styles.td}><img width={100} src={`/image/${v.store_id}`}/><br></br>{v.store_name}</td>
                             <td className={styles.td}>{v.address}</td>
                             <td className={styles.td}><Link to={`/Store/${v.store_id}`}> 상세정보 </Link></td>
                         </tr>,
@@ -126,7 +126,7 @@ function AddCategory() {
                         <tr key={v.store_id}>
                             <td className={styles.td}><Checkbox onChange={(e) => onChangeEach(e, v.store_id)}
                                           checked={select.includes(v.store_id)}/></td>
-                            <td className={styles.td}><img width={100} src={`/img/${v.store_id}.jpg`}/><br></br>{v.store_name}</td>
+                            <td className={styles.td}><img width={100} src={`/image/${v.store_id}`}/><br></br>{v.store_name}</td>
                             <td className={styles.td}>{v.address}</td>
                             {/*<td>{v.store_id}</td>*/}
                             <td className={styles.td}><Link to={`/Store/${v.store_id}`}> 상세정보 </Link></td>

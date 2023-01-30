@@ -37,7 +37,7 @@ function AllCategory() {
                     <ul className="cards__items" data-columns="2">
                     {category.filter(v => createFuzzyMatcher(searchBox).test(v.category_name)).map(v =>
                             <CardItem
-                                src={`/img/${v.category_id}.jpg`}
+                                src={`/image/${v.category_id}`}
                                 name={v.category_name}
                                 favorite={`Favorite: ${v.favorite}`}
                                 path={`/GetReady/${v.category_id}`}
