@@ -1,18 +1,28 @@
 import styles from "./reviews.module.css"
 import {Rating} from "@mui/material";
+import React, {useState} from "react";
+import {Checkbox} from "antd";
 
 function Reviews(props) {
+    const [searchBox, setSearchBox] = useState('');
+    const updateSearchBox = e => setSearchBox(e.target.value);
+    const resetSearchBox = () => setSearchBox('');
+
     return (
         <div style={{width:"100%"}}>
             <div className={styles.wrapper}>
                 <div style={{fontSize:"25px"}}>리뷰</div>
                 <div>
-                    <div>검색창</div>
+                    <div>
+                        <input id={"searchArea"} value={searchBox} onChange={updateSearchBox}
+                                    placeholder={"Type 'Name' to Search"} size={50}/>
+                            <button type={"button"} onClick={resetSearchBox}>초기화</button>
+                    </div>
                     <table className={styles.table}>
                         <thead className={styles.thead}>
                         <tr>
                             <th className={styles.th} style={{width:"30px"}}>번호</th>
-                            <th className={styles.th} style={{width:"650px"}}>내용</th>
+                            <th className={styles.th} style={{width:"600px"}}>내용</th>
                             <th className={styles.th} style={{width:"80px"}}>별점</th>
                             <th className={styles.th} style={{width:"80px"}}>작성자</th>
                             <th className={styles.th} style={{width:"100px"}}>날짜</th>
