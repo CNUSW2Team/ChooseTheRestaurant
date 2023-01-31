@@ -14,7 +14,7 @@ import AddCategory from "./components/AddCategory";
 import AdminAddMenuToStore from "./components/admin/AdminAddMenuToStore";
 import ModifyEntities from "./components/admin/ModifyEntities";
 import AdminPage from "./components/admin/AdminPage";
-// import GameTest from "./components/worldcup/GameTest"; //나중에 지우기
+import GameTest from "./components/worldcup/GameTest"; //나중에 지우기
 
 function App() {
 
@@ -29,8 +29,6 @@ function App() {
                     <Route path="/AllCategory/*" element={<AllCategory />}></Route>
                     <Route path="/GetReady/:categoryId" element={<GetReady />}></Route>
                     <Route path="/Round/:categoryId/:numOfRound" element={<Game />}></Route>
-                    {/* test 나중에 지우기 */}
-                    {/* <Route path="/Round/:categoryId/:numOfRound/test" element={<GameTest />}></Route>  */}
                     <Route path="/Result/:categoryId/:storeId" element={<WinnerResult />}></Route>
                     <Route path="/Ranking/:categoryId" element={<RankingPage />}></Route>
                     <Route path="/admin" element={<AdminPage />}></Route>

@@ -19,77 +19,47 @@ import useDidMountEffect from '../useDidMountEffect'
 function GameTest(props) {
     let {categoryId} = useParams();
     let {numOfRound} = useParams();
-
-    const Data = [{
-            'store_id': 'ba209830-987c-4d30-8fc0-1921e8f7db9f',
-            'store_name': '청춘우동'
-        },
-        {
-            'store_id': 'f4ae598f-7bcb-440d-96f8-a19750b2ed4b',
-            'store_name': '리코타코'
-        },
-        {
-            'store_id': '86ac9f9a-02ac-4203-a849-d75f93e9f6a5',
-            'store_name': '충대분식'
-        },
-        {
-            'store_id': '83a1c4cc-bd29-4ca1-b1ed-29426fa72313',
-            'store_name': '별리달리'
-        },
-    ]
-
+   
     const [StoreInfo, setData] = useState([]); //첫데이터
     const [items, setItem] = useState([]); // 월드컵 아이템 리스트
     const [winners, SetWinner] = useState([]);
+    const [round, SetRound] = useState();
 
     useEffect(() => {
-            setData(Data);
-            setItem(Data.sort(() => Math.random() - 0.5));
-        },
-        []);
-
-    function Item({target, itemData, onClick}) {
-        const item = document.createElement("div") //item, hover
-        target.appendChild(item);
-        
-        this.state = [itemData];
-    
-        
-        item.addEventListener('click', () => {
-            this.setState({
-                clickCount: this.state.clickCount + 1,
-                toggled: !this.state.toggled
+        axios.get(`/Round/${categoryId}/${numOfRound}`)
+            .then(response => {
+                setData(response.data);
+                setItem(response.data.sort(() => Math.random() - 0.5));
+                SetRound(numOfRound);
+                console.log(response.data);
             })
-            
-        if(onClick) { 
-            onClick(this.state.clickCount)
+            .catch(error => {
+                console.log(error);
+            })
+    },
+    []);
+
+    
+    function WinnerChoice(e){
+        const newWinner = JSON.parse(e.currentTarget.getAttribute('value'))
+        console.log(newWinner)
+        SetWinner([...winners, newWinner])
+        if(items.length <= 2) {
+            console.log('hgfgfdfsfsdfddsfsd')
+            setItem(winners)
+            SetRound(parseInt(round)/2)    
+        } else {
+            setItem(items.slice(2))
         }
-        })
-    
         
-        this.render()
-    }
-    // winner(클릭 시)만 보내고 slice하기
-    // const WinnerChoice = e => {
-    //     console.log(e)
-    //     // SetWinner([...winners, ])
-    // }
-    // useEffect(WinnerChoice, [items]);
-
-    
-
-
-    // 첫 랜더링 막은 ver.
-    const WinnerChoice = (e) => {
-        console.log(e)
     };
 
     // winner만 담고 스테이지(Round) 끝날때마다 setItems
-    useEffect(() => {
+    // useEffect(() => {
 
 
 
-    }, [winners])
+    // }, [winners])
 
         // categoryId의, numofRound만큼, random으로 가져오기
         // random 2개 보여주기, 선택한 store 다음 스테이지로 올리고 아닌 것 버리기
@@ -99,14 +69,15 @@ function GameTest(props) {
         // `/Result/${categoryId}/${StoreInfo[0] && StoreInfo[0]["store_id"]}`
         return (
             <>
-                {/* <div className='inlineBlock'>
+                <h1>{round}강</h1>
+                <div className='inlineBlock'>
                     <p>{items[0] && items[0]["store_name"]}</p>
-                    <img width={300} value={items[0] && items[0]["store_id"]} onClick={WinnerChoice} src={`/img/${items[0] && items[0]["store_id"]}.jpg`} />
+                    <img width={300} value={JSON.stringify(items[0])} onClick={e => WinnerChoice(e)} src={`/image/${items[0] && items[0]["store_id"]}`} />
                 </div>
                 <div className='inlineBlock'>
                     <p>{items[1] && items[1]["store_name"]}</p>
-                    <img width={300} onClick={WinnerChoice} src={`/img/${items[1] && items[1]["store_id"]}.jpg`} />
-                </div> */}
+                    <img width={300} value={JSON.stringify(items[1])} onClick={e => WinnerChoice(e)} src={`/image/${items[1] && items[1]["store_id"]}`} />
+                </div>
 
             </>
         );
@@ -116,28 +87,7 @@ export default GameTest;
 
 
 
-// ver 2
-//     const GameTest = () => {
-//         let {categoryId} = useParams();
-//         let {numOfRound} = useParams();
-    
-//         const items = [{
-//             'store_id': 'ba209830-987c-4d30-8fc0-1921e8f7db9f',
-//             'store_name': '청춘우동'
-//         },
-//         {
-//             'store_id': 'f4ae598f-7bcb-440d-96f8-a19750b2ed4b',
-//             'store_name': '리코타코'
-//         },
-//         {
-//             'store_id': '86ac9f9a-02ac-4203-a849-d75f93e9f6a5',
-//             'store_name': '충대분식'
-//         },
-//         {
-//             'store_id': '83a1c4cc-bd29-4ca1-b1ed-29426fa72313',
-//             'store_name': '별리달리'
-//         }
-//     ]
+
     
 //         const [foods, setFoods] = useState([]);
 //         const [displays, setDisplays] = useState([]);

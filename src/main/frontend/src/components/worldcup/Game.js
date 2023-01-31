@@ -1,65 +1,86 @@
-import React, {useEffect, useState} from 'react';
+import React, {
+    useEffect,
+    useState
+} from 'react';
 import axios from "axios";
-import {Button, Form, Table} from "react-bootstrap";
-import {Link, useParams, useLocation} from "react-router-dom";
-
+import {
+    Button,
+    Form,
+    Table
+} from "react-bootstrap";
+import {
+    Link,
+    useParams,
+    useLocation
+} from "react-router-dom";
+import useDidMountEffect from '../useDidMountEffect'
 
 
 function Game(props) {
-    let { categoryId } = useParams();
-    let { numOfRound } = useParams();
-    
-    const [StoreInfo, setData] = useState([]); //첫데이터
+    let {categoryId} = useParams();
+    let {numOfRound} = useParams();
+   
+    // const [StoreInfo, setData] = useState([]); //첫데이터
     const [items, setItem] = useState([]); // 월드컵 아이템 리스트
     const [winners, SetWinner] = useState([]);
+    const [round, SetRound] = useState();
+    const [count, SetCount] = useState(0);
 
     useEffect(() => {
-            axios.get(`/Round/${categoryId}/${numOfRound}`)
-                .then(response => {
-                    setData(response.data);
-                    setItem(response.data.sort(() => Math.random() - 0.5));
-                    console.log(response.data);
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-        },
-        []);
-
-    // winner(클릭 시)만 보내고 slice하기
-    // const WinnerChoice = e => {
-    //     e.preventDefault();
-    // }
-
-    // useEffect(WinnerChoice, [items]);
-
-    // winner만 담고 스테이지(Round) 끝날때마다 setItems
-    useEffect(() => {
-
-
-
-    }, [winners])
+        axios.get(`/Round/${categoryId}/${numOfRound}`)
+            .then(response => {
+                setItem(response.data);
+                SetRound(numOfRound);
+                // console.log(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    },
+    []);
 
     
-    // 선택한 store 다음 스테이지로 올리고 아닌 것 버리기
-    // 하위 스테이지 비면 상위 스테이지로 옮기기
-    // 상위스테이지에 하나만 남으면 해당 store 결과페이지로 보내기
+    function WinnerChoice(e){
+        const newWinner = JSON.parse(e.currentTarget.getAttribute('value'))
+        SetCount(count+1)
+        
+        setItem(items.slice(2))
+        SetWinner([...winners, newWinner])
+        console.log(newWinner)
+        console.log('item :', items)
+        console.log('winners :',winners)
+        if(count == 3) {
+            console.log('라운드 종료')
+            console.log('winners :',winners)
+            setItem([])
+            console.log('items :', items)
+            SetRound(parseInt(round)/2)   
+            if(winners.length == 1){
+                console.log('게임종료')
+                console.log(winners[0])
+            }
+        } else {
+            console.log(count)
+        }
+    };
 
-    // `/Result/${categoryId}/${StoreInfo[0] && StoreInfo[0]["store_id"]}`
-    return (
-        <>
-            <div className='inlineBlock'>
-                <p>{items[0] && items[0]["store_name"]}</p>
-                <img width={500} src={`/img/${items[0] && items[0]["store_id"]}.jpg`} />
-            </div>
-            <div className='inlineBlock'>
-                <p>{items[1] && items[1]["store_name"]}</p>
-                <img width={500} src={`/img/${items[1] && items[1]["store_id"]}.jpg`} />
-            </div>
+  
+        // `/Result/${categoryId}/${StoreInfo[0] && StoreInfo[0]["store_id"]}`
+        return (
+            <>
+                <h1>{round}강</h1>
+                <div className='inlineBlock'>
+                    <p>{items[0] && items[0]["store_name"]}</p>
+                    <img width={300} value={JSON.stringify(items[0])} onClick={e => WinnerChoice(e)} src={`/image/${items[0] && items[0]["store_id"]}`} />
+                </div>
+                <div className='inlineBlock'>
+                    <p>{items[1] && items[1]["store_name"]}</p>
+                    <img width={300} value={JSON.stringify(items[1])} onClick={e => WinnerChoice(e)} src={`/image/${items[1] && items[1]["store_id"]}`} />
+                </div>
 
-            {/* 랜덤월드컵 */}
-        </>
-    );
-}
+            </>
+        );
+    }
 
 export default Game;
+
