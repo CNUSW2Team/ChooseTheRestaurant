@@ -2,7 +2,7 @@ import styles from "./table.module.css"
 
 function Menus(props) {
     return (
-        <table className={styles.table}>
+        <table className={styles.table} style={{width:"620px"}}>
             <thead className={styles.thead}>
             <tr>
                 <th className={styles.th}>메뉴명</th>

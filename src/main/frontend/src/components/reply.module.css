@@ -5,30 +5,30 @@
     border-collapse: collapse;
     border-radius: 5px;
     overflow: hidden;
-    margin: auto;
-    width: 800px;
+    /*margin: auto;*/
+    width: 620px;
+    height: 20%;
 }
 
 .cardBody {
-    flex: 1 1 auto;
-    padding: 5px 5px;
     color: black;
 }
 
 .cardHeader {
     width: 100%;
     display: inline-flex;
-    padding: 15px;
+    padding: 2px 7px 2px 7px;
     color: black;
     border-bottom: solid #9f9f9f;
-    font-size: 25px;
+    font-size: 20px;
     background: #eaeaea;
+    align-items: center;
+    /*margin-bottom: -20px;*/
 }
 
 .textarea {
-    /*width: border-box;*/
-    width: 150%;
-    height: 6.25em;
+    width: 80%;
+    height: 3em;
     resize: none;
     border-radius: 5px;
     padding: 10px;
@@ -37,41 +37,33 @@
 .form1 {
     justify-content: space-between;
     display: inline-flex;
-    padding: 5px;
     width: 650px;
-    /*background: #9f9f9f;*/
+    height: 25px;
 }
 
 .form2 {
-    display: inline-block;
-    /*background: #9f9f9f;*/
+    display: inline-flex;
+    /*background: #c96262;*/
     text-align: left;
-    width: 180px;
+    width: 230px;
+    align-items: center;
 }
 
 .form3{
-    /*text-align: right;*/
-    width: 460px;
-    /*background: #9f9f9f;*/
-    justify-content: stretch;
-}
-
-.form4{
+    display: flex;
     text-align: right;
-    width: 93%;
+    width: 98%;
     /*background: #9f9f9f;*/
-    justify-content: stretch;
+    justify-content: space-around;
 }
 
 .li {
-    margin: 1px;
-    display: flex;
+    /*display: flex;*/
     flex-flow: column;
-    height: 180px;
-    columns: 2;
-    justify-content: space-between;
+    list-style: none;
+    /*height: 180px;*/
 }
 
 .ul {
-    columns: 2;
+    /*columns: 2;*/
 }
