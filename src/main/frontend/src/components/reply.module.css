@@ -1,13 +1,14 @@
 .card {
     color: black;
     background-color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
+    /*box-shadow: 0 2px 5px rgba(0, 0, 0, .25);*/
     border-collapse: collapse;
     border-radius: 5px;
     overflow: hidden;
+    border: solid #9f9f9f;
     /*margin: auto;*/
-    width: 620px;
-    height: 20%;
+    width: 100%;
+    height: 50%;
 }
 
 .cardBody {
@@ -17,10 +18,10 @@
 .cardHeader {
     width: 100%;
     display: inline-flex;
-    padding: 2px 7px 2px 7px;
+    padding: 10px 17px 10px 17px;
     color: black;
     border-bottom: solid #9f9f9f;
-    font-size: 20px;
+    font-size: 25px;
     background: #eaeaea;
     align-items: center;
     /*margin-bottom: -20px;*/
@@ -28,17 +29,28 @@
 
 .textarea {
     width: 80%;
-    height: 3em;
+    height: 6em;
     resize: none;
     border-radius: 5px;
     padding: 10px;
 }
 
-.form1 {
-    justify-content: space-between;
+.user {
+    justify-content: left;
     display: inline-flex;
-    width: 650px;
-    height: 25px;
+    width: 100%;
+    padding: 10px;
+    height: 100%;
+    margin: 5px;
+    /*background: #61dafb;*/
+}
+
+.form1 {
+    /*justify-content: space-between;*/
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+    /*background: #61dafb;*/
 }
 
 .form2 {
@@ -51,9 +63,11 @@
 
 .form3{
     display: flex;
-    text-align: right;
-    width: 98%;
+    width: 100%;
+    height: 200px;
     /*background: #9f9f9f;*/
+    align-items: center;
+    /*justify-content: center;*/
     justify-content: space-around;
 }
 

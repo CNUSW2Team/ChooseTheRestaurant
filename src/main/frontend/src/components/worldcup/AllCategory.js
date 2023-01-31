@@ -32,7 +32,7 @@ function AllCategory() {
             </div>
             <div className="cards__container">
                 <div className="cards__wrapper">
-                    <ul className="cards__items" data-columns="2">
+                    <ul className="cards__items">
                     {category.filter(v => createFuzzyMatcher(searchBox).test(v.category_name)).map(v =>
                             <CardItem
                                 src={`/image/${v.category_id}`}

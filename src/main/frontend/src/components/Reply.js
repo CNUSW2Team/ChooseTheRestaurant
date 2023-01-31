@@ -48,16 +48,19 @@ function Reply(props) {
 
     return (<div className={styles.card}>
         <div className={styles.cardHeader}>
-            <AiFillMessage size={20} style={{paddingRight: "5px"}}/>REPLY
+            <AiFillMessage size={25} style={{paddingRight: "5px"}}/>REPLY
         </div>
         <div className={styles.cardBody}>
             <ul style={{padding: "0px 0px 0px 10px", marginTop: "8px"}}>
                 <li className={styles.li} style={{marginBottom: "3px"}}>
                     <div className={styles.form1}>
-                        <FaUserCircle size={25}/>
-                        <input type="text" placeholder="익명" onChange={updateNickName}/>
-                        <RiLockPasswordFill size={25}/>
-                        <input type="password" placeholder="패스워드" onChange={updatePasswords}/>
+                        <div className={styles.user}>
+                            <FaUserCircle size={25}/>
+                            <input style={{marginRight:"15px", marginLeft:"10px"}} type="text" placeholder="익명" onChange={updateNickName}/>
+                            <RiLockPasswordFill size={25}/>
+                            <input style={{marginRight:"15px", marginLeft:"10px"}} type="password" placeholder="패스워드" onChange={updatePasswords}/>
+                        </div>
+
                         <div className={styles.form2}>
                             <Rating name="Create_Review" defaultValue={0} precision={0.5} onChange={updateRating}/>
                             {rating}점
