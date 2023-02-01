@@ -1,0 +1,19 @@
+.button {
+    background-color: #744777;
+    border-radius:10px;
+    border:3px solid ;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    /*font-family:Arial;*/
+    font-size:17px;
+    padding:3px 7px;
+    /*text-decoration:none;*/
+}
+.button:hover {
+    background-color: #8d3893;
+}
+.button:active {
+    position:relative;
+    top:1px;
+}
