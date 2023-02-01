@@ -26,6 +26,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @RestController
@@ -167,10 +168,12 @@ public class Controller {
         });
         results.put("menu", menus);
         List<JSONObject> reviews = new ArrayList<>();
-        store.getReviews().forEach(v -> {
+        AtomicInteger count = new AtomicInteger(store.getReviews().size()+1);
+        store.getReviews().stream().sorted().forEach(v -> {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             String time = simpleDateFormat.format(v.getDate());
             JSONObject review = new JSONObject();
+            review.put("idx", count.decrementAndGet());
             review.put("date", time);
             review.put("nickname", v.getWriter());
             review.put("comment", v.getContents());

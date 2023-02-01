@@ -14,7 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString(exclude = "store")
-public class Review {
+public class Review implements Comparable<Review>{
     @Id
     private UUID review_id;
 
@@ -32,4 +32,16 @@ public class Review {
 
     @CreationTimestamp
     private Timestamp date;
+
+
+    @Override
+    public int compareTo(Review o) {
+        if(date.before(o.date)){
+            return 1;
+        }
+        else if(date.after(o.date)){
+            return -1;
+        }
+        return 0;
+    }
 }
