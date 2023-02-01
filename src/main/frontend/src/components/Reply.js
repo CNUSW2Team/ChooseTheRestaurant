@@ -9,9 +9,9 @@ import styles from "./reply.module.css"
 
 function Reply(props) {
     const [nickName, setNickName] = useState('익명');
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState('default');
     const [comment, setComment] = useState('');
-    const [rating, setRating] = useState(0);
+    const [rating, setRating] = useState('5.0');
 
     const updateNickName = e => setNickName(e.target.value);
     const updatePasswords = e => setPassword(e.target.value);
@@ -62,7 +62,7 @@ function Reply(props) {
                         </div>
 
                         <div className={styles.form2}>
-                            <Rating name="Create_Review" defaultValue={0} precision={0.5} onChange={updateRating}/>
+                            <Rating name="Create_Review" defaultValue={rating} precision={0.5} onChange={updateRating}/>
                             {rating}점
                         </div>
                     </div>

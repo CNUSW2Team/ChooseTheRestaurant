@@ -9,28 +9,6 @@ import SideMenu from "./SideMenu";
 
 function Store() {
     let {storeId} = useParams();
-    const [store, setData] = useState([]);
-
-    function replyTab(index){
-        contentChange(index);
-    }
-
-    const content =
-        [{name: '상세정보', content: <div>상세정보</div>},
-            {name: '메뉴', content: <Menus menus={store.menu}/>},
-            {name: '리뷰', content: <Reviews onClickHandler={replyTab} reviews={store.reviews}/>},
-            {name: '리뷰 남기기', content: <Reply store={storeId}/>}
-        ];
-
-    const useTabs = (initialTabs, allTabs) => {
-        const [contentIndex, setContentIndex] = useState(initialTabs);
-        return {
-            contentItem: allTabs[contentIndex], contentChange: setContentIndex
-        };
-    };
-    const {contentItem, contentChange} = useTabs(0, content);
-
-
     useEffect(() => {
         axios.get(`/StoreInfo/${storeId}`)
             .then(response => {
@@ -41,11 +19,25 @@ function Store() {
                 console.log(error);
             })
     }, []);
+    const [store, setData] = useState([]);
 
+    const content =
+        [{idx: 0, name: '상세정보', content: <div>상세정보</div>},
+            {idx: 1, name: '메뉴', content: <Menus menus={store.menu}/>},
+            {idx: 2, name: '리뷰', content: <Reviews store={storeId} reviews={store.reviews}/>},
+        ];
+
+    const useTabs = (initialTabs, allTabs) => {
+        const [contentIndex, setContentIndex] = useState(initialTabs);
+        return {
+            contentItem: allTabs[contentIndex], contentChange: setContentIndex
+        };
+    };
+    const {contentItem, contentChange} = useTabs(0, content);
 
     return (<div>
             <div className={styles.wrapper}>
-                <SideMenu store_name={store.store_name} onClickHandler={contentChange}/>
+                <SideMenu store_name={store.store_name} onClickHandler={contentChange} contentItem={contentItem}/>
                 <div className={styles.main}>
                     {contentItem.content}
                 </div>
