@@ -28,7 +28,7 @@ function Reviews(props) {
         <div style={{width:"100%"}}>
             <div className={styles.wrapper}>
                 <div style={{display:"flex", flexFlow:"column", width:"50%"}}>
-                    <div style={{fontSize:"25px", padding:"10px", color:""}}>리뷰</div>
+                    <div style={{fontSize:"25px", padding:"10px", color:"#754878"}}>리뷰</div>
                     <div style={{display:"flex"}}>
                         <input id={"searchArea"} value={searchBox} onChange={updateSearchBox}
                                style={{"border-radius": "2px",
