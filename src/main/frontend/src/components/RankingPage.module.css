@@ -1,28 +1,8 @@
-#firstPlace {
-    width: 300px;
-    z-index: 3;
-    position: static;
-    left: 20%;
-    top: 20%;
-}
-
-#secondPlace {
-    width: 250px;
-    z-index: 2;
-    position: absolute;
-    left: 20%;
-}
-
-#thirdPlace {
-    width: 250px;
-    z-index: 1;
-    position: absolute;
-    left: 0%
-}
-
 .top3 {
     width: 50vw;
     line-height: 100px;
+    margin-left : 5%;
+    margin-top: 10%;
 }
 
 .top3 img{
@@ -31,4 +11,16 @@
 
 .top3 img:nth-child(2){
     width: 20vw;
+    border: #cdca4d 4px solid;
+    padding:2px;
+}
+
+.top3 img:nth-child(1) {
+    border: #cdcdcd 2px solid;
+    padding:2px;
+}
+
+.top3 img:nth-child(3) {
+    border: #cd9362 2px solid;
+    padding:2px;
 }
