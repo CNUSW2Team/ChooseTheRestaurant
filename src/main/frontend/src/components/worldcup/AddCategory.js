@@ -5,8 +5,8 @@ import {Link, useHref} from "react-router-dom";
 import {useEffect, useState} from 'react';
 import axios from "axios";
 import {Form, Table} from "react-bootstrap";
-import styles from "./table.module.css"
-import {createFuzzyMatcher} from "../util/util";
+import styles from "../table.module.css"
+import {createFuzzyMatcher} from "../../util/util";
 
 
 function AddCategory() {

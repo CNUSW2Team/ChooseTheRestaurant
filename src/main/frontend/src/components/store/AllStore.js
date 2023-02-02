@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Button, Form, Table} from "react-bootstrap";
 import {Link, useNavigate } from "react-router-dom";
-import {createFuzzyMatcher} from "../util/util";
-import styles from "./table.module.css"
+import {createFuzzyMatcher} from "../../util/util";
+import styles from "../table.module.css"
 import {Rating} from "@mui/material";
 
 function AllStore() {
@@ -50,7 +50,7 @@ function AllStore() {
                 <td className={styles.td}>{v.store_name}</td>
                 <td className={styles.td}>{v.address}</td>
                 <td className={styles.td}>{v.numOfReviews}</td>
-                <td className={styles.td}><Rating name="Average_Star" value={v.averageStars} precision={0.01} readOnly/> {v.averageStars}</td>
+                <td className={styles.td}><Rating name="Average_Star" value={v.averageStars} precision={0.5} readOnly/> {v.averageStars}</td>
             </tr>,)}
             </tbody>
         </Table>

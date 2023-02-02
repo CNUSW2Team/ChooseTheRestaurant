@@ -158,29 +158,6 @@ public class Controller {
         results.put("address", store.getAddress());
         results.put("contact", store.getPhone_number());
         results.put("averageStars", Math.round(store.getReviews().stream().mapToDouble(Review::getRating).average().orElseGet(()-> 0)*100.0)/100.0);
-        List<JSONObject> menus = new ArrayList<>();
-        store.getMenus().forEach(v -> {
-            JSONObject menu = new JSONObject();
-            menu.put("menu_name", v.getMenu_name());
-            menu.put("menu_id", v.getMenu_id());
-            menu.put("price", v.getPrice());
-            menus.add(menu);
-        });
-        results.put("menu", menus);
-        List<JSONObject> reviews = new ArrayList<>();
-        AtomicInteger count = new AtomicInteger(store.getReviews().size()+1);
-        store.getReviews().stream().sorted().forEach(v -> {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            String time = simpleDateFormat.format(v.getDate());
-            JSONObject review = new JSONObject();
-            review.put("idx", count.decrementAndGet());
-            review.put("date", time);
-            review.put("nickname", v.getWriter());
-            review.put("comment", v.getContents());
-            review.put("stars", v.getRating());
-            reviews.add(review);
-        });
-        results.put("reviews", reviews);
 
         List<JSONObject> times = new ArrayList<>();
         String openingHours = store.getOpening_hours();
@@ -218,7 +195,6 @@ public class Controller {
                     time.put("hours", hours);
                     break;
             }
-
             times.add(time);
         });
 
@@ -227,20 +203,57 @@ public class Controller {
         return results.toString();
     }
 
-    @GetMapping("/StoreMenusInfo/{storeId}") // storeId에 해당하는 store의 메뉴 정보
-    public @ResponseBody String getStoreMenusInfo(@PathVariable("storeId") String storeId) {
+    @GetMapping("/Review/{storeId}") // storeId에 해당하는 store의 리뷰
+    public @ResponseBody String getReviews(@PathVariable("storeId") String storeId) {
         Store store = crudService.findStoreById(UUID.fromString(storeId));
-        List<JSONObject> results = new ArrayList<>();
+
+        List<JSONObject> reviews = new ArrayList<>();
+        AtomicInteger count = new AtomicInteger(store.getReviews().size()+1);
+        store.getReviews().stream().sorted().forEach(v -> {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            String time = simpleDateFormat.format(v.getDate());
+            JSONObject review = new JSONObject();
+            review.put("idx", count.decrementAndGet());
+            review.put("date", time);
+            review.put("nickname", v.getWriter());
+            review.put("comment", v.getContents());
+            review.put("stars", v.getRating());
+            reviews.add(review);
+        });
+
+        return reviews.toString();
+    }
+
+    @GetMapping("/Menu/{storeId}") // storeId에 해당하는 store의 메뉴
+    public @ResponseBody String getMenus(@PathVariable("storeId") String storeId) {
+        Store store = crudService.findStoreById(UUID.fromString(storeId));
+
+        List<JSONObject> menus = new ArrayList<>();
         store.getMenus().forEach(v -> {
             JSONObject menu = new JSONObject();
             menu.put("menu_name", v.getMenu_name());
             menu.put("menu_id", v.getMenu_id());
             menu.put("price", v.getPrice());
-            results.add(menu);
+            menus.add(menu);
         });
 
-        return results.toString();
+        return menus.toString();
     }
+//
+//    @GetMapping("/StoreMenusInfo/{storeId}") // storeId에 해당하는 store의 메뉴 정보
+//    public @ResponseBody String getStoreMenusInfo(@PathVariable("storeId") String storeId) {
+//        Store store = crudService.findStoreById(UUID.fromString(storeId));
+//        List<JSONObject> results = new ArrayList<>();
+//        store.getMenus().forEach(v -> {
+//            JSONObject menu = new JSONObject();
+//            menu.put("menu_name", v.getMenu_name());
+//            menu.put("menu_id", v.getMenu_id());
+//            menu.put("price", v.getPrice());
+//            results.add(menu);
+//        });
+//
+//        return results.toString();
+//    }
 
     // ==================================== Post =========================================== //
     @PostMapping(value = "/admin/requestStoreAdd")

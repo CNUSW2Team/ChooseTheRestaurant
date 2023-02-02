@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
 import axios from "axios";
-import Reply from "./Reply";
 import Reviews from "./Reviews";
 import styles from "./store.module.css"
 import Menus from "./Menus";
 import SideMenu from "./SideMenu";
+import MoreInfo from "./MoreInfo";
 
 function Store() {
     let {storeId} = useParams();
@@ -22,9 +22,9 @@ function Store() {
     const [store, setData] = useState([]);
 
     const content =
-        [{idx: 0, name: '상세정보', content: <div>상세정보</div>},
-            {idx: 1, name: '메뉴', content: <Menus menus={store.menu}/>},
-            {idx: 2, name: '리뷰', content: <Reviews store={storeId} reviews={store.reviews}/>},
+        [{idx: 0, name: '상세정보', content: <MoreInfo info={store}/>},
+            {idx: 1, name: '메뉴', content: <Menus store={storeId}/>},
+            {idx: 2, name: '리뷰', content: <Reviews store={storeId}/>},
         ];
 
     const useTabs = (initialTabs, allTabs) => {
