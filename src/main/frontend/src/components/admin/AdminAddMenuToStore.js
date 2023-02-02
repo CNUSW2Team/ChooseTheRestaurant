@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import axios from "axios";
 import {Form, Table} from "react-bootstrap";
-import styles from "../table.module.css";
 import {Checkbox} from "antd";
 
 function AdminAddMenuToStore(props) {
@@ -59,21 +58,21 @@ function AdminAddMenuToStore(props) {
 
         return (
             <div>
-                <Table id={"storeTable"} className={styles.table}>
+                <Table id={"storeTable"} className="table">
                     <thead>
                     <tr>
-                        <th className={styles.thead}>선택</th>
-                        <th className={styles.thead}>가게</th>
-                        <th className={styles.thead}>주소</th>
+                        <th className="thead">선택</th>
+                        <th className="thead">가게</th>
+                        <th className="thead">주소</th>
                     </tr>
                     </thead>
-                    <tbody className={styles.body}>
+                    <tbody className="body">
                     {store.map(s => (
                         <tr key={s.store_id}>
-                            <td className={styles.td}><input type={"radio"} name={"selectedStore"} value={s.store_id}
+                            <td className="td"><input type={"radio"} name={"selectedStore"} value={s.store_id}
                                        onChange={e => updateStoreInfo(e, s.store_name)}/></td>
-                            <td className={styles.td}><img width={100} src={`/image/${s.store_id}`} onError={handleNoImg}/><br></br>{s.store_name}</td>
-                            <td className={styles.td}>{s.address}</td>
+                            <td className="td"><img width={100} src={`/image/${s.store_id}`} onError={handleNoImg}/><br></br>{s.store_name}</td>
+                            <td className="td">{s.address}</td>
                         </tr>
                     ))}
                     </tbody>
@@ -109,25 +108,25 @@ function AdminAddMenuToStore(props) {
 
         return (
             <div>
-                <Form className={styles.left}>
+                <Form className="left">
                     <h2>{storeName} 메뉴</h2>
-                    <Table id={"menuTable"} className={styles.table}>
+                    <Table id={"menuTable"} className="table">
                         <thead>
                         <tr>
-                            <th className={styles.thead}>선택</th>
-                            <th className={styles.thead}>메뉴</th>
-                            <th className={styles.thead}>가격</th>
-                            <th className={styles.thead}>이미지</th>
+                            <th className="thead">선택</th>
+                            <th className="thead">메뉴</th>
+                            <th className="thead">가격</th>
+                            <th className="thead">이미지</th>
                         </tr>
                         </thead>
-                        <tbody className={styles.body}>
+                        <tbody className="body">
                         {menu.filter(m => !selected.includes(m.menu_id)).map(m => (
                             <tr key={m.menu_id}>
-                                <td className={styles.td}><Checkbox onChange={(e) => onChangeEach(e, m.menu_id)}
+                                <td className="td"><Checkbox onChange={(e) => onChangeEach(e, m.menu_id)}
                                               checked={selected.includes(m.menu_id)}/></td>
-                                <td className={styles.td}>{m.menu_name}</td>
-                                <td className={styles.td}>{m.price}</td>
-                                <td className={styles.td}><img width={200} height={100} src={`/image/${m.menu_id}`} onError={handleNoImg}/></td>
+                                <td className="td">{m.menu_name}</td>
+                                <td className="td">{m.price}</td>
+                                <td className="td"><img width={200} height={100} src={`/image/${m.menu_id}`} onError={handleNoImg}/></td>
                             </tr>
                         ))}
                         </tbody>
@@ -141,25 +140,25 @@ function AdminAddMenuToStore(props) {
 
         return (
             <div>
-                <Form className={styles.left}>
+                <Form className="left">
                     <h2>선택한 메뉴</h2>
-                    <Table id={"menuTable"} className={styles.table}>
+                    <Table id={"menuTable"} className="table">
                         <thead>
                         <tr>
-                            <th className={styles.thead}>선택</th>
-                            <th className={styles.thead}>메뉴</th>
-                            <th className={styles.thead}>가격</th>
-                            <th className={styles.thead}>이미지</th>
+                            <th className="thead">선택</th>
+                            <th className="thead">메뉴</th>
+                            <th className="thead">가격</th>
+                            <th className="thead">이미지</th>
                         </tr>
                         </thead>
-                        <tbody className={styles.body}>
+                        <tbody className="body">
                         {menu.filter(m => selected.includes(m.menu_id)).map(m => (
                             <tr key={m.menu_id}>
-                                <td className={styles.td}><Checkbox onChange={(e) => onChangeEach(e, m.menu_id)}
+                                <td className="td"><Checkbox onChange={(e) => onChangeEach(e, m.menu_id)}
                                                                     checked={selected.includes(m.menu_id)}/></td>
-                                <td className={styles.td}>{m.menu_name}</td>
-                                <td className={styles.td}>{m.price}</td>
-                                <td className={styles.td}><img width={200} height={100} src={`/image/${m.menu_id}`} onError={handleNoImg}/></td>
+                                <td className="td">{m.menu_name}</td>
+                                <td className="td">{m.price}</td>
+                                <td className="td"><img width={200} height={100} src={`/image/${m.menu_id}`} onError={handleNoImg}/></td>
                             </tr>
                         ))}
                         </tbody>
@@ -173,9 +172,9 @@ function AdminAddMenuToStore(props) {
     function formAddMenu() {
         return (
             <div>
-                <Form className={styles.top}>
+                <Form className="top">
                     <h3>메뉴 추가하기</h3>
-                    <Table className={styles.table}>
+                    <Table className="table">
                         <tbody>
                         <tr>
                             <td>메뉴 이름 :</td>

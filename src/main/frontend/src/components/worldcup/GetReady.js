@@ -46,6 +46,7 @@ function GetReady() {
                 <button value={8} onClick={sendRound}>Round : 8강</button>
             </div>
             <Link to={`/Round/${categoryId}/${numOfRound}`}><button onClick={DneyUndefined}>시작하기</button></Link>
+            <Link to={`/Ranking/${categoryId}`}><button>랭킹페이지</button></Link>
         </div>
         
     );

@@ -8,7 +8,7 @@
 }
 
 .main {
-    width: 100%;
+    width: 100vw;
     display: flex;
     padding: 10px;
     /*margin-right: auto;*/

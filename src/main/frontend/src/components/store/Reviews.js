@@ -43,52 +43,53 @@ function Reviews(props) {
             <div className={styles.wrapper}>
                 <div className={styles.header}>
                     <div style={{fontSize:"25px", padding:"10px", color:"#754878"}}>리뷰</div>
-                    <div style={{display:"flex"}}>
+                    <div className="flex">
                         <input className={styles.input} id={"searchArea"} value={searchBox} onChange={updateSearchBox}
                                placeholder={"검색할 내용을 입력하세요."} size={50}/>
                         <button className={buttonStyle.button} type={"button"} onClick={() => {setSearchBox('')}}>초기화</button>
                     </div>
-
                 </div>
+                <table>
+                    <thead>
+                    <tr>
+                        {/*<th className={styles.th} style={{width:"30px"}}>번호</th>*/}
+                        {/*<th className={styles.th} style={{width:"600px"}}>내용</th>*/}
+                        {/*<th className={styles.th} style={{width:"80px"}}>별점</th>*/}
+                        {/*<th className={styles.th} style={{width:"80px"}}>작성자</th>*/}
+                        {/*<th className={styles.th} style={{width:"100px"}}>날짜</th>*/}
 
-                <div>
-
-                    <table className={styles.table}>
-                        <thead className={styles.thead}>
+                        <th>번호</th>
+                        <th>내용</th>
+                        <th>별점</th>
+                        <th>작성자</th>
+                        <th>날짜</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {data && totalCount === 0 ?
                         <tr>
-                            <th className={styles.th} style={{width:"30px"}}>번호</th>
-                            <th className={styles.th} style={{width:"600px"}}>내용</th>
-                            <th className={styles.th} style={{width:"80px"}}>별점</th>
-                            <th className={styles.th} style={{width:"80px"}}>작성자</th>
-                            <th className={styles.th} style={{width:"100px"}}>날짜</th>
+                            <td colSpan={5}> 검색된 데이터가 없습니다. </td>
                         </tr>
-                        </thead>
-                        <tbody className={styles.tbody}>
-                        {data && totalCount === 0 ?
-                            <tr>
-                                <td className={styles.td} colSpan={5}> 검색된 데이터가 없습니다. </td>
-                            </tr>
-                            : data.slice(items*(page-1), items*(page-1)+items)
-                            .map(v => <tr key={v.idx}>
-                                <td className={styles.td}>{v.idx}</td>
-                                <td className={styles.td} style={{overflow:"hidden"}}>{v.comment}</td>
-                                <td className={styles.td} style={{justifyContent:"space-evenly"}}><Rating readOnly precision={0.5} value={v.stars} size={"small"}/></td>
-                                <td className={styles.td}>{v.nickname}</td>
-                                <td className={styles.td}>{v.date}</td>
-                            </tr>,)}
-                        </tbody>
-                    </table>
-                    <div> <PaginationBox>
-                        <Pagination
-                            activePage={page}
-                            itemsCountPerPage={items}
-                            totalItemsCount={totalCount}
-                            pageRangeDisplayed={5}
-                            onChange={handlePageChange}>
-                        </Pagination>
-                    </PaginationBox> </div>
-                </div>
-                <div> <SmallReply store={props.store} setReview={setReview}/> </div>
+                        : data.slice(items*(page-1), items*(page-1)+items)
+                        .map(v => <tr key={v.idx}>
+                            <td>{v.idx}</td>
+                            <td className={styles.comment}>{v.comment}</td>
+                            <td style={{justifyContent:"space-evenly"}}><Rating readOnly precision={0.5} value={v.stars} size={"small"}/></td>
+                            <td>{v.nickname}</td>
+                            <td>{v.date}</td>
+                        </tr>,)}
+                    </tbody>
+                </table>
+                <PaginationBox>
+                    <Pagination
+                        activePage={page}
+                        itemsCountPerPage={items}
+                        totalItemsCount={totalCount}
+                        pageRangeDisplayed={5}
+                        onChange={handlePageChange}>
+                    </Pagination>
+                </PaginationBox>
+                <SmallReply store={props.store} setReview={setReview}/>
             </div>
         </div>
 );

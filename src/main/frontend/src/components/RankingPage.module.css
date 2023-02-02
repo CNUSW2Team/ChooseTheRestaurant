@@ -20,9 +20,15 @@
     left: 0%
 }
 
-#top3 {
-    width: 100%;
-    height: 100%;
+.top3 {
+    width: 50vw;
     line-height: 100px;
-    overflow: scroll;
+}
+
+.top3 img{
+    width: 10vw;
+}
+
+.top3 img:nth-child(2){
+    width: 20vw;
 }

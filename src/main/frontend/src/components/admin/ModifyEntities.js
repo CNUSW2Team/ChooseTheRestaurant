@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Button, Form, Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import styles from "../table.module.css"
 
 function ModifyEntities() {
     const [category, setCategory] = useState([]);
@@ -70,25 +69,25 @@ function ModifyEntities() {
 
     return (
         <div>
-            <Form className={styles.left}>
+            <Form className="left">
                 <h1> 카테고리 리스트 </h1>
-                <Table className={styles.table}>
-                    <thead className={styles.thead}>
+                <Table className="table">
+                    <thead className="thead">
                     <tr>
-                        <th className={styles.th}>월드컵</th>
-                        <th className={styles.th}>좋아요</th>
-                        <th className={styles.th}>가게 수</th>
-                        <th className={styles.th}>삭제하기</th>
+                        <th className="th">월드컵</th>
+                        <th className="th">좋아요</th>
+                        <th className="th">가게 수</th>
+                        <th className="th">삭제하기</th>
                     </tr>
                     </thead>
-                    <tbody className={styles.body}>
+                    <tbody className="body">
                     {category.map(v =>
                         <tr key={v.category_id}>
-                            <td className={styles.td}><img width={300} src={`/image/${v.category_id}`}/><br></br>
+                            <td className="td"><img width={300} src={`/image/${v.category_id}`}/><br></br>
                                 {v.category_name}</td>
-                            <td className={styles.td}>{v.favorite}</td>
-                            <td className={styles.td}>{v.num_of_stores}개</td>
-                            <td className={styles.td}>
+                            <td className="td">{v.favorite}</td>
+                            <td className="td">{v.num_of_stores}개</td>
+                            <td className="td">
                                 <button onClick={() => RemoveCategory(v.category_id)}>삭제하기</button>
                             </td>
                         </tr>,
@@ -96,23 +95,23 @@ function ModifyEntities() {
                     </tbody>
                 </Table>
             </Form>
-            <Form className={styles.right}>
+            <Form className="right">
                 <h1> 가게 리스트 </h1>
-                <Table className={styles.table}>
-                    <thead className={styles.thead}>
+                <Table className="table">
+                    <thead className="thead">
                     <tr>
-                        <th className={styles.th}>가게</th>
-                        <th className={styles.th}>주소</th>
-                        <th className={styles.th}>삭제하기</th>
+                        <th className="th">가게</th>
+                        <th className="th">주소</th>
+                        <th className="th">삭제하기</th>
                     </tr>
                     </thead>
                     <tbody>
                     {store.map(v =>
                         <tr key={v.store_id}>
-                            <td className={styles.td}><img width={100} src={`/image/${v.store_id}`}/><br></br>
+                            <td className="td"><img width={100} src={`/image/${v.store_id}`}/><br></br>
                                 {v.store_name}</td>
-                            <td className={styles.td}>{v.address}</td>
-                            <td className={styles.td}>
+                            <td className="td">{v.address}</td>
+                            <td className="td">
                                 <button onClick={() => RemoveStore(v.store_id)}>삭제하기</button>
                             </td>
                         </tr>,

@@ -1,5 +1,4 @@
 import axios from "axios";
-import styles from "../table.module.css";
 
 function MoreInfo(props) {
     return (

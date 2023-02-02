@@ -11,43 +11,14 @@
     margin-top: auto;
     margin-bottom: auto;
 }
-
-.table {
-    border: 1px #a39485 solid;
-    font-size: .9em;
-    /*box-shadow: 0 2px 5px rgba(0,0,0,.25);*/
-    width: 100%;
-    border-collapse: collapse;
-    border-radius: 2px;
+.comment{
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 텍스트를 자를 때 원하는 단위 ex) 3줄 */
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    table-layout: fixed;
-}
-
-.th {
-    text-align: center;
-    padding: 10px;
-}
-
-.thead {
-    font-weight: bold;
-    color: #fff;
-    background: #754878;
-}
-
-.td, .th {
-    /*padding: 1em .5em;*/
-    /*vertical-align: middle;*/
-    text-align: center;
-}
-
-.td {
-    padding: 10px 5px;
-    border-bottom: 1px solid rgba(0, 0, 0, .1);
-    background: #fff;
-    height: 50px;
-    /*white-space:nowrap;*/
+    width: 300px;
+    text-overflow: ellipsis;
 }
 
 .header {

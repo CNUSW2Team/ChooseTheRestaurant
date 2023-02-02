@@ -5,7 +5,6 @@ import {Link, useHref} from "react-router-dom";
 import {useEffect, useState} from 'react';
 import axios from "axios";
 import {Form, Table} from "react-bootstrap";
-import styles from "../table.module.css"
 import {createFuzzyMatcher} from "../../util/util";
 
 
@@ -80,31 +79,31 @@ function AddCategory() {
             <h1>월드컵 이름: <input onChange={updateCategoryName}/>
                 <button type={"button"} onClick={() => CreateCategory()}>등록하기</button>
             </h1>
-            <Form className={styles.left}>
+            <Form className="left">
                 <h1>Selected Store Table</h1>
-                <Table className={styles.table}>
-                    <thead className={styles.thead}>
+                <Table className="table">
+                    <thead className="thead">
                     <tr>
-                        <th className={styles.th} width={40}>선택 해제</th>
-                        <th className={styles.th} width={100}>이름</th>
-                        <th className={styles.th}>주소</th>
-                        <th className={styles.th} width={80}>상세정보</th>
+                        <th className="th" width={40}>선택 해제</th>
+                        <th className="th" width={100}>이름</th>
+                        <th className="th">주소</th>
+                        <th className="th" width={80}>상세정보</th>
                     </tr>
                     </thead>
-                    <tbody className={styles.body}>
+                    <tbody className="body">
                     {store.filter(v => select.includes(v.store_id)).map(v =>
                         <tr>
-                            <td className={styles.td}><Checkbox onChange={(e) => onChangeEach(e, v.store_id)}
+                            <td className="td"><Checkbox onChange={(e) => onChangeEach(e, v.store_id)}
                                           checked={select.includes(v.store_id)}/></td>
-                            <td className={styles.td}><img width={100} src={`/image/${v.store_id}`}/><br></br>{v.store_name}</td>
-                            <td className={styles.td}>{v.address}</td>
-                            <td className={styles.td}><Link to={`/Store/${v.store_id}`}> 상세정보 </Link></td>
+                            <td className="td"><img width={100} src={`/image/${v.store_id}`}/><br></br>{v.store_name}</td>
+                            <td className="td">{v.address}</td>
+                            <td className="td"><Link to={`/Store/${v.store_id}`}> 상세정보 </Link></td>
                         </tr>,
                     )}
                     </tbody>
                 </Table>
             </Form>
-            <Form className={styles.right}>
+            <Form className="right">
                 <h1>All Store Table</h1>
                 <div><input id={"searchArea"} value={searchBox} onChange={updateSearchBox}
                             placeholder={"Type 'Name' to Search"} size={50}/>
@@ -112,24 +111,24 @@ function AddCategory() {
                     <br/>
                     전체선택: <Checkbox onChange={onChangeAll} checked={select.length === store.length}/>
                 </div>
-                <Table className={styles.table}>
-                    <thead className={styles.thead}>
+                <Table className="table">
+                    <thead className="thead">
                     <tr>
-                        <th className={styles.th} width={40}>선택</th>
-                        <th className={styles.th} width={100}>이름</th>
-                        <th className={styles.th}>주소</th>
-                        <th className={styles.th} width={80}>상세정보</th>
+                        <th className="th" width={40}>선택</th>
+                        <th className="th" width={100}>이름</th>
+                        <th className="th">주소</th>
+                        <th className="th" width={80}>상세정보</th>
                     </tr>
                     </thead>
-                    <tbody className={styles.body}>
+                    <tbody className="body">
                     {store.filter(v => createFuzzyMatcher(searchBox).test(v.store_name)).filter(v => !select.includes(v.store_id)).map(v =>
                         <tr key={v.store_id}>
-                            <td className={styles.td}><Checkbox onChange={(e) => onChangeEach(e, v.store_id)}
+                            <td className="td"><Checkbox onChange={(e) => onChangeEach(e, v.store_id)}
                                           checked={select.includes(v.store_id)}/></td>
-                            <td className={styles.td}><img width={100} src={`/image/${v.store_id}`}/><br></br>{v.store_name}</td>
-                            <td className={styles.td}>{v.address}</td>
+                            <td className="td"><img width={100} src={`/image/${v.store_id}`}/><br></br>{v.store_name}</td>
+                            <td className="td">{v.address}</td>
                             {/*<td>{v.store_id}</td>*/}
-                            <td className={styles.td}><Link to={`/Store/${v.store_id}`}> 상세정보 </Link></td>
+                            <td className="td"><Link to={`/Store/${v.store_id}`}> 상세정보 </Link></td>
                         </tr>,
                     )}
                     </tbody>
