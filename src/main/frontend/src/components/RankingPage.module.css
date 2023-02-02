@@ -1,34 +1,80 @@
-#firstPlace {
-    width: 300px;
-    z-index: 3;
-    position: static;
-    left: 20%;
-    top: 20%;
+
+.title {
 }
 
-#secondPlace {
-    width: 250px;
-    z-index: 2;
-    position: absolute;
-    left: 20%;
+/*============================= RankingTable wrapper div 관리 ======================================*/
+
+.list {
+    overflow: scroll;
+    height: 70vh;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.list::-webkit-scrollbar {
+    display: none;
 }
 
-#thirdPlace {
-    width: 250px;
-    z-index: 1;
-    position: absolute;
-    left: 0%
-}
+/*============================= 3개의 img wrapper div 관리 ======================================*/
 
 .top3 {
     width: 50vw;
     line-height: 100px;
+    margin-left : 5%;
+    margin-top: 8%;
 }
 
 .top3 img{
     width: 10vw;
 }
 
-.top3 img:nth-child(2){
+/*============================= div 안의 이미지 위치 + 테두리 ======================================*/
+
+.firstPlace{
+    float:left;
+}
+.firstPlace img:nth-child(2) {
     width: 20vw;
+    border: #cdca4d 4px solid;
+    padding:2px;
+}
+
+.secondPlace{
+    float:left;
+    margin-top: 23%;
+}
+.secondPlace img:nth-child(2) {
+        border: #cdcdcd 2px solid;
+        padding:2px;
+}
+
+.thirdPlace{
+    float:left;
+    margin-top: 23%;
+}
+.thirdPlace img:nth-child(2) {
+        border: #cd9362 2px solid;
+        padding:2px;
+}
+
+/*============================= div 안의 텍스트 위치 + 스타일 ======================================*/
+
+.firstPlaceFont{
+    font-size: 30px;
+    font-family: 'Staatliches', cursive;
+    color: #F1C164;
+    line-height: 50%;
+}
+
+.secondPlaceFont{
+    font-size: 25px;
+    font-family: 'Staatliches', cursive;
+    color: #cdcdcd;
+    line-height: 50%;
+}
+
+.thirdPlaceFont{
+    font-size: 23px;
+    font-family: 'Staatliches', cursive;
+    color: #cd9362;
+    line-height: 50%;
 }
