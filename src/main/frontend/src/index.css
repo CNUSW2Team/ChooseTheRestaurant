@@ -1,13 +1,14 @@
 body {
   background-color: #E7DDF7;
-  margin: 0;
+  /*margin: 0;*/
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 70px;
-  box-sizing: border-box;
+  height: 80vh;
+  /*box-sizing: border-box;*/
 }
 
 code {
@@ -34,6 +35,7 @@ table {
   overflow: hidden;
   margin:auto;
   text-align: center;
+  table-layout: fixed;
 }
 
 thead {
@@ -60,17 +62,33 @@ thead {
 
 .main {
   width: 100vw;
-  padding: 10px;
+  padding: 30px;
   /*margin-right: auto;*/
   /*margin-left: auto;*/
   justify-content: center;
   background: white;
   border-radius: 10px;
   align-items: center;
-  height: 70vh;
+  /*height: 70vh;*/
   overflow: hidden;
+  overflow-y: auto;
 }
 
 .flex{
   display: flex;
+}
+
+.main::-webkit-scrollbar {
+  width: 8px;  /* 스크롤바의 너비 */
+}
+
+.main::-webkit-scrollbar-thumb {
+  height: 30%; /* 스크롤바의 길이 */
+  background: #9f9f9f; /* 스크롤바의 색상 */
+
+  border-radius: 10px;
+}
+
+.main::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
 }

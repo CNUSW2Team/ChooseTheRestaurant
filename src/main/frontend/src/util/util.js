@@ -31,10 +31,11 @@ export function ch2pattern(ch) {
         const end = begin + 587;
         return `[${ch}\\u${begin.toString(16)}-\\u${end.toString(16)}]`;
     }
+
     return escapeRegExp(ch);
 }
 
 export function createFuzzyMatcher(input) {
-    const pattern = input.split('').map(ch2pattern).join('.*?');
+    const pattern = input.toLowerCase().split('').map(ch2pattern).join('.*?');
     return new RegExp(pattern);
 }
