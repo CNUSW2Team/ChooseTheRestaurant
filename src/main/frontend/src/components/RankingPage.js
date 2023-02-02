@@ -28,24 +28,24 @@ function RankingPage() {
     return (
         <div className="wrapper">
             <div className="main">
-                <h1><p>{category && category.category_name} 월드컵 순위</p></h1>
+                <h1 className={styles.title}>{category && category.category_name} 월드컵 순위</h1>
                 <div style={{display:"flex"}}>
                     <div className={styles.top3}>
-                        {/*<div style={{float:"left"}}>*/}
-                        {/*    <p>Top2!</p>*/}
-                        {/*    {store[1] && <img src={`/image/${store[1].store_id}`}/>}*/}
-                        {/*</div>*/}
-                        {/*<div style={{float:"left"}}>*/}
-                        {/*    <p>Top1!</p>*/}
-                        {/*    {store[0] && <img src={`/image/${store[0].store_id}`}/>}*/}
-                        {/*</div>*/}
-                        {/*<div style={{float:"left"}}>*/}
-                        {/*    <p>Top3!</p>*/}
-                        {/*    {store[2] && <img src={`/image/${store[2].store_id}`}/>}*/}
-                        {/*</div>*/}
-                        {store[1] && <img src={`/image/${store[1].store_id}`}/>}
-                        {store[0] && <img src={`/image/${store[0].store_id}`}/>}
-                        {store[2] && <img src={`/image/${store[2].store_id}`}/>}
+                        <div className={styles.secondPlace}>
+                            <h1 className={styles.secondPlaceFont}>Top2!</h1>
+                            {store[1] && <img src={`/image/${store[1].store_id}`}/>}
+                        </div>
+                        <div className={styles.firstPlace}>
+                            <h1 className={styles.firstPlaceFont}>Top1!</h1>
+                            {store[0] && <img src={`/image/${store[0].store_id}`}/>}
+                        </div>
+                        <div className={styles.thirdPlace}>
+                            <h1 className={styles.thirdPlaceFont}>Top3!</h1>
+                            {store[2] && <img src={`/image/${store[2].store_id}`}/>}
+                        </div>
+                        {/*{store[1] && <img src={`/image/${store[1].store_id}`}/>}*/}
+                        {/*{store[0] && <img src={`/image/${store[0].store_id}`}/>}*/}
+                        {/*{store[2] && <img src={`/image/${store[2].store_id}`}/>}*/}
                     </div>
                         <RankingTable category={categoryId} setStore={setStore}/>
                     </div>

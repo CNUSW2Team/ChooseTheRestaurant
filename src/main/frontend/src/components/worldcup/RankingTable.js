@@ -1,7 +1,9 @@
+import styles from "../RankingPage.module.css"
 import axios from "axios";
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {Table} from "react-bootstrap";
+
 
 function RankingTable(props) {
     let count = 1;
@@ -19,7 +21,7 @@ function RankingTable(props) {
     }, []);
 
     return (
-        <div>
+        <div className={styles.list}>
             <Table striped bordered hover>
                 <thead>
                 <tr>
