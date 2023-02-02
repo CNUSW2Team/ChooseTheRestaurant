@@ -35,7 +35,7 @@ table {
   overflow: hidden;
   margin:auto;
   text-align: center;
-  table-layout: fixed;
+  /*table-layout: fixed;*/
 }
 
 thead {
