@@ -1,0 +1,16 @@
+.wrapper {
+    display: flex;
+    background: seashell;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.input {
+    border-radius: 2px;
+    outline-color: #8d3893;
+    border: 1px solid #754878;
+    margin: 4px;
+    padding: 4px;
+}

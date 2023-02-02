@@ -22,7 +22,7 @@
     overflow: hidden;
     margin-top: 15px;
     margin-bottom: 15px;
-    table-layout:fixed;
+    table-layout: fixed;
 }
 
 .th {
@@ -44,12 +44,22 @@
 
 .td {
     padding: 10px 5px;
-    border-bottom: 1px solid rgba(0,0,0,.1);
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
     background: #fff;
     height: 50px;
     /*white-space:nowrap;*/
 }
 
-.tbody {
+.header {
+    display: flex;
+    flex-flow: column;
+    width: 50%
+}
 
+.input {
+    border-radius: 2px;
+    outline-color: #8d3893;
+    border: 1px solid #754878;
+    margin: 4px;
+    padding: 4px;
 }

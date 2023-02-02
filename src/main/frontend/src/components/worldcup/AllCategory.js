@@ -4,12 +4,13 @@ import {Link} from "react-router-dom";
 import {createFuzzyMatcher} from "../../util/util";
 import CardItem from "../Cards/Carditem";
 import '../Cards/Cards.css';
+import styles from "./AllCategory.module.css"
+import buttonStyle from "../button.module.css";
 
 function AllCategory() {
     const [category, setData] = useState([]);
     const [searchBox, setSearchBox] = useState('');
     const updateSearchBox = e => setSearchBox(e.target.value);
-    const resetSearchBox = () => setSearchBox('');
 
     useEffect(() => {
         axios.get('/AllCategory')
@@ -22,13 +23,18 @@ function AllCategory() {
             })
     }, []);
 
-    return (<div>
+    return (<div className={styles.wrapper}>
         <div className='cards'>
             <h1>진행할 월드컵을 선택하세요!</h1>
-            <button><Link to={`/AddCategory`}> 월드컵 만들기 </Link></button>
-            <div><input id={"searchArea"} value={searchBox} onChange={updateSearchBox}
-                        placeholder={"Type 'Name' to Search"}/>
-                <button type={"button"} onClick={resetSearchBox}>clear</button>
+
+            <div style={{display:"flex", justifyContent:"space-between"}}>
+                <div>
+                    <input className={styles.input} id={"searchArea"} value={searchBox} onChange={updateSearchBox}
+                           placeholder={"검색할 내용을 입력하세요."} size={50}/>
+                    <button className={buttonStyle.button} type={"button"} onClick={() => {setSearchBox('')}}>초기화</button>
+                </div>
+
+                <button className={buttonStyle.button} type={"button"} onClick={() => {window.location.href = `/AddCategory`}}> 월드컵 만들기 </button>
             </div>
             <div className="cards__container">
                 <div className="cards__wrapper">
