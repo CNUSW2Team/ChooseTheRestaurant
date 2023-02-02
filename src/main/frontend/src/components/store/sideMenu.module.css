@@ -27,7 +27,7 @@
     background: #f7e8e8;
     width: 80%;
     overflow: hidden;
-    height: 30px;
+    height: 20px;
     border-radius: 20px;
     padding: 13px;
     display: flex;
@@ -38,6 +38,7 @@
 
 .item:hover{
     background: #f7d5f7;
+    cursor: pointer;
 }
 
 .itemActive {
@@ -45,15 +46,11 @@
     background: lightcoral;
     width: 80%;
     overflow: hidden;
-    height: 30px;
+    height: 20px;
     border-radius: 20px;
     padding: 13px;
     display: flex;
     flex-flow: column;
     justify-content: center;
     color: white;
-}
-
-.itemActive:hover{
-    background: #f7d5f7;
 }

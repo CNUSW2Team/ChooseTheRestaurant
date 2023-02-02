@@ -1,9 +1,9 @@
 import {Rating} from "@mui/material";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {AiFillMessage} from "react-icons/ai";
 import styles from "./smallreply.module.css"
-import buttonStyle from "./button.module.css"
+import buttonStyle from "../button.module.css"
 
 function SmallReply(props) {
     const [nickName, setNickName] = useState('익명');
@@ -38,9 +38,17 @@ function SmallReply(props) {
             axios.post('http://localhost:8080/requestReviewAdd', fd)
                 .then((response) => {
                     alert(response.data);
+                    alert(rating);
                 })
                 .then(() => {
-                    window.location.href = `/Store/${props.store}`;
+                    axios.get(`/Review/${props.store}`)
+                        .then(response => {
+                            props.setReview(response.data);
+                            console.log(response.data);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
                 })
         }
     }
