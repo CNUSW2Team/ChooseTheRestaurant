@@ -44,6 +44,9 @@ public class Controller {
         headers.setContentType(MediaType.IMAGE_PNG);
 
         File file = new File(IMAGE_FILE_UPLOAD_PATH, image_id + ".jpg");
+        if(!file.exists()){
+            file = new File(IMAGE_FILE_UPLOAD_PATH, "default-image.jpg");
+        }
         Resource resource = new FileSystemResource(file);
 
         return new ResponseEntity<Resource>(resource, headers, HttpStatus.CREATED);

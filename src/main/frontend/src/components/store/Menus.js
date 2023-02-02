@@ -23,21 +23,27 @@ function Menus(props) {
                     <div style={{fontSize: "25px", padding: "10px", color: "#754878"}}>메뉴</div>
                 </div>
                 <div>
-                    <table className={styles.table}>
+                    <table style={{tableLayout:"fixed", width:"600px"}}>
+                        <colgroup>
+                            <col style={{width: "50px"}}/>
+                            <col style={{width: "100px"}}/>
+                            <col style={{width: "200px"}}/>
+                            <col style={{width: "150px"}}/>
+                        </colgroup>
                         <thead className={styles.thead}>
                         <tr>
-                            <th className={styles.th} style={{width: "10px"}}>번호</th>
-                            <th className={styles.th} style={{width: "80px"}}>사진</th>
-                            <th className={styles.th} style={{width: "80px"}}>메뉴</th>
-                            <th className={styles.th} style={{width: "80px"}}>가격</th>
+                            <th>번호</th>
+                            <th>사진</th>
+                            <th>메뉴</th>
+                            <th>가격</th>
                         </tr>
                         </thead>
                         <tbody>
                         {menu && menu.map(v => <tr>
-                            <td className={styles.td}>0</td>
-                            <td className={styles.td}>사진</td>
-                            <td className={styles.td}>{v.menu_name}</td>
-                            <td className={styles.td}>{v.price}</td>
+                            <td >0</td>
+                            <td ><img width={100} src={`/image/${v.menu_id}`} /></td>
+                            <td >{v.menu_name}</td>
+                            <td >{v.price}원</td>
                         </tr>,)}
                         </tbody>
                     </table>

@@ -23,8 +23,8 @@ function AllCategory() {
             })
     }, []);
 
-    return (<div className={styles.wrapper}>
-        <div className='cards'>
+    return (<div className="wrapper">
+        <div className='main'>
             <h1>진행할 월드컵을 선택하세요!</h1>
 
             <div style={{display:"flex", justifyContent:"space-between"}}>
@@ -39,7 +39,7 @@ function AllCategory() {
             <div className="cards__container">
                 <div className="cards__wrapper">
                     <ul className="cards__items">
-                    {category.filter(v => createFuzzyMatcher(searchBox).test(v.category_name)).map(v =>
+                    {category.filter(v => createFuzzyMatcher(searchBox).test(v.category_name.toLowerCase())).map(v =>
                             <CardItem
                                 src={`/image/${v.category_id}`}
                                 name={v.category_name}

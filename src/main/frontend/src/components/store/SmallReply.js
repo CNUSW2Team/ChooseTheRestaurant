@@ -28,6 +28,8 @@ function SmallReply(props) {
             alert('별점을 메겨주세요.');
         } else if (comment.length < 1) {
             alert('리뷰를 적어주세요.');
+        } else if(comment.length > 200){
+            alert('리뷰는 200자 까지만 가능합니다.');
         } else {
             const reviewDto = {
                 store_id: props.store, writer: nickName, contents: comment, rating: rating, password: password
@@ -38,13 +40,15 @@ function SmallReply(props) {
             axios.post('http://localhost:8080/requestReviewAdd', fd)
                 .then((response) => {
                     alert(response.data);
-                    alert(rating);
                 })
                 .then(() => {
                     axios.get(`/Review/${props.store}`)
                         .then(response => {
                             props.setReview(response.data);
                             console.log(response.data);
+                            setComment('');
+
+
                         })
                         .catch(error => {
                             console.log(error);
@@ -56,7 +60,7 @@ function SmallReply(props) {
     return (<div className={styles.wrapper}>
         <div className={styles.inputArea}>
             <AiFillMessage size={25} style={{paddingRight: "5px", color:"#754878"}}/>
-            <textarea onChange={updateComment} className={styles.textarea}
+            <textarea value={comment} onChange={updateComment} className={styles.textarea}
                       placeholder="리뷰를 남겨주세요"></textarea>
         </div>
         <div className={styles.reply}>

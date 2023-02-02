@@ -24,7 +24,7 @@ h1 {
 }
 
 .cards__items {
-    margin-bottom: 24px;
+    /*margin-bottom: 24px;*/
 }
 
 .cards__item {
@@ -99,7 +99,7 @@ h1 {
 }
 
 .cards__item__info {
-    padding: 20px 30px 30px;
+    padding: 0px 30px 30px;
 }
 
 .cards__item__text {
@@ -117,11 +117,11 @@ h1 {
     float: right;
 }
 
-@media only screen and (min-width: 1200px) {
-    .content__blog__container {
-        width: 84%;
-    }
-}
+/*@media only screen and (min-width: 1200px) {*/
+/*    .content__blog__container {*/
+/*        width: 84%;*/
+/*    }*/
+/*}*/
 
 /*@media only screen and (max-width: 1024px) {*/
 /*    .cards__items {*/
@@ -132,6 +132,7 @@ h1 {
 @media only screen and (min-width: 1024px) {
     .cards__items {
         columns: 2;
+
     }
 }
 
@@ -147,7 +148,7 @@ h1 {
     }
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1280px) {
     .cards__item {
         margin-bottom: 2rem;
     }

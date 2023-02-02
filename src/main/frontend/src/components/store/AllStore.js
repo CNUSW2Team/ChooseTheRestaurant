@@ -1,20 +1,39 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Button, Form, Table} from "react-bootstrap";
-import {Link, useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {createFuzzyMatcher} from "../../util/util";
 import {Rating} from "@mui/material";
+import styles from "../worldcup/AllCategory.module.css";
+import buttonStyle from "../button.module.css";
+import Pagination from "react-js-pagination";
+import PaginationBox from "../../util/PaginationBox";
 
 function AllStore() {
-    const [store, setData] = useState([]);
+    const [store, setStore] = useState([]);
     const [searchBox, setSearchBox] = useState('');
+
+    const [page, setPage] = useState(1);
+    const [items, setItems] = useState(3);
+    const [data, setData] = useState(store);
+    useEffect(() => {
+        setTotalCount(data.length);
+        setPage(1);
+    }, [data])
+    const [totalCount, setTotalCount] = useState(data.length - 1);
+    const handlePageChange = (page) => {
+        setPage(page);
+    };
+
     const updateSearchBox = e => setSearchBox(e.target.value);
-    const resetSearchBox = () => setSearchBox('');
+    useEffect(() => {
+        setData(store.filter(v => createFuzzyMatcher(searchBox).test(v.store_name.toLowerCase())));
+    }, [searchBox, store])
 
     useEffect(() => {
         axios.get('/AllStore')
             .then(response => {
-                setData(response.data);
+                setStore(response.data);
                 console.log(response.data);
             })
             .catch(error => {
@@ -28,32 +47,73 @@ function AllStore() {
         navigate(`/Store/${storeId}`);
     }
 
-    return (<Form>
-        <div><input id={"searchArea"} value={searchBox} onChange={updateSearchBox}
-                    placeholder={"Type 'Name' to Search"}/>
-            <button type={"button"} onClick={resetSearchBox}>clear</button>
+    return (<div className="wrapper">
+        <div className="main">
+            <h1> 가게를 선택하세요</h1>
+            <div style={{display:"flex", flexFlow:"column", justifyContent:"space-between", height: "550px"}}>
+                <div>
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <div>
+                            <input className={styles.input} id={"searchArea"} value={searchBox} onChange={updateSearchBox}
+                                   placeholder={"검색할 가게를 입력하세요."} size={50}/>
+                            <button className={buttonStyle.button} type={"button"} onClick={() => {
+                                setSearchBox('')
+                            }}>초기화
+                            </button>
+                        </div>
+                    </div>
+                    <table>
+                        <colgroup>
+                            <col style={{width: "120px"}}/>
+                            <col style={{width: "170px"}}/>
+                            <col style={{width: "500px"}}/>
+                            <col style={{width: "100px"}}/>
+                            <col style={{width: "150px"}}/>
+                        </colgroup>
+                        <thead className="thead">
+                        <tr>
+                            <th>사진</th>
+                            <th>이름</th>
+                            <th>주소</th>
+                            <th>리뷰 개수</th>
+                            <th>평균 별점</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {data && totalCount === 0 ?
+                            <tr>
+                                <td colSpan={5}> 검색된 데이터가 없습니다.</td>
+                            </tr>
+                            : data.slice(items * (page - 1), items * (page - 1) + items)
+                                .map(v => <tr key={v.store_id} onClick={()=>linkToStore(v.store_id)}>
+                                    <td><img width={100} src={`/image/${v.store_id}`}/></td>
+                                    <td>
+                                        {v.store_name}
+                                    </td>
+                                    <td>{v.address}</td>
+                                    <td>{v.numOfReviews}</td>
+                                    <td>
+                                        <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                                            <Rating name="Average_Star" value={v.averageStars} precision={0.5}
+                                                    readOnly/> {v.averageStars}
+                                        </div>
+                                    </td>
+                                </tr>,)}
+                        </tbody>
+                    </table>
+                </div>
+                <PaginationBox>
+                    <Pagination
+                        activePage={page}
+                        itemsCountPerPage={items}
+                        totalItemsCount={totalCount}
+                        pageRangeDisplayed={5}
+                        onChange={handlePageChange}>
+                    </Pagination>
+                </PaginationBox>
+            </div>
         </div>
-        <Table className="table">
-            <thead className="thead">
-            <tr>
-                <th className="th">사진</th>
-                <th className="th">이름</th>
-                <th className="th">주소</th>
-                <th className="th">리뷰 개수</th>
-                <th className="th">평균 별점</th>
-            </tr>
-            </thead>
-            <tbody>
-            {store.filter(v => createFuzzyMatcher(searchBox).test(v.store_name)).map(v => <tr onClick={()=>linkToStore(v.store_id)} style={{cursor:"pointer"}} key={v.store_id}>
-                <td className="td"><img width={100} src={`/image/${v.store_id}`}/></td>
-                <td className="td">{v.store_name}</td>
-                <td className="td">{v.address}</td>
-                <td className="td">{v.numOfReviews}</td>
-                <td className="td"><Rating name="Average_Star" value={v.averageStars} precision={0.5} readOnly/> {v.averageStars}</td>
-            </tr>,)}
-            </tbody>
-        </Table>
-    </Form>);
+    </div>);
 }
 
 export default AllStore;

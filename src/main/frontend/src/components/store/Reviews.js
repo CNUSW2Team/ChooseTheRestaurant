@@ -7,6 +7,7 @@ import {createFuzzyMatcher} from "../../util/util";
 import SmallReply from "./SmallReply";
 import buttonStyle from "../button.module.css";
 import axios from "axios";
+import PaginationBox from "../../util/PaginationBox";
 
 function Reviews(props) {
 
@@ -15,7 +16,7 @@ function Reviews(props) {
         axios.get(`/Review/${props.store}`)
             .then(response => {
                 setReview(response.data);
-                console.log("Review: ",response.data);
+                console.log("Review: ", response.data);
             })
             .catch(error => {
                 console.log(error);
@@ -25,7 +26,7 @@ function Reviews(props) {
     const [searchBox, setSearchBox] = useState('');
     const updateSearchBox = e => setSearchBox(e.target.value);
     useEffect(() => {
-        setData(review.filter(v => createFuzzyMatcher(searchBox).test(v.comment)));
+        setData(review.filter(v => createFuzzyMatcher(searchBox).test(v.comment.toLowerCase())));
     }, [searchBox, review])
     const [page, setPage] = useState(1);
     const [items, setItems] = useState(5);
@@ -35,86 +36,75 @@ function Reviews(props) {
         setTotalCount(data.length);
         setPage(1);
     }, [data])
-    const [totalCount, setTotalCount] = useState(data.length-1);
-    const handlePageChange = (page) => { setPage(page); };
+    const [totalCount, setTotalCount] = useState(data.length - 1);
+    const handlePageChange = (page) => {
+        setPage(page);
+    };
 
     return (
-        <div style={{width:"100%"}}>
+        <div style={{width: "100%"}}>
             <div className={styles.wrapper}>
                 <div className={styles.header}>
-                    <div style={{fontSize:"25px", padding:"10px", color:"#754878"}}>리뷰</div>
-                    <div className="flex">
+                    <div style={{fontSize: "25px", padding: "10px", color: "#754878"}}>리뷰</div>
+                    <div className="flex" style={{marginBottom:"10px"}}>
                         <input className={styles.input} id={"searchArea"} value={searchBox} onChange={updateSearchBox}
                                placeholder={"검색할 내용을 입력하세요."} size={50}/>
-                        <button className={buttonStyle.button} type={"button"} onClick={() => {setSearchBox('')}}>초기화</button>
+                        <button className={buttonStyle.button} type={"button"} onClick={() => {
+                            setSearchBox('')
+                        }}>초기화
+                        </button>
                     </div>
-                </div>
-                <table>
-                    <thead>
-                    <tr>
-                        {/*<th className={styles.th} style={{width:"30px"}}>번호</th>*/}
-                        {/*<th className={styles.th} style={{width:"600px"}}>내용</th>*/}
-                        {/*<th className={styles.th} style={{width:"80px"}}>별점</th>*/}
-                        {/*<th className={styles.th} style={{width:"80px"}}>작성자</th>*/}
-                        {/*<th className={styles.th} style={{width:"100px"}}>날짜</th>*/}
-
-                        <th>번호</th>
-                        <th>내용</th>
-                        <th>별점</th>
-                        <th>작성자</th>
-                        <th>날짜</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {data && totalCount === 0 ?
+                    <table style={{tableLayout: "fixed"}}>
+                        <colgroup>
+                            <col style={{width: "50px"}}/>
+                            <col style={{minWidth: "500px"}}/>
+                            <col style={{width: "100px"}}/>
+                            <col style={{width: "150px"}}/>
+                            <col style={{width: "100px"}}/>
+                        </colgroup>
+                        <thead>
                         <tr>
-                            <td colSpan={5}> 검색된 데이터가 없습니다. </td>
+                            <th>번호</th>
+                            <th>내용</th>
+                            <th>별점</th>
+                            <th>작성자</th>
+                            <th>날짜</th>
                         </tr>
-                        : data.slice(items*(page-1), items*(page-1)+items)
-                        .map(v => <tr key={v.idx}>
-                            <td>{v.idx}</td>
-                            <td className={styles.comment}>{v.comment}</td>
-                            <td style={{justifyContent:"space-evenly"}}><Rating readOnly precision={0.5} value={v.stars} size={"small"}/></td>
-                            <td>{v.nickname}</td>
-                            <td>{v.date}</td>
-                        </tr>,)}
-                    </tbody>
-                </table>
-                <PaginationBox>
-                    <Pagination
-                        activePage={page}
-                        itemsCountPerPage={items}
-                        totalItemsCount={totalCount}
-                        pageRangeDisplayed={5}
-                        onChange={handlePageChange}>
-                    </Pagination>
-                </PaginationBox>
-                <SmallReply store={props.store} setReview={setReview}/>
+                        </thead>
+                        <tbody>
+                        {data && totalCount === 0 ?
+                            <tr>
+                                <td colSpan={5}> 검색된 데이터가 없습니다.</td>
+                            </tr>
+                            : data.slice(items * (page - 1), items * (page - 1) + items)
+                                .map(v => <tr key={v.idx} style={{height: "5px"}}>
+                                    <td>{v.idx}</td>
+                                    <td >
+                                        <div className={styles.comment}> {v.comment} </div>
+                                    </td>
+                                    <td><Rating readOnly precision={0.5} value={v.stars} size={"small"}/></td>
+                                    <td>{v.nickname}</td>
+                                    <td>{v.date}</td>
+                                </tr>,)}
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <PaginationBox>
+                        <Pagination
+                            activePage={page}
+                            itemsCountPerPage={items}
+                            totalItemsCount={totalCount}
+                            pageRangeDisplayed={5}
+                            onChange={handlePageChange}>
+                        </Pagination>
+                    </PaginationBox>
+                    <SmallReply store={props.store} setReview={setReview}/>
+                </div>
+
             </div>
         </div>
-);
+    );
 }
-
-const PaginationBox = styled.div`
-  .pagination { display: flex; justify-content: center; margin-top: 15px;}
-  ul { list-style: none; padding: 0; }
-  ul.pagination li {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    border: 1px solid #e2e2e2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem; 
-  }
-  ul.pagination li:first-child{ border-radius: 5px 0 0 5px; }
-  ul.pagination li:last-child{ border-radius: 0 5px 5px 0; }
-  ul.pagination li a { text-decoration: none; color: #9f9f9f; font-size: 1rem; }
-  ul.pagination li.active a { color: white; }
-  ul.pagination li.active { background-color: #754878; }
-  ul.pagination li a:hover,
-  ul.pagination li a.active { color: #e7ddf7; }
-`
 
 export default Reviews;

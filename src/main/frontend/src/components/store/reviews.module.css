@@ -5,29 +5,30 @@
     border-radius: 10px;
     display: flex;
     flex-flow: column;
-    /*background: #282c34;*/
+
     justify-content: space-between;
-    /*padding-top: 50px;*/
-    margin-top: auto;
-    margin-bottom: auto;
 }
 .comment{
-    white-space: normal;
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* 텍스트를 자를 때 원하는 단위 ex) 3줄 */
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-    overflow: hidden;
-    width: 300px;
+    word-break: break-word;
+    height: 57px;
+    /*max-height: 60px;*/
+    overflow:hidden;
     text-overflow: ellipsis;
+    /*background: bisque;*/
 }
 
 .header {
+    /*background: blue;*/
     display: flex;
     flex-flow: column;
-    width: 50%
+    /*width: 500px;*/
 }
 
 .input {
+    width: 300px;
     border-radius: 2px;
     outline-color: #8d3893;
     border: 1px solid #754878;
