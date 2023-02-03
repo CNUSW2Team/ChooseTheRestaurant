@@ -45,14 +45,15 @@ function Reviews(props) {
         <div style={{width: "100%"}}>
             <div className={styles.wrapper}>
                 <div className={styles.header}>
-                    <div style={{fontSize: "25px", padding: "10px", color: "#754878"}}>리뷰</div>
-                    <div className="flex" style={{marginBottom:"10px"}}>
+                    <div style={{fontSize: "25px",color: "#754878", padding:"13px"}}>리뷰</div>
+                    <div className="flex" style={{marginBottom: "10px"}}>
                         <input className={styles.input} id={"searchArea"} value={searchBox} onChange={updateSearchBox}
                                placeholder={"검색할 내용을 입력하세요."} size={50}/>
                         <button className={buttonStyle.button} type={"button"} onClick={() => {
                             setSearchBox('')
                         }}>초기화
                         </button>
+                </div>
                     </div>
                     <table style={{tableLayout: "fixed"}}>
                         <colgroup>
@@ -79,8 +80,11 @@ function Reviews(props) {
                             : data.slice(items * (page - 1), items * (page - 1) + items)
                                 .map(v => <tr key={v.idx} style={{height: "5px"}}>
                                     <td>{v.idx}</td>
-                                    <td >
-                                        <div className={styles.comment}> {v.comment} </div>
+                                    <td style={{height:"45px"}}>
+                                        <div className={styles.comment}>
+                                            {/*<p>{v.comment}</p>*/}
+                                            {v.comment}
+                                        </div>
                                     </td>
                                     <td><Rating readOnly precision={0.5} value={v.stars} size={"small"}/></td>
                                     <td>{v.nickname}</td>
@@ -88,7 +92,6 @@ function Reviews(props) {
                                 </tr>,)}
                         </tbody>
                     </table>
-                </div>
                 <div>
                     <PaginationBox>
                         <Pagination
