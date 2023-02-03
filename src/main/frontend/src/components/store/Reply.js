@@ -5,7 +5,6 @@ import {AiFillMessage} from "react-icons/ai";
 import {RiLockPasswordFill} from "react-icons/ri";
 import {FaUserCircle} from "react-icons/fa";
 import {Button} from 'react-bootstrap';
-import styles from "./reply.module.css"
 
 function Reply(props) {
     const [nickName, setNickName] = useState('익명');
@@ -46,27 +45,27 @@ function Reply(props) {
         }
     }
 
-    return (<div className={styles.card}>
-        <div className={styles.cardHeader}>
-            <AiFillMessage size={25} style={{paddingRight: "5px"}}/>REPLY
+    return (<div>
+        <div>
+            <AiFillMessage size={25}/>REPLY
         </div>
-        <div className={styles.cardBody}>
-            <ul style={{padding: "0px 0px 0px 10px", marginTop: "8px"}}>
-                <li className={styles.li} style={{marginBottom: "3px"}}>
-                    <div className={styles.form1}>
-                        <div className={styles.user}>
+        <div>
+            <ul>
+                <li>
+                    <div>
+                        <div>
                             <FaUserCircle size={25}/>
-                            <input style={{marginRight:"15px", marginLeft:"10px"}} type="text" placeholder="익명" onChange={updateNickName}/>
+                            <input type="text" placeholder="익명" onChange={updateNickName}/>
                             <RiLockPasswordFill size={25}/>
-                            <input style={{marginRight:"15px", marginLeft:"10px"}} type="password" placeholder="패스워드" onChange={updatePasswords}/>
+                            <input type="password" placeholder="패스워드" onChange={updatePasswords}/>
                         </div>
 
-                        <div className={styles.form2}>
+                        <div>
                             <Rating name="Create_Review" defaultValue={rating} precision={0.5} onChange={updateRating}/>
                             {rating}점
                         </div>
                     </div>
-                    <div className={styles.form3}><textarea onChange={updateComment} className={styles.textarea}
+                    <div><textarea onChange={updateComment}
                                                             placeholder="리뷰를 남겨주세요"></textarea>
                         <Button type="button" onClick={addReview}>
                             리뷰 남기기

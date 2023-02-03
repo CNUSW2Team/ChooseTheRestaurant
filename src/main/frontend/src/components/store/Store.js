@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import Reviews from "./Reviews";
-import styles from "./store.module.css"
 import Menus from "./Menus";
 import SideMenu from "./SideMenu";
 import MoreInfo from "./MoreInfo";

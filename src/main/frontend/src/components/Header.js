@@ -4,11 +4,19 @@ import {Link} from "react-router-dom";
 function Header(props) {
     return (
         <div>
-            <div>
-            <Link to="/">
-                <h1>CNU WorldCup</h1>
-            </Link>
-            </div>
+            <ul>
+                <Link to={`/AllCategory/*`}><li>카테고리</li></Link>
+                <Link to={`/AllCategory/*`}><li>카테고리</li></Link>
+                <Link to={`/AllCategory/*`}><li>카테고리</li></Link>
+                <Link to={`/AllCategory/*`}><li>카테고리</li></Link>
+                <Link to={`/AllCategory/*`}><li>카테고리</li></Link>
+                <Link to={`/AllCategory/*`}><li>카테고리</li></Link>
+            </ul>
+
+            {/*<Link to="/">*/}
+            {/*    <h1>CNU WorldCup</h1>*/}
+            {/*</Link>*/}
+
         </div>
 
 

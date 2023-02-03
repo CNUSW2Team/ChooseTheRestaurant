@@ -1,4 +1,3 @@
-import styles from "../RankingPage.module.css"
 import axios from "axios";
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
@@ -21,7 +20,7 @@ function RankingTable(props) {
     }, []);
 
     return (
-        <div className={styles.list}>
+        <div>
             <Table striped bordered hover>
                 <thead>
                 <tr>

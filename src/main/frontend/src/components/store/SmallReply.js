@@ -2,8 +2,6 @@ import {Rating} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {AiFillMessage} from "react-icons/ai";
-import styles from "./smallreply.module.css"
-import buttonStyle from "../button.module.css"
 
 function SmallReply(props) {
     const [nickName, setNickName] = useState('익명');
@@ -57,18 +55,18 @@ function SmallReply(props) {
         }
     }
 
-    return (<div className={styles.wrapper}>
-        <div className={styles.inputArea}>
+    return (<div>
+        <div>
             <AiFillMessage size={25} style={{paddingRight: "5px", color:"#754878"}}/>
-            <textarea value={comment} onChange={updateComment} className={styles.textarea}
+            <textarea value={comment} onChange={updateComment}
                       placeholder="리뷰를 남겨주세요"></textarea>
         </div>
-        <div className={styles.reply}>
-            <div className={styles.rating}>
+        <div>
+            <div>
                 <Rating precision={0.5} defaultValue={5} onChange={updateRating} size={"small"}/>
-                <div style={{width:"40px", padding:"2px"}}>{rating}점</div>
+                <div>{rating}점</div>
             </div>
-            <button className={buttonStyle.button} type="button" onClick={addReview}>
+            <button type="button" onClick={addReview}>
                 리뷰 남기기
             </button>
         </div>

@@ -4,8 +4,6 @@ import {Button, Form, Table} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {createFuzzyMatcher} from "../../util/util";
 import {Rating} from "@mui/material";
-import styles from "../worldcup/AllCategory.module.css";
-import buttonStyle from "../button.module.css";
 import Pagination from "react-js-pagination";
 import PaginationBox from "../../util/PaginationBox";
 
@@ -50,27 +48,20 @@ function AllStore() {
     return (<div className="wrapper">
         <div className="main">
             <h1> 가게를 선택하세요</h1>
-            <div style={{display:"flex", flexFlow:"column", justifyContent:"space-between", height: "550px"}}>
+            <div>
                 <div>
-                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                    <div>
                         <div>
-                            <input className={styles.input} id={"searchArea"} value={searchBox} onChange={updateSearchBox}
+                            <input id={"searchArea"} value={searchBox} onChange={updateSearchBox}
                                    placeholder={"검색할 가게를 입력하세요."} size={50}/>
-                            <button className={buttonStyle.button} type={"button"} onClick={() => {
+                            <button type={"button"} onClick={() => {
                                 setSearchBox('')
                             }}>초기화
                             </button>
                         </div>
                     </div>
                     <table>
-                        <colgroup>
-                            <col style={{width: "120px"}}/>
-                            <col style={{width: "170px"}}/>
-                            <col style={{width: "500px"}}/>
-                            <col style={{width: "100px"}}/>
-                            <col style={{width: "150px"}}/>
-                        </colgroup>
-                        <thead className="thead">
+                        <thead>
                         <tr>
                             <th>사진</th>
                             <th>이름</th>
@@ -93,7 +84,7 @@ function AllStore() {
                                     <td>{v.address}</td>
                                     <td>{v.numOfReviews}</td>
                                     <td>
-                                        <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                                        <div>
                                             <Rating name="Average_Star" value={v.averageStars} precision={0.5}
                                                     readOnly/> {v.averageStars}
                                         </div>

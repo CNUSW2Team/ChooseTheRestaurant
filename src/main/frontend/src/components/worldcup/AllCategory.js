@@ -3,9 +3,6 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 import {createFuzzyMatcher} from "../../util/util";
 import CardItem from "../Cards/Carditem";
-import '../Cards/Cards.css';
-import styles from "./AllCategory.module.css"
-import buttonStyle from "../button.module.css";
 
 function AllCategory() {
     const [category, setData] = useState([]);
@@ -27,14 +24,14 @@ function AllCategory() {
         <div className='main'>
             <h1>진행할 월드컵을 선택하세요!</h1>
 
-            <div style={{display:"flex", justifyContent:"space-between"}}>
+            <div>
                 <div>
-                    <input className={styles.input} id={"searchArea"} value={searchBox} onChange={updateSearchBox}
+                    <input id={"searchArea"} value={searchBox} onChange={updateSearchBox}
                            placeholder={"검색할 내용을 입력하세요."} size={50}/>
-                    <button className={buttonStyle.button} type={"button"} onClick={() => {setSearchBox('')}}>초기화</button>
+                    <button type={"button"} onClick={() => {setSearchBox('')}}>초기화</button>
                 </div>
 
-                <button className={buttonStyle.button} type={"button"} onClick={() => {window.location.href = `/AddCategory`}}> 월드컵 만들기 </button>
+                <button type={"button"} onClick={() => {window.location.href = `/AddCategory`}}> 월드컵 만들기 </button>
             </div>
             <div className="cards__container">
                 <div className="cards__wrapper">
