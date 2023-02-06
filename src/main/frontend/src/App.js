@@ -25,7 +25,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<HomePage />}></Route>
                     <Route path="/Store/:storeId" element={<Store />}></Route>
-                    <Route path="/AllStore/*" element={<AllStore />}></Route>
+                    <Route path="/AllStore/" element={<AllStore />}></Route>
                     <Route path="/AllCategory/*" element={<AllCategory />}></Route>
                     <Route path="/GetReady/:categoryId" element={<GetReady />}></Route>
                     <Route path="/Round/:categoryId/:numOfRound" element={<Game />}></Route>
