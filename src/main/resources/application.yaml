@@ -5,8 +5,14 @@ spring:
     username: root
     password: sw1234!
   thymeleaf:
-    view-names: "views/*"
-    prefix: "/WEB-INF/"
+    cache: true
+
+#server인증서 적용 설정 -> https
+#server:
+#  port: 443 - https 포트 번호
+#  ssl:
+#    enabled: true
+#    key-alias: 
 
 #spring:
 #  datasource:
