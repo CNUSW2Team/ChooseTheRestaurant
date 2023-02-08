@@ -22,7 +22,6 @@ public class CRUDService {
     private ReviewRepository reviewRepository;
     @Autowired
     private StoreRepository storeRepository;
-    @Autowired
 
     @Transactional
     public List<Store> findAllStores() {

@@ -3,8 +3,11 @@ package com.swacademy.cnuworldcup.servlet;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.swacademy.cnuworldcup.entity.*;
 import com.swacademy.cnuworldcup.entity.Menu;
+import com.swacademy.cnuworldcup.entity.status.Role;
 import com.swacademy.cnuworldcup.service.CRUDService;
+import com.swacademy.cnuworldcup.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,10 +34,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class Controller {
-    @Autowired
-    CRUDService crudService;
+
+    private final CRUDService crudService;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
 //    final String IMAGE_FILE_UPLOAD_PATH = new File("src\\main\\frontend\\public\\img").getAbsolutePath();
     final String IMAGE_FILE_UPLOAD_PATH = new File("src\\main\\resources\\image\\").getAbsolutePath();
@@ -508,5 +514,20 @@ public class Controller {
         } else {
             log.info("Can not find Image {}.jpg", id);
         }
+    }
+
+    // Spring Security Test
+    @GetMapping("/signUp")
+    public String signUp() {
+        Users user = Users.builder()
+                .userId(UUID.randomUUID())
+                .name("test")
+                .password(passwordEncoder.encode("test123"))
+                .role(Role.ROLE_USER)
+                .build();
+
+        userService.saveUser(user);
+
+        return "redirect:/me";
     }
 }
