@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Button, Form, Table} from "react-bootstrap";
 import {Link, useParams} from "react-router-dom";
+import StartButton from "../StartButton";
 
 function WinnerResult(){
     let { categoryId } = useParams();
@@ -47,18 +48,20 @@ function WinnerResult(){
                 <p>{`별점 ${StoreInfo["stars"]}`}</p>
                 <form onSubmit={Send}>
                     <h4 className='inlineBlock'>{`내가 남기는 ${StoreInfo["store_name"]} 간단 코멘트`}</h4>
-                    <input onChange={updateNewComment} value={NewComment} placeholder="write your comment"/> 
+                    <input onChange={updateNewComment} value={NewComment} placeholder="write your comment"/>
                     <Button>sfsfds</Button>
                 </form>
-            </div> 
+            </div>
             <div className='button-wrap'>
                 <Link to={`/Ranking/${categoryId}`}><button>랭킹페이지로 가기</button></Link>
                 <Link to={`/GetReady/${categoryId}`}><button>다시하기</button></Link>
-                <Link to={`/AllCategory/*`}><button>다른 월드컵 해보기</button></Link>
+                <Link to={`/AllCategory`}><button>다른 월드컵 해보기</button></Link>
                 <button>결과 공유하기</button>
             </div>
         </>
-        
+        // <div>
+        //     <StartButton value={"시작하기"} category_name={v.category_name} category_id={v.category_id} />
+        // </div>
     )     
 }
 
