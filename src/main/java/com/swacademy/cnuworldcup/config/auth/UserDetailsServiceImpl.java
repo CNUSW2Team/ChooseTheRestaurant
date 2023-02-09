@@ -12,14 +12,14 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class CustomUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserService userService;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Users> user = userService.findByUserName(username);
+        Optional<Users> user = userService.findByUsername(username);
         if(user.isEmpty()) throw new UsernameNotFoundException(username);
-        return new CustomUserDetails(user.get());
+        return user.get();
     }
 
 }

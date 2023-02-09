@@ -521,7 +521,7 @@ public class Controller {
     public String signUp() {
         Users user = Users.builder()
                 .userId(UUID.randomUUID())
-                .name("test")
+                .username("test")
                 .password(passwordEncoder.encode("test123"))
                 .role(Role.ROLE_USER)
                 .build();

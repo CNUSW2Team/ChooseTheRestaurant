@@ -4,3 +4,9 @@ spring:
     url: jdbc:mysql://34.64.229.60:3306/worldcup_mgmt
     username: root
     password: sw1234!
+
+jwt:
+  header: token
+  issuer: CNUWorldCup
+  client-secret: EENY5W0eegTf1naQB2eDeyCLl5kRS2b8xa5c4qLdS0hmVjtbvo8tOyhPMcAmtPuQ
+  expiry-seconds: 60
