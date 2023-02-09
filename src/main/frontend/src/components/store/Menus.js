@@ -1,4 +1,3 @@
-import styles from "./menus.module.css"
 import axios from "axios";
 import React, {useEffect, useState} from "react";
 
@@ -17,20 +16,14 @@ function Menus(props) {
     }, []);
 
     return (
-        <div style={{width: "100%"}}>
-            <div className={styles.wrapper}>
-                <div className={styles.header}>
-                    <div style={{fontSize: "25px", padding: "10px", color: "#754878"}}>메뉴</div>
+        <div>
+            <div>
+                <div>
+                    <div>메뉴</div>
                 </div>
                 <div>
-                    <table style={{tableLayout:"fixed", width:"600px"}}>
-                        <colgroup>
-                            <col style={{width: "50px"}}/>
-                            <col style={{width: "100px"}}/>
-                            <col style={{width: "200px"}}/>
-                            <col style={{width: "150px"}}/>
-                        </colgroup>
-                        <thead className={styles.thead}>
+                    <table>
+                        <thead>
                         <tr>
                             <th>번호</th>
                             <th>사진</th>

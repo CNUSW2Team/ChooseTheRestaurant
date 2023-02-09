@@ -1,17 +1,26 @@
 import React from 'react';
-import {Link} from "react-router-dom";
 
-function Header(props) {
+function Header() {
     return (
-        <div>
-            <div style={{width:"250px", textAlign: "center", margin:"0 auto"}}>
-            <Link to="/">
-                <h1>CNU WorldCup</h1>
-            </Link>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light mb-auto sticky-top">
+            <div className="container-fluid">
+                <a className="navbar-brand" href="/">CNU-WorldCup</a>
+                <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="nav-item">
+                            <a className="nav-link" aria-current="page" href="/AllCategory">Category</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/AllStore">Stores</a>
+                        </li>
+                    </ul>
+                    <form className="d-flex">
+                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                        <button className="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
             </div>
-        </div>
-
-
+        </nav>
     );
 }
 

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Button, Form, Table} from "react-bootstrap";
 import {Link, useParams} from "react-router-dom";
+import {Container, BeutyButton} from './style';
 
 function WinnerResult(){
     let { categoryId } = useParams();
@@ -30,14 +31,14 @@ function WinnerResult(){
     function Send(e){
         e.preventDefault();
         console.log(NewComment);
-        axios.post('http://localhost:8080/admin/requestStoreAdd',
+        axios.post('/admin/requestStoreAdd',
             {NewComment:NewComment})
         setComment('')
     }
         
     
     return (
-        <>
+        <Container>
             <div className="inlineBlock">
                 <p>{StoreInfo["comments"]}</p>
                 <img width={500} src={`/img/${storeId}.jpg`} />
@@ -48,7 +49,7 @@ function WinnerResult(){
                 <form onSubmit={Send}>
                     <h4 className='inlineBlock'>{`내가 남기는 ${StoreInfo["store_name"]} 간단 코멘트`}</h4>
                     <input onChange={updateNewComment} value={NewComment} placeholder="write your comment"/> 
-                    <Button>sfsfds</Button>
+                    <button type="submit">멘트</button>
                 </form>
             </div> 
             <div className='button-wrap'>
@@ -57,7 +58,7 @@ function WinnerResult(){
                 <Link to={`/AllCategory/*`}><button>다른 월드컵 해보기</button></Link>
                 <button>결과 공유하기</button>
             </div>
-        </>
+        </Container>
         
     )     
 }

@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import Reviews from "./Reviews";
-import styles from "./store.module.css"
 import Menus from "./Menus";
 import SideMenu from "./SideMenu";
 import MoreInfo from "./MoreInfo";
@@ -36,10 +35,10 @@ function Store() {
     const {contentItem, contentChange} = useTabs(0, content);
 
     return (<div>
-            <div className={styles.wrapper}>
-                <SideMenu store_name={store.store_name} onClickHandler={contentChange} contentItem={contentItem}/>
-                <div className={styles.main}>
-                    {contentItem.content}
+            <div className="wrapper">
+                <div className="main flex info">
+                    <SideMenu store_name={store.store_name} onClickHandler={contentChange} contentItem={contentItem}/>
+                    <div style={{width:"85vw"}}>{contentItem.content}</div>
                 </div>
             </div>
         </div>

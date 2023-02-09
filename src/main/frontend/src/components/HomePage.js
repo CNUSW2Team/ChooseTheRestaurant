@@ -1,25 +1,17 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+
 function HomePage() {
     return (
-        <div style={{textAlign: "center", paddingTop:"50px", display:"flex", flexFlow:"column", "justify-content":"space-between"}}>
-            <div style={{padding:"50px"}}><img src={"img/cnu-worldcup-logo.png"} width={350}/></div>
-            <div style={{margin:"10px"}}>
-            <Link to="/AllCategory">
-                    충대맛집월드컵 시작하기
-            </Link>
-            </div>
-            <div style={{margin:"10px"}}>
-            <Link to="/AllStore">
-                    전체 가게 확인하기
-            </Link>
-            </div>
-            <div style={{margin:"10px"}}>
-                    <Link to={`/admin`}>
-                        관리자 페이지
-                    </Link>
-            </div>
-
+        <div className="w-50 h-100 p-3 mx-auto">
+            <main className="position-absolute top-50 start-50 translate-middle text-center">
+                <h1>Start page.</h1>
+                <p className="lead">Cover is a one-page template for building simple and beautiful home pages. Download,
+                    edit the text, and add your own fullscreen background photo to make it your own.</p>
+                <p className="lead">
+                    <a href="/AllCategory" className="btn btn-lg btn-secondary fw-bold border-white ">충대맛집월드컵 시작하기</a>
+                </p>
+            </main>
         </div>
     );
 }
