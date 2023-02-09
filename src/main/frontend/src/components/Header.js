@@ -8,10 +8,10 @@ function Header() {
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link" aria-current="page" href="/AllCategory">Category</a>
+                            <a className="nav-link" aria-current="page" href="/AllCategory">카테고리</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/AllStore">Stores</a>
+                            <a className="nav-link" href="/AllStore">가게</a>
                         </li>
                     </ul>
                     <form className="d-flex">

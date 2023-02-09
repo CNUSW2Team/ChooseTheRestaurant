@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Button, Form, Table} from "react-bootstrap";
 import {Link, useParams} from "react-router-dom";
+import StartButton from "../StartButton";
 import {Container, BeutyButton} from './style';
 
 function WinnerResult(){
@@ -38,7 +39,7 @@ function WinnerResult(){
         
     
     return (
-        <Container>
+        <>
             <div className="inlineBlock">
                 <p>{StoreInfo["comments"]}</p>
                 <img width={500} src={`/img/${storeId}.jpg`} />
@@ -51,15 +52,18 @@ function WinnerResult(){
                     <input onChange={updateNewComment} value={NewComment} placeholder="write your comment"/> 
                     <button type="submit">멘트</button>
                 </form>
-            </div> 
+            </div>
             <div className='button-wrap'>
                 <Link to={`/Ranking/${categoryId}`}><button>랭킹페이지로 가기</button></Link>
                 <Link to={`/GetReady/${categoryId}`}><button>다시하기</button></Link>
-                <Link to={`/AllCategory/*`}><button>다른 월드컵 해보기</button></Link>
+                <Link to={`/AllCategory`}><button>다른 월드컵 해보기</button></Link>
                 <button>결과 공유하기</button>
             </div>
-        </Container>
-        
+        <div>
+            <StartButton value={"시작하기"} category_name={v.category_name} category_id={v.category_id} />
+        </div>
+
+        </>
     )     
 }
 

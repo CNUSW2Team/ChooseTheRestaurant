@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import axios from "axios";
-import {Link} from "react-router-dom";
 import {createFuzzyMatcher} from "../../util/util";
-import CardItem from "../Cards/Carditem";
+import StartButton from "../StartButton";
 
 function AllCategory() {
     const [category, setData] = useState([]);
@@ -20,38 +19,6 @@ function AllCategory() {
             })
     }, []);
 
-    // return (<div className="wrapper">
-    //     <div className='main'>
-    //         <h1>진행할 월드컵을 선택하세요!</h1>
-    //
-    //         <div>
-    //             <div>
-    //                 <input id={"searchArea"} value={searchBox} onChange={updateSearchBox}
-    //                        placeholder={"검색할 내용을 입력하세요."} size={50}/>
-    //                 <button type={"button"} onClick={() => {setSearchBox('')}}>초기화</button>
-    //             </div>
-    //
-    //             <button type={"button"} onClick={() => {window.location.href = `/AddCategory`}}> 월드컵 만들기 </button>
-    //         </div>
-    //         <div className="cards__container">
-    //             <div className="cards__wrapper">
-    //                 <ul className="cards__items">
-    //                 {category.filter(v => createFuzzyMatcher(searchBox).test(v.category_name.toLowerCase())).map(v =>
-    //                         <CardItem
-    //                             src={`/image/${v.category_id}`}
-    //                             name={v.category_name}
-    //                             favorite={`Favorite: ${v.favorite}`}
-    //                             path={`/GetReady/${v.category_id}`}
-    //                             num={v.num_of_stores}
-    //                         />
-    //                     ,)}</ul>
-    //             </div>
-    {/*        </div>*/
-    }
-    {/*    </div>*/
-    }
-    {/*</div>);*/
-    }
 
     return (
         <div className="flex-column p-5">
@@ -71,7 +38,7 @@ function AllCategory() {
 
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5 g-4 w-100 m-auto">
                 {category.filter(v => createFuzzyMatcher(searchBox).test(v.category_name.toLowerCase())).map(v =>
-                    <div className="col">
+                    <div className="col" key={v.category_id}>
                         <div className="card shadow">
                             <img src={`/image/${v.category_id}`} className="card-img-top " alt="..."/>
                             <p className="card-text text-end">
@@ -80,8 +47,10 @@ function AllCategory() {
                             <div className="card-body">
                                 <h5 className="card-title fw-bold">{v.category_name}</h5>
                                 <div className="btn-group btn-group-sm">
-                                    <button type="button" className="btn btn-outline-primary" onClick={() => window.location.href = `/Ranking/${v.category_id}`}>랭킹보기</button>
-                                    <button type="button" className="btn btn-outline-primary" onClick={() => window.location.href = `/GetReady/${v.category_id}`}>시작하기</button>
+                                    <StartButton value={"시작하기"} category_name={v.category_name} category_id={v.category_id}/>
+                                    <button type="button" className="btn btn-outline-primary"
+                                            onClick={() => window.location.href = `/Ranking/${v.category_id}`}>랭킹보기
+                                    </button>
                                 </div>
                                 <p className="card-text text-end">
                                     등록된 가게: {v.num_of_stores}

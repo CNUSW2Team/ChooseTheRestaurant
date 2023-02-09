@@ -68,7 +68,7 @@ public class Controller {
         return results.toString();
     }
 
-    @GetMapping("/AllCategory/{categoryId}")
+    @GetMapping("/Category/{categoryId}")
     public @ResponseBody String getOneCategory(@PathVariable("categoryId") String categoryId) {
         JSONObject results = new JSONObject();
         Category category = crudService.findCategoryById(UUID.fromString(categoryId));
