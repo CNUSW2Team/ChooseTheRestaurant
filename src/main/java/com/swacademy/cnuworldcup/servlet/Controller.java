@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 @Slf4j
 @RestController
@@ -445,6 +446,16 @@ public class Controller {
         crudService.removeReview(removeReview);
 
         return "리뷰 삭제 완료";
+    }
+
+    @PostMapping(value = "/winCount/{categoryId}/{storeId}")
+    public String winnerCountIncrease(@PathVariable("categoryId") String categoryId, @PathVariable("storeId") String storeId) {
+        Relation relations = crudService.findCategoryById(UUID.fromString(categoryId)).getRelations().stream().filter(v -> v.getStore().getStore_id().toString().equals(storeId)).findFirst().get();
+        int winCount = relations.getWin_count();
+        relations.setWin_count(winCount+1);
+
+        crudService.saveRelation(relations);
+        return "승리 처리 완료.";
     }
 
     // 가게, 메뉴, 카테고리 등 이미지있는 엔티티 삭제시 호출할 것!
