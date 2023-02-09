@@ -3,9 +3,10 @@ import axios from "axios";
 import {useParams} from "react-router-dom";
 import useDidMountEffect from '../useDidMountEffect'
 
-function Game(props) {
-    let {categoryId} = useParams();
-    let {numOfRound} = useParams();
+
+function Game() {
+    const {categoryId} = useParams();
+    const {numOfRound} = useParams();
 
     const [items, setItem] = useState([]); // 월드컵 아이템 리스트
     const [winners, setWinner] = useState([]);
@@ -26,6 +27,7 @@ function Game(props) {
         if (items.length === 0 && winners.length === 1) {
             window.location.href = `/Result/${categoryId}/${winners[0]["store_id"]}`;
             alert("게임종료");
+            return ;
         }
         if (winners.length === round / 2) {
             console.log("test");

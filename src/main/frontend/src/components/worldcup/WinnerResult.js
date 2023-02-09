@@ -3,6 +3,7 @@ import axios from "axios";
 import {Button, Form, Table} from "react-bootstrap";
 import {Link, useParams} from "react-router-dom";
 import StartButton from "../StartButton";
+import {Container, BeutyButton} from './style';
 
 function WinnerResult(){
     let { categoryId } = useParams();
@@ -31,7 +32,7 @@ function WinnerResult(){
     function Send(e){
         e.preventDefault();
         console.log(NewComment);
-        axios.post('http://localhost:8080/admin/requestStoreAdd',
+        axios.post('/admin/requestStoreAdd',
             {NewComment:NewComment})
         setComment('')
     }
@@ -48,8 +49,8 @@ function WinnerResult(){
                 <p>{`별점 ${StoreInfo["stars"]}`}</p>
                 <form onSubmit={Send}>
                     <h4 className='inlineBlock'>{`내가 남기는 ${StoreInfo["store_name"]} 간단 코멘트`}</h4>
-                    <input onChange={updateNewComment} value={NewComment} placeholder="write your comment"/>
-                    <Button>sfsfds</Button>
+                    <input onChange={updateNewComment} value={NewComment} placeholder="write your comment"/> 
+                    <button type="submit">멘트</button>
                 </form>
             </div>
             <div className='button-wrap'>
@@ -58,10 +59,11 @@ function WinnerResult(){
                 <Link to={`/AllCategory`}><button>다른 월드컵 해보기</button></Link>
                 <button>결과 공유하기</button>
             </div>
+        <div>
+            <StartButton value={"시작하기"} category_name={v.category_name} category_id={v.category_id} />
+        </div>
+
         </>
-        // <div>
-        //     <StartButton value={"시작하기"} category_name={v.category_name} category_id={v.category_id} />
-        // </div>
     )     
 }
 
