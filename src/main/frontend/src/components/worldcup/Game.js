@@ -3,7 +3,7 @@ import axios from "axios";
 import {useParams} from "react-router-dom";
 import useDidMountEffect from '../useDidMountEffect'
 
-function Game(props) {
+function Game() {
     let {categoryId} = useParams();
     let {numOfRound} = useParams();
 
@@ -25,7 +25,11 @@ function Game(props) {
     useDidMountEffect(() => {
         if (items.length === 0 && winners.length === 1) {
             window.location.href = `/Result/${categoryId}/${winners[0]["store_id"]}`;
-            alert("게임종료");
+            axios.post(`/winCount/${categoryId}/${winners[0].store_id}`)
+                .catch(error => {
+                    console.log(error);
+                })
+            return;
         }
         if (winners.length === round / 2) {
             console.log("test");

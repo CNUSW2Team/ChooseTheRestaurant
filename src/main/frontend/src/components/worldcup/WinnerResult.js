@@ -20,13 +20,13 @@ function WinnerResult(){
                 })
         },
         []);
-    
+
     // 내가 남기는 간단 코멘트
     const [NewComment, setComment] = useState('');
-    
+
     const updateNewComment = e => {
         setComment(e.target.value)
-    } 
+    }
 
     function Send(e){
         e.preventDefault();
@@ -35,13 +35,13 @@ function WinnerResult(){
             {NewComment:NewComment})
         setComment('')
     }
-        
-    
+
+
     return (
         <>
             <div className="inlineBlock">
                 <p>{StoreInfo["comments"]}</p>
-                <img width={500} src={`/img/${storeId}.jpg`} />
+                <img width={500} src={`/image/${storeId}`} />
             </div>
             <div className="inlineBlock">
                 <p>{`${StoreInfo["store_name"]}는 전체 랭킹에서 ${StoreInfo["rank"]}등을 차지했어요!`}</p>
@@ -53,16 +53,15 @@ function WinnerResult(){
                 </form>
             </div>
             <div className='button-wrap'>
-                <Link to={`/Ranking/${categoryId}`}><button>랭킹페이지로 가기</button></Link>
-                <Link to={`/GetReady/${categoryId}`}><button>다시하기</button></Link>
-                <Link to={`/AllCategory`}><button>다른 월드컵 해보기</button></Link>
-                <button>결과 공유하기</button>
+                <button className="btn btn-outline-primary" onClick={() => window.location.href =`/Ranking/${categoryId}`}> 랭킹페이지로 가기</button>
+                <StartButton value={"다시하기"} category_name={""} category_id={categoryId} />
+                <button className="btn btn-outline-primary" onClick={() => window.location.href =`/AllCategory`}> 다른월드컵 해보기</button>
             </div>
+        <div>
+
+        </div>
         </>
-        // <div>
-        //     <StartButton value={"시작하기"} category_name={v.category_name} category_id={v.category_id} />
-        // </div>
-    )     
+    )
 }
 
 export default WinnerResult;
