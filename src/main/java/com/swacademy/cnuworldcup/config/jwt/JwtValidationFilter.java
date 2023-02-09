@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +21,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class JwtValidationFilter extends OncePerRequestFilter {
@@ -33,9 +35,11 @@ public class JwtValidationFilter extends OncePerRequestFilter {
                 String accessToken = header.substring(7);
                 // secret, issuer 설정 필요
                 Algorithm algorithm = Algorithm.HMAC256("secret");
-                JWTVerifier verifier = JWT.require(algorithm).withIssuer("issuer").build();
-                DecodedJWT jwt = verifier.verify(accessToken);
-                String username = jwt.getSubject();
+                JWTVerifier verifier = JWT.require(algorithm)
+                        .withIssuer("issuer")
+                        .build();
+                DecodedJWT decodedJWT = verifier.verify(accessToken);
+                String username = decodedJWT.getSubject();
 
                 Users user = (Users) userDetailsService.loadUserByUsername(username);
                 Authentication authenticationToken = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
