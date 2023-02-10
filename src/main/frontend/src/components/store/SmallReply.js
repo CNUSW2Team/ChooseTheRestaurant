@@ -55,18 +55,18 @@ function SmallReply(props) {
         }
     }
 
-    return (<div>
-        <div>
-            <AiFillMessage size={25} style={{paddingRight: "5px", color:"#754878"}}/>
-            <textarea value={comment} onChange={updateComment}
+    return (<div className="">
+        <div className="d-flex m-3">
+            <AiFillMessage className="" size={25}/>
+            <textarea className="form-control" value={comment} onChange={updateComment}
                       placeholder="리뷰를 남겨주세요"></textarea>
         </div>
-        <div>
-            <div>
+        <div className="float-end">
+            <div className="d-flex">
                 <Rating precision={0.5} defaultValue={5} onChange={updateRating} size={"small"}/>
                 <div>{rating}점</div>
             </div>
-            <button type="button" onClick={addReview}>
+            <button className="btn btn-outline-primary" type="button" onClick={addReview}>
                 리뷰 남기기
             </button>
         </div>

@@ -20,33 +20,31 @@ function RankingTable(props) {
     }, []);
 
     return (
-        <div>
-            <Table striped bordered hover>
-                <thead>
+        <div className="w-50 table-responsive m-3">
+            <table className="table table-hover table-sm text-center">
+                <caption className="caption caption-top">클릭시 상세정보를 확인 할 수 있습니다.</caption>
+                <thead className="table-dark">
                 <tr>
                     <th >순위</th>
-                    <th >사진</th>
+                    {/*<th >사진</th>*/}
                     <th >이름</th>
                     <th >별점</th>
                     <th >승리</th>
-                    <th >상세정보</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 {ranking.map(v =>
-                    <tr key={v.store_id}>
+                    <tr key={v.store_id} onClick={() => window.location.href=`/Store/${v.store_id}`}>
                         <td>{count++}</td>
-                        <td><img width={100} src={`/image/${v.store_id}`} /></td>
-
+                        {/*<td><img width={100} src={`/image/${v.store_id}`} /></td>*/}
                         <td>{v.store_name}</td>
-                        <td>{v.stars}</td>
+                        <td>{Math.round(v.stars * 100)/100}</td>
                         <td>{v.winningCount}</td>
-                        <td><Link to={`/Store/${v.store_id}`}> 상세정보 </Link></td>
                     </tr>
                 )}
                 </tbody>
-            </Table>
+            </table>
         </div>
     );
 }

@@ -72,22 +72,11 @@ function Game() {
             </div>
             <div className="card w-auto m-5 overflow-hidden"  style={{maxWidth:"35%", maxHeight:"70vh"}} onClick={() => WinnerChoice(items[1])}>
                 <img src={`/image/${items[1] && items[1]["store_id"]}`} className="" alt="..."/>
-                <div className="carousel-caption fs-4">
+                <div className="carousel-caption fs-3">
                     <p>{items[1] && items[1]["store_name"]}</p>
                 </div>
                 <a href="#" className="stretched-link"></a>
             </div>
-
-            {/*<div>*/}
-            {/*    <p>{items[0] && items[0]["store_name"]}</p>*/}
-            {/*    <img width={300} value={JSON.stringify(items[0])} onClick={e => WinnerChoice(e)}*/}
-            {/*         src={`/image/${items[0] && items[0]["store_id"]}`}/>*/}
-            {/*</div>*/}
-            {/*<div>*/}
-            {/*    <p>{items[1] && items[1]["store_name"]}</p>*/}
-            {/*    <img width={300} value={JSON.stringify(items[1])} onClick={e => WinnerChoice(e)}*/}
-            {/*         src={`/image/${items[1] && items[1]["store_id"]}`}/>*/}
-            {/*</div>*/}
         </div>
     </div>);
 }
