@@ -39,7 +39,7 @@ function AllCategory() {
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5 g-4 w-100 m-auto">
                 {category.filter(v => createFuzzyMatcher(searchBox).test(v.category_name.toLowerCase())).map(v =>
                     <div className="col" key={v.category_id}>
-                        <div className="card shadow ">
+                        <div className="card shadow">
                             <img src={`/image/${v.category_id}`} className="card-img-top " alt="..."/>
                             <p className="text-end bg-danger text-white p-1">
                                 Favorite: {v.favorite}
@@ -47,7 +47,7 @@ function AllCategory() {
                             <div className="p-3 d-flex flex-column align-items-end">
                                 <h5 className="card-title fw-bold text-nowrap text-truncate w-100">{v.category_name}</h5>
                                 <div className="btn-group btn-group-sm my-3">
-                                    <StartButton value={"시작하기"} category_name={v.category_name} category_id={v.category_id}/>
+                                    <StartButton value={"시작하기"} category_name={v.category_name} category_id={v.category_id} num_of_stores={v.num_of_stores}/>
                                     <button type="button" className="btn btn-outline-primary"
                                             onClick={() => window.location.href = `/Ranking/${v.category_id}`}>랭킹보기
                                     </button>

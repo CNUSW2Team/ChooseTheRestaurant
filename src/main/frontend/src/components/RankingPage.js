@@ -13,8 +13,7 @@ function RankingPage() {
     let {categoryId} = useParams();
 
     useEffect(() => {
-
-            axios.get(`/AllCategory/${categoryId}`)
+            axios.get(`/Category/${categoryId}`)
                 .then(response => {
                     setCategory(response.data);
                     console.log(response.data);
@@ -27,9 +26,11 @@ function RankingPage() {
 
     return (
         <div className="p-4">
-            <h5>{category && category.category_name} 월드컵 순위</h5>
-            <div className="d-flex">
+            <h5 className="mb-4">[{category && category.category_name}] 순위</h5>
+            <div className="d-flex flex-column align-items-center">
+                <h4 className="mb-4 border-bottom w-100 text-center p-4"> Top3! </h4>
                 <Top3 store={store}/>
+                <h4 className="m-4 border-bottom w-100 text-center p-4"> 전체결과 </h4>
                 <RankingTable category={categoryId} setStore={setStore}/>
             </div>
         </div>

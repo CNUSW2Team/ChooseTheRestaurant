@@ -24,7 +24,7 @@ function Game() {
 
     useDidMountEffect(() => {
         if (items.length === 0 && winners.length === 1) {
-            window.location.href = `/Result/${categoryId}/${winners[0]["store_id"]}`;
+            window.location.replace( `/Result/${categoryId}/${winners[0]["store_id"]}`);
             axios.post(`/winCount/${categoryId}/${winners[0].store_id}`)
                 .catch(error => {
                     console.log(error);
