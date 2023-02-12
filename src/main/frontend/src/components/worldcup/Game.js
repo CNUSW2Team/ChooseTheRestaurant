@@ -62,7 +62,7 @@ function Game() {
                 ({count}/{round/2})
             </h1>
         </div>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center align-items-center">
             <div className="card w-auto m-5 overflow-hidden" style={{maxWidth:"35%", maxHeight:"70vh"}}  onClick={() => WinnerChoice(items[0])}>
                 <img src={`/image/${items[0] && items[0]["store_id"]}`} alt="..." />
                 <div className="carousel-caption fs-3">
@@ -70,6 +70,7 @@ function Game() {
                 </div>
                 <a href="#" className="stretched-link"></a>
             </div>
+            <h3>vs</h3>
             <div className="card w-auto m-5 overflow-hidden"  style={{maxWidth:"35%", maxHeight:"70vh"}} onClick={() => WinnerChoice(items[1])}>
                 <img src={`/image/${items[1] && items[1]["store_id"]}`} className="" alt="..."/>
                 <div className="carousel-caption fs-3">

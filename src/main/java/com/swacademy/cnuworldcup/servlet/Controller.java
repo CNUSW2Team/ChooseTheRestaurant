@@ -133,7 +133,7 @@ public class Controller {
         return results.toString();
     }
 
-    @GetMapping("/Result/{categoryId}/{storeId}") // categoryId에 해당하는 storeId의 코멘트와 랭킹정보 반환(내가 선택한 1위 가게의 정보 출력시)
+    @GetMapping("/Result/{categoryId}/{storeId}") // categoryId에 해당하는 storeId의 랭킹정보 반환(내가 선택한 1위 가게의 정보 출력시)
     public @ResponseBody String getWinnerResult(@PathVariable("categoryId") String categoryId, @PathVariable("storeId") String storeId) {
         JSONObject results = new JSONObject();
         List<Relation> relations = crudService.findCategoryById(UUID.fromString(categoryId)).getRelations().stream().sorted((a, b) -> b.getWin_count() - a.getWin_count()).toList();
@@ -141,16 +141,20 @@ public class Controller {
         Store store = crudService.findStoreById(UUID.fromString(storeId));
         double averageStars = store.getReviews().stream().mapToDouble(Review::getRating).average().orElse(0);
         Relation rank = store.getRelations().stream().filter(v -> Objects.equals(v.getCategory().getCategory_id().toString(), categoryId)).findFirst().get();
-        List<String> list = new ArrayList<>();
-        store.getComments().forEach(v -> {
 
-            list.add(v.getContents().toString());
-        });
         results.put("store_name", store.getStore_name());
         results.put("rank", relations.indexOf(rank) + 1);
         results.put("stars", averageStars);
-        results.put("comments", list);
 
+        return results.toString();
+    }
+
+    @GetMapping("/Comment/{storeId}") // storeId의 코멘트를 반환
+    public @ResponseBody String getComments(String categoryId, @PathVariable("storeId") String storeId) {
+        JSONObject results = new JSONObject();
+        List<String> comments = crudService.findCommentByStoreId(UUID.fromString(storeId)).stream().map(Comment::getContents).toList();
+
+        results.put("comments", comments);
         return results.toString();
     }
 
