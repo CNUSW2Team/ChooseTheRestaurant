@@ -3,7 +3,6 @@ import axios from "axios";
 import {Button, Form, Table} from "react-bootstrap";
 import {Link, useParams} from "react-router-dom";
 import StartButton from "../StartButton";
-import {Container, BeutyButton} from './style';
 
 function WinnerResult(){
     let { categoryId } = useParams();
@@ -39,12 +38,12 @@ function WinnerResult(){
 
 
     return (
-        <>
-            <div className="inlineBlock">
-                <p>{StoreInfo["comments"]}</p>
-                <img width={500} src={`/image/${storeId}`} />
+        <div style={{position:"absolute", top:"53%", left:"65%", transform:"translate(-50%,-50%)", display:"flex", width:"80vw"}}>
+            <div>
+                <img width={600} src={`/image/${storeId}`} />
+                {/* <p>{StoreInfo["comments"]}</p> 작성된 코멘트 뿌리는 부분*/}
             </div>
-            <div className="inlineBlock">
+            <div style={{display:"flex", alignItems:"center", flexDirection:"column"}}>
                 <p>{`${StoreInfo["store_name"]}는 전체 랭킹에서 ${StoreInfo["rank"]}등을 차지했어요!`}</p>
                 <p>{`별점 ${StoreInfo["stars"]}`}</p>
                 <form onSubmit={Send}>
@@ -52,15 +51,14 @@ function WinnerResult(){
                     <input onChange={updateNewComment} value={NewComment} placeholder="write your comment"/> 
                     <button type="submit">멘트</button>
                 </form>
+                <div className='button-wrap'>
+                    <button className="btn btn-outline-primary" onClick={() => window.location.href =`/Ranking/${categoryId}`}> 랭킹페이지로 가기</button>
+                    <StartButton value={"다시하기"} category_name={""} category_id={categoryId} />
+                    <button className="btn btn-outline-primary" onClick={() => window.location.href =`/AllCategory`}> 다른월드컵 해보기</button>
+                </div>
             </div>
-            <div className='button-wrap'>
-                <button className="btn btn-outline-primary" onClick={() => window.location.href =`/Ranking/${categoryId}`}> 랭킹페이지로 가기</button>
-                <StartButton value={"다시하기"} category_name={""} category_id={categoryId} />
-                <button className="btn btn-outline-primary" onClick={() => window.location.href =`/AllCategory`}> 다른월드컵 해보기</button>
-            </div>
-        <div>
+            
         </div>
-        </>
     )
 }
 

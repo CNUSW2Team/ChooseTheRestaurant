@@ -39,9 +39,9 @@ function AllCategory() {
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5 g-4 w-100 m-auto">
                 {category.filter(v => createFuzzyMatcher(searchBox).test(v.category_name.toLowerCase())).map(v =>
                     <div className="col" key={v.category_id}>
-                        <div className="card shadow ">
+                        <div className="card shadow">
                             <img src={`/image/${v.category_id}`} className="card-img-top " alt="..."/>
-                            <p className="card-text text-end bg-info ">
+                            <p className="text-end" style={{padding:"8px 16px", display:"inline-block", backgroundColor:"rgba(240, 231, 180, 0.8)"}}>
                                 Favorite: {v.favorite}
                             </p>
                             <div className="card-body">
