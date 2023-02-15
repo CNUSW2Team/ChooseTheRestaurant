@@ -22,7 +22,7 @@ function Game() {
             })
     }, []);
 
-    useDidMountEffect(() => {
+    useEffect(() => {
         if (items.length === 0 && winners.length === 1) {
             window.location.replace( `/Result/${categoryId}/${winners[0]["store_id"]}`);
             axios.post(`/winCount/${categoryId}/${winners[0].store_id}`)
@@ -30,7 +30,6 @@ function Game() {
                     console.log(error);
                 })
             return;
-
         }
         if (winners.length === round / 2) {
             console.log("test");

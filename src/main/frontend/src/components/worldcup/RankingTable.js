@@ -33,7 +33,6 @@ function RankingTable(props) {
                 </tr>
                 </thead>
                 <tbody>
-
                 {ranking.map(v =>
                     <tr key={v.store_id} onClick={() => window.location.href=`/Store/${v.store_id}`}>
                         <td>{count++}</td>

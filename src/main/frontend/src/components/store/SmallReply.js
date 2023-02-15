@@ -45,8 +45,6 @@ function SmallReply(props) {
                             props.setReview(response.data);
                             console.log(response.data);
                             setComment('');
-
-
                         })
                         .catch(error => {
                             console.log(error);
