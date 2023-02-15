@@ -152,4 +152,8 @@ public class CRUDService {
     public void removeStore(Store store) {
         storeRepository.delete(store);
     }
+
+    public void saveComment(Comment comment) {
+        commentRepository.save(comment);
+    }
 }

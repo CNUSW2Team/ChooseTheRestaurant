@@ -53,17 +53,23 @@ public class Controller {
         return new ResponseEntity<Resource>(resource, headers, HttpStatus.CREATED);
     }
 
-    @GetMapping("/AllCategory")
+    // 인기순으로 정렬
+    @GetMapping("/api/AllCategory")
     public @ResponseBody String getAllCategory() {
         List<JSONObject> results = new ArrayList<>();
         List<Category> categories = crudService.findAllCategories();
+        categories.sort((a, b) -> b.getLike_num() - a.getLike_num());
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
         for (Category category : categories) {
             JSONObject json = new JSONObject();
+            String time = simpleDateFormat.format(category.getCreated_at());
             json.put("category_id", category.getCategory_id());
             json.put("category_name", category.getCategory_name());
             json.put("favorite", category.getLike_num());
             json.put("num_of_stores", (long) category.getRelations().size());
-
+            json.put("created_at", time);
             results.add(json);
         }
         return results.toString();
@@ -76,6 +82,7 @@ public class Controller {
         results.put("category_id", category.getCategory_id());
         results.put("category_name", category.getCategory_name());
         results.put("favorite", category.getLike_num());
+
         return results.toString();
     }
 
@@ -151,10 +158,16 @@ public class Controller {
 
     @GetMapping("/Comment/{storeId}") // storeId의 코멘트를 반환
     public @ResponseBody String getComments(String categoryId, @PathVariable("storeId") String storeId) {
-        JSONObject results = new JSONObject();
-        List<String> comments = crudService.findCommentByStoreId(UUID.fromString(storeId)).stream().map(Comment::getContents).toList();
+        List<JSONObject> results = new ArrayList<>();
+        List<Comment> comments = crudService.findCommentByStoreId(UUID.fromString(storeId));
 
-        results.put("comments", comments);
+        for (Comment comment : comments) {
+            JSONObject json = new JSONObject();
+            json.put("comment_id", comment.getComment_id());
+            json.put("comment", comment.getContents());
+            results.add(json);
+        }
+
         return results.toString();
     }
 
@@ -351,8 +364,11 @@ public class Controller {
         }
 
         UUID categoryId = UUID.randomUUID();
-        Category category = Category.builder().category_id(categoryId).category_name((String) categoryMap.get("category_name")).like_num(0)
-                //.relations()
+        Category category = Category.builder()
+                .category_id(categoryId)
+                .category_name((String) categoryMap.get("category_name"))
+                .like_num(0)
+                .created_at(new Timestamp(System.currentTimeMillis()))
                 .build();
         crudService.saveCategory(category);
 
@@ -361,6 +377,8 @@ public class Controller {
             Relation relation = Relation.builder().relation_id(UUID.randomUUID()).win_count(0).store(store).category(category).build();
             crudService.saveRelation(relation);
         }
+
+        Collections.shuffle(storeList);
 
         combineAndSaveImage(storeList.get(0), storeList.get(1), categoryId.toString());
 
@@ -460,6 +478,15 @@ public class Controller {
 
         crudService.saveRelation(relations);
         return "승리 처리 완료.";
+    }
+
+    @PostMapping(value = "/Comment/{storeId}")
+    public String createComment(@PathVariable("storeId") String storeId, String comments) {
+
+        Comment comment = Comment.builder().comment_id(UUID.randomUUID()).store(crudService.findStoreById(UUID.fromString(storeId))).contents(comments).build();
+
+        crudService.saveComment(comment);
+        return "코멘트 등록 완료.";
     }
 
     // 가게, 메뉴, 카테고리 등 이미지있는 엔티티 삭제시 호출할 것!
