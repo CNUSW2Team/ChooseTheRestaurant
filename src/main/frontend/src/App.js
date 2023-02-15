@@ -14,6 +14,8 @@ import AddCategory from "./components/worldcup/AddCategory";
 import AdminAddMenuToStore from "./components/admin/AdminAddMenuToStore";
 import ModifyEntities from "./components/admin/ModifyEntities";
 import AdminPage from "./components/admin/AdminPage";
+
+import Login from "./components/auth/Login"
 import GameTest from "./components/worldcup/GameTest"; //나중에 지우기
 
 function App() {
@@ -36,6 +38,7 @@ function App() {
                     <Route path="/admin/AdminAddMenuToStore" element={<AdminAddMenuToStore />}></Route>
                     <Route path="/admin/ModifyEntities" element={<ModifyEntities />}></Route>
                     <Route path="/AddCategory" element={<AddCategory />}></Route>
+                    <Route path="/Login" element={<Login />}></Route>
                     {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
                     <Route path="*" element={<NotFound />}></Route>
                 </Routes>

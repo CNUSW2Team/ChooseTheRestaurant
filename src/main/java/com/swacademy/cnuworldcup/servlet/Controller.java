@@ -38,8 +38,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Controller {
 
     private final CRUDService crudService;
-    private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
 
 //    final String IMAGE_FILE_UPLOAD_PATH = new File("src\\main\\frontend\\public\\img").getAbsolutePath();
     final String IMAGE_FILE_UPLOAD_PATH = new File("src\\main\\resources\\image\\").getAbsolutePath();
@@ -514,20 +512,5 @@ public class Controller {
         } else {
             log.info("Can not find Image {}.jpg", id);
         }
-    }
-
-    // Spring Security Test
-    @GetMapping("/signUp")
-    public String signUp() {
-        Users user = Users.builder()
-                .userId(UUID.randomUUID())
-                .username("test")
-                .password(passwordEncoder.encode("test123"))
-                .role(Role.ROLE_USER)
-                .build();
-
-        userService.saveUser(user);
-
-        return "redirect:/me";
     }
 }

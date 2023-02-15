@@ -1,11 +1,8 @@
 package com.swacademy.cnuworldcup.config;
 
-import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.swacademy.cnuworldcup.config.auth.UserDetailsServiceImpl;
-import com.swacademy.cnuworldcup.config.jwt.JwtProviderFilter;
 import com.swacademy.cnuworldcup.config.jwt.JwtValidationFilter;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,7 +11,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -37,23 +33,21 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder.userDetailsService(userDetailsService);
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
 
-        JwtProviderFilter jwtProviderFilter = new JwtProviderFilter(authenticationManager);
-
         http
+                .cors().disable()
                 .csrf().disable()
                 .httpBasic().disable()
+                .formLogin().disable()
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((authz) -> authz
-                        .anyRequest().hasAnyRole("USER", "ADMIN")
-                )
-                .formLogin(formLogin ->
-                        formLogin
-                                .defaultSuccessUrl("/")
+                        /*.requestMatchers("/login").permitAll()*/
+                        .anyRequest().permitAll()
                 )
                 .logout(logout ->
                         logout
@@ -62,7 +56,6 @@ public class WebSecurityConfig {
                 )
                 .authenticationManager(authenticationManager)
                 .addFilterBefore(jwtValidationFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterAt(jwtProviderFilter, UsernamePasswordAuthenticationFilter.class)
         ;
 
         return http.build();

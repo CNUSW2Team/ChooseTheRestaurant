@@ -6,7 +6,5 @@ spring:
     password: sw1234!
 
 jwt:
-  header: token
-  issuer: CNUWorldCup
-  client-secret: EENY5W0eegTf1naQB2eDeyCLl5kRS2b8xa5c4qLdS0hmVjtbvo8tOyhPMcAmtPuQ
-  expiry-seconds: 60
+  secret: secret
+  issuer: issuer
