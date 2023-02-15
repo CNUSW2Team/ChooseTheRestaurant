@@ -1,8 +1,8 @@
 /*global kakao*/
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-const { kakao } = window;
+const {kakao} = window;
 
 
 /*
@@ -44,10 +44,11 @@ function KakaoMap(props) {
             });
         });
     }
+
     return (
-        <>
-            <div id={"map"} style={{width:500, height:500}}>{loadMap(props.name, props.address)}</div>
-        </>
+        <div className="rounded-5 border border-dark" id={"map"} style={{width:400, height:400}}>
+            {loadMap(props.name, props.address)}
+        </div>
     );
 }
 

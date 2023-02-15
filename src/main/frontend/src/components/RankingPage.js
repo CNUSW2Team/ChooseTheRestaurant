@@ -4,16 +4,16 @@ import axios from "axios";
 import {Button, Form, Table} from "react-bootstrap";
 import {Link, useParams} from "react-router-dom";
 import RankingTable from "./worldcup/RankingTable";
+import Top3 from "./Top3";
 
 function RankingPage() {
     const [store, setStore] = useState([]);
 
     const [category, setCategory] = useState([]);
-    let { categoryId } = useParams();
+    let {categoryId} = useParams();
 
     useEffect(() => {
-
-            axios.get(`/AllCategory/${categoryId}`)
+            axios.get(`/Category/${categoryId}`)
                 .then(response => {
                     setCategory(response.data);
                     console.log(response.data);
@@ -25,35 +25,15 @@ function RankingPage() {
         []);
 
     return (
-        <div className="wrapper">
-            <div className="main">
-                <h1>{category && category.category_name} 월드컵 순위</h1>
-                <div>
-                    <div>
-                        <div>
-                            <h1>Top2!</h1>
-                            {store[1] && <img src={`/image/${store[1].store_id}`}/>}
-                        </div>
-                        <div>
-                            <h1>Top1!</h1>
-                            {store[0] && <img src={`/image/${store[0].store_id}`}/>}
-                        </div>
-                        <div>
-                            <h1>Top3!</h1>
-                            {store[2] && <img src={`/image/${store[2].store_id}`}/>}
-                        </div>
-                        {/*{store[1] && <img src={`/image/${store[1].store_id}`}/>}*/}
-                        {/*{store[0] && <img src={`/image/${store[0].store_id}`}/>}*/}
-                        {/*{store[2] && <img src={`/image/${store[2].store_id}`}/>}*/}
-                    </div>
-                        <RankingTable category={categoryId} setStore={setStore}/>
-                    </div>
+        <div className="p-4">
+            <h5 className="mb-4">[{category && category.category_name}] 순위</h5>
+            <div className="d-flex flex-column align-items-center">
+                <h4 className="mb-4 border-bottom w-100 text-center p-4"> Top3! </h4>
+                <Top3 store={store}/>
+                <h4 className="m-4 border-bottom w-100 text-center p-4"> 전체결과 </h4>
+                <RankingTable category={categoryId} setStore={setStore}/>
             </div>
-
-
-
         </div>
-
     );
 }
 

@@ -24,7 +24,7 @@ function Game() {
 
     useDidMountEffect(() => {
         if (items.length === 0 && winners.length === 1) {
-            window.location.href = `/Result/${categoryId}/${winners[0]["store_id"]}`;
+            window.location.replace( `/Result/${categoryId}/${winners[0]["store_id"]}`);
             axios.post(`/winCount/${categoryId}/${winners[0].store_id}`)
                 .catch(error => {
                     console.log(error);
@@ -62,7 +62,7 @@ function Game() {
                 ({count}/{round/2})
             </h1>
         </div>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center align-items-center">
             <div className="card w-auto m-5 overflow-hidden" style={{maxWidth:"35%", maxHeight:"70vh"}}  onClick={() => WinnerChoice(items[0])}>
                 <img src={`/image/${items[0] && items[0]["store_id"]}`} alt="..." />
                 <div className="carousel-caption fs-3">
@@ -70,24 +70,14 @@ function Game() {
                 </div>
                 <a href="#" className="stretched-link"></a>
             </div>
+            <h3>vs</h3>
             <div className="card w-auto m-5 overflow-hidden"  style={{maxWidth:"35%", maxHeight:"70vh"}} onClick={() => WinnerChoice(items[1])}>
                 <img src={`/image/${items[1] && items[1]["store_id"]}`} className="" alt="..."/>
-                <div className="carousel-caption fs-4">
+                <div className="carousel-caption fs-3">
                     <p>{items[1] && items[1]["store_name"]}</p>
                 </div>
                 <a href="#" className="stretched-link"></a>
             </div>
-
-            {/*<div>*/}
-            {/*    <p>{items[0] && items[0]["store_name"]}</p>*/}
-            {/*    <img width={300} value={JSON.stringify(items[0])} onClick={e => WinnerChoice(e)}*/}
-            {/*         src={`/image/${items[0] && items[0]["store_id"]}`}/>*/}
-            {/*</div>*/}
-            {/*<div>*/}
-            {/*    <p>{items[1] && items[1]["store_name"]}</p>*/}
-            {/*    <img width={300} value={JSON.stringify(items[1])} onClick={e => WinnerChoice(e)}*/}
-            {/*         src={`/image/${items[1] && items[1]["store_id"]}`}/>*/}
-            {/*</div>*/}
         </div>
     </div>);
 }
