@@ -5,7 +5,7 @@ function Menus(props) {
 
     const [menu, setMenu] = useState([]);
     useEffect(() => {
-        axios.get(`/Menu/${props.store}`)
+        axios.get(`/api/Menu/${props.store}`)
             .then(response => {
                 setMenu(response.data);
                 console.log("Menu: ", response.data);

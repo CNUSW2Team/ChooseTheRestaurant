@@ -13,7 +13,7 @@ function RankingPage() {
     let {categoryId} = useParams();
 
     useEffect(() => {
-            axios.get(`/Category/${categoryId}`)
+            axios.get(`/api/Category/${categoryId}`)
                 .then(response => {
                     setCategory(response.data);
                     console.log(response.data);

@@ -11,7 +11,7 @@ function Reviews(props) {
 
     const [review, setReview] = useState([]);
     useEffect(() => {
-        axios.get(`/Review/${props.store}`)
+        axios.get(`/api/Review/${props.store}`)
             .then(response => {
                 setReview(response.data);
                 console.log("Review: ", response.data);

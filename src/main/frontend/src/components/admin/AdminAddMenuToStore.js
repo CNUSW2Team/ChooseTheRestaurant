@@ -43,7 +43,7 @@ function AdminAddMenuToStore(props) {
     }
 
     useEffect(() => {
-            axios.get('/AllStore')
+            axios.get('/api/Store')
                 .then(response => {
                     setStore(response.data);
                     console.log(response.data);
@@ -95,7 +95,7 @@ function AdminAddMenuToStore(props) {
 
     function showStoreMenuList() {
         if (!menu.length && !isMenuLoaded) {
-            axios.get(`http://localhost:8080/StoreMenusInfo/${storeId}`)
+            axios.get(`/StoreMenusInfo/${storeId}`)
                 .then(response => {
                     setMenu(response.data);
                     setIsMenuLoaded(1);
@@ -217,19 +217,20 @@ function AdminAddMenuToStore(props) {
         file ? fd.append("file", file[0]) : fd.append("file", null);
         fd.append("menuDto", JSON.stringify(menuDto));
 
-        axios.post('http://localhost:8080/admin/requestMenuAdd', fd)
+        axios.post('/api/admin/Menu', fd)
             .then((response) => {alert(response.data);})
 
         resetInput();
     }
 
     function removeMenu(e) {
+        // const fd = new FormData();
+        // selected.forEach(s => fd.append("selectedMenuId", s));
 
-        const fd = new FormData();
-        selected.forEach(s => fd.append("selectedMenuId", s));
+        selected.forEach(v => axios.delete(`/api/Menu/${v}`))
 
-        axios.post('http://localhost:8080/requestMenuRemove', fd)
-            .then((response) => {alert(response.data);})
+        // axios.post('http://localhost:8080/requestMenuRemove', fd)
+        //     .then((response) => {alert(response.data);})
 
    }
     function alertBlankInput() {

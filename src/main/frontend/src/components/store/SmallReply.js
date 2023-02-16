@@ -40,7 +40,7 @@ function SmallReply(props) {
                     alert(response.data);
                 })
                 .then(() => {
-                    axios.get(`/Review/${props.store}`)
+                    axios.get(`/api/Review/${props.store}`)
                         .then(response => {
                             props.setReview(response.data);
                             console.log(response.data);
