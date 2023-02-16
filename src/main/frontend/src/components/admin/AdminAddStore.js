@@ -49,7 +49,7 @@ function AdminAddStore() {
         }
         fd.append("storeDto", JSON.stringify(storeDto));
 
-        axios.post('http://localhost:8080/admin/requestStoreAdd', fd)
+        axios.post('/api/admin/Store', fd)
             .then((response) => {alert(response.data);})
 
         resetInput();

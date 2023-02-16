@@ -2,7 +2,7 @@ import React from 'react';
 
 function Header() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light mb-auto sticky-top">
+        <nav className="navbar navbar-expand-md navbar-light bg-light mb-auto sticky-top">
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">CNU-WorldCup</a>
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo02">

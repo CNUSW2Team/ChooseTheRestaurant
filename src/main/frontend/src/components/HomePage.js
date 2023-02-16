@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 function HomePage() {
     return (
-        <div className="w-50 h-100 p-3 mx-auto">
+        <div className="h-100 p-3 ">
             <main className="position-absolute top-50 start-50 translate-middle text-center">
                 <h1>Start page.</h1>
                 <p className="lead">Cover is a one-page template for building simple and beautiful home pages. Download,

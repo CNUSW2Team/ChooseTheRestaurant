@@ -35,7 +35,7 @@ function Reply(props) {
 
             fd.append("reviewDto", JSON.stringify(reviewDto));
 
-            axios.post('http://localhost:8080/requestReviewAdd', fd)
+            axios.post('/api/Review', fd)
                 .then((response) => {
                     alert(response.data);
                 })

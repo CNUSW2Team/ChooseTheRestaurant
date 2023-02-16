@@ -33,7 +33,7 @@ function AddCategory() {
             }
             fd.append("categoryDto", JSON.stringify(categoryDto));
 
-            axios.post('http://localhost:8080/requestCategoryAdd', fd)
+            axios.post('/api/Category', fd)
                 .then(() => {
                     window.location.href = "/AllCategory";
                 })
@@ -69,7 +69,7 @@ function AddCategory() {
     }
 
     useEffect(() => {
-            axios.get('/AllStore')
+            axios.get('/api/Store')
                 .then(response => {
                     setStore(response.data);
                     console.log(response.data);

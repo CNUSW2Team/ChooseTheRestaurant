@@ -26,7 +26,7 @@ function GameTest(props) {
     const [round, SetRound] = useState();
 
     useEffect(() => {
-        axios.get(`/Round/${categoryId}/${numOfRound}`)
+        axios.get(`/api/Round/${categoryId}/${numOfRound}`)
             .then(response => {
                 setData(response.data);
                 setItem(response.data.sort(() => Math.random() - 0.5));

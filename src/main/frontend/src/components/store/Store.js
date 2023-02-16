@@ -9,7 +9,7 @@ import MoreInfo from "./MoreInfo";
 function Store() {
     let {storeId} = useParams();
     useEffect(() => {
-        axios.get(`/StoreInfo/${storeId}`)
+        axios.get(`/api/Store/${storeId}`)
             .then(response => {
                 setData(response.data);
                 console.log(response.data);

@@ -13,7 +13,7 @@ function Game() {
     const [count, setCount] = useState(1);
 
     useEffect(() => {
-        axios.get(`/Round/${categoryId}/${numOfRound}`)
+        axios.get(`/api/Round/${categoryId}/${numOfRound}`)
             .then(response => {
                 setItem(response.data);
             })
@@ -25,7 +25,7 @@ function Game() {
     useEffect(() => {
         if (items.length === 0 && winners.length === 1) {
             window.location.replace( `/Result/${categoryId}/${winners[0]["store_id"]}`);
-            axios.post(`/winCount/${categoryId}/${winners[0].store_id}`)
+            axios.post(`/api/winCount/${categoryId}/${winners[0].store_id}`)
                 .catch(error => {
                     console.log(error);
                 })

@@ -11,29 +11,21 @@ function AllCategory() {
     const [sort, setSort] = useState('인기순');
 
     useEffect(() => {
-        axios.get('/api/AllCategory')
+        axios.get('/api/Category')
             .then(response => {
                 setData(response.data);
                 setCategory(response.data);
-                console.log("initial:", response.data);
+                // console.log("initial:", response.data);
             })
             .catch(error => {
                 console.log(error);
             })
     }, []);
 
-    useEffect(() => {
-        console.log("data: ", data);
-        console.log("category: ", category);
-    },[sort])
-
     function updateSort(value){
         setSort(value);
         switch (value) {
             case '인기순':
-                // setCategory(data.sort((a, b) => {
-                //     return b.favorite - a.favorite;
-                // }));
                 category.sort((a, b) => {
                     if(a.favorite === b.favorite){
                         const upperCaseA = a.category_name.toUpperCase();
@@ -49,11 +41,6 @@ function AllCategory() {
                 });
                 break;
             case '최신순':
-                // setCategory(data.sort((a, b) => {
-                //     const date_a = new Date(a.created_at);
-                //     const date_b = new Date(b.created_at);
-                //     return date_b - date_a;
-                // }));
                 category.sort((a, b) => {
                     const date_a = new Date(a.created_at);
                     const date_b = new Date(b.created_at);
@@ -61,14 +48,6 @@ function AllCategory() {
                 });
                 break;
             case '이름순':
-                // setCategory(data.sort((a, b) => {
-                //     const upperCaseA = a.category_name.toUpperCase();
-                //     const upperCaseB = b.category_name.toUpperCase();
-                //
-                //     if (upperCaseA > upperCaseB) return 1;
-                //     if (upperCaseA < upperCaseB) return -1;
-                //     if (upperCaseA === upperCaseB) return 0;
-                // }));
                 category.sort((a, b) => {
                     const upperCaseA = a.category_name.toUpperCase();
                     const upperCaseB = b.category_name.toUpperCase();
@@ -126,7 +105,7 @@ function AllCategory() {
                                 <div className="btn-group btn-group-sm my-3">
                                     <StartButton value={"시작하기"} category_name={v.category_name}
                                                  category_id={v.category_id} num_of_stores={v.num_of_stores}/>
-                                    <button type="button" className="btn btn-outline-primary"
+                                    <button type="button" className="btn btn-outline-secondary"
                                             onClick={() => window.location.href = `/Ranking/${v.category_id}`}>랭킹보기
                                     </button>
                                 </div>

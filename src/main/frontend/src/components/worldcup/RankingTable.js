@@ -8,7 +8,7 @@ function RankingTable(props) {
     let count = 1;
     const [ranking, setRanking] = useState([]);
     useEffect(() => {
-        axios.get(`/Ranking/${props.category}`)
+        axios.get(`/api/Ranking/${props.category}`)
             .then(response => {
                 setRanking(response.data);
                 props.setStore(response.data)

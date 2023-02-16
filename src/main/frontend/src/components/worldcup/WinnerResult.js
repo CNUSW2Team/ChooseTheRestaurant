@@ -13,7 +13,7 @@ function WinnerResult() {
     const [comments, setComments] = useState([]);
     const [favorite, setFavorite] = useState(false);
     useEffect(() => {
-            axios.get(`/Result/${categoryId}/${storeId}`)
+            axios.get(`/api/Ranking/${categoryId}/${storeId}`)
                 .then(response => {
                     setStore(response.data);
                     console.log(response.data);
@@ -21,7 +21,7 @@ function WinnerResult() {
                 .catch(error => {
                     console.log(error);
                 });
-            axios.get(`/Comment/${storeId}`)
+            axios.get(`/api/Comment/${storeId}`)
                 .then(response => {
                     setComments(response.data);
                     console.log(response.data);
@@ -45,12 +45,12 @@ function WinnerResult() {
             const fd = new FormData();
             fd.append("comments", newComment);
 
-            axios.post(`http://localhost:8080/Comment/${storeId}`, fd)
+            axios.post(`/api/Comment/${storeId}`, fd)
                 .then((response) => {
                     alert(response.data);
                 })
                 .then(() => {
-                    axios.get(`/Comment/${storeId}`)
+                    axios.get(`/api/Comment/${storeId}`)
                         .then(response => {
                             setComments(response.data);
                             console.log(response.data);
