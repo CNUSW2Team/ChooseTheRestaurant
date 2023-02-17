@@ -36,11 +36,12 @@ function Store() {
     const {contentItem, contentChange} = useTabs(0, content);
 
     return (
-        <div className="m-5">
-            <h5>{store.store_name}</h5>
-            <div className="d-flex flex-column">
+        <div>
+            <h2 className="d-flex justify-content-center align-items-center text-white" style={{backgroundImage:`url("/image/${storeId}")`, height:"180px", backgroundSize:"cover", backgroundPositionY:"center"}}>{store.store_name}</h2>
+            {/*<h5 className="">{store.store_name}</h5>*/}
+            <div className="d-flex flex-column vh-100">
                 <TabBar store_name={store.store_name} onClickHandler={contentChange} contentItem={contentItem}/>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-between px-5">
                     <MoreInfo info={store}/>
                     {contentItem.content}
                 </div>

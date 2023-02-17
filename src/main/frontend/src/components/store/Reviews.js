@@ -40,7 +40,7 @@ function Reviews(props) {
     };
 
     return (
-        <div className="d-flex flex-column m-4 w-50">
+        <div className="d-flex flex-column m-4 w-100">
             <div className="d-flex m-3">
                 <input type="email" className="form-control w-75" id="searchArea" value={searchBox}
                        onChange={updateSearchBox}
@@ -48,11 +48,11 @@ function Reviews(props) {
                 <button className="btn btn-outline-secondary" type="submit" onClick={() => setSearchBox('')}>초기화
                 </button>
             </div>
-            <table className="table table-responsive text-center table-hover align-middle m-3">
+            <table className="table table-responsive text-center table-hover align-middle m-3 w-auto">
                 <thead className="table-secondary">
                 <tr>
                     <th>번호</th>
-                    <th className="col-5">내용</th>
+                    <th>내용</th>
                     <th>별점</th>
                     <th>작성자</th>
                     <th>날짜</th>

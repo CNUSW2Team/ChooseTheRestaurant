@@ -12,22 +12,22 @@ function AllStore() {
     const [store, setStore] = useState([]);
     const [searchBox, setSearchBox] = useState('');
 
-    const [page, setPage] = useState(1);
-    const [items, setItems] = useState(4);
-    const [data, setData] = useState(store);
-    useEffect(() => {
-        setTotalCount(data.length);
-        setPage(1);
-    }, [data])
-    const [totalCount, setTotalCount] = useState(data.length - 1);
-    const handlePageChange = (page) => {
-        setPage(page);
-    };
+    // const [page, setPage] = useState(1);
+    // const [items, setItems] = useState(4);
+    // const [data, setData] = useState(store);
+    // useEffect(() => {
+    //     setTotalCount(data.length);
+    //     setPage(1);
+    // }, [data])
+    // const [totalCount, setTotalCount] = useState(data.length - 1);
+    // const handlePageChange = (page) => {
+    //     setPage(page);
+    // };
 
     const updateSearchBox = e => setSearchBox(e.target.value);
-    useEffect(() => {
-        setData(store.filter(v => createFuzzyMatcher(searchBox).test(v.store_name.toLowerCase())));
-    }, [searchBox, store])
+    // useEffect(() => {
+    //     setData(store.filter(v => createFuzzyMatcher(searchBox).test(v.store_name.toLowerCase())));
+    // }, [searchBox, store])
 
     useEffect(() => {
         axios.get('/api/Store')

@@ -4,7 +4,6 @@ import {createFuzzyMatcher} from "../../util/util";
 import StartButton from "../StartButton";
 
 function AllCategory() {
-    const [data, setData] = useState([]);
     const [searchBox, setSearchBox] = useState('');
     const [category, setCategory] = useState([]);
     const updateSearchBox = e => setSearchBox(e.target.value);
@@ -13,7 +12,6 @@ function AllCategory() {
     useEffect(() => {
         axios.get('/api/Category')
             .then(response => {
-                setData(response.data);
                 setCategory(response.data);
                 // console.log("initial:", response.data);
             })

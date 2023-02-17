@@ -1,7 +1,5 @@
 package com.swacademy.cnuworldcup.servlet;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.swacademy.cnuworldcup.entity.Menu;
 import com.swacademy.cnuworldcup.entity.*;
 import com.swacademy.cnuworldcup.service.CRUDService;
 import lombok.AllArgsConstructor;
@@ -9,18 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.List;
-import java.util.*;
+import java.util.UUID;
 
 import static com.swacademy.cnuworldcup.util.Util.deleteImage;
 
