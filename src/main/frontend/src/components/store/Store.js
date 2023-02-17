@@ -37,12 +37,19 @@ function Store() {
 
     return (
         <div>
-            <h2 className="d-flex justify-content-center align-items-center text-white" style={{backgroundImage:`url("/image/${storeId}")`, height:"180px", backgroundSize:"cover", backgroundPositionY:"center"}}>{store.store_name}</h2>
+            <h2 className="d-flex justify-content-center align-items-center text-white" style={{
+                backgroundImage: `url("/image/${storeId}")`,
+                height: "180px",
+                backgroundSize: "cover",
+                backgroundPositionY: "center"
+            }}>{store.store_name}</h2>
             {/*<h5 className="">{store.store_name}</h5>*/}
-            <div className="d-flex flex-column vh-100">
-                <TabBar store_name={store.store_name} onClickHandler={contentChange} contentItem={contentItem}/>
-                <div className="d-flex justify-content-between px-5">
+            <TabBar store_name={store.store_name} onClickHandler={contentChange} contentItem={contentItem}/>
+            <div className="row m-5">
+                <div className="col-lg-auto mb-5">
                     <MoreInfo info={store}/>
+                </div>
+                <div className="col">
                     {contentItem.content}
                 </div>
             </div>
