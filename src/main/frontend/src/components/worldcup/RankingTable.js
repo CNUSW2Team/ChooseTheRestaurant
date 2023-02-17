@@ -20,7 +20,7 @@ function RankingTable(props) {
     }, []);
 
     return (
-        <div className="w-75 table-responsive m-3">
+        <div className="w-100 table-responsive p-5">
             <table className="table table-hover table-sm text-center">
                 <caption className="caption caption-top">클릭시 상세정보를 확인 할 수 있습니다.</caption>
                 <thead className="table-dark">

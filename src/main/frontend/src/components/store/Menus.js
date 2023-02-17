@@ -17,7 +17,7 @@ function Menus(props) {
 
     return (
         // <div className="d-flex justify-content-center m-4">
-            <table className="table table-hover w-50 text-center align-middle">
+            <table className="table table-hover text-center align-middle">
                 <thead>
                 <tr>
                     <th>번호</th>

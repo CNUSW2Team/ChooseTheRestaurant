@@ -3,7 +3,7 @@ import React from "react";
 function Top3(props){
     const store = props.store;
     return(
-        <div className="d-flex w-75 align-items-end m-1">
+        <div className="d-flex w-100 align-items-end p-5">
             <div className="text-center" style={{width:"30%"}}>
                 <h3>2위</h3>
                 <div className="card w-auto m-1 overflow-hidden" >
