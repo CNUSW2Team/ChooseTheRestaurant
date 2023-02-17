@@ -21,7 +21,7 @@ import {NavermapsProvider} from 'react-naver-maps';
 function App() {
     return (
         <NavermapsProvider ncpClientId='se3vlo7bzj'>
-            <div className="d-flex flex-column justify-content-between overflow-hidden">
+            <div className="d-flex flex-column justify-content-between">
                 <div className="min-vh-100">
                     <Header/>
                     <BrowserRouter>
