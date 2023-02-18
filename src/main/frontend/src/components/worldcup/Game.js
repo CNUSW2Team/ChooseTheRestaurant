@@ -49,7 +49,7 @@ function Game() {
         const newWinner = item;
         setItem(items.slice(2));
         setWinner([...winners, newWinner]);
-        setCount(count+1);
+        if(round !== 2) setCount(count+1);
     }
 
     return (<div className="d-flex flex-column p-4">
