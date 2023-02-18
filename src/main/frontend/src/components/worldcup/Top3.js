@@ -3,8 +3,8 @@ import React from "react";
 function Top3(props){
     const store = props.store;
     return(
-        <div className="d-flex w-100 align-items-end p-5">
-            <div className="text-center" style={{width:"30%"}}>
+        <div className="d-flex w-100 align-items-end p-3">
+            <div className="text-center" style={{width:"25%"}}>
                 <h3>2위</h3>
                 <div className="card w-auto m-1 overflow-hidden" >
                     {store[1] && <img src={`/image/${store[1].store_id}`} alt="..." />}
@@ -24,7 +24,7 @@ function Top3(props){
                 </div>
                 {/*{store[0] && <img src={`/image/${store[0].store_id}`}/>}*/}
             </div>
-            <div className="text-center" style={{width:"30%"}}>
+            <div className="text-center" style={{width:"25%"}}>
                 <h3>3위</h3>
                 <div className="card w-auto m-1 overflow-hidden">
                     {store[2] && <img src={`/image/${store[2].store_id}`} alt="..." />}

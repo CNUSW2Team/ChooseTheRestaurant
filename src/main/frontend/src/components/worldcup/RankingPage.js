@@ -23,7 +23,7 @@ function RankingPage() {
         []);
 
     return (
-        <div className="p-4">
+        <div className="p-4 d-flex flex-column justify-content-center min-vh-100">
             <h5 className="mb-4 d-flex">
                 <div className="text-info me-2">{category && category.category_name}</div>
                 순위

@@ -50,7 +50,7 @@ function RankingTable(props) {
                 {ranking.slice(items * (page - 1), items * (page - 1) + items)
                 .map(v =>
                     <tr key={v.store_id} onClick={() => window.location.href=`/Store/${v.store_id}`}>
-                        <td>{count++}</td>
+                        <td>{(page-1)*items + count++}</td>
                         {/*<td><img width={100} src={`/image/${v.store_id}`} /></td>*/}
                         <td>{v.store_name}</td>
                         <td>{Math.round(v.stars * 100)/100}</td>
