@@ -2,6 +2,9 @@ import axios from "axios";
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {Table} from "react-bootstrap";
+import Pagination from 'react-js-pagination'
+import PaginationBox from "../../util/PaginationBox";
+
 
 
 function RankingTable(props) {
@@ -19,6 +22,17 @@ function RankingTable(props) {
             })
     }, []);
 
+    const [page, setPage] = useState(1);
+    const [items, setItems] = useState(8);
+    const [totalCount, setTotalCount] = useState(ranking.length);
+
+    useEffect(() => {
+        setTotalCount(ranking.length);
+    }, [ranking])
+    const handlePageChange = (page) => {
+        setPage(page);
+    };
+
     return (
         <div className="w-100 table-responsive p-5">
             <table className="table table-hover table-sm text-center">
@@ -33,7 +47,8 @@ function RankingTable(props) {
                 </tr>
                 </thead>
                 <tbody>
-                {ranking.map(v =>
+                {ranking.slice(items * (page - 1), items * (page - 1) + items)
+                .map(v =>
                     <tr key={v.store_id} onClick={() => window.location.href=`/Store/${v.store_id}`}>
                         <td>{count++}</td>
                         {/*<td><img width={100} src={`/image/${v.store_id}`} /></td>*/}
@@ -44,6 +59,15 @@ function RankingTable(props) {
                 )}
                 </tbody>
             </table>
+            <PaginationBox>
+                <Pagination
+                    activePage={page}
+                    itemsCountPerPage={items}
+                    totalItemsCount={totalCount}
+                    pageRangeDisplayed={5}
+                    onChange={handlePageChange}>
+                </Pagination>
+            </PaginationBox>
         </div>
     );
 }

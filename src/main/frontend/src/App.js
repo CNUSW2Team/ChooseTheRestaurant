@@ -17,12 +17,13 @@ import AdminPage from "./components/admin/AdminPage";
 import 'bootstrap/dist/css/bootstrap.css';
 import Footer from "./components/Footer";
 import {NavermapsProvider} from 'react-naver-maps';
+import './App.css'
 
 function App() {
     return (
         <NavermapsProvider ncpClientId='se3vlo7bzj'>
-            <div className="d-flex flex-column justify-content-between">
-                <div className="min-vh-100">
+            <div className="d-flex flex-column justify-content-between min-vh-100">
+                <div className="">
                     <Header/>
                     <BrowserRouter>
                         <Routes>

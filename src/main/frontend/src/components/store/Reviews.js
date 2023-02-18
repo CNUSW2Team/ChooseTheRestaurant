@@ -49,8 +49,8 @@ function Reviews(props) {
                 </button>
             </div>
             <table className="table table-responsive text-center table-hover align-middle w-auto" style={{minWidth:"350px"}}>
-                <thead className="table-secondary">
-                <tr>
+                <thead style={{backgroundColor:"#212529"}}>
+                <tr className="text-white">
                     <th style={{width:"50px"}}>번호</th>
                     <th>내용</th>
                     <th style={{width:"50px"}}>별점</th>

@@ -3,7 +3,6 @@ import axios from "axios";
 import {Button, Form, Table} from "react-bootstrap";
 import {Link, useParams} from "react-router-dom";
 import StartButton from "../StartButton";
-import {Container, BeutyButton} from './style';
 
 function WinnerResult() {
     let {categoryId} = useParams();
@@ -48,18 +47,10 @@ function WinnerResult() {
             axios.post(`/api/Comment/${storeId}`, fd)
                 .then((response) => {
                     alert(response.data);
+                    setComments([...comments, {"comment": newComment, "comment_id": comments.length + 1}])
+                    setNewComment('')
                 })
-                .then(() => {
-                    axios.get(`/api/Comment/${storeId}`)
-                        .then(response => {
-                            setComments(response.data);
-                            console.log(response.data);
-                            setNewComment('');
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        })
-                })
+                
         }
     }
 
@@ -83,7 +74,7 @@ function WinnerResult() {
                     <caption className="caption caption-top">간단 코멘트</caption>
                     <thead className="table-dark">
                     <tr>
-                        <th >코멘트</th>
+                        <th>코멘트</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -95,7 +86,7 @@ function WinnerResult() {
                     </tbody>
                 </table>
             </div>
-            <div className="inlineBlock">
+            <div>
                 <p>{`${store["store_name"]}는 전체 랭킹에서 ${store["rank"]}등을 차지했어요!`}</p>
                 <p>{`별점 ${store["stars"]}`}</p>
                 <h5 className="me-3">{`내가 남기는 ${store["store_name"]} 간단 코멘트`}</h5>

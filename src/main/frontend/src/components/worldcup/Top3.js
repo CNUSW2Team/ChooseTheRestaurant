@@ -24,7 +24,7 @@ function Top3(props){
                 </div>
                 {/*{store[0] && <img src={`/image/${store[0].store_id}`}/>}*/}
             </div>
-            <div className="text-center" style={{width:"20%"}}>
+            <div className="text-center" style={{width:"30%"}}>
                 <h3>3위</h3>
                 <div className="card w-auto m-1 overflow-hidden">
                     {store[2] && <img src={`/image/${store[2].store_id}`} alt="..." />}

@@ -42,7 +42,7 @@ const PaginationBox = styled.div`
   }
 
   ul.pagination li.active {
-    background-color: #754878;
+    background-color: #212529;
   }
 
   ul.pagination li a:hover,
