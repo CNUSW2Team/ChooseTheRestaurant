@@ -17,8 +17,6 @@ function AddCategory() {
 
     const [searchBox, setSearchBox] = useState('');
     const updateSearchBox = e => setSearchBox(e.target.value);
-    const resetSearchBox = () => setSearchBox('');
-
 
     function CreateCategory() {
         const fd = new FormData();

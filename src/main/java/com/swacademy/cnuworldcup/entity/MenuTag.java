@@ -14,14 +14,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = "menu")
-public class HashTag {
+public class MenuTag {
     @Id
-    private long tag_id;
+    private UUID menu_tag_id;
 
     @ManyToOne
     @JoinColumn(name = "menu_id", referencedColumnName = "menu_id")
     private Menu menu;
 
-    private String tag_name;
+    @ManyToOne
+    @JoinColumn(name = "tag_id", referencedColumnName = "tag_id")
+    private Tag tag;
 }

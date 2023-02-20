@@ -18,6 +18,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Footer from "./components/Footer";
 import {NavermapsProvider} from 'react-naver-maps';
 import './App.css'
+import AllMenu from "./components/store/AllMenu";
 
 function App() {
     return (
@@ -29,8 +30,10 @@ function App() {
                         <Routes>
                             <Route path="/" element={<HomePage/>}></Route>
                             <Route path="/Store/:storeId" element={<Store/>}></Route>
-                            <Route path="/AllStore/" element={<AllStore/>}></Route>
+                            <Route path="/AllStore" element={<AllStore/>}></Route>
+                            <Route path="/AllMenu" element={<AllMenu/>}></Route>
                             <Route path="/AllCategory" element={<AllCategory/>}></Route>
+                            <Route path="/AddCategory" element={<AddCategory/>}></Route>
                             <Route path="/GetReady/:categoryId" element={<GetReady/>}></Route>
                             <Route path="/Round/:categoryId/:numOfRound" element={<Game/>}></Route>
                             <Route path="/Result/:categoryId/:storeId" element={<WinnerResult/>}></Route>
@@ -39,7 +42,6 @@ function App() {
                             <Route path="/admin/AdminAddStore" element={<AdminAddStore/>}></Route>
                             <Route path="/admin/AdminAddMenuToStore" element={<AdminAddMenuToStore/>}></Route>
                             <Route path="/admin/ModifyEntities" element={<ModifyEntities/>}></Route>
-                            <Route path="/AddCategory" element={<AddCategory/>}></Route>
                             <Route path="*" element={<NotFound/>}></Route>
                         </Routes>
                     </BrowserRouter>

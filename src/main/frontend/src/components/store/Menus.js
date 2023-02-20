@@ -24,14 +24,16 @@ function Menus(props) {
                     <th>사진</th>
                     <th>메뉴</th>
                     <th>가격</th>
+                    <th>태그</th>
                 </tr>
                 </thead>
                 <tbody>
                 {menu && menu.map(v => <tr>
-                    <td>0</td>
+                    <td>{v.idx}</td>
                     <td><img width={100} src={`/image/${v.menu_id}`}/></td>
                     <td>{v.menu_name}</td>
                     <td>{v.price}원</td>
+                    <td>{v.tag.map(w => <button className="btn btn-primary">{w}</button>)}</td>
                 </tr>,)}
                 </tbody>
             </table>
