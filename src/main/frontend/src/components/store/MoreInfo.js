@@ -1,6 +1,4 @@
-import axios from "axios";
-import KakaoMap from "../map/KakaoMap";
-import {Container as MapDiv, NaverMap, Marker, useNavermaps} from 'react-naver-maps'
+import {Container as MapDiv, Marker, NaverMap, useNavermaps} from 'react-naver-maps'
 
 function MoreInfo(props) {
     const navermaps = useNavermaps();

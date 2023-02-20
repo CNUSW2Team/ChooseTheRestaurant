@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import {Button, Form, Table} from "react-bootstrap";
-import {Link, useParams} from "react-router-dom";
-import StartButton from "../StartButton";
+import {useParams} from "react-router-dom";
+import StartButton from "./StartButton";
 
 function WinnerResult() {
     let {categoryId} = useParams();

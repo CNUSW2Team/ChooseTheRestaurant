@@ -1,10 +1,7 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
-import {Table} from "react-bootstrap";
 import Pagination from 'react-js-pagination'
 import PaginationBox from "../../util/PaginationBox";
-
 
 
 function RankingTable(props) {

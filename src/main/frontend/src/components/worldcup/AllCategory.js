@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import axios from "axios";
 import {createFuzzyMatcher} from "../../util/util";
-import StartButton from "../StartButton";
+import StartButton from "./StartButton";
 
 function AllCategory() {
     const [searchBox, setSearchBox] = useState('');
@@ -63,7 +63,7 @@ function AllCategory() {
             <h4 className="p-2">진행할 월드컵을 선택하세요</h4>
             <div className="p-2 d-flex justify-content-between">
                 <div className="d-flex">
-                    <input type="email" className="form-control" id="searchArea" value={searchBox}
+                    <input className="form-control" id="searchArea" value={searchBox}
                            onChange={updateSearchBox}
                            style={{width: "350px"}}
                            placeholder="검색할 월드컵을 입력하세요."/>

@@ -3,7 +3,7 @@ import axios from "axios";
 import {Form, Table} from "react-bootstrap";
 import {Checkbox} from "antd";
 
-function AdminAddMenuToStore(props) {
+function AddMenu(props) {
 
     const [store, setStore] = useState([]);
     const [storeId, setStoreId] = useState("");
@@ -259,4 +259,4 @@ function AdminAddMenuToStore(props) {
     );
 }
 
-export default AdminAddMenuToStore;
+export default AddMenu;
