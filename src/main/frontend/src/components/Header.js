@@ -13,6 +13,9 @@ function Header() {
                         <li className="nav-item">
                             <a className="nav-link" href="/AllStore">가게</a>
                         </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/AllMenu">메뉴</a>
+                        </li>
                     </ul>
                     {/*<form className="d-flex">*/}
                     {/*    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>*/}

@@ -6,7 +6,7 @@ import {createFuzzyMatcher} from "../../util/util";
 import {Rating} from "@mui/material";
 import Pagination from "react-js-pagination";
 import PaginationBox from "../../util/PaginationBox";
-import StartButton from "../StartButton";
+import StartButton from "../worldcup/StartButton";
 
 function AllStore() {
     const [store, setStore] = useState([]);
@@ -61,7 +61,7 @@ function AllStore() {
                                         <img src={`/image/${v.store_id}`} className="rounded-start img-fluid h-100"
                                              style={{objectFit: "cover"}}/>
                                     </div>
-                                    <div className="col">
+                                    <div className="col" style={{minHeight: "250px"}}>
                                         <div className="card-body d-flex flex-column justify-content-evenly h-100">
                                             <h5 className="card-title fw-bold text-truncate w-100">{v.store_name}</h5>
                                             <p className="card-text mb-5">{v.address}</p>

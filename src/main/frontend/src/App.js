@@ -9,15 +9,19 @@ import AllCategory from "./components/worldcup/AllCategory";
 import GetReady from "./components/worldcup/GetReady";
 import Game from "./components/worldcup/Game";
 import WinnerResult from "./components/worldcup/WinnerResult";
-import AdminAddStore from "./components/admin/AdminAddStore";
+import AddStore from "./components/admin/AddStore";
 import AddCategory from "./components/worldcup/AddCategory";
-import AdminAddMenuToStore from "./components/admin/AdminAddMenuToStore";
+import AddMenu from "./components/admin/AddMenu";
 import ModifyEntities from "./components/admin/ModifyEntities";
 import AdminPage from "./components/admin/AdminPage";
 import 'bootstrap/dist/css/bootstrap.css';
 import Footer from "./components/Footer";
 import {NavermapsProvider} from 'react-naver-maps';
 import './App.css'
+import AllMenu from "./components/store/AllMenu";
+import AdminStore from "./components/admin/AdminStore";
+import AdminAllStore from "./components/admin/AdminAllStore";
+import AdminAllCategory from "./components/admin/AdminAllCategory";
 
 function App() {
     return (
@@ -29,17 +33,21 @@ function App() {
                         <Routes>
                             <Route path="/" element={<HomePage/>}></Route>
                             <Route path="/Store/:storeId" element={<Store/>}></Route>
-                            <Route path="/AllStore/" element={<AllStore/>}></Route>
+                            <Route path="/AllStore" element={<AllStore/>}></Route>
+                            <Route path="/AllMenu" element={<AllMenu/>}></Route>
                             <Route path="/AllCategory" element={<AllCategory/>}></Route>
+                            <Route path="/AddCategory" element={<AddCategory/>}></Route>
                             <Route path="/GetReady/:categoryId" element={<GetReady/>}></Route>
                             <Route path="/Round/:categoryId/:numOfRound" element={<Game/>}></Route>
                             <Route path="/Result/:categoryId/:storeId" element={<WinnerResult/>}></Route>
                             <Route path="/Ranking/:categoryId" element={<RankingPage/>}></Route>
                             <Route path="/admin" element={<AdminPage/>}></Route>
-                            <Route path="/admin/AdminAddStore" element={<AdminAddStore/>}></Route>
-                            <Route path="/admin/AdminAddMenuToStore" element={<AdminAddMenuToStore/>}></Route>
+                            <Route path="/admin/AllStore" element={<AdminAllStore/>}></Route>
+                            <Route path="/admin/AddStore" element={<AddStore/>}></Route>
+                            <Route path="/admin/Store/:storeId" element={<AdminStore/>}></Route>
+                            <Route path="/admin/AddMenu" element={<AddMenu/>}></Route>
                             <Route path="/admin/ModifyEntities" element={<ModifyEntities/>}></Route>
-                            <Route path="/AddCategory" element={<AddCategory/>}></Route>
+                            <Route path="/admin/AllCategory" element={<AdminAllCategory/>}></Route>
                             <Route path="*" element={<NotFound/>}></Route>
                         </Routes>
                     </BrowserRouter>

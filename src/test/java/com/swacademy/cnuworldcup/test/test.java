@@ -1,10 +1,7 @@
 package com.swacademy.cnuworldcup.test;
 
 
-import com.swacademy.cnuworldcup.entity.Menu;
-import com.swacademy.cnuworldcup.entity.Relation;
-import com.swacademy.cnuworldcup.entity.Store;
-import com.swacademy.cnuworldcup.entity.Category;
+import com.swacademy.cnuworldcup.entity.*;
 import com.swacademy.cnuworldcup.repository.MenuRepository;
 import com.swacademy.cnuworldcup.repository.RelationRepository;
 import com.swacademy.cnuworldcup.repository.StoreRepository;
@@ -35,6 +32,16 @@ public class test {
 
     @Autowired
     CRUDService crudService;
+
+
+    @Test
+    void test(){
+        Tag tagById = crudService.findTagById(2);
+        Menu menu = crudService.findMenuById(UUID.fromString("4a5e3163-173b-43fb-8621-c0dda30b64ad"));
+        MenuTag menuTag = MenuTag.builder().menu_tag_id(UUID.randomUUID()).tag(tagById).menu(menu).build();
+        crudService.saveMenuTag(menuTag);
+
+    }
 
 
     @Test

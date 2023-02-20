@@ -3,6 +3,8 @@ package com.swacademy.cnuworldcup.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -24,4 +26,6 @@ public class Menu {
 
     private int price;
 
+    @OneToMany(mappedBy = "menu", fetch = FetchType.EAGER)
+    private List<MenuTag> menuTag = new ArrayList<>();
 }

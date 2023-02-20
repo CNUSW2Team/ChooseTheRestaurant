@@ -23,6 +23,9 @@ public class CRUDService {
     @Autowired
     private StoreRepository storeRepository;
     @Autowired
+    private TagRepository tagRepository;
+    @Autowired
+    private MenuTagRepository menuTagRepository;
 
     @Transactional
     public List<Store> findAllStores() {
@@ -30,8 +33,18 @@ public class CRUDService {
     }
 
     @Transactional
+    public List<Menu> findAllMenus() {
+        return menuRepository.findAll();
+    }
+
+    @Transactional
     public List<Category> findAllCategories() {
         return categoryRepository.findAll();
+    }
+
+    @Transactional
+    public List<Tag> findAllTags() {
+        return tagRepository.findAll();
     }
 
     @Transactional
@@ -57,6 +70,11 @@ public class CRUDService {
     @Transactional
     public Review findReviewById(UUID uuid) {
         return reviewRepository.findById(uuid).get();
+    }
+
+    @Transactional
+    public Tag findTagById(long id) {
+        return tagRepository.findById(id).get();
     }
 
     @Transactional
@@ -87,6 +105,12 @@ public class CRUDService {
     public List<Review> findReviewByStoreId(UUID uuid) {
         Store store = storeRepository.findById(uuid).get();
         return reviewRepository.findByStore(store);
+    }
+
+    @Transactional
+    public List<MenuTag> findMenuTagByMenuId(UUID uuid) {
+        Menu menu = menuRepository.findById(uuid).get();
+        return menuTagRepository.findByMenu(menu);
     }
 
     @Transactional
@@ -121,6 +145,16 @@ public class CRUDService {
     @Transactional
     public Review saveReview(Review review) {
         return reviewRepository.save(review);
+    }
+
+    @Transactional
+    public Tag saveTag(Tag tag) {
+        return tagRepository.save(tag);
+    }
+
+    @Transactional
+    public MenuTag saveMenuTag(MenuTag menuTag) {
+        return menuTagRepository.save(menuTag);
     }
 
     @Transactional

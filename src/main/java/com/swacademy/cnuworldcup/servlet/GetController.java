@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 @Slf4j
 @RestController
@@ -99,7 +100,7 @@ public class GetController {
     }
 
     @GetMapping("/api/Store") // DB에 존재하는 모든 가게들을 반환(월드컵 제작용)
-    public @ResponseBody String getAllStore() {
+    public @ResponseBody String getAllStores() {
         List<JSONObject> results = new ArrayList<>();
         List<Store> allStores = crudService.findAllStores();
 
@@ -114,6 +115,44 @@ public class GetController {
             results.add(json);
         }
 
+        return results.toString();
+    }
+
+    @GetMapping("/api/Menu") // storeId에 해당하는 store의 메뉴
+    public @ResponseBody String getAllMenus() {
+        List<JSONObject> results = new ArrayList<>();
+        List<Menu> allMenus = crudService.findAllMenus();
+
+        for (Menu menu : allMenus) {
+            List<String> tags = crudService.findMenuTagByMenuId(menu.getMenu_id()).stream().map(w -> w.getTag().getTag_name()).toList();
+
+            JSONObject json = new JSONObject();
+            json.put("menu_id", menu.getMenu_id());
+            json.put("menu_name", menu.getMenu_name());
+            json.put("price", menu.getPrice());
+            json.put("store_id", menu.getStore().getStore_id());
+            json.put("store_name", menu.getStore().getStore_name());
+            json.put("tag", tags);
+
+            results.add(json);
+        }
+
+        return results.toString();
+    }
+
+    @GetMapping("/api/Tag") // 모든 tag list 반환
+    public @ResponseBody String getAllTags() {
+        List<JSONObject> results = new ArrayList<>();
+
+        List<String> tags = crudService.findAllTags().stream().map(Tag::getTag_name).toList();
+
+        for(String tag : tags){
+            JSONObject json = new JSONObject();
+            json.put("tag", tag);
+//            json.put("select", 0);
+
+            results.add(json);
+        }
         return results.toString();
     }
 
@@ -244,11 +283,17 @@ public class GetController {
         Store store = crudService.findStoreById(UUID.fromString(storeId));
 
         List<JSONObject> menus = new ArrayList<>();
+
+        AtomicInteger count = new AtomicInteger(1);
         store.getMenus().forEach(v -> {
+            List<String> tags = crudService.findMenuTagByMenuId(v.getMenu_id()).stream().map(w -> w.getTag().getTag_name()).toList();
+
             JSONObject menu = new JSONObject();
+            menu.put("idx", count.getAndIncrement());
             menu.put("menu_name", v.getMenu_name());
             menu.put("menu_id", v.getMenu_id());
             menu.put("price", v.getPrice());
+            menu.put("tag", tags);
             menus.add(menu);
         });
 
