@@ -6,7 +6,7 @@ from 'mdb-react-ui-kit';
 
 function SignOut() {
     function signOut() {
-        localStorage.clear();
+        localStorage.removeItem("jwt");
         window.location.href = `/`;
     }
 
@@ -14,7 +14,7 @@ function SignOut() {
 
     return (
         <>
-            {localStorage.getItem("jwt") ? <button onClick={signOut}>로그아웃</button> :
+            {localStorage.getItem("jwt") ? <MDBBtn onClick={signOut}>로그아웃</MDBBtn> :
                 <MDBBtn onClick={moveSignInPage}>로그인</MDBBtn>}
         </>
     )

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.3.0",
     "@mui/material": "^5.11.6",
     "antd": "^5.1.5",
     "axios": "^1.2.2",
@@ -12,7 +13,7 @@
     "lodash": "^4.17.21",
     "mdb-react-ui-kit": "^5.1.0",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.7.0",
+    "react-bootstrap": "^2.7.2",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
