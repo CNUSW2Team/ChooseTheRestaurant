@@ -30,7 +30,7 @@ public class UserService {
         Optional<Users> user = this.findByUsername(username);
         if(user.isEmpty()) throw new UsernameNotFoundException(username);
         if(!passwordEncoder.matches(password, user.get().getPassword()))
-            throw new RuntimeException(password + " is not valid");
+            throw new RuntimeException("Invalid password : " + password);
 
         return jwtProvider.createToken(user.get().getUsername());
     }

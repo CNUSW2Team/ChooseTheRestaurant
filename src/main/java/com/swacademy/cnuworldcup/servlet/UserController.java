@@ -30,7 +30,7 @@ public class UserController {
         return "Success singUp!";
     }
 
-    @PostMapping("/back/login")
+    @PostMapping("/auth/login")
     public String login(@RequestBody Users user) {
         String token = userService.createJwt(user.getUsername(), user.getPassword());
         return token;

@@ -22,6 +22,7 @@ import AllMenu from "./components/store/AllMenu";
 import AdminStore from "./components/admin/AdminStore";
 import AdminAllStore from "./components/admin/AdminAllStore";
 import AdminAllCategory from "./components/admin/AdminAllCategory";
+import Login from "./components/auth/Login";
 
 function App() {
     return (
@@ -48,6 +49,7 @@ function App() {
                             <Route path="/admin/AddMenu" element={<AddMenu/>}></Route>
                             <Route path="/admin/ModifyEntities" element={<ModifyEntities/>}></Route>
                             <Route path="/admin/AllCategory" element={<AdminAllCategory/>}></Route>
+                            <Route path="/login" element={<Login/>}></Route>
                             <Route path="*" element={<NotFound/>}></Route>
                         </Routes>
                     </BrowserRouter>
