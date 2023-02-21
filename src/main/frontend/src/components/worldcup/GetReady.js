@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import {Button, Form, Table} from "react-bootstrap";
 import {Link, useParams} from "react-router-dom";
 
 function GetReady() {
@@ -8,7 +7,7 @@ function GetReady() {
 
     const [category, setData] = useState([]); 
     useEffect(() => {
-            axios.get(`/AllCategory/${categoryId}`)
+            axios.get(`/Category/${categoryId}`)
                 .then(response => {
                     setData(response.data);
                     console.log(response.data);
@@ -19,13 +18,10 @@ function GetReady() {
         },
         []);
 
-        
-    const [numOfRound, SetRound] = useState()
+    const [numOfRound, setRound] = useState()
 
     const sendRound = (e) => {
-        // console.log(e.target.value)
-        SetRound(e.target.value)
-        // console.log(typeof(numOfRound)) //console에 한 박자 늦게 찍히는 이유
+        setRound(e.target.value)
     }
     
     const DneyUndefined = e => {

@@ -1,13 +1,13 @@
-
 import React from 'react';
-import {Link} from "react-router-dom";
-function AdminPage(props) {
+
+function AdminPage() {
     return (
-        <>
-            <Link to={`/admin/AdminAddStore`}><button>가게 추가</button></Link>
-            <button><Link to={`/admin/AdminAddMenuToStore`}> 가게에 메뉴 추가하기 </Link></button>
-            <Link to={`/admin/ModifyEntities`}><button>엔티티 수정</button></Link>
-        </>
+        <div className='min-vh-100'>
+            <main className="position-absolute top-50 start-50 translate-middle text-center d-flex flex-column">
+                <a href="/admin/AllStore" className="btn btn-lg btn-secondary fw-bold border-white ">가게 관리</a>
+                <a href="/admin/AllCategory" className="btn btn-lg btn-secondary fw-bold border-white ">카테고리 관리</a>
+            </main>
+        </div>
     );
 }
 

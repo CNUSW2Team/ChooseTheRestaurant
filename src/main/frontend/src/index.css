@@ -1,91 +1,91 @@
-body {
-  background-color: #E7DDF7;
-  /*margin: 0;*/
-  font-family: 'Noto Sans KR', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /*height: 80vh;*/
-  /*box-sizing: border-box;*/
-}
+/*body {*/
+/*  background-color: #E7DDF7;*/
+/*  !*margin: 0;*!*/
+/*  font-family: 'Noto Sans KR', sans-serif;*/
+/*  -webkit-font-smoothing: antialiased;*/
+/*  -moz-osx-font-smoothing: grayscale;*/
+/*  !*height: 80vh;*!*/
+/*  !*box-sizing: border-box;*!*/
+/*}*/
 
-* {
-  margin: 0px;
-  padding: 0px;
-}
+/** {*/
+/*  margin: 0px;*/
+/*  padding: 0px;*/
+/*}*/
 
-ul, ol {
-  list-style: none;
-}
+/*ul, ol {*/
+/*  list-style: none;*/
+/*}*/
 
-a {
-  text-decoration: none
-}
+/*a {*/
+/*  text-decoration: none*/
+/*}*/
 
-td{
-  background: #fff;
-  padding: 10px 5px;
- }
+/*td{*/
+/*  background: #fff;*/
+/*  padding: 10px 5px;*/
+/* }*/
 
-th{
-  padding: 10px;
-}
+/*th{*/
+/*  padding: 10px;*/
+/*}*/
 
-table {
-  border: 1px #a39485 solid;
-  font-size: .9em;
-  box-shadow: 0 2px 5px rgba(0,0,0,.25);
-  width: 100%;
-  border-collapse: collapse;
-  border-radius: 5px;
-  overflow: hidden;
-  margin:auto;
-  text-align: center;
-  /*table-layout: fixed;*/
-}
+/*table {*/
+/*  border: 1px #a39485 solid;*/
+/*  font-size: .9em;*/
+/*  box-shadow: 0 2px 5px rgba(0,0,0,.25);*/
+/*  width: 100%;*/
+/*  border-collapse: collapse;*/
+/*  border-radius: 5px;*/
+/*  overflow: hidden;*/
+/*  margin:auto;*/
+/*  text-align: center;*/
+/*  !*table-layout: fixed;*!*/
+/*}*/
 
-thead {
-  font-weight: bold;
-  color: #fff;
-  background: #754878;
-}
+/*thead {*/
+/*  font-weight: bold;*/
+/*  color: #fff;*/
+/*  background: #754878;*/
+/*}*/
 
 
-/*라이브러리*/
-.inlineBlock{
-  display: inline-block;
-  margin-right: 30px;
-}
+/*!*라이브러리*!*/
+/*.inlineBlock{*/
+/*  display: inline-block;*/
+/*  margin-right: 30px;*/
+/*}*/
 
-.flex{
-  display: flex;
-}
+/*.flex{*/
+/*  display: flex;*/
+/*}*/
 
-.main.info{
-  /*background-color: blue;*/
-  padding: 0;
-}
+/*.main.info{*/
+/*  !*background-color: blue;*!*/
+/*  padding: 0;*/
+/*}*/
 
-.main::-webkit-scrollbar {
-  width: 8px;  /* 스크롤바의 너비 */
-}
+/*.main::-webkit-scrollbar {*/
+/*  width: 8px;  !* 스크롤바의 너비 *!*/
+/*}*/
 
-.main::-webkit-scrollbar-thumb {
-  height: 30%; /* 스크롤바의 길이 */
-  background: #9f9f9f; /* 스크롤바의 색상 */
+/*.main::-webkit-scrollbar-thumb {*/
+/*  height: 30%; !* 스크롤바의 길이 *!*/
+/*  background: #9f9f9f; !* 스크롤바의 색상 *!*/
 
-  border-radius: 10px;
-}
+/*  border-radius: 10px;*/
+/*}*/
 
-.main::-webkit-scrollbar-track {
-  background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
-}
+/*.main::-webkit-scrollbar-track {*/
+/*  background: rgba(33, 122, 244, .1);  !*스크롤바 뒷 배경 색상*!*/
+/*}*/
 
-@media only screen and (max-width: 1250px) {
-  .wrapper {
-    flex-flow: column;
-  }
-  .main {
-    height: calc(100% - 150px);
-    padding-top: 50px;
-  }
-}
+/*@media only screen and (max-width: 1250px) {*/
+/*  .wrapper {*/
+/*    flex-flow: column;*/
+/*  }*/
+/*  .main {*/
+/*    height: calc(100% - 150px);*/
+/*    padding-top: 50px;*/
+/*  }*/
+/*}*/

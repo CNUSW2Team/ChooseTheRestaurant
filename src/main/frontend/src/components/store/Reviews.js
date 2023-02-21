@@ -11,7 +11,7 @@ function Reviews(props) {
 
     const [review, setReview] = useState([]);
     useEffect(() => {
-        axios.get(`/Review/${props.store}`)
+        axios.get(`/api/Review/${props.store}`)
             .then(response => {
                 setReview(response.data);
                 console.log("Review: ", response.data);
@@ -40,66 +40,69 @@ function Reviews(props) {
     };
 
     return (
-        <div>
+        <div className="d-flex flex-column m-4 w-100">
+            <div className="d-flex mb-3">
+                <input type="email" className="form-control w-75" id="searchArea" value={searchBox}
+                       onChange={updateSearchBox}
+                       placeholder="검색할 내용을 입력하세요."/>
+                <button className="btn btn-outline-secondary" type="submit" onClick={() => setSearchBox('')}>초기화
+                </button>
+            </div>
+            <table className="table table-responsive text-center table-hover align-middle w-auto" style={{minWidth:"350px"}}>
+                <thead style={{backgroundColor:"#212529"}}>
+                <tr className="text-white">
+                    <th style={{width:"50px"}}>번호</th>
+                    <th>내용</th>
+                    <th style={{width:"50px"}}>별점</th>
+                    <th style={{width:"80px"}}>작성자</th>
+                    <th style={{width:"130px"}}>날짜</th>
+                </tr>
+                </thead>
+                <tbody>
+                {data && totalCount === 0 ?
+                    <tr>
+                        <td colSpan={5}> 검색된 데이터가 없습니다.</td>
+                    </tr>
+                    : data.slice(items * (page - 1), items * (page - 1) + items)
+                        .map(v => <tr key={v.idx}>
+                            <td>{v.idx}</td>
+                            <td style={{height:"70px"}}>
+                                <StyledComments>
+                                    {/*<p>{v.comment}</p>*/}
+                                    {v.comment}
+                                </StyledComments>
+                            </td>
+                            <td><Rating readOnly precision={0.5} value={v.stars} size={"small"}/></td>
+                            <td>{v.nickname}</td>
+                            <td>{v.date}</td>
+                        </tr>,)}
+                </tbody>
+            </table>
             <div>
-                <div>
-                    <div>리뷰</div>
-                    <div className="flex">
-                        <input id={"searchArea"} value={searchBox} onChange={updateSearchBox}
-                               placeholder={"검색할 내용을 입력하세요."} size={50}/>
-                        <button type={"button"} onClick={() => {
-                            setSearchBox('')
-                        }}>초기화
-                        </button>
-                </div>
-                    </div>
-                    <table>
-
-                        <thead>
-                        <tr>
-                            <th>번호</th>
-                            <th>내용</th>
-                            <th>별점</th>
-                            <th>작성자</th>
-                            <th>날짜</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {data && totalCount === 0 ?
-                            <tr>
-                                <td colSpan={5}> 검색된 데이터가 없습니다.</td>
-                            </tr>
-                            : data.slice(items * (page - 1), items * (page - 1) + items)
-                                .map(v => <tr key={v.idx}>
-                                    <td>{v.idx}</td>
-                                    <td>
-                                        <div>
-                                            {/*<p>{v.comment}</p>*/}
-                                            {v.comment}
-                                        </div>
-                                    </td>
-                                    <td><Rating readOnly precision={0.5} value={v.stars} size={"small"}/></td>
-                                    <td>{v.nickname}</td>
-                                    <td>{v.date}</td>
-                                </tr>,)}
-                        </tbody>
-                    </table>
-                <div>
-                    <PaginationBox>
-                        <Pagination
-                            activePage={page}
-                            itemsCountPerPage={items}
-                            totalItemsCount={totalCount}
-                            pageRangeDisplayed={5}
-                            onChange={handlePageChange}>
-                        </Pagination>
-                    </PaginationBox>
-                    <SmallReply store={props.store} setReview={setReview}/>
-                </div>
-
+                <PaginationBox>
+                    <Pagination
+                        activePage={page}
+                        itemsCountPerPage={items}
+                        totalItemsCount={totalCount}
+                        pageRangeDisplayed={5}
+                        onChange={handlePageChange}>
+                    </Pagination>
+                </PaginationBox>
+                <SmallReply store={props.store} setReview={setReview}/>
             </div>
         </div>
     );
 }
 
 export default Reviews;
+
+const StyledComments = styled.div`
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+`

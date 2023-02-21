@@ -7,7 +7,7 @@ function ModifyEntities() {
     const [category, setCategory] = useState([]);
     const [store, setStore] = useState([]);
     useEffect(() => {
-            axios.get('/AllCategory')
+            axios.get('/api/Category')
                 .then(response => {
                     setCategory(response.data);
                     console.log(response.data);
@@ -18,7 +18,7 @@ function ModifyEntities() {
         },
         []);
     useEffect(() => {
-            axios.get('/AllStore')
+            axios.get('/api/Store')
                 .then(response => {
                     setStore(response.data);
                     console.log(response.data);
@@ -30,15 +30,8 @@ function ModifyEntities() {
         []);
 
     function RemoveCategory(category_id) {
-        const fd = new FormData();
-        const categoryDto = {
-            category_id: category_id
-        }
         if (window.confirm("정말로 삭제하시겠습니까?")) {
-
-            fd.append("categoryDto", JSON.stringify(categoryDto));
-
-            axios.post('http://localhost:8080/requestCategoryRemove', fd)
+            axios.delete(`/api/Category/${category_id}`)
                 .then(() => {
                     window.location.href = "/admin/ModifyEntities";
                 })
@@ -49,15 +42,8 @@ function ModifyEntities() {
     }
 
     function RemoveStore(store_id) {
-        const fd = new FormData();
-        const storeDto = {
-            store_id: store_id
-        }
         if (window.confirm("정말로 삭제하시겠습니까?\n관련된 메뉴, 코멘트, 리뷰가 모두 삭제되며,\n카테고리에 등록된 가게 또한 삭제됩니다.\n해당 작업은 되돌릴 수 없습니다.")) {
-
-            fd.append("storeDto", JSON.stringify(storeDto));
-
-            axios.post('http://localhost:8080/requestStoreRemove', fd)
+            axios.delete(`/api/Store/${store_id}`)
                 .then(() => {
                     window.location.href = "/admin/ModifyEntities";
                 })
@@ -119,7 +105,6 @@ function ModifyEntities() {
                     </tbody>
                 </Table>
             </Form>
-
         </div>
     );
 }
