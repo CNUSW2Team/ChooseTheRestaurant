@@ -91,7 +91,7 @@ function AddStore() {
 
     return (
         <div className="p-5 pt-3">
-            <i className="bi bi-arrow-left btn" onClick={() => window.location.href = "/admin/Store"}>이전으로</i>
+            <i className="bi bi-arrow-left btn" onClick={() => window.location.href = "/admin/AllStore"}>이전으로</i>
             <h4>가게 정보를 입력해 주세요.</h4>
             <div className="d-flex flex-column p-3 align-items-center">
                 <div className="input-group mb-3 w-50">

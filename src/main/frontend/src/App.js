@@ -11,8 +11,6 @@ import Game from "./components/worldcup/Game";
 import WinnerResult from "./components/worldcup/WinnerResult";
 import AddStore from "./components/admin/AddStore";
 import AddCategory from "./components/worldcup/AddCategory";
-import AddMenu from "./components/admin/AddMenu";
-import ModifyEntities from "./components/admin/ModifyEntities";
 import AdminPage from "./components/admin/AdminPage";
 import 'bootstrap/dist/css/bootstrap.css';
 import Footer from "./components/Footer";
@@ -45,8 +43,6 @@ function App() {
                             <Route path="/admin/AllStore" element={<AdminAllStore/>}></Route>
                             <Route path="/admin/AddStore" element={<AddStore/>}></Route>
                             <Route path="/admin/Store/:storeId" element={<AdminStore/>}></Route>
-                            <Route path="/admin/AddMenu" element={<AddMenu/>}></Route>
-                            <Route path="/admin/ModifyEntities" element={<ModifyEntities/>}></Route>
                             <Route path="/admin/AllCategory" element={<AdminAllCategory/>}></Route>
                             <Route path="*" element={<NotFound/>}></Route>
                         </Routes>
