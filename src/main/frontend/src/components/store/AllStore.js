@@ -44,7 +44,7 @@ function AllStore() {
         <h4 className="p-2"> 가게를 선택하세요</h4>
         <div>
             <div className="d-flex w-50 m-3">
-                <input type="email" className="form-control w-75" id="searchArea" value={searchBox}
+                <input className="form-control w-75" id="searchArea" value={searchBox}
                        onChange={updateSearchBox}
                        placeholder="검색할 가게를 입력하세요."/>
                 <button className="btn btn-outline-secondary" type="submit" onClick={() => setSearchBox('')}>초기화

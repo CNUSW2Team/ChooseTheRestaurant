@@ -24,7 +24,14 @@ function ModifyEntities() {
         if (window.confirm("정말로 삭제하시겠습니까?")) {
             axios.delete(`/api/Category/${category_id}`)
                 .then(() => {
-                    window.location.href = "/admin/Category";
+                    axios.get('/api/Category')
+                        .then(response => {
+                            setCategory(response.data);
+                            console.log(response.data);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
                 })
                 .then((response) => {
                     console.log(response.data)

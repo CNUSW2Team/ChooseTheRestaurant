@@ -1,7 +1,12 @@
 import {Container as MapDiv, Marker, NaverMap, useNavermaps} from 'react-naver-maps'
+import {useEffect, useState} from "react";
 
 function MoreInfo(props) {
     const navermaps = useNavermaps();
+
+    // const [address, setAddress] = useState('');
+    // const [phoneNumber, setPhoneNumber] = useState('');
+    // const [address, setAddress] = useState('');
 
     return (
         <div className="d-flex flex-column align-items-center mt-5 me-5 bg-light p-4 rounded-4 justify-content-between"
@@ -18,19 +23,15 @@ function MoreInfo(props) {
 
             <div className="input-group input-group-sm mb-3">
                 <span className="input-group-text" id="address">주소</span>
-                <input type="text" className="form-control text-center" value={props.info.address}/>
+                <input type="text" className="form-control text-center" value={props.address} placeholder={props.info.address}
+                       onChange={(e) => props.setAddress(e.target.value)}/>
             </div>
             <div className="input-group input-group-sm mb-3">
                 <span className="input-group-text" id="phoneNumber">전화</span>
-                <input type="text" className="form-control text-center" value={props.info.contact}/>
+                <input type="text" className="form-control text-center" value={props.phoneNumber}
+                       placeholder={props.info.contact}
+                       onChange={(e) => props.setPhoneNumber(e.target.value)}/>
             </div>
-
-            {props.info.times && props.info.times.map(v =>
-                <div className="input-group input-group-sm">
-                    <span className="input-group-text" id="openingHour">{v.day}</span>
-                    <input type="text" className="form-control text-center" value={v.hours}/>
-                </div>
-            )}
         </div>
     );
 }
