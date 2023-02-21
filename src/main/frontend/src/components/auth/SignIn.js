@@ -1,4 +1,3 @@
-/*global kakao*/
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {
@@ -10,8 +9,7 @@ import {
 }
 from 'mdb-react-ui-kit';
 
-
-function Login() {
+function SignIn() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -28,21 +26,20 @@ function Login() {
     function checkBlank() {
         if(!username) {
             alert("아이디를 입력해주세요");
-            return -1;
+            return false;
         }
         if(!password) {
             alert("비밀번호를 입력해주세요");
-            return -1;
+            return false;
         }
-        return 1;
+        return true;
     }
 
-    function executeLogin() {
-        if(checkBlank() != 1) {
+    function signIn() {
+        if(!checkBlank()) {
             return;
         }
-
-        axios.post('/auth/login', {username: username, password: password})
+        axios.post('/auth/signIn', {username: username, password: password})
             .then((response) => { localStorage.setItem("jwt", response.data);})
         window.location.href = `/`;
     }
@@ -58,10 +55,10 @@ function Login() {
                 <a href="!#">Forgot password?</a>
             </div>
 
-            <MDBBtn className="mb-4" onClick={executeLogin}>Sign in</MDBBtn>
+            <MDBBtn className="mb-4" onClick={signIn}>Sign in</MDBBtn>
 
             <div className="text-center">
-                <p>Not a member? <a href="#!">Register</a></p>
+                <p>Not a member? <a href="/signUp">Register</a></p>
                 <p>or sign up with:</p>
 
                 <div className='d-flex justify-content-between mx-auto' style={{width: '40%'}}>
@@ -89,4 +86,4 @@ function Login() {
 
 }
 
-export default Login;
+export default SignIn;

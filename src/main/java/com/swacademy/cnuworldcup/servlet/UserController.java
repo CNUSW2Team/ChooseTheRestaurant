@@ -14,24 +14,14 @@ import java.util.UUID;
 public class UserController {
 
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
 
-    @GetMapping("/signUp")
-    public String signUp() {
-        Users user = Users.builder()
-                .userId(UUID.randomUUID())
-                .username("test")
-                .password(passwordEncoder.encode("test123"))
-                .role(Role.ROLE_USER)
-                .build();
-
-        userService.saveUser(user);
-
-        return "Success singUp!";
+    @PostMapping("/auth/signUp")
+    public String singUp(@RequestBody Users user) {
+        return userService.saveUser(user.getUsername(), user.getPassword());
     }
 
-    @PostMapping("/auth/login")
-    public String login(@RequestBody Users user) {
+    @PostMapping("/auth/signIn")
+    public String singIn(@RequestBody Users user) {
         String token = userService.createJwt(user.getUsername(), user.getPassword());
         return token;
     }
