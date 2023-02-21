@@ -11,7 +11,7 @@ function HomePage() {
                 <p className="lead"> 충남대 근처의 가게들로 구성된 맛집 월드컵을 통해 확인해보세요! </p>
                 <div>
                     <a href="/AllCategory" className="btn btn-lg btn-secondary fw-bold border-white ">월드컵</a>
-                    <a href="/AllCategory" className="btn btn-lg btn-secondary fw-bold border-white ">태그검색</a>
+                    <a href="/AllMenu" className="btn btn-lg btn-secondary fw-bold border-white ">태그검색</a>
                     <a href="/AllCategory" className="btn btn-lg btn-secondary fw-bold border-white ">룰렛</a>
                     <a href="/AllCategory" className="btn btn-lg btn-secondary fw-bold border-white ">사다리</a>
                 </div>

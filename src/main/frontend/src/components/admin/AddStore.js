@@ -46,11 +46,18 @@ function AddStore() {
         }
         fd.append("storeDto", JSON.stringify(storeDto));
 
+        for (let key of fd.keys()) {
+            console.log(key);
+        }
+        /* value 확인하기 */
+        for (let value of fd.values()) {
+            console.log(value);
+        }
+
         axios.post('/api/admin/Store', fd)
             .then((response) => {
                 alert(response.data);
             })
-            .then(window.location.href = "/admin/AddStore")
 
         resetInput();
     }

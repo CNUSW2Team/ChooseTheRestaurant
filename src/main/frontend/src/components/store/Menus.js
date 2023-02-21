@@ -38,7 +38,7 @@ function Menus(props) {
         //         </tr>,)}
         //         </tbody>
         //     </table>
-        <div className="row row-cols-lg-1 row-cols-xl-2 row-cols-xxl-3 g-4 w-100 m-auto">
+        <div className="row row-cols-1 row-cols-xl-2 row-cols-xxl-3 g-4 w-100 m-auto">
             {menu.map(v =>
                         <div className="col">
                             <div className="card shadow">
@@ -47,10 +47,10 @@ function Menus(props) {
                                         <img src={`/image/${v.menu_id}`} className="rounded-start img-fluid h-100"
                                              style={{objectFit: "cover"}}/>
                                     </div>
-                                    <div className="col" style={{minHeight:"150px"}}>
+                                    <div className="col-7 p-1" style={{minHeight:"150px"}}>
                                         <div className="card-body d-flex flex-column justify-content-between h-100">
-                                            <div>
-                                                <h5 className="card-title fw-bold text-truncate w-100">{v.menu_name}</h5>
+                                            <div className="d-flex flex-column">
+                                                <h5 className="fw-bold text-truncate">{v.menu_name}</h5>
                                                 <p className="card-text">{v.price}원</p>
                                             </div>
                                             <p className="d-flex">
