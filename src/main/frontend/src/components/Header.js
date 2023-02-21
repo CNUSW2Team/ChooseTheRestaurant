@@ -1,4 +1,5 @@
 import React from 'react';
+import Logout from "./auth/Logout";
 
 function Header() {
     return (
@@ -17,6 +18,7 @@ function Header() {
                             <a className="nav-link" href="/AllMenu">메뉴</a>
                         </li>
                     </ul>
+                    <Logout ></Logout>
                     {/*<form className="d-flex">*/}
                     {/*    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>*/}
                     {/*    <button className="btn btn-outline-success" type="submit">Search</button>*/}
