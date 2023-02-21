@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     MDBBtn,
     MDBContainer,
@@ -18,25 +18,31 @@ function SignUp() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [repeatedPassword, setRepeatedPassword] = useState("");
+    const [disableBtn, setDisableBtn] = useState(true);
 
     const updateUsername = e => setUsername(e.target.value);
     const updatePassword = e => setPassword(e.target.value);
     const updateRepeatedPassword = e => setRepeatedPassword(e.target.value);
 
-    function checkBlank() {
-        if(!username) {
-            alert("Please enter your Email");
-            return false;
+    function checkValid() {
+        if(!username || !password || !repeatedPassword) {
+            setDisableBtn(true);
+        } else setDisableBtn(false);
+    }
+    useEffect(() => {checkValid()}, [username, password, repeatedPassword]);
+
+    function checkUsername() {
+        const regex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+        if(!regex.test(username)) {
+            alert("잘못된 이메일 형식입니다.");
+            return;
         }
-        if(!password) {
-            alert("Please enter your password");
-            return false;
-        }
-        if(!repeatedPassword) {
-            alert("Please enter your confirm password")
-            return false;
-        }
-        return true;
+
+        axios.get('/auth/findUser', {params: {username: username}})
+            .then((response) => {
+                if(response.data) alert("이미 존재하는 이메일입니다.")
+                else signUp();
+            })
     }
 
     function confirmPassword() {
@@ -48,7 +54,6 @@ function SignUp() {
     }
 
     function signUp() {
-        if(!checkBlank()) return;
         if(!confirmPassword()) return;
 
         axios.post('/auth/signUp', {username: username, password: password})
@@ -69,20 +74,20 @@ function SignUp() {
 
                             <div className="d-flex flex-row align-items-center mb-4">
                                 <MDBIcon fas icon="envelope me-3" size='lg'/>
-                                <MDBInput label='Your Email' id='form2' type='email' onChange={updateUsername}/>
+                                <MDBInput label='Your Email' type='email' onChange={updateUsername}/>
                             </div>
 
                             <div className="d-flex flex-row align-items-center mb-4">
                                 <MDBIcon fas icon="lock me-3" size='lg'/>
-                                <MDBInput label='Password' id='form3' type='password' onChange={updatePassword}/>
+                                <MDBInput label='Password' type='password' onChange={updatePassword}/>
                             </div>
 
                             <div className="d-flex flex-row align-items-center mb-4">
                                 <MDBIcon fas icon="key me-3" size='lg'/>
-                                <MDBInput label='Repeat your password' id='form4' type='password' onChange={updateRepeatedPassword}/>
+                                <MDBInput label='Repeat your password' type='password' onChange={updateRepeatedPassword}/>
                             </div>
 
-                            <MDBBtn className='mb-4' size='lg' onClick={signUp}>Register</MDBBtn>
+                            <MDBBtn className='mb-4' size='lg' onClick={checkUsername} disabled={disableBtn}>Register</MDBBtn>
 
                         </MDBCol>
 

@@ -40,7 +40,7 @@ function SignIn() {
             return;
         }
         axios.post('/auth/signIn', {username: username, password: password})
-            .then((response) => { localStorage.setItem("jwt", response.data);})
+            .then((response) => { localStorage.setItem("jwt", response.data, {sameSite: 'strict'})})
         window.location.href = `/`;
     }
 
