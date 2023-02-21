@@ -57,13 +57,13 @@ function AllStore() {
                         <div className="col" onClick={() => window.location.href = `/Store/${v.store_id}`}>
                             <div className="card shadow">
                                 <div className="row g-2">
-                                    <div className="col">
+                                    <div className="col-6">
                                         <img src={`/image/${v.store_id}`} className="rounded-start img-fluid h-100"
                                              style={{objectFit: "cover"}}/>
                                     </div>
-                                    <div className="col" style={{minHeight: "250px"}}>
+                                    <div className="col-5" style={{minHeight: "250px"}}>
                                         <div className="card-body d-flex flex-column justify-content-evenly h-100">
-                                            <h5 className="card-title fw-bold text-truncate w-100">{v.store_name}</h5>
+                                            <h5 className="card-title fw-bold w-100">{v.store_name}</h5>
                                             <p className="card-text mb-5">{v.address}</p>
                                             <p className="card-text text-end">
                                                 <small className="d-inline-flex">
