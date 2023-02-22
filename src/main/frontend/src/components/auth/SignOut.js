@@ -1,8 +1,4 @@
 import React from 'react';
-import {
-    MDBBtn
-}
-from 'mdb-react-ui-kit';
 
 function SignOut() {
     function signOut() {

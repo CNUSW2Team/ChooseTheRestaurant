@@ -1,13 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import {
-    MDBContainer,
-    MDBInput,
-    MDBCheckbox,
-    MDBBtn,
-    MDBIcon
-}
-    from 'mdb-react-ui-kit';
 
 function SignIn() {
 

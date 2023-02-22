@@ -114,6 +114,13 @@ public class CRUDService {
     }
 
     @Transactional
+    public List<MenuTag> findMenuTagByTagId(long id) {
+        Tag tag = tagRepository.findById(id).get();
+        List<MenuTag> byTag = menuTagRepository.findByTag(tag);
+        return byTag;
+    }
+
+    @Transactional
     public Tag findTagByName(String name) {
         return tagRepository.findByName(name);
     }
@@ -195,6 +202,11 @@ public class CRUDService {
     @Transactional
     public void removeTag(Tag tag) {
         tagRepository.delete(tag);
+    }
+
+    @Transactional
+    public void removeMenuTag(MenuTag menuTag) {
+        menuTagRepository.delete(menuTag);
     }
 
     @Transactional

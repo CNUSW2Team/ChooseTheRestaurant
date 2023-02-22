@@ -81,6 +81,11 @@ public class DeleteController {
     @DeleteMapping(value = "/api/Tag/{tagName}")
     public void removeTag(@PathVariable String tagName) {
         Tag toRemove = crudService.findTagByName(tagName);
+        List<MenuTag> menuTags = crudService.findMenuTagByTagId(toRemove.getTag_id());
+
+        for(MenuTag menuTag: menuTags){
+            crudService.removeMenuTag(menuTag);
+        }
         crudService.removeTag(toRemove);
     }
 
