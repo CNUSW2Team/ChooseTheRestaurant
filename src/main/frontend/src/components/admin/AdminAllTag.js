@@ -96,7 +96,7 @@ function AllStore() {
         </div>
         <div className="m-2">
             {tag.filter(v => createFuzzyMatcher(searchBox).test(v.tag.toLowerCase())).map(v =>
-                <button className="btn btn-sm btn-primary rounded-4 m-1" onClick={deleteTag} value={v.tag}>#{v.tag}</button>
+                <button className="btn btn-sm btn-primary rounded-4 m-1" key={v.tag} onClick={deleteTag} value={v.tag}>#{v.tag}</button>
             )}
         </div>
     </div>);

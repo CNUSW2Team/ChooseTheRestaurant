@@ -15,8 +15,8 @@ function SignOut() {
 
     return (
         <>
-            {localStorage.getItem("jwt") ? <MDBBtn onClick={signOut}>로그아웃</MDBBtn> :
-                <MDBBtn onClick={moveSignInPage}>로그인</MDBBtn>}
+            {localStorage.getItem("jwt") ? <button className="btn btn-primary rounded-4" onClick={signOut}>로그아웃</button> :
+                <button className="btn btn-primary rounded-4" onClick={moveSignInPage}>로그인</button>}
         </>
     )
 

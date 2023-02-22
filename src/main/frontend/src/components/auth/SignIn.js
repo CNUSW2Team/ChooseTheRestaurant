@@ -7,7 +7,7 @@ import {
     MDBBtn,
     MDBIcon
 }
-from 'mdb-react-ui-kit';
+    from 'mdb-react-ui-kit';
 
 function SignIn() {
 
@@ -18,17 +18,17 @@ function SignIn() {
     const updatePassword = e => setPassword(e.target.value);
 
     useEffect(() => {
-        if(localStorage.getItem("jwt")) {
+        if (localStorage.getItem("jwt")) {
             window.location.href = `/`;
         }
     })
 
     function checkBlank() {
-        if(!username) {
+        if (!username) {
             alert("아이디를 입력해주세요");
             return false;
         }
-        if(!password) {
+        if (!password) {
             alert("비밀번호를 입력해주세요");
             return false;
         }
@@ -36,7 +36,7 @@ function SignIn() {
     }
 
     function signIn() {
-        if(!checkBlank()) {
+        if (!checkBlank()) {
             return;
         }
         axios.post('/auth/signIn', {username: username, password: password})
@@ -47,44 +47,61 @@ function SignIn() {
             })
     }
 
-    return(
-        <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
+    return (
+        <div className="p-3 m-5 d-flex flex-column align-items-center">
+            <div className="mb-3 w-50">
+                <label htmlFor="form1" className="form-label">Email address</label>
+                <input type="email" className="form-control" id="form1"
+                       placeholder="name@example.com"
+                       onChange={updateUsername}/>
 
-            <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email' onChange={updateUsername}/>
-            <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' onChange={updatePassword}/>
-
-            <div className="d-flex justify-content-between mx-3 mb-4">
-                <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-                <a href="!#">Forgot password?</a>
+            </div>
+            <div className="mb-3 w-50">
+                <label htmlFor="form2" className="form-label">Password</label>
+                <input type="password" className="form-control" id="form2"
+                       placeholder="*****"
+                       onChange={updatePassword}/>
             </div>
 
-            <MDBBtn className="mb-4" onClick={signIn}>Sign in</MDBBtn>
+            {/*<MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email' onChange={updateUsername}/>*/}
+            {/*<MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' onChange={updatePassword}/>*/}
 
-            <div className="text-center">
-                <p>Not a member? <a href="/signUp">Register</a></p>
-                <p>or sign up with:</p>
-
-                <div className='d-flex justify-content-between mx-auto' style={{width: '40%'}}>
-                    <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                        <MDBIcon fab icon='facebook-f' size="sm"/>
-                    </MDBBtn>
-
-                    <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                        <MDBIcon fab icon='twitter' size="sm"/>
-                    </MDBBtn>
-
-                    <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                        <MDBIcon fab icon='google' size="sm"/>
-                    </MDBBtn>
-
-                    <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                        <MDBIcon fab icon='github' size="sm"/>
-                    </MDBBtn>
-
-                </div>
+            {/*<div className="d-flex justify-content-between mx-3 mb-4">*/}
+            {/*    <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />*/}
+            {/*    <a href="!#">Forgot password?</a>*/}
+            {/*</div>*/}
+            <div>
+                <button className="btn btn-primary mx-2" onClick={signIn}>Sign in</button>
+                <button className="btn btn-primary mx-2" onClick={() => window.location.href = '/signUp'}>Register
+                </button>
             </div>
 
-        </MDBContainer>
+
+            {/*<div className="text-center">*/}
+            {/*    <p>Not a member? <a href="/signUp">Register</a></p>*/}
+            {/*    <p>or sign up with:</p>*/}
+
+            {/*    <div className='d-flex justify-content-between mx-auto' style={{width: '40%'}}>*/}
+            {/*        <button tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>*/}
+            {/*            <MDBIcon fab icon='facebook-f' size="sm"/>*/}
+            {/*        </button>*/}
+
+            {/*        <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>*/}
+            {/*            <MDBIcon fab icon='twitter' size="sm"/>*/}
+            {/*        </MDBBtn>*/}
+
+            {/*        <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>*/}
+            {/*            <MDBIcon fab icon='google' size="sm"/>*/}
+            {/*        </MDBBtn>*/}
+
+            {/*        <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>*/}
+            {/*            <MDBIcon fab icon='github' size="sm"/>*/}
+            {/*        </MDBBtn>*/}
+
+            {/*    </div>*/}
+            {/*</div>*/}
+
+        </div>
     )
 
 }

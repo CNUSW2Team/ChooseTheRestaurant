@@ -4,11 +4,6 @@ import {adminBtn, adminGet} from "./auth/AdminUtil";
 
 function HomePage() {
 
-    const [admin, setAdmin] = useState(false);
-
-    useEffect(() =>{
-        adminGet("/auth/admin", setAdmin);
-    }, [])
 
     return (
         <div className='min-vh-100' style={{backgroundColor:"#E7DDF7"}}>
@@ -23,7 +18,7 @@ function HomePage() {
                     <a href="/AllCategory" className="btn btn-lg btn-secondary fw-bold border-white ">룰렛</a>
                     <a href="/AllCategory" className="btn btn-lg btn-secondary fw-bold border-white ">사다리</a>
                 </div>
-                {admin && <a href="/admin" className="btn">관리자페이지</a>}
+
             </main>
         </div>
     );
