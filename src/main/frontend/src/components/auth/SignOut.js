@@ -7,6 +7,7 @@ from 'mdb-react-ui-kit';
 function SignOut() {
     function signOut() {
         localStorage.removeItem("jwt");
+        localStorage.removeItem("username");
         window.location.href = `/`;
     }
 

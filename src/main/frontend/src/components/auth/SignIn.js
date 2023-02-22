@@ -42,6 +42,7 @@ function SignIn() {
         axios.post('/auth/signIn', {username: username, password: password})
             .then((response) => {
                 localStorage.setItem("jwt", response.data);
+                localStorage.setItem("username", username);
                 window.location.href = `/`;
             })
     }

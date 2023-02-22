@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {createFuzzyMatcher} from "../../util/util";
 import {Rating} from "@mui/material";
+import {prohibitionNonAdmin} from "../auth/AdminUtil";
 
 function AllStore() {
     const [tag, setTag] = useState([]);
@@ -10,6 +11,10 @@ function AllStore() {
 
     const updateSearchBox = e => setSearchBox(e.target.value);
     const updateNewTag = e => setNewTag(e.target.value);
+
+    useEffect(() => {
+        prohibitionNonAdmin();
+    }, [])
 
     function addTag() {
         if (newTag.length === 0) {
