@@ -16,7 +16,8 @@ public class Tag {
     @Id
     private long tag_id;
 
-    private String tag_name;
+    @Column(name = "tag_name")
+    private String name;
 
     @OneToMany(mappedBy = "tag", fetch = FetchType.EAGER)
     private List<MenuTag> menuTag = new ArrayList<>();

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import {Container as MapDiv, Marker, NaverMap, useNavermaps} from 'react-naver-maps'
+import AddTags from "./AddTags";
 
 function AdminStore() {
     let {storeId} = useParams();
@@ -33,6 +34,10 @@ function AdminStore() {
             })
     }, []);
 
+    useEffect(() => {
+        console.log(newMenu);
+    }, [newMenu]);
+
     function removeMenu(id) {
         if (window.confirm("정말로 삭제하시겠습니까?")) {
             axios.delete(`/api/Menu/${id}`)
@@ -62,14 +67,6 @@ function AdminStore() {
         const name = e.target.name;
         setNewMenu(newMenu.map((item) => {
             return item.idx === parseInt(name) ? {...item, price: value} : item;
-        }));
-    }
-
-    function handleTag(e) {
-        const value = e.target.value;
-        const name = e.target.name;
-        setNewMenu(newMenu.map((item) => {
-            return item.idx === parseInt(name) ? {...item, tag: value} : item;
         }));
     }
 
@@ -248,11 +245,11 @@ function AdminStore() {
                                                    placeholder="가격을 입력하세요." value={v.price}
                                                    onChange={handlePrice}/>
                                         </div>
-                                        <div className="input-group mb-1 input-group-sm">
-                                            <span className="input-group-text" id={"tag" + v.idx}>태그</span>
-                                            <input type="text" className="form-control" name={v.idx}
-                                                   placeholder="태그를 입력하세요. '/'로 구분합니다." value={v.tag}
-                                                   onChange={handleTag}/>
+                                        <div className="d-flex w-100 align-items-center">
+                                            <AddTags idx={v.idx} newMenu={newMenu} setNewMenu={setNewMenu}/>
+                                            <div className="">
+                                                {v.tag.map(w => <a className="me-1"> #{w} </a>)}
+                                            </div>
                                         </div>
                                         <div className="d-flex w-100 align-items-center">
                                             <label htmlFor={v.idx}>

@@ -124,7 +124,7 @@ public class GetController {
         List<Menu> allMenus = crudService.findAllMenus();
 
         for (Menu menu : allMenus) {
-            List<String> tags = crudService.findMenuTagByMenuId(menu.getMenu_id()).stream().map(w -> w.getTag().getTag_name()).toList();
+            List<String> tags = crudService.findMenuTagByMenuId(menu.getMenu_id()).stream().map(w -> w.getTag().getName()).toList();
 
             JSONObject json = new JSONObject();
             json.put("menu_id", menu.getMenu_id());
@@ -144,7 +144,7 @@ public class GetController {
     public @ResponseBody String getAllTags() {
         List<JSONObject> results = new ArrayList<>();
 
-        List<String> tags = crudService.findAllTags().stream().map(Tag::getTag_name).toList();
+        List<String> tags = crudService.findAllTags().stream().map(Tag::getName).toList();
 
         for(String tag : tags){
             JSONObject json = new JSONObject();
@@ -286,7 +286,7 @@ public class GetController {
 
         AtomicInteger count = new AtomicInteger(1);
         store.getMenus().forEach(v -> {
-            List<String> tags = crudService.findMenuTagByMenuId(v.getMenu_id()).stream().map(w -> w.getTag().getTag_name()).toList();
+            List<String> tags = crudService.findMenuTagByMenuId(v.getMenu_id()).stream().map(w -> w.getTag().getName()).toList();
 
             JSONObject menu = new JSONObject();
             menu.put("idx", count.getAndIncrement());
