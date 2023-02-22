@@ -2,11 +2,16 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {createFuzzyMatcher} from "../../util/util";
 import StartButton from "../worldcup/StartButton";
+import {prohibitionNonAdmin} from "../auth/AdminUtil";
 
 function ModifyEntities() {
     const [searchBox, setSearchBox] = useState('');
     const [category, setCategory] = useState([]);
     const updateSearchBox = e => setSearchBox(e.target.value);
+
+    useEffect(() => {
+        prohibitionNonAdmin();
+    }, [])
 
     useEffect(() => {
             axios.get('/api/Category')

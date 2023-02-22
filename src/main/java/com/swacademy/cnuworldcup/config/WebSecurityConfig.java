@@ -2,6 +2,7 @@ package com.swacademy.cnuworldcup.config;
 
 import com.swacademy.cnuworldcup.config.auth.UserDetailsServiceImpl;
 import com.swacademy.cnuworldcup.config.jwt.JwtValidationFilter;
+import com.swacademy.cnuworldcup.entity.status.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,7 +47,7 @@ public class WebSecurityConfig {
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((authz) -> authz
-                        /*.requestMatchers("/login").permitAll()*/
+                        .requestMatchers("/auth/admin").hasAnyRole("ADMIN")
                         .anyRequest().permitAll()
                 )
                 .logout(logout ->

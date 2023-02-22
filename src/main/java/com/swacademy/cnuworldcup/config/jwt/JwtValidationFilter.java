@@ -43,10 +43,9 @@ public class JwtValidationFilter extends OncePerRequestFilter {
 
                 Users user = (Users) userDetailsService.loadUserByUsername(username);
                 Authentication authenticationToken = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-                log.info("Authorities : {}", authenticationToken.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             } catch (JWTVerificationException e) {
-                e.printStackTrace();
+                log.info("jwt authentication failed");
             }
         }
         filterChain.doFilter(request, response);
