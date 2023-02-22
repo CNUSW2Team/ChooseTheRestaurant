@@ -1,12 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import {Button, Form, Table} from "react-bootstrap";
-import {Link, useNavigate} from "react-router-dom";
 import {createFuzzyMatcher} from "../../util/util";
 import {Rating} from "@mui/material";
-import Pagination from "react-js-pagination";
-import PaginationBox from "../../util/PaginationBox";
-import StartButton from "../worldcup/StartButton";
 
 function AllStore() {
     const [store, setStore] = useState([]);
