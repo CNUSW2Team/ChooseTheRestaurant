@@ -2,12 +2,17 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {createFuzzyMatcher} from "../../util/util";
 import {Rating} from "@mui/material";
+import {prohibitionNonAdmin} from "../auth/AdminUtil";
 
 function AllStore() {
     const [store, setStore] = useState([]);
     const [searchBox, setSearchBox] = useState('');
 
     const updateSearchBox = e => setSearchBox(e.target.value);
+
+    useEffect(() => {
+        prohibitionNonAdmin();
+    }, [])
 
     useEffect(() => {
         axios.get('/api/Store')

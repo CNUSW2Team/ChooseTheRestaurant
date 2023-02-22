@@ -24,6 +24,11 @@ public class UserController {
         return userService.findByUsername(username).isPresent();
     }
 
+    @GetMapping("/auth/admin")
+    public boolean checkAdmin() {
+        return true;
+    }
+
     @PostMapping("/auth/signUp")
     public String singUp(@RequestBody Users user) {
         return userService.saveUser(user.getUsername(), user.getPassword());
