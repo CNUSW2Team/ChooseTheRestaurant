@@ -22,6 +22,7 @@ import AdminAllStore from "./components/admin/AdminAllStore";
 import AdminAllCategory from "./components/admin/AdminAllCategory";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
+import AdminAllTag from "./components/admin/AdminAllTag";
 
 function App() {
     return (
@@ -46,6 +47,7 @@ function App() {
                             <Route path="/admin/AddStore" element={<AddStore/>}></Route>
                             <Route path="/admin/Store/:storeId" element={<AdminStore/>}></Route>
                             <Route path="/admin/AllCategory" element={<AdminAllCategory/>}></Route>
+                            <Route path="/admin/AllTag" element={<AdminAllTag/>}></Route>
                             <Route path="/login" element={<SignIn/>}></Route>
                             <Route path="/signUp" element={<SignUp/>}></Route>
                             <Route path="*" element={<NotFound/>}></Route>

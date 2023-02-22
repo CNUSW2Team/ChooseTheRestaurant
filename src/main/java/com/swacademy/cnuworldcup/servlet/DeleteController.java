@@ -78,6 +78,12 @@ public class DeleteController {
         return "선택한 메뉴 삭제 완료";
     }
 
+    @DeleteMapping(value = "/api/Tag/{tagName}")
+    public void removeTag(@PathVariable String tagName) {
+        Tag toRemove = crudService.findTagByName(tagName);
+        crudService.removeTag(toRemove);
+    }
+
     @DeleteMapping(value = "/api/Comment/{commentId}")
     public String removeComment(@PathVariable String commentId) {
         Comment removeComment = crudService.findCommentById(UUID.fromString(commentId));

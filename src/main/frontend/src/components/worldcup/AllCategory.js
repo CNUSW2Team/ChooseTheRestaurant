@@ -95,9 +95,9 @@ function AllCategory() {
                     <div className="col" key={v.category_id}>
                         <div className="card shadow">
                             <img src={`/image/${v.category_id}`} className="card-img-top " alt="..."/>
-                            <p className="text-end bg-danger text-white p-1">
-                                Favorite: {v.favorite}
-                            </p>
+                            <div className="text-end bg-danger text-white pe-3 py-1">
+                                ♥ {v.favorite}
+                            </div>
                             <div className="p-3 d-flex flex-column align-items-end">
                                 <h5 className="card-title fw-bold text-nowrap text-truncate w-100">{v.category_name}</h5>
                                 <div className="btn-group btn-group-sm my-3">

@@ -114,6 +114,11 @@ public class CRUDService {
     }
 
     @Transactional
+    public Tag findTagByName(String name) {
+        return tagRepository.findByName(name);
+    }
+
+    @Transactional
     public Comment saveComment(UUID storeUUID, String s) {
         Store store = storeRepository.findById(storeUUID).get();
         Comment comment = new Comment();
@@ -187,6 +192,12 @@ public class CRUDService {
         storeRepository.delete(store);
     }
 
+    @Transactional
+    public void removeTag(Tag tag) {
+        tagRepository.delete(tag);
+    }
+
+    @Transactional
     public void saveComment(Comment comment) {
         commentRepository.save(comment);
     }

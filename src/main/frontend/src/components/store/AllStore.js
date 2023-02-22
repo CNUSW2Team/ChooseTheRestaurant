@@ -1,12 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import {Button, Form, Table} from "react-bootstrap";
-import {Link, useNavigate} from "react-router-dom";
 import {createFuzzyMatcher} from "../../util/util";
 import {Rating} from "@mui/material";
-import Pagination from "react-js-pagination";
-import PaginationBox from "../../util/PaginationBox";
-import StartButton from "../worldcup/StartButton";
 
 function AllStore() {
     const [store, setStore] = useState([]);
@@ -33,7 +28,7 @@ function AllStore() {
         axios.get('/api/Store')
             .then(response => {
                 setStore(response.data);
-                console.log(response.data);
+                // console.log(response.data);
             })
             .catch(error => {
                 console.log(error);
@@ -54,7 +49,7 @@ function AllStore() {
 
             <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 g-4 w-100 m-auto">
                 {store.filter(v => createFuzzyMatcher(searchBox).test(v.store_name.toLowerCase())).map(v =>
-                        <div className="col" onClick={() => window.location.href = `/Store/${v.store_id}`}>
+                        <div className="col" key={v.store_id} onClick={() => window.location.href = `/Store/${v.store_id}`}>
                             <div className="card shadow">
                                 <div className="row g-2">
                                     <div className="col-6">

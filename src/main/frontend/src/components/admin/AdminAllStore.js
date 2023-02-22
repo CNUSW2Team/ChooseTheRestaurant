@@ -18,7 +18,7 @@ function AllStore() {
         axios.get('/api/Store')
             .then(response => {
                 setStore(response.data);
-                console.log(response.data);
+                // console.log(response.data);
             })
             .catch(error => {
                 console.log(error);
@@ -46,7 +46,7 @@ function AllStore() {
 
             <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 g-4 w-100 m-auto">
                 {store.filter(v => createFuzzyMatcher(searchBox).test(v.store_name.toLowerCase())).map(v =>
-                        <div className="col" onClick={() => window.location.href = `/admin/Store/${v.store_id}`}>
+                        <div className="col" key={v.store_id} onClick={() => window.location.href = `/admin/Store/${v.store_id}`}>
                             <div className="card shadow">
                                 <div className="row g-2">
                                     <div className="col">
@@ -55,7 +55,7 @@ function AllStore() {
                                     </div>
                                     <div className="col" style={{minHeight: "250px"}}>
                                         <div className="card-body d-flex flex-column justify-content-evenly h-100">
-                                            <h5 className="card-title fw-bold text-truncate w-100">{v.store_name}</h5>
+                                            <h5 className="card-title fw-bold w-100">{v.store_name}</h5>
                                             <p className="card-text mb-5">{v.address}</p>
                                             <p className="card-text text-end">
                                                 <small className="d-inline-flex">

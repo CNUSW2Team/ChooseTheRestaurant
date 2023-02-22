@@ -4,7 +4,7 @@ function MoreInfo(props) {
     const navermaps = useNavermaps();
 
     return (
-        <div className="d-flex flex-column align-items-center mt-5 me-5 bg-light p-4 rounded-4 justify-content-between" style={{width:"450px", height:"500px"}}>
+        <div className="d-flex flex-column align-items-center mt-5 me-5 bg-light p-4 pb-2 rounded-4 justify-content-between" style={{width:"450px", height:"550px"}}>
             {/*<KakaoMap*/}
             {/*    name={props.info.store_name}*/}
             {/*    address={props.info.address}*/}
@@ -18,9 +18,9 @@ function MoreInfo(props) {
                     />
                 </NaverMap>
             </MapDiv>
-            <div className="">주소: {props.info.address}</div>
-            <div>전화: {props.info.contact}</div>
-            <div className="">평점: {props.info.averageStars}</div>
+            <div className="text-center bg-white w-100 rounded-4 my-1 p-1 mt-3">주소: {props.info.address}</div>
+            <div className="text-center bg-white w-100 rounded-4 my-1 p-1">전화: {props.info.contact}</div>
+            <div className="text-center bg-white w-100 rounded-4 my-1 p-1">평점: {props.info.averageStars}</div>
         </div>
     );
 }

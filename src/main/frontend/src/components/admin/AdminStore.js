@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import {Container as MapDiv, Marker, NaverMap, useNavermaps} from 'react-naver-maps'
+import AddTags from "./AddTags";
 import {prohibitionNonAdmin} from "../auth/AdminUtil";
 
 function AdminStore() {
@@ -23,7 +24,7 @@ function AdminStore() {
         axios.get(`/api/Menu/${storeId}`)
             .then(response => {
                 setMenu(response.data);
-                console.log("Menu: ", response.data);
+                // console.log("Menu: ", response.data);
             })
             .catch(error => {
                 console.log(error);
@@ -31,12 +32,16 @@ function AdminStore() {
         axios.get(`/api/Store/${storeId}`)
             .then(response => {
                 setStore(response.data);
-                console.log(response.data);
+                // console.log(response.data);
             })
             .catch(error => {
                 console.log(error);
             })
     }, []);
+
+    // useEffect(() => {
+    //     console.log(newMenu);
+    // }, [newMenu]);
 
     function removeMenu(id) {
         if (window.confirm("정말로 삭제하시겠습니까?")) {
@@ -45,7 +50,7 @@ function AdminStore() {
                     axios.get(`/api/Menu/${storeId}`)
                         .then(response => {
                             setMenu(response.data);
-                            console.log("Menu: ", response.data);
+                            // console.log("Menu: ", response.data);
                         })
                         .catch(error => {
                             console.log(error);
@@ -70,14 +75,6 @@ function AdminStore() {
         }));
     }
 
-    function handleTag(e) {
-        const value = e.target.value;
-        const name = e.target.name;
-        setNewMenu(newMenu.map((item) => {
-            return item.idx === parseInt(name) ? {...item, tag: value} : item;
-        }));
-    }
-
     function handleImg(e) {
         const img = e.target.files[0];
         const name = e.target.name;
@@ -93,7 +90,7 @@ function AdminStore() {
         ));
     }
 
-    function RemoveStore(store_id) {
+    function removeStore(store_id) {
         if (window.confirm("정말로 삭제하시겠습니까?\n관련된 메뉴, 코멘트, 리뷰가 모두 삭제되며,\n카테고리에 등록된 가게 또한 삭제됩니다.\n해당 작업은 되돌릴 수 없습니다.")) {
             axios.delete(`/api/Store/${store_id}`)
                 .then(() => {
@@ -204,7 +201,7 @@ function AdminStore() {
                     <div className="row row-cols-1 row-cols-xl-2 row-cols-xxl-3 g-4 w-100 m-auto">
                         {/* 등록된 메뉴 */}
                         {menu.map(v =>
-                                <div className="col">
+                                <div className="col" key={v.menu_id}>
                                     <div className="card shadow">
                                         <div className="row">
                                             <div className="col-5">
@@ -220,7 +217,7 @@ function AdminStore() {
                                                         <p className="card-text">{v.price}원</p>
                                                     </div>
                                                     <p className="card-text">
-                                                        {v.tag.map(w => <a className="me-2">#{w}</a>)}
+                                                        {v.tag.map(w => <a className="me-2" key={w}>#{w}</a>)}
                                                     </p>
                                                 </div>
                                             </div>
@@ -236,7 +233,7 @@ function AdminStore() {
 
                         {/* 메뉴 추가 폼 */}
                         {newMenu.map(v =>
-                                <div className="col">
+                                <div className="col" key={v.idx}>
                                     <div className="card shadow p-3 align-items-end">
                                         <button className="btn btn-sm btn-outline-danger mb-1" value={v.idx}
                                                 onClick={deleteNewMenu}>삭제
@@ -253,11 +250,11 @@ function AdminStore() {
                                                    placeholder="가격을 입력하세요." value={v.price}
                                                    onChange={handlePrice}/>
                                         </div>
-                                        <div className="input-group mb-1 input-group-sm">
-                                            <span className="input-group-text" id={"tag" + v.idx}>태그</span>
-                                            <input type="text" className="form-control" name={v.idx}
-                                                   placeholder="태그를 입력하세요. '/'로 구분합니다." value={v.tag}
-                                                   onChange={handleTag}/>
+                                        <div className="d-flex w-100 align-items-center">
+                                            <AddTags idx={v.idx} newMenu={newMenu} setNewMenu={setNewMenu}/>
+                                            <div className="">
+                                                {v.tag.map(w => <a className="me-1" key={w}> #{w} </a>)}
+                                            </div>
                                         </div>
                                         <div className="d-flex w-100 align-items-center">
                                             <label htmlFor={v.idx}>
@@ -289,7 +286,7 @@ function AdminStore() {
                 </div>
             </div>
             <div className="text-end w-100">
-                <button className="btn btn-danger m-3" onClick={() => RemoveStore(storeId)}>가게 삭제하기</button>
+                <button className="btn btn-danger m-3" onClick={() => removeStore(storeId)}>가게 삭제하기</button>
                 <button className="btn btn-outline-primary m-3" onClick={submitChange}>변경사항 저장하기</button>
             </div>
         </div>
