@@ -14,7 +14,6 @@ function AddTags(props) {
         axios.get('/api/Tag')
             .then(response => {
                 setTags(response.data);
-                // console.log(response.data);
             })
             .catch(error => {
                 console.log(error);
@@ -27,7 +26,7 @@ function AddTags(props) {
             setSelected([...selected, value]);
     }
 
-    function saveTag(){
+    function saveTag() {
         props.setNewMenu(props.newMenu.map((item) => {
             return item.idx === parseInt(props.idx) ? {...item, tag: selected} : item;
         }));
@@ -47,7 +46,8 @@ function AddTags(props) {
                         {tags && tags.map((v) =>
                             <button
                                 className={"btn btn-sm rounded-4 m-1 " + (selected.includes(v.tag) ? "btn-primary" : "btn-secondary")}
-                                onClick={(e) => updateSelect(e, v.tag)}>#{v.tag}</button>
+                                onClick={(e) => updateSelect(e, v.tag)}
+                                key={v.tag}>#{v.tag}</button>
                         )}
                     </div>
                 </Modal.Body>

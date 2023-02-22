@@ -48,9 +48,9 @@ function Reviews(props) {
                 <button className="btn btn-outline-secondary" type="submit" onClick={() => setSearchBox('')}>초기화
                 </button>
             </div>
-            <table className="table table-responsive text-center table-hover align-middle w-auto" style={{minWidth:"350px"}}>
-                <thead style={{backgroundColor:"#212529"}}>
-                <tr className="text-white">
+            <table className="table text-center align-middle" style={{minWidth:"350px"}}>
+                <thead>
+                <tr className="table-light">
                     <th style={{width:"50px"}}>번호</th>
                     <th>내용</th>
                     <th style={{width:"50px"}}>별점</th>

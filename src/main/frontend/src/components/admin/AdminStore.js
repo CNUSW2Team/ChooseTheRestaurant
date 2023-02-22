@@ -19,7 +19,7 @@ function AdminStore() {
         axios.get(`/api/Menu/${storeId}`)
             .then(response => {
                 setMenu(response.data);
-                console.log("Menu: ", response.data);
+                // console.log("Menu: ", response.data);
             })
             .catch(error => {
                 console.log(error);
@@ -27,16 +27,16 @@ function AdminStore() {
         axios.get(`/api/Store/${storeId}`)
             .then(response => {
                 setStore(response.data);
-                console.log(response.data);
+                // console.log(response.data);
             })
             .catch(error => {
                 console.log(error);
             })
     }, []);
 
-    useEffect(() => {
-        console.log(newMenu);
-    }, [newMenu]);
+    // useEffect(() => {
+    //     console.log(newMenu);
+    // }, [newMenu]);
 
     function removeMenu(id) {
         if (window.confirm("정말로 삭제하시겠습니까?")) {
@@ -45,7 +45,7 @@ function AdminStore() {
                     axios.get(`/api/Menu/${storeId}`)
                         .then(response => {
                             setMenu(response.data);
-                            console.log("Menu: ", response.data);
+                            // console.log("Menu: ", response.data);
                         })
                         .catch(error => {
                             console.log(error);
@@ -196,7 +196,7 @@ function AdminStore() {
                     <div className="row row-cols-1 row-cols-xl-2 row-cols-xxl-3 g-4 w-100 m-auto">
                         {/* 등록된 메뉴 */}
                         {menu.map(v =>
-                                <div className="col">
+                                <div className="col" key={v.menu_id}>
                                     <div className="card shadow">
                                         <div className="row">
                                             <div className="col-5">
@@ -212,7 +212,7 @@ function AdminStore() {
                                                         <p className="card-text">{v.price}원</p>
                                                     </div>
                                                     <p className="card-text">
-                                                        {v.tag.map(w => <a className="me-2">#{w}</a>)}
+                                                        {v.tag.map(w => <a className="me-2" key={w}>#{w}</a>)}
                                                     </p>
                                                 </div>
                                             </div>
@@ -228,7 +228,7 @@ function AdminStore() {
 
                         {/* 메뉴 추가 폼 */}
                         {newMenu.map(v =>
-                                <div className="col">
+                                <div className="col" key={v.idx}>
                                     <div className="card shadow p-3 align-items-end">
                                         <button className="btn btn-sm btn-outline-danger mb-1" value={v.idx}
                                                 onClick={deleteNewMenu}>삭제
@@ -248,7 +248,7 @@ function AdminStore() {
                                         <div className="d-flex w-100 align-items-center">
                                             <AddTags idx={v.idx} newMenu={newMenu} setNewMenu={setNewMenu}/>
                                             <div className="">
-                                                {v.tag.map(w => <a className="me-1"> #{w} </a>)}
+                                                {v.tag.map(w => <a className="me-1" key={w}> #{w} </a>)}
                                             </div>
                                         </div>
                                         <div className="d-flex w-100 align-items-center">

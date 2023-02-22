@@ -12,7 +12,7 @@ function Store() {
         axios.get(`/api/Store/${storeId}`)
             .then(response => {
                 setData(response.data);
-                console.log(response.data);
+                // console.log(response.data);
             })
             .catch(error => {
                 console.log(error);
@@ -22,7 +22,6 @@ function Store() {
 
     const content =
         [
-            // {idx: 0, name: '상세정보', content: <MoreInfo info={store}/>},
             {idx: 0, name: '메뉴', content: <Menus store={storeId}/>},
             {idx: 1, name: '리뷰', content: <Reviews store={storeId}/>},
         ];
