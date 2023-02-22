@@ -1,6 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {adminGet, prohibitionNonAdmin} from "../auth/AdminUtil";
 
 function AdminPage() {
+
+    useEffect(() => {
+        prohibitionNonAdmin();
+    }, [])
+
     return (
         <div className='min-vh-100'>
             <main className="position-absolute top-50 start-50 translate-middle text-center d-flex flex-column">

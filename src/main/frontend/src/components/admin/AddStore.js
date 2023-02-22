@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import {prohibitionNonAdmin} from "../auth/AdminUtil";
 
 function AddStore() {
     const [store_name, setStoreName] = useState('');
@@ -16,6 +17,10 @@ function AddStore() {
         setFile(e.target.files);
         previewImg(e.target.files);
     }
+
+    useEffect(() => {
+        prohibitionNonAdmin();
+    }, [])
 
     function previewImg(files) {
         const imgBox = document.getElementById("imgBox");

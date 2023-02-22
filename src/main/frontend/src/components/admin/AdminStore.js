@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import {Container as MapDiv, Marker, NaverMap, useNavermaps} from 'react-naver-maps'
+import {prohibitionNonAdmin} from "../auth/AdminUtil";
 
 function AdminStore() {
     let {storeId} = useParams();
@@ -13,6 +14,10 @@ function AdminStore() {
     const [menu, setMenu] = useState([]);
     const [newMenu, setNewMenu] = useState([]);
     const [idx, setIdx] = useState(1);
+
+    useEffect(() => {
+        prohibitionNonAdmin();
+    }, [])
 
     useEffect(() => {
         axios.get(`/api/Menu/${storeId}`)
