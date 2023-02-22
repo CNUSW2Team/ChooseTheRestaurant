@@ -85,7 +85,7 @@ function AdminStore() {
         ));
     }
 
-    function RemoveStore(store_id) {
+    function removeStore(store_id) {
         if (window.confirm("정말로 삭제하시겠습니까?\n관련된 메뉴, 코멘트, 리뷰가 모두 삭제되며,\n카테고리에 등록된 가게 또한 삭제됩니다.\n해당 작업은 되돌릴 수 없습니다.")) {
             axios.delete(`/api/Store/${store_id}`)
                 .then(() => {
@@ -281,7 +281,7 @@ function AdminStore() {
                 </div>
             </div>
             <div className="text-end w-100">
-                <button className="btn btn-danger m-3" onClick={() => RemoveStore(storeId)}>가게 삭제하기</button>
+                <button className="btn btn-danger m-3" onClick={() => removeStore(storeId)}>가게 삭제하기</button>
                 <button className="btn btn-outline-primary m-3" onClick={submitChange}>변경사항 저장하기</button>
             </div>
         </div>

@@ -193,6 +193,11 @@ public class CRUDService {
     }
 
     @Transactional
+    public void removeTag(Tag tag) {
+        tagRepository.delete(tag);
+    }
+
+    @Transactional
     public void saveComment(Comment comment) {
         commentRepository.save(comment);
     }

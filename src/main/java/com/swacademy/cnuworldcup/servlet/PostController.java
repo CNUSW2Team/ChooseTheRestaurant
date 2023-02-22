@@ -71,6 +71,12 @@ public class PostController {
         return "리뷰 등록 완료";
     }
 
+    @PostMapping(value = "/api/Tag")
+    public void AddNewTag(String tag) {
+        Tag newTag = Tag.builder().name(tag).build();
+        crudService.saveTag(newTag);
+    }
+
     @PostMapping(value = "/api/Category")
     public String AddNewCategory(String categoryDto) throws IOException {
 
@@ -105,29 +111,29 @@ public class PostController {
         return "새로운 카테고리 등록 완료";
     }
 
-    @PostMapping(value = "/api/admin/Menu")
-    public String AddNewMenu(String menuDto, MultipartFile[] file) throws IOException {
-
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, String> menuMap = mapper.readValue(menuDto, Map.class);
-
-        UUID menuID = UUID.randomUUID();
-        Menu menu = Menu.builder()
-                .menu_id((menuID))
-                .menu_name(menuMap.get("menu_name"))
-                .price(Integer.parseInt(menuMap.get("price")))
-                .store(crudService.findStoreById(UUID.fromString(menuMap.get("store_id"))))
-                .build();
-        crudService.saveMenu(menu);
-
-        if(file != null) {
-            File fileSave = new File(IMAGE_FILE_UPLOAD_PATH, menuID.toString() + ".jpg");
-            file[0].transferTo(fileSave);
-            saveFormattedImage(IMAGE_FILE_UPLOAD_PATH, menuID.toString(), 1000, 1000);
-        }
-
-        return "새로운 메뉴 등록 완료";
-    }
+//    @PostMapping(value = "/api/admin/Menu")
+//    public String AddNewMenu(String menuDto, MultipartFile[] file) throws IOException {
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        Map<String, String> menuMap = mapper.readValue(menuDto, Map.class);
+//
+//        UUID menuID = UUID.randomUUID();
+//        Menu menu = Menu.builder()
+//                .menu_id((menuID))
+//                .menu_name(menuMap.get("menu_name"))
+//                .price(Integer.parseInt(menuMap.get("price")))
+//                .store(crudService.findStoreById(UUID.fromString(menuMap.get("store_id"))))
+//                .build();
+//        crudService.saveMenu(menu);
+//
+//        if(file != null) {
+//            File fileSave = new File(IMAGE_FILE_UPLOAD_PATH, menuID.toString() + ".jpg");
+//            file[0].transferTo(fileSave);
+//            saveFormattedImage(IMAGE_FILE_UPLOAD_PATH, menuID.toString(), 1000, 1000);
+//        }
+//
+//        return "새로운 메뉴 등록 완료";
+//    }
 
     @PostMapping(value = "/api/winCount/{categoryId}/{storeId}")
     public String winnerCountIncrease(@PathVariable("categoryId") String categoryId, @PathVariable("storeId") String storeId) {
