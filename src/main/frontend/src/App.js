@@ -23,6 +23,8 @@ import AdminAllCategory from "./components/admin/AdminAllCategory";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import AdminAllTag from "./components/admin/AdminAllTag";
+import "./components/roulette/Roulette.css";
+import RouletteForm from "./components/roulette/RouletteForm"
 
 function App() {
     return (
@@ -42,6 +44,7 @@ function App() {
                             <Route path="/Round/:categoryId/:numOfRound" element={<Game/>}></Route>
                             <Route path="/Result/:categoryId/:storeId" element={<WinnerResult/>}></Route>
                             <Route path="/Ranking/:categoryId" element={<RankingPage/>}></Route>
+                            <Route path="/Roulette" element={<RouletteForm/>}></Route>
                             <Route path="/admin" element={<AdminPage/>}></Route>
                             <Route path="/admin/AllStore" element={<AdminAllStore/>}></Route>
                             <Route path="/admin/AddStore" element={<AddStore/>}></Route>

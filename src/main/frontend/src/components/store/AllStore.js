@@ -28,7 +28,7 @@ function AllStore() {
         axios.get('/api/Store')
             .then(response => {
                 setStore(response.data);
-                // console.log(response.data);
+                console.log(response.data);
             })
             .catch(error => {
                 console.log(error);
