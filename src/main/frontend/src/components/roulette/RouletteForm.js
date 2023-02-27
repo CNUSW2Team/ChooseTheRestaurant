@@ -1,54 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { BiTrash, BiGridVertical, BiPlus } from "react-icons/bi";
 import { v4 as uuidv4 } from "uuid";
 import Roulette from "./Roulette";
+import {createFuzzyMatcher} from "../../util/util";
 
 const FormularioTexto = () => {
+  
+  const [store, setStore] = useState([]);
+  const [searchBox, setSearchBox] = useState('');
+  const updateSearchBox = e => setSearchBox(e.target.value);
+
+  useEffect(() => {
+    axios.get('/api/Store')
+        .then(response => {
+            setStore(response.data);
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+}, []);
+
+console.log("store", store[0])
   const [inputList, setInputList] = useState([
     {
-      id: uuidv4(),
-      text: "Где туалет?"
-    },
-    {
-      id: uuidv4(),
-      text: "Можно вкусную жижу"
-    },
-    {
-      id: uuidv4(),
-      text: "А стики есть?"
-    },
-    {
-      id: uuidv4(),
-      text: "Испаритель на вейп"
-    },
-    {
-      id: uuidv4(),
-      text: "Батарейки есть?"
-    },
-    {
-      id: uuidv4(),
-      text: "А где банкомат?"
-    },
-    {
-      id: uuidv4(),
-      text: "А на Юнке за 200р"
-    },
-    {
-      id: uuidv4(),
-      text: "Стекло есть?"
-    },
-    {
-      id: uuidv4(),
-      text: "Можно кент с кнопкой"
-    },
-    {
-      id: uuidv4(),
-      text: "Испарик на Филин"
-    },
-    {
-      id: uuidv4(),
-      text: "Зажигалки Есть?"
+      store_id: "example",
+      store_name: ""
     }
   ]);
 
@@ -68,8 +47,23 @@ const FormularioTexto = () => {
   };
 
   // handle click event of the Add button
-  const handleAddClick = () => {
-    setInputList([...inputList, { text: "", id: uuidv4() }]);
+  const handleAddClick = (id, name, event) => {
+    const duplicatedStore = inputList.includes(name);
+    console.log(duplicatedStore)
+
+    if(inputList[0]["store_name"] == "") {
+      inputList.shift();
+    }
+  
+    inputList.forEach(o => {
+      if (o.store_name == name) {
+        alert('이미 선택된 가게입니다.')
+        event.preventDefault();
+      }
+    })
+    
+    setInputList([...inputList, {store_id: id, store_name: name}]);  
+
   };
 
   function handleOnDragEnd(result) {
@@ -83,69 +77,99 @@ const FormularioTexto = () => {
   }
 
   return (
-    <div className="main-form">
-      <div className="text-title">
-        <h2>Elysium Рулетка</h2>
-      </div>
-      {/*  */}
-      <Roulette data={inputList} />
-      <DragDropContext onDragEnd={handleOnDragEnd}>
-        <Droppable droppableId="items">
-          {(provided) => (
-            <ul
-              className="items"
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              style={{ listStyle: "none" }}
-            >
-              {inputList.map((x, index) => {
-                return (
-                  <Draggable key={x.id} draggableId={x.id} index={index}>
-                    {(provided) => (
-                      <li
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        className="list-item"
-                      >
-                        <div className="item">
-                          <BiGridVertical />
-                          <input
-                            name="text"
-                            placeholder="Введи что-нибудь(или нет)"
-                            value={x.text}
-                            onChange={(e) => handleInputChange(e, index)}
-                            className="input"
-                          />
-                          <div className="btn-box">
-                            {inputList.length !== 1 && (
-                              <button
-                                className="button"
-                                onClick={() => handleRemoveClick(index)}
-                              >
-                                <BiTrash />
-                              </button>
-                            )}
+    <div>
+      <div className="main-form">
+        <div className="text-title">
+          <h2 className="text-center m-3">Roulette Title</h2>
+        </div>
+
+        <Roulette data={inputList} />
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="items">
+            {(provided) => (
+              <ul
+                className="items"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                style={{ listStyle: "none" }}
+              >
+                {inputList.map((x, index) => {
+                  return (
+                    <Draggable key={x.store_id} draggableId={x.store_id} index={index}>
+                      {(provided) => (
+                        <li
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          className="list-item"
+                        >
+                          <div className="item">
+                            <BiGridVertical />
+                            <input
+                              name="text"
+                              placeholder="Add Store"
+                              value={x.store_name}
+                              onChange={(e) => handleInputChange(e, index)}
+                              className="input"
+                            />
+                            <div className="btn-box">
+                              {inputList.length !== 1 && (
+                                <button
+                                  className="button"
+                                  onClick={() => handleRemoveClick(index)}
+                                >
+                                  <BiTrash />
+                                </button>
+                              )}
+                            </div>
                           </div>
+                        </li>
+                      )}
+                    </Draggable>
+                  );
+                })}
+                {provided.placeholder}
+              </ul>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </div>
+      <div className="p-5">
+        <h4 className="p-2">가게를 선택하세요</h4>
+        <div>
+            <div className="d-flex w-50 p-2">
+                <input className="form-control w-75" id="searchArea" value={searchBox}
+                       onChange={updateSearchBox}
+                       placeholder="검색할 가게를 입력하세요."/>
+                <button className="btn btn-outline-secondary" type="submit" onClick={() => setSearchBox('')}>초기화
+                </button>
+            </div>
+
+            <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 g-4 w-100 m-auto">
+                {store.filter(v => createFuzzyMatcher(searchBox).test(v.store_name.toLowerCase())).map(v =>
+                        <div className="col" key={v.store_id} onClick={() => handleAddClick(v.store_id, v.store_name)}>
+                            <div className="card shadow">
+                                <div className="row g-2">
+                                    <div className="col-6">
+                                        <img src={`/image/${v.store_id}`} className="rounded-start img-fluid h-100"
+                                             style={{objectFit: "cover"}}/>
+                                    </div>
+                                    <div className="col-5">
+                                        <div className="card-body d-flex flex-column justify-content-evenly h-100">
+                                            <h5 className="card-title fw-bold w-100">{v.store_name}</h5>
+                                            <p className="card-text mb-5">{v.address}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </li>
-                    )}
-                  </Draggable>
-                );
-              })}
-              {provided.placeholder}
-            </ul>
-          )}
-        </Droppable>
-      </DragDropContext>
-      <button
-        onClick={handleAddClick}
-        style={{ marginLeft: "2.1rem" }}
-        className="button"
-      >
-        <BiPlus />
-      </button>
+                    ,)}
+
+            </div>
+        </div>
+      </div>
     </div>
+    
   );
 };
 

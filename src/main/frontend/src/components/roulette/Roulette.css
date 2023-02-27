@@ -70,6 +70,7 @@
     font-size: 1.25rem;
     color: #421a4c;
     margin-bottom: 2.5rem;
+    margin-top: 30px;
   }
   
   .result-item {
@@ -93,22 +94,6 @@
   
   .hidden {
     display: none;
-  }
-  
-  i,
-  svg {
-    margin-right: 1rem;
-  }
-  .App {
-    font-family: sans-serif;
-    text-align: center;
-  }
-  
-  .text-title {
-    font-size: 1.25rem;
-    color: #5b627d;
-    padding-top: 15px;
-    padding-bottom: 15px;
   }
   
   .prize-message {

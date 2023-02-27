@@ -20,6 +20,9 @@ function Header() {
                             <a className="nav-link" aria-current="page" href="/AllCategory">월드컵</a>
                         </li>
                         <li className="nav-item">
+                            <a className="nav-link" href="/Roulette">룰렛</a>
+                        </li>
+                        <li className="nav-item">
                             <a className="nav-link" href="/AllStore">가게</a>
                         </li>
                         <li className="nav-item">

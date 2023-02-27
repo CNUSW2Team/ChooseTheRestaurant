@@ -1,30 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Wheel } from "react-custom-roulette";
 
 const Roulette = ({ data }) => {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [rouletteData, setRouletteData] = useState(data);
-  console.log(rouletteData)
+  const spinningRef = useRef(null);
+
   const handleSpinClick = () => {
     const newPrizeNumber = Math.floor(Math.random() * data.length);
     setPrizeNumber(newPrizeNumber);
     setMustSpin(true);
+    spinningRef.current.disabled = false;
   };
 
   useEffect(() => {
     const addShortString = data.map((item) => {
       return {
-        completeOption: "Start",
+        completeOption: item.store_name,
         option:
-          item.text.length >= 30
-            ? item.text.substring(0, 30).trimEnd() + "..."
-            : item.text
+          item.store_name.length >= 30
+            ? item.store_name.substring(0, 30).trimEnd() + "..."
+            : item.store_name
       };
     });
     setRouletteData(addShortString);
   }, [data]);
 
+
+
+  
   return (
     <>
       <div align="center" className="roulette-container">
@@ -34,13 +39,13 @@ const Roulette = ({ data }) => {
           prizeNumber={prizeNumber}
           data={rouletteData}
           outerBorderColor={["#ccc"]}
-          outerBorderWidth={[9]}
+          outerBorderWidth={[7]}
           innerBorderColor={["#f2f2f2"]}
           radiusLineColor={["tranparent"]}
           radiusLineWidth={[1]}
           textColors={["#f5f5f5"]}
           textDistance={55}
-          fontSize={[10]}
+          fontSize={[12]}
           backgroundColors={[
             "#3f297e",
             "#175fa9",
@@ -63,15 +68,9 @@ const Roulette = ({ data }) => {
           Start
         </button>
       </div>
-      <br />
-      <button
-        className="prize-message"
-        onClick={handleSpinClick}
-        disabled={mustSpin}
-      > 
+      <h2 ref={spinningRef} className="text-center m-3 d-none">
         {!mustSpin ? rouletteData[prizeNumber].completeOption : "맛집 고르는 중..."}
-      </button>
-      <h1>{rouletteData[0]["option"]}</h1>
+      </h2>
     </>
   );
 };
