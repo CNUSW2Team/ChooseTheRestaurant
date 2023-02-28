@@ -5,19 +5,30 @@ const Roulette = ({ data }) => {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [rouletteData, setRouletteData] = useState(data);
-  const spinningRef = useRef(null);
+  const popUpRef = useRef(null);
+  const popupBoxRef = useRef(null);
 
   const handleSpinClick = () => {
     const newPrizeNumber = Math.floor(Math.random() * data.length);
     setPrizeNumber(newPrizeNumber);
-    setMustSpin(true);
-    spinningRef.current.disabled = false;
+
+    if(rouletteData.length <= 1){
+      alert("2개 이상의 가게를 선택해주세요.")
+      setMustSpin(false);
+    } else {
+      setMustSpin(true);
+      setTimeout(()=>{ 
+        popUpRef.current.classList.remove('hidden')
+        popupBoxRef.current.classList.add('fade-in') 
+      }, 2000); 
+    }
   };
 
   useEffect(() => {
     const addShortString = data.map((item) => {
       return {
         completeOption: item.store_name,
+        completeOptionId: item.store_id,
         option:
           item.store_name.length >= 30
             ? item.store_name.substring(0, 30).trimEnd() + "..."
@@ -27,9 +38,10 @@ const Roulette = ({ data }) => {
     setRouletteData(addShortString);
   }, [data]);
 
+  const handlePopupClose = () => {
+    popUpRef.current.classList.add('hidden')
+  }
 
-
-  
   return (
     <>
       <div align="center" className="roulette-container">
@@ -68,11 +80,26 @@ const Roulette = ({ data }) => {
           Start
         </button>
       </div>
-      <h2 ref={spinningRef} className="text-center m-3 d-none">
-        {!mustSpin ? rouletteData[prizeNumber].completeOption : "맛집 고르는 중..."}
-      </h2>
+
+      {/* popup */}
+      <div ref={popUpRef} className="pop-up hidden">
+        <div ref={popupBoxRef} className="popup-box">
+          <h1>Result</h1>
+          <div>
+            <h3>{rouletteData[prizeNumber].completeOption}</h3>
+            <img style={{width:350, borderRadius: "5px"}} src={`/image/${rouletteData[prizeNumber].completeOptionId}`}/>
+          </div>
+          
+          <div className="btn-wrap">
+            <button class="btn btn-light" onClick={() => window.location.href = `/Store/${rouletteData[prizeNumber].completeOptionId}`}>가게로 이동</button>
+            <button class="btn btn-light" onClick={handlePopupClose}>Close</button>
+          </div>
+        </div>
+        
+      </div>
     </>
   );
 };
 
 export default Roulette;
+

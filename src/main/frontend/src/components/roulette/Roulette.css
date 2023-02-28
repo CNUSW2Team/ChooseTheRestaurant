@@ -69,8 +69,8 @@
   .text-title {
     font-size: 1.25rem;
     color: #421a4c;
-    margin-bottom: 2.5rem;
-    margin-top: 30px;
+    margin-bottom: 2rem;
+    margin-top: 70px;
   }
   
   .result-item {
@@ -96,7 +96,7 @@
     display: none;
   }
   
-  .prize-message {
+  /* .prize-message {
     border: 1px solid #dcdcdc;
     padding: 20px 35px;
     border-radius: 0.5rem;
@@ -111,25 +111,100 @@
       rgba(35, 155, 99, 1) 0%,
       rgba(100, 176, 49, 1) 100%
     );
-  }
+  } */
   
   .roulette-container {
     position: relative;
-    width: 100%;
-    max-width: 550px;
+    margin-bottom: 0.7rem;
     aspect-ratio: 1;
-    margin: 0 auto;
   }
   
-  .roulette-container > div {
+  /* .roulette-container > div {
     width: 100%;
     height: 100%;
     max-width: unset;
     max-height: unset;
-  }
+  } */
   
   .main-form {
-    max-width: 600px;
     margin: 0 auto;
   }
-  
+
+  .store-list{
+    max-width: 55vw;
+  }
+
+  .pop-up{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: rgba(0,0,0,0.7);
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .popup-box{
+    padding: 30px;
+    border-radius: 20px;
+    min-width: 700px;
+    min-height: 600px;
+    z-index: 100;
+    background-color: rgb(231, 221, 247);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .fade-in {
+    animation: fadein 0.3s;
+    -moz-animation: fadein 0.3s; /* Firefox */
+    -webkit-animation: fadein 0.3s; /* Safari and Chrome */
+    -o-animation: fadein 0.3s; /* Opera */
+  }
+  @keyframes fadein {
+      from {
+          opacity: 0;
+      }
+      to {
+          opacity: 1;
+      }
+  }
+  @-moz-keyframes fadein { /* Firefox */
+      from {
+          opacity: 0;
+      }
+      to {
+          opacity: 1;
+      }
+  }
+  @-webkit-keyframes fadein { /* Safari and Chrome */
+      from {
+          opacity: 0;
+      }
+      to {
+          opacity: 1;
+      }
+  }
+  @-o-keyframes fadein { /* Opera */
+      from {
+          opacity: 0;
+      }
+      to {
+          opacity: 1;
+      }
+  }
+
+  .btn-wrap{
+    margin-top: 20px;
+  }
+
+  .btn-wrap .btn{
+    margin: 5px;
+  }
+
+  .pop-up h1{
+    margin-bottom: 20px;
+  }

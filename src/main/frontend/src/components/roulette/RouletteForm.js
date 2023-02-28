@@ -7,7 +7,6 @@ import Roulette from "./Roulette";
 import {createFuzzyMatcher} from "../../util/util";
 
 const FormularioTexto = () => {
-  
   const [store, setStore] = useState([]);
   const [searchBox, setSearchBox] = useState('');
   const updateSearchBox = e => setSearchBox(e.target.value);
@@ -16,14 +15,13 @@ const FormularioTexto = () => {
     axios.get('/api/Store')
         .then(response => {
             setStore(response.data);
-            console.log(response.data);
         })
         .catch(error => {
             console.log(error);
         })
 }, []);
 
-console.log("store", store[0])
+
   const [inputList, setInputList] = useState([
     {
       store_id: "example",
@@ -48,8 +46,6 @@ console.log("store", store[0])
 
   // handle click event of the Add button
   const handleAddClick = (id, name, event) => {
-    const duplicatedStore = inputList.includes(name);
-    console.log(duplicatedStore)
 
     if(inputList[0]["store_name"] == "") {
       inputList.shift();
@@ -77,10 +73,10 @@ console.log("store", store[0])
   }
 
   return (
-    <div>
+    <div className="d-flex p-5">
       <div className="main-form">
         <div className="text-title">
-          <h2 className="text-center m-3">Roulette Title</h2>
+          <h2 className="text-center">Roulette Title</h2>
         </div>
 
         <Roulette data={inputList} />
@@ -134,25 +130,25 @@ console.log("store", store[0])
           </Droppable>
         </DragDropContext>
       </div>
-      <div className="p-5">
+      <div className="store-list">
         <h4 className="p-2">가게를 선택하세요</h4>
         <div>
             <div className="d-flex w-50 p-2">
                 <input className="form-control w-75" id="searchArea" value={searchBox}
-                       onChange={updateSearchBox}
-                       placeholder="검색할 가게를 입력하세요."/>
+                      onChange={updateSearchBox}
+                      placeholder="검색할 가게를 입력하세요."/>
                 <button className="btn btn-outline-secondary" type="submit" onClick={() => setSearchBox('')}>초기화
                 </button>
             </div>
 
-            <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 g-4 w-100 m-auto">
+            <div className="row row-cols-1 row-cols-xl-2 row-cols-xxl-3 g-4 w-100 m-auto">
                 {store.filter(v => createFuzzyMatcher(searchBox).test(v.store_name.toLowerCase())).map(v =>
                         <div className="col" key={v.store_id} onClick={() => handleAddClick(v.store_id, v.store_name)}>
                             <div className="card shadow">
                                 <div className="row g-2">
                                     <div className="col-6">
                                         <img src={`/image/${v.store_id}`} className="rounded-start img-fluid h-100"
-                                             style={{objectFit: "cover"}}/>
+                                            style={{objectFit: "cover"}}/>
                                     </div>
                                     <div className="col-5">
                                         <div className="card-body d-flex flex-column justify-content-evenly h-100">
@@ -168,6 +164,7 @@ console.log("store", store[0])
             </div>
         </div>
       </div>
+      
     </div>
     
   );
