@@ -112,7 +112,6 @@ public class GetController {
             json.put("address", store.getAddress());
             json.put("numOfReviews", store.getReviews().size());
             json.put("averageStars", Math.round(store.getReviews().stream().mapToDouble(Review::getRating).average().orElseGet(()-> 0)*100.0)/100.0);
-
             results.add(json);
         }
 
@@ -213,6 +212,8 @@ public class GetController {
         results.put("address", store.getAddress());
         results.put("contact", store.getPhone_number());
         results.put("averageStars", Math.round(store.getReviews().stream().mapToDouble(Review::getRating).average().orElseGet(()-> 0)*100.0)/100.0);
+        results.put("latitude", store.getLatitude());
+        results.put("longitude", store.getLongitude());
 
         List<JSONObject> times = new ArrayList<>();
         String openingHours = store.getOpening_hours();

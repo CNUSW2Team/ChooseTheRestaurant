@@ -12,7 +12,7 @@ function Store() {
         axios.get(`/api/Store/${storeId}`)
             .then(response => {
                 setData(response.data);
-                // console.log(response.data);
+                console.log(response.data);
             })
             .catch(error => {
                 console.log(error);

@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useParams} from "react-router-dom";
 import axios from "axios";
-import {Container as MapDiv, Marker, NaverMap, useNavermaps} from 'react-naver-maps'
 import AddTags from "./AddTags";
 import {prohibitionNonAdmin} from "../auth/AdminUtil";
 
 function AdminStore() {
     let {storeId} = useParams();
-    const navermaps = useNavermaps();
 
     const [address, setAddress] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [latitude, setLatitude] = useState('');
+    const [longitude, setLongitude] = useState('');
     const [store, setStore] = useState([]);
     const [menu, setMenu] = useState([]);
     const [newMenu, setNewMenu] = useState([]);
@@ -19,6 +19,29 @@ function AdminStore() {
     useEffect(() => {
         prohibitionNonAdmin();
     }, [])
+
+    const mapElement = useRef(null);
+    const { naver } = window;
+
+    useEffect(() => {
+        if (!mapElement.current || !naver) return;
+
+        // 지도에 표시할 위치의 위도와 경도 좌표를 파라미터로 넣어줍니다.
+        const location = new naver.maps.LatLng(store.latitude, store.longitude);
+        const mapOptions: naver.maps.MapOptions = {
+            center: location,
+            zoom: 18,
+            zoomControl: true,
+            zoomControlOptions: {
+                position: naver.maps.Position.TOP_RIGHT,
+            },
+        };
+        const map = new naver.maps.Map(mapElement.current, mapOptions);
+        new naver.maps.Marker({
+            position: location,
+            map,
+        });
+    });
 
     useEffect(() => {
         axios.get(`/api/Menu/${storeId}`)
@@ -125,6 +148,8 @@ function AdminStore() {
             storeId: storeId,
             address: address,
             phoneNumber: phoneNumber,
+            latitude: latitude,
+            longitude: longitude
         }
         fd.append("storeDto", JSON.stringify(storeDto));
 
@@ -154,6 +179,8 @@ function AdminStore() {
         setNewMenu([]);
         setAddress("");
         setPhoneNumber("");
+        setLatitude("");
+        setLongitude("");
     }
 
     return (
@@ -172,15 +199,7 @@ function AdminStore() {
                     <div
                         className="d-flex flex-column align-items-center mt-5 me-5 bg-light p-4 rounded-4 justify-content-between"
                         style={{width: "450px", height: "500px"}}>
-                        <MapDiv style={{width: "100%", height: "100%"}}>
-                            <NaverMap
-                                defaultCenter={new navermaps.LatLng(37.3595704, 127.105399)}
-                                defaultZoom={15}>
-                                <Marker
-                                    defaultPosition={new navermaps.LatLng(37.3595704, 127.105399)}
-                                />
-                            </NaverMap>
-                        </MapDiv>
+                        <div ref={mapElement} style={{width: "100%", height: "100%"}} />
 
                         <div className="input-group input-group-sm mb-3">
                             <span className="input-group-text" id="address">주소</span>
@@ -193,6 +212,20 @@ function AdminStore() {
                             <input type="text" className="form-control text-center" value={phoneNumber}
                                    placeholder={store.contact}
                                    onChange={(e) => setPhoneNumber(e.target.value)}/>
+                        </div>
+                        <div className="d-flex">
+                            <div className="input-group input-group-sm w-50">
+                                <span className="input-group-text" id="latitude">위도</span>
+                                <input type="text" className="form-control text-center" value={latitude}
+                                       placeholder={store.latitude}
+                                       onChange={(e) => setLatitude(e.target.value)}/>
+                            </div>
+                            <div className="input-group input-group-sm w-50">
+                                <span className="input-group-text" id="longitude">경도</span>
+                                <input type="text" className="form-control text-center" value={longitude}
+                                       placeholder={store.longitude}
+                                       onChange={(e) => setLongitude(e.target.value)}/>
+                            </div>
                         </div>
                     </div>
                 </div>

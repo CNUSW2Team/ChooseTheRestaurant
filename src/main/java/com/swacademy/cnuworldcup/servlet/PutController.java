@@ -40,8 +40,12 @@ public class PutController {
 
         String newAddress = storeMap.get("address");
         String newPhoneNumber = storeMap.get("phoneNumber");
+        String newLatitude = storeMap.get("latitude");
+        String newLongitude = storeMap.get("longitude");
         if (!newAddress.equals("")) store.setAddress(newAddress);
         if (!newPhoneNumber.equals("")) store.setPhone_number(newPhoneNumber);
+        if (!newLatitude.equals("")) store.setLatitude(Float.parseFloat(newLatitude));
+        if (!newLongitude.equals("")) store.setLongitude(Float.parseFloat(newLongitude));
 
         crudService.saveStore(store);
 
