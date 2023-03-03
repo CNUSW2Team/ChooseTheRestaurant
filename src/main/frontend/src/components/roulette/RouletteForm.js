@@ -153,7 +153,7 @@ const FormularioTexto = () => {
                                     <div className="col-5">
                                         <div className="card-body d-flex flex-column justify-content-evenly h-100">
                                             <h5 className="card-title fw-bold w-100">{v.store_name}</h5>
-                                            <p className="card-text mb-5">{v.address}</p>
+                                            {/*<p className="card-text mb-5">{v.address}</p>*/}
                                         </div>
                                     </div>
                                 </div>
