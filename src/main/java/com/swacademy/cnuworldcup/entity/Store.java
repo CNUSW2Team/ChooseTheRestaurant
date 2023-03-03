@@ -26,6 +26,10 @@ public class Store {
 
     private String opening_hours;
 
+    private float latitude;
+    private float longitude;
+
+
     @OneToMany(mappedBy = "store", fetch = FetchType.EAGER)
     private List<Relation> relations = new ArrayList<>();
 

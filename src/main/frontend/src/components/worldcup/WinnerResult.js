@@ -8,6 +8,8 @@ function WinnerResult() {
     let {storeId} = useParams();
 
     const [store, setStore] = useState([]);
+    const [categoryName, setCategoryName] = useState('');
+    const [numOfStore, setNumOfStore] = useState(0);
     const [likeNum, setLikeNum] = useState(0);
     const [comments, setComments] = useState([]);
     const [favorite, setFavorite] = useState(false);
@@ -32,6 +34,8 @@ function WinnerResult() {
             axios.get(`/api/Category/${categoryId}`)
                 .then(response => {
                     setLikeNum(response.data.favorite);
+                    setCategoryName(response.data.category_name);
+                    setNumOfStore(response.data.num_of_stores);
                     console.log(response.data);
                 })
                 .catch(error => {
@@ -120,7 +124,7 @@ function WinnerResult() {
                     <button className="btn btn-outline-primary me-1"
                             onClick={() => window.location.href = `/Ranking/${categoryId}`}> 랭킹페이지로 가기
                     </button>
-                    <StartButton value={"다시하기"} category_name={""} category_id={categoryId}/>
+                    <StartButton value={"다시하기"} category_name={categoryName} category_id={categoryId} num_of_stores={numOfStore}/>
                     <button className="btn btn-outline-primary mx-1"
                             onClick={() => window.location.href = `/AllCategory`}> 다른월드컵
                         해보기
