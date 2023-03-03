@@ -71,7 +71,7 @@ function AllMenu() {
                                             <img src={`/image/${v.menu_id}`} className="rounded-start img-fluid h-100"
                                                  style={{objectFit: "cover"}}/>
                                         </div>
-                                        <div className="col" style={{minHeight: "200px"}}>
+                                        <div className="col-7" style={{minHeight: "200px"}}>
                                             <div className="card-body d-flex flex-column justify-content-between h-100">
                                                 <div>
                                                     <h5 className="card-title fw-bold text-truncate w-100">{v.menu_name}</h5>
