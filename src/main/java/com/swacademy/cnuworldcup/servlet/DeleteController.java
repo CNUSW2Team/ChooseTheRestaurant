@@ -72,6 +72,10 @@ public class DeleteController {
     @DeleteMapping(value = "/api/Menu/{menuId}")
     public String removeMenu(@PathVariable String menuId) {
         Menu toRemove = crudService.findMenuById(UUID.fromString(menuId));
+        List<MenuTag> menuTagByMenuId = crudService.findMenuTagByMenuId(UUID.fromString(menuId));
+        for(MenuTag menuTag : menuTagByMenuId){
+            crudService.removeMenuTag(menuTag);
+        }
         crudService.removeMenu(toRemove);
         deleteImage(IMAGE_FILE_UPLOAD_PATH, menuId);
 
