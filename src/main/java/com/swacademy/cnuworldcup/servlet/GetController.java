@@ -77,6 +77,7 @@ public class GetController {
         results.put("category_id", category.getCategory_id());
         results.put("category_name", category.getCategory_name());
         results.put("favorite", category.getLike_num());
+        results.put("num_of_stores", (long) category.getRelations().size());
 
         return results.toString();
     }
