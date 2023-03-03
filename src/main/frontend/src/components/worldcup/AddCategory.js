@@ -18,8 +18,8 @@ function AddCategory() {
     function CreateCategory() {
         const fd = new FormData();
 
-        if (categoryName.length < 5) {
-            alert('월드컵 이름은 5자 이상으로 해 주세요.');
+        if (categoryName.length < 2) {
+            alert('월드컵 이름은 2자 이상으로 해 주세요.');
         } else if (select.length < 2) {
             alert('가게를 2개 이상 선택해 주세요.');
         } else {
