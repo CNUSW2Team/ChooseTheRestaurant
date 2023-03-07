@@ -79,9 +79,9 @@ function Game() {
                          .to(box2Ref.current, 2.5, {})
                          .to(box2Ref.current, 0, {transform: "none", display:"block"});
                      timeline2
-                         .to(box1Ref.current, 1, {rotateY: -360, rotateZ: -360})
+                         .to(box1Ref.current, 1, {})
                          .to(box1Ref.current, 2, {})
-                         .to(box1Ref.current, 0, {rotateY: 360, rotateZ: 360});
+                         .to(box1Ref.current, 0, {});
                      WinnerChoice(items[0])
                  }}>
                 <img src={`/image/${items[0] && items[0]["store_id"]}`} className="rounded-start img-fluid h-100 w-100" />
@@ -98,9 +98,9 @@ function Game() {
                          .to(box1Ref.current, 2.5, {})
                          .to(box1Ref.current, 0, {transform: "none", display:"block"});
                      timeline1
-                         .to(box2Ref.current, 1, {rotateY: -360, rotateZ: -360})
+                         .to(box2Ref.current, 1, {})
                          .to(box2Ref.current, 2, {})
-                         .to(box2Ref.current, 0, {rotateY: 360, rotateZ: 360});
+                         .to(box2Ref.current, 0, {});
                      WinnerChoice(items[1])
                  }}>
                 <img src={`/image/${items[1] && items[1]["store_id"]}`} className="rounded-start img-fluid h-100 w-100"/>

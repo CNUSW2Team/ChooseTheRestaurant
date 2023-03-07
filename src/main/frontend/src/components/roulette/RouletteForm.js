@@ -46,7 +46,6 @@ const FormularioTexto = () => {
 
   // handle click event of the Add button
   const handleAddClick = (id, name, event) => {
-
     if(inputList[0]["store_name"] == "") {
       inputList.shift();
     }
