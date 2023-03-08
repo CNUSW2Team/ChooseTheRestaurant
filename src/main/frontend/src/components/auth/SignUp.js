@@ -69,7 +69,7 @@ function SignUp() {
 
                             <div className="d-flex flex-row align-items-center mb-4">
                                 <MDBIcon fas icon="envelope me-3" size='lg'/>
-                                <MDBInput label='Your Email' type='email' onChange={updateUsername}/>
+                                <MDBInput label='Your Username' type='email' onChange={updateUsername}/>
                             </div>
 
                             <div className="d-flex flex-row align-items-center mb-4">
@@ -82,7 +82,7 @@ function SignUp() {
                                 <MDBInput label='Repeat your password' type='password' onChange={updateRepeatedPassword}/>
                             </div>
 
-                            <MDBBtn className='mb-4' size='lg' onClick={checkUsername} disabled={disableBtn}>Register</MDBBtn>
+                            <button className="btn btn-primary mx-2" onClick={checkUsername} disabled={disableBtn}>Register</button>
 
                         </MDBCol>
 

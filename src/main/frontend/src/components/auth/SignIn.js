@@ -45,7 +45,7 @@ function SignIn() {
             <div className="mb-3 w-50">
                 <label htmlFor="form1" className="form-label">Email address</label>
                 <input type="email" className="form-control" id="form1"
-                       placeholder="name@example.com"
+                       placeholder="username"
                        onChange={updateUsername}/>
 
             </div>
