@@ -32,15 +32,10 @@ function SignUp() {
     useEffect(() => {checkValid()}, [username, password, repeatedPassword]);
 
     function checkUsername() {
-        const regex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-        if(!regex.test(username)) {
-            alert("잘못된 이메일 형식입니다.");
-            return;
-        }
 
         axios.get('/auth/findUser', {params: {username: username}})
             .then((response) => {
-                if(response.data) alert("이미 존재하는 이메일입니다.")
+                if(response.data) alert("이미 존재하는 이름입니다.")
                 else signUp();
             })
     }
