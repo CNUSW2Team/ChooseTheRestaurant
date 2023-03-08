@@ -37,6 +37,7 @@ function SignIn() {
                 localStorage.setItem("username", username);
                 window.location.href = `/`;
             })
+            .catch((err) => alert("아이디 혹은 비밀번호를 잘못 입력하셨거나 존재하지 않는 아이디입니다."))
     }
 
     return (
