@@ -26,8 +26,7 @@ Back-End: Spring/Spring Boot, MySQL
 
 ![%EA%B0%80%EA%B2%8C_%EC%A0%95%EB%B3%B4](https://github.com/CNUSW2Team/ChooseTheRestaurant/assets/33508545/58247af6-a2db-4767-a35f-38d00e6f17e7)
 
-(https://github.com/CNUSW2Team/ChooseTheRestaurant/assets/33508545/58247af6-a2db-4767-a35f-38d00e6f17e7)
-![%EC%9B%94%EB%93%9C%EC%BB%B5_%EC%A7%84%ED%96%89]
+![%EC%9B%94%EB%93%9C%EC%BB%B5_%EC%A7%84%ED%96%89](https://github.com/CNUSW2Team/ChooseTheRestaurant/assets/33508545/b2348a5b-989d-4928-b135-6adb5fbc3b41)
 
-(https://github.com/CNUSW2Team/ChooseTheRestaurant/assets/33508545/45d57ae4-a992-48ae-be55-67d07973e897)
-![%EB%A3%B0%EB%A0%9B](https://github.com/CNUSW2Team/ChooseTheRestaurant/assets/33508545/30ef9aa9-0825-4c36-9aad-f1fd4392613b)
+![%EB%A3%B0%EB%A0%9B](https://github.com/CNUSW2Team/ChooseTheRestaurant/assets/33508545/623ba005-f0f8-4ba4-82ad-8da10302b5d0)
+
