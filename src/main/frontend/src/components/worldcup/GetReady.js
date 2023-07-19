@@ -5,18 +5,18 @@ import {Link, useParams} from "react-router-dom";
 function GetReady() {
     let { categoryId } = useParams();
 
-    const [category, setData] = useState('한식맛집'); 
-    // useEffect(() => {
-    //         axios.get(`/Category/${categoryId}`)
-    //             .then(response => {
-    //                 setData(response.data);
-    //                 console.log(response.data);
-    //             })
-    //             .catch(error => {
-    //                 console.log(error);
-    //             })
-    //     },
-    //     []);
+    const [category, setData] = useState([]); 
+    useEffect(() => {
+            axios.get(`/Category/${categoryId}`)
+                .then(response => {
+                    setData(response.data);
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+        []);
 
     const [numOfRound, setRound] = useState()
 
@@ -24,7 +24,7 @@ function GetReady() {
         setRound(e.target.value)
     }
     
-    const DenyUndefined = e => {
+    const DneyUndefined = e => {
         console.log(e)
         if(typeof(numOfRound) == 'undefined'){
             e.preventDefault();
@@ -41,7 +41,7 @@ function GetReady() {
                 <button value={4} onClick={sendRound}>Round : 4강</button>
                 <button value={8} onClick={sendRound}>Round : 8강</button>
             </div>
-            <Link to={`/Round/${categoryId}/${numOfRound}`}><button onClick={DenyUndefined}>시작하기</button></Link>
+            <Link to={`/Round/${categoryId}/${numOfRound}`}><button onClick={DneyUndefined}>시작하기</button></Link>
             <Link to={`/Ranking/${categoryId}`}><button>랭킹페이지</button></Link>
         </div>
         

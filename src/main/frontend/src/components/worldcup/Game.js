@@ -3,41 +3,26 @@ import axios from "axios";
 import {useParams} from "react-router-dom";
 import {Timeline, Tween} from 'react-gsap';
 import gsap from 'gsap';
-import items_dummy from '../dummyData/items.json'
 
 function Game() {
     const {categoryId} = useParams();
     const {numOfRound} = useParams();
 
-    
-    const [items, setItem] = useState(items_dummy); // 월드컵 아이템 리스트
+    const [items, setItem] = useState([]); // 월드컵 아이템 리스트
     const [winners, setWinner] = useState([]);
     const [round, setRound] = useState(numOfRound);
     const [count, setCount] = useState(1);
 
 
-    // useEffect(() => {
-    //     axios.get(`/api/Round/${categoryId}/${numOfRound}`)
-    //         .then(response => {
-    //             setItem(response.data);
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         })
-    // }, []);
-
-    const apiUrl = 'dummy/items.json';
-
-        axios.get(apiUrl)
-            .then(data => {
-                //가지고 온 리스트를 state에 저장합니다.
-                this.setState({
-                    webtoonList : data.data.webtoonList
-                });
+    useEffect(() => {
+        axios.get(`/api/Round/${categoryId}/${numOfRound}`)
+            .then(response => {
+                setItem(response.data);
             })
             .catch(error => {
                 console.log(error);
-            });
+            })
+    }, []);
 
     useEffect(() => {
         if (items.length === 0 && winners.length === 1) {
@@ -99,8 +84,7 @@ function Game() {
                          .to(box1Ref.current, 0, {});
                      WinnerChoice(items[0])
                  }}>
-                {/* <img src={`/image/${items[0] && items[0]["store_id"]}`} className="rounded-start img-fluid h-100 w-100" /> */}
-                <img src='/img/logo512.png'/>
+                <img src={`/image/${items[0] && items[0]["store_id"]}`} className="rounded-start img-fluid h-100 w-100" />
                 <div className="carousel-caption fs-3">
                     <p>{items[0] && items[0]["store_name"]}</p>
                 </div>

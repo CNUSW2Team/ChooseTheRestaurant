@@ -24,14 +24,11 @@ function StartButton(props) {
                     <h5 className="mb-4 d-flex">선택한 월드컵: <div className="ms-1 text-primary">{props.category_name}</div></h5>
                     <div className="mb-2">라운드를선택하세요</div>
                     <select className="form-select form-select-sm" onChange={handleChangeSelect}>
-                        {/* {num_of_stores >= 64 ? <option value="5">64강</option> : null}
+                        {num_of_stores >= 64 ? <option value="5">64강</option> : null}
                         {num_of_stores >= 32 ? <option value="4">32강</option> : null}
                         {num_of_stores >= 16 ? <option value="3">16강</option> : null}
                         {num_of_stores >= 8 ? <option value="2">8강</option> : null}
-                        {num_of_stores >= 4 ? <option value="1">4강</option> : null} */}
-                        
-                        <option value="2">8강</option>
-                        <option value="1">4강</option>
+                        {num_of_stores >= 4 ? <option value="1">4강</option> : null}
                     </select>
                 </Modal.Body>
 
