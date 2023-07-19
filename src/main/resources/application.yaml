@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/worldcup_mgmt
+    url: jdbc:mysql://34.64.229.60:3306/worldcup_mgmt
     username: root
     password: sw1234!
   servlet:
