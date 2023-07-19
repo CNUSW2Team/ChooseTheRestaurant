@@ -2,23 +2,25 @@ import React, {useEffect, useRef, useState} from 'react';
 import axios from "axios";
 import {createFuzzyMatcher} from "../../util/util";
 import StartButton from "./StartButton";
+import categories_dummy from '../dummyData/categories.json'
+import dummy_img from '../dummyImg/카테고리더미.jpg'
 
 function AllCategory() {
     const [searchBox, setSearchBox] = useState('');
-    const [category, setCategory] = useState([]);
+    const [category, setCategory] = useState(categories_dummy);
     const updateSearchBox = e => setSearchBox(e.target.value);
     const [sort, setSort] = useState('인기순');
 
-    useEffect(() => {
-        axios.get('/api/Category')
-            .then(response => {
-                setCategory(response.data);
-                // console.log("initial:", response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }, []);
+    // useEffect(() => {
+    //     axios.get('/api/Category')
+    //         .then(response => {
+    //             setCategory(response.data);
+    //             // console.log("initial:", response.data);
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         })
+    // }, []);
 
     function updateSort(value){
         setSort(value);
@@ -94,7 +96,8 @@ function AllCategory() {
                 {category.filter(v => createFuzzyMatcher(searchBox).test(v.category_name.toLowerCase())).map(v =>
                     <div className="col" key={v.category_id}>
                         <div className="card shadow">
-                            <img src={`/image/${v.category_id}`} className="card-img-top " alt="..."/>
+                            {/* <img src={`/image/${v.category_id}`} className="card-img-top " alt="..."/> */}
+                            <img src={dummy_img} />
                             <div className="text-end bg-danger text-white pe-3 py-1">
                                 ♥ {v.favorite}
                             </div>
